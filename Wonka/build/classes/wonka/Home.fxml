@@ -244,9 +244,9 @@
                         </Label>
                      </children>
                   </HBox>
-                  <ScrollPane fx:id="ListCards" layoutX="15.0" layoutY="335.0" prefHeight="428.0" prefWidth="905.0" stylesheets="@style.css">
+                  <ScrollPane fx:id="ListCardsOrders" layoutX="15.0" layoutY="335.0" prefHeight="428.0" prefWidth="905.0" stylesheets="@style.css">
                      <content>
-                        <VBox fx:id="pnItems" prefHeight="537.0" prefWidth="902.0" spacing="5.0" style="-fx-background-color: #00222B;">
+                        <VBox fx:id="pnItemsOrders" prefHeight="537.0" prefWidth="902.0" spacing="5.0" style="-fx-background-color: #00222B;">
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>

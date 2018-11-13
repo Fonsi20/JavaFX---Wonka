@@ -21,6 +21,9 @@ public class Controller implements Initializable {
     private VBox pnItems = null;
 
     @FXML
+    private VBox pnItemsOrders = null;
+
+    @FXML
     private Button btnOverview;
 
     @FXML
@@ -56,12 +59,15 @@ public class Controller implements Initializable {
     @FXML
     private ScrollPane ListCards;
 
+    @FXML
+    private ScrollPane ListCardsOrders;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        listaCards();
+        ListCards();
     }
 
-    public void listaCards() {
+    public void ListCards() {
 
         Node[] nodes = new Node[10];
         for (int i = 0; i < nodes.length; i++) {
@@ -77,6 +83,30 @@ public class Controller implements Initializable {
                     nodes[j].setStyle("-fx-background-color : #02030A");
                 });
                 pnItems.getChildren().add(nodes[i]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    public void ListCardsOrders() {
+
+        System.out.println(" ENTRO EN LA SEGUNDA LISTA");
+        Node[] nodes = new Node[10];
+        for (int i = 0; i < nodes.length; i++) {
+            try {
+
+                final int j = i;
+                nodes[i] = FXMLLoader.load(getClass().getResource("Item.fxml"));
+
+                nodes[i].setOnMouseEntered(event -> {
+                    nodes[j].setStyle("-fx-background-color : #0A0E3F");
+                });
+                nodes[i].setOnMouseExited(event -> {
+                    nodes[j].setStyle("-fx-background-color : #02030A");
+                });
+                pnItemsOrders.getChildren().add(nodes[i]);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -110,6 +140,7 @@ public class Controller implements Initializable {
             pnlOrders.setVisible(false);
             pnlDevelops.setVisible(false);
             pnlMenus.setVisible(false);
+            ListCards();
             pnlOverview.toFront();
         }
         if (actionEvent.getSource() == btnSettings) {
@@ -131,8 +162,8 @@ public class Controller implements Initializable {
             pnlOrders.setVisible(true);
             pnlDevelops.setVisible(false);
             pnlMenus.setVisible(false);
-            ListCards.setVisible(false);
-            listaCards();
+            //ListCards.setVisible(false);
+            ListCardsOrders();
             pnlOrders.toFront();
         }
     }

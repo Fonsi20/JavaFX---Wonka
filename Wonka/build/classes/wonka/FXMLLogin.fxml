@@ -9,16 +9,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="login" prefHeight="450.0" prefWidth="900.0" style="-fx-background-color: #00222B;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wonka.FXMLLoginController">
+<AnchorPane id="AnchorPane" fx:id="login" prefHeight="450.0" prefWidth="900.0" style="-fx-background-color: #00222B;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wonka.FXMLLoginController">
    <children>
       <ImageView id="fondo.jpg" fitHeight="457.0" fitWidth="494.0" layoutX="-31.0" layoutY="2.0" opacity="0.43" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/fondo.jpg" />
+            <Image url="@../images/fondo.jpg" />
          </image>
       </ImageView>
       <ImageView id="broom.jpg" fitHeight="54.0" fitWidth="54.0" layoutX="55.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/witch-hat.png" />
+            <Image url="@../images/witch-hat.png" />
          </image>
       </ImageView>
       <AnchorPane layoutX="497.0" layoutY="37.0" prefHeight="376.0" prefWidth="367.0" style="-fx-background-color: #00C9FF;">

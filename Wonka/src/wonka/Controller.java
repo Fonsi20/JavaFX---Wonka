@@ -92,7 +92,6 @@ public class Controller implements Initializable {
 
     public void ListCardsOrders() {
 
-        System.out.println(" ENTRO EN LA SEGUNDA LISTA");
         Node[] nodes = new Node[10];
         for (int i = 0; i < nodes.length; i++) {
             try {

@@ -71,7 +71,7 @@ public class Wonka extends Application {
             primaryStage.initStyle(StageStyle.TRANSPARENT);
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
-            moverPantalla(root);
+            //moverPantalla(root);
             primaryStage.show();
         } catch (IOException e) {
         }

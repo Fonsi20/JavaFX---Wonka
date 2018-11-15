@@ -12,7 +12,10 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicReference;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class Controller implements Initializable {
 
@@ -60,6 +63,9 @@ public class Controller implements Initializable {
     private Pane pnlMenus;
 
     @FXML
+    private AnchorPane home;
+
+    @FXML
     private ScrollPane ListCards;
 
     @FXML
@@ -71,6 +77,29 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ListCards();
+        this.MoverVentanas(this.home);
+    }
+
+    private void MoverVentanas(AnchorPane root) {
+
+        AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
+        AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
+
+        root.setOnMousePressed(e -> {
+            Stage stage = (Stage) root.getScene().getWindow();
+            xOffset.set(stage.getX() - e.getScreenX());
+            yOffset.set(stage.getY() - e.getScreenY());
+
+        });
+
+        root.setOnMouseDragged(e -> {
+            Stage stage = (Stage) root.getScene().getWindow();
+            stage.setX(e.getScreenX() + xOffset.get());
+            stage.setY(e.getScreenY() + yOffset.get());
+            //root.setStyle("-fx-cursor: CLOSED_HAND;");
+        });
+
+        //root.setOnMouseReleased(e -> root.setStyle("-fx-cursor: DEFAULT;"));
     }
 
     public void ListCards() {

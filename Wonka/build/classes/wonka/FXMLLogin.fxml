@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" fx:id="login" prefHeight="450.0" prefWidth="900.0" style="-fx-background-color: #00222B;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wonka.FXMLLoginController">
+<AnchorPane id="AnchorPane" fx:id="login" prefHeight="450.0" prefWidth="900.0" style="-fx-background-color: #00222B;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wonka.FXMLLoginController">
    <children>
       <ImageView id="fondo.jpg" fitHeight="457.0" fitWidth="494.0" layoutX="-31.0" layoutY="2.0" opacity="0.43" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -42,7 +42,7 @@
          </font>
       </Text>
       <Text fill="WHITE" layoutX="55.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Be watter my friend, like in yout mind. sRex Copyleft:&#10;Alfonso Fernández, Daniel Bastos and Diego Velazquez" />
-      <JFXButton fx:id="btnSingUp" layoutX="55.0" layoutY="273.0" onAction="#handleButtonAction" prefHeight="32.0" prefWidth="133.0" style="-fx-background-color: #00C9FF;" text="Sing Up" textFill="WHITE">
+      <JFXButton fx:id="btnSingUp" layoutX="55.0" layoutY="273.0" onAction="#handleButtonAction" prefHeight="32.0" prefWidth="133.0" style="-fx-background-color: #00C9FF;" text="Salir" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

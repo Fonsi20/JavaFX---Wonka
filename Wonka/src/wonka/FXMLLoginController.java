@@ -9,6 +9,7 @@ import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicReference;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -83,7 +84,30 @@ public class FXMLLoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+          this.MoverVentanas(this.login);
+    }
+
+    private void MoverVentanas(AnchorPane root) {
+
+        AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
+        AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
+
+        root.setOnMousePressed(e -> {
+            Stage stage = (Stage) root.getScene().getWindow();
+            xOffset.set(stage.getX() - e.getScreenX());
+            yOffset.set(stage.getY() - e.getScreenY());
+
+        });
+
+        root.setOnMouseDragged(e -> {
+            Stage stage = (Stage) root.getScene().getWindow();
+            stage.setX(e.getScreenX() + xOffset.get());
+            stage.setY(e.getScreenY() + yOffset.get());
+            //root.setStyle("-fx-cursor: CLOSED_HAND;");
+        });
+
+       // root.setOnMouseReleased(e -> root.setStyle("-fx-cursor: DEFAULT;"));
+
     }
 
 }

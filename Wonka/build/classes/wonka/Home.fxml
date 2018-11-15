@@ -33,7 +33,7 @@
                   <Insets bottom="20.0" />
                </VBox.margin>
             </Label>
-            <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="Overview" textFill="#e7e5e5">
+            <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="Inicio" textFill="#e7e5e5">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -51,7 +51,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="Orders">
+            <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="Cartas">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -63,7 +63,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="Customers">
+            <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="Clientes">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -75,7 +75,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="Carts">
+            <Button fx:id="btnMenus" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="Compras">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -87,7 +87,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="Developers">
+            <Button fx:id="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="Desarrolladores">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -99,7 +99,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSignout" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="Sign Out">
+            <Button fx:id="btnSignout" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="Salir">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -121,8 +121,8 @@
             <Pane fx:id="pnlMenus" prefHeight="200.0" prefWidth="200.0" visible="false" />
             <Pane fx:id="pnlCustomer" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
-                  <TextField layoutX="709.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="search" style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
-                  <Label layoutX="46.0" layoutY="27.0" text="Customers" textFill="#e7e5e5">
+                  <TextField layoutX="709.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="Buscar..." style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <Label layoutX="46.0" layoutY="27.0" text="Clientes" textFill="#e7e5e5">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -253,10 +253,10 @@
                   </Label>
                   <TextField fx:id="direccionCliente" alignment="TOP_LEFT" layoutX="39.0" layoutY="263.0" prefHeight="25.0" prefWidth="675.0" promptText="Ponteareas, nº22 CP 45124 Pontevedra España" style="-fx-background-color: #00000B;" />
                </children></Pane>
-            <Pane fx:id="pnlOrders" prefHeight="200.0" prefWidth="200.0">
+            <Pane fx:id="pnlOrders" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
-                  <TextField layoutX="709.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="search" style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
-                  <Label layoutX="48.0" layoutY="27.0" text="Carts List" textFill="#e7e5e5">
+                  <TextField layoutX="709.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="Buscar..." style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <Label layoutX="48.0" layoutY="27.0" text="Lista de Cartas" textFill="#e7e5e5">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -325,22 +325,22 @@
                         </VBox>
                         <VBox alignment="TOP_CENTER" prefHeight="180.0" prefWidth="136.0" spacing="25.0">
                            <children>
-                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="115.0" mnemonicParsing="false" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Clear" textAlignment="CENTER" textFill="WHITE">
+                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="115.0" mnemonicParsing="false" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Limpiar" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="140.0" mnemonicParsing="false" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Modificar Card" textAlignment="CENTER" textFill="WHITE">
+                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="140.0" mnemonicParsing="false" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Modificar Carta" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Delete Card" textAlignment="CENTER" textFill="WHITE">
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Borrar Carta" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Save Card" textAlignment="CENTER" textFill="WHITE">
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Guardar Carta" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -389,6 +389,9 @@
                                  <font>
                                     <Font name="System Bold" size="16.0" />
                                  </font>
+                                 <VBox.margin>
+                                    <Insets bottom="26.0" />
+                                 </VBox.margin>
                               </Text>
                               <Label text="ID de la carta" textFill="WHITE">
                                  <font>
@@ -429,12 +432,15 @@
                               <Insets bottom="20.0" left="15.0" right="15.0" top="30.0" />
                            </padding>
                         </VBox>
-                        <VBox fx:id="atributosMagi1" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #266D7F;" HBox.hgrow="ALWAYS">
+                        <VBox fx:id="atributosMagi1" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #4FA2FF;" HBox.hgrow="ALWAYS">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Magic">
                                  <font>
                                     <Font name="System Bold" size="16.0" />
                                  </font>
+                                 <VBox.margin>
+                                    <Insets bottom="26.0" />
+                                 </VBox.margin>
                               </Text>
                               <Label text="ID de la carta" textFill="WHITE">
                                  <font>
@@ -453,7 +459,7 @@
                               <Insets bottom="20.0" left="15.0" right="15.0" top="30.0" />
                            </padding>
                         </VBox>
-                        <VBox fx:id="atributosMagi2" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #266D7F;" HBox.hgrow="ALWAYS">
+                        <VBox fx:id="atributosMagi2" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #4FA2FF;" HBox.hgrow="ALWAYS">
                            <padding>
                               <Insets bottom="20.0" left="15.0" right="15.0" top="30.0" />
                            </padding>
@@ -462,6 +468,9 @@
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
+                                 <VBox.margin>
+                                    <Insets top="53.0" />
+                                 </VBox.margin>
                               </Label>
                               <TextField fx:id="magiTipo" promptText="Instant" style="-fx-background-color: #00000B;" />
                               <Label text="Color" textFill="WHITE">
@@ -481,6 +490,9 @@
                                  <font>
                                     <Font name="System Bold" size="16.0" />
                                  </font>
+                                 <VBox.margin>
+                                    <Insets bottom="26.0" />
+                                 </VBox.margin>
                               </Text>
                               <Label text="ID de la carta" textFill="WHITE">
                                  <font>
@@ -538,15 +550,15 @@
                      </image>
                   </ImageView>
                </children></Pane>
-            <Pane fx:id="pnlOverview" prefHeight="576.0" prefWidth="793.0" visible="false">
+            <Pane fx:id="pnlOverview" prefHeight="576.0" prefWidth="793.0">
                <children>
-                  <TextField layoutX="710.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="search" style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
-                  <Label layoutX="48.0" layoutY="27.0" text="Home" textFill="#e7e5e5">
+                  <TextField layoutX="710.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="Buscar..." style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <Label layoutX="48.0" layoutY="27.0" text="Inicio" textFill="#e7e5e5">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="72.0" prefHeight="92.0" prefWidth="661.0" spacing="50.0">
+                  <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="72.0" prefHeight="92.0" prefWidth="661.0" spacing="100.0">
                      <children>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
@@ -555,7 +567,7 @@
                                     <Font name="System Bold" size="26.0" />
                                  </font>
                               </Label>
-                              <Label text="Total Carts" textFill="#e7e5e5" />
+                              <Label text="Total Cartas" textFill="#e7e5e5" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
@@ -565,7 +577,7 @@
                                     <Font name="System Bold" size="26.0" />
                                  </font>
                               </Label>
-                              <Label text="Total Clients" textFill="#e7e5e5" />
+                              <Label text="Total Clientes" textFill="#e7e5e5" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
@@ -575,7 +587,7 @@
                                     <Font name="System Bold" size="26.0" />
                                  </font>
                               </Label>
-                              <Label text="Peding Orders" textFill="#e7e5e5" />
+                              <Label text="Pedidos Pendientes" textFill="#e7e5e5" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
@@ -585,7 +597,7 @@
                                     <Font name="System Bold" size="26.0" />
                                  </font>
                               </Label>
-                              <Label text="Orders on Hold" textFill="#e7e5e5" />
+                              <Label text="Cartas Vendidas" textFill="#e7e5e5" />
                            </children>
                         </VBox>
                      </children>

@@ -46,5 +46,9 @@ Contributor(s):
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3307/TIENDACARTAS</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">usbw</property>
+        <mapping resource="Mapeos/Carta.hbm.xml"/>
+        <mapping resource="Mapeos/Cliente.hbm.xml"/>
+        <mapping resource="Mapeos/Reserva.hbm.xml"/>
+        <mapping resource="Mapeos/Venta.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

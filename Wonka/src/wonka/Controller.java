@@ -30,6 +30,12 @@ public class Controller implements Initializable {
     private VBox pnItemsClientes = null;
 
     @FXML
+    private VBox pnItemsCartasLess = null;
+
+    @FXML
+    private VBox pnItemsClientesLess = null;
+
+    @FXML
     private Button btnOverview;
 
     @FXML
@@ -39,7 +45,7 @@ public class Controller implements Initializable {
     private Button btnCustomers;
 
     @FXML
-    private Button btnMenus;
+    private Button btnCompras;
 
     @FXML
     private Button btnSettings;
@@ -60,13 +66,19 @@ public class Controller implements Initializable {
     private Pane pnlDevelops;
 
     @FXML
-    private Pane pnlMenus;
+    private Pane pnlCompras;
 
     @FXML
     private AnchorPane home;
 
     @FXML
     private ScrollPane ListCards;
+
+    @FXML
+    private ScrollPane ListCardsLess;
+
+    @FXML
+    private ScrollPane ListClientesLess;
 
     @FXML
     private ScrollPane ListCardsOrders;
@@ -77,6 +89,10 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ListCards();
+        ListCardsOrders();
+        ListCardsClientes();
+        ListCardsLess();
+        ListClientesLess();
         this.MoverVentanas(this.home);
     }
 
@@ -109,7 +125,7 @@ public class Controller implements Initializable {
             try {
 
                 final int j = i;
-                nodes[i] = FXMLLoader.load(getClass().getResource("Item.fxml"));
+                nodes[i] = FXMLLoader.load(getClass().getResource("ItemCarta.fxml"));
 
                 nodes[i].setOnMouseEntered(event -> {
                     nodes[j].setStyle("-fx-background-color : #266D7F");
@@ -132,7 +148,7 @@ public class Controller implements Initializable {
             try {
 
                 final int j = i;
-                nodes[i] = FXMLLoader.load(getClass().getResource("Item.fxml"));
+                nodes[i] = FXMLLoader.load(getClass().getResource("ItemCarta.fxml"));
 
                 nodes[i].setOnMouseEntered(event -> {
                     nodes[j].setStyle("-fx-background-color : #266D7F");
@@ -155,7 +171,7 @@ public class Controller implements Initializable {
             try {
 
                 final int j = i;
-                nodes[i] = FXMLLoader.load(getClass().getResource("Item.fxml"));
+                nodes[i] = FXMLLoader.load(getClass().getResource("ItemCliente.fxml"));
 
                 nodes[i].setOnMouseEntered(event -> {
                     nodes[j].setStyle("-fx-background-color : #266D7F");
@@ -171,6 +187,53 @@ public class Controller implements Initializable {
 
     }
 
+    public void ListCardsLess() {
+
+        Node[] nodes = new Node[20];
+        for (int i = 0; i < nodes.length; i++) {
+            try {
+
+                final int j = i;
+                nodes[i] = FXMLLoader.load(getClass().getResource("ItemCartaLess.fxml"));
+
+                nodes[i].setOnMouseEntered(event -> {
+                    nodes[j].setStyle("-fx-background-color : #266D7F");
+                });
+                nodes[i].setOnMouseExited(event -> {
+                    nodes[j].setStyle("-fx-background-color : #00000B");
+                });
+                
+                pnItemsCartasLess.getChildren().add(nodes[i]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    public void ListClientesLess() {
+
+        Node[] nodes = new Node[4];
+        for (int i = 0; i < nodes.length; i++) {
+            try {
+
+                final int j = i;
+                nodes[i] = FXMLLoader.load(getClass().getResource("ItemClienteLess.fxml"));
+
+                nodes[i].setOnMouseEntered(event -> {
+                    nodes[j].setStyle("-fx-background-color : #266D7F");
+                });
+                nodes[i].setOnMouseExited(event -> {
+                    nodes[j].setStyle("-fx-background-color : #00000B");
+                });
+                pnItemsClientesLess.getChildren().add(nodes[i]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
     public void handleClicks(ActionEvent actionEvent) {
         if (actionEvent.getSource() == btnCustomers) {
             pnlCustomer.setStyle("-fx-background-color : #00222B");
@@ -178,18 +241,20 @@ public class Controller implements Initializable {
             pnlCustomer.setVisible(true);
             pnlOrders.setVisible(false);
             pnlDevelops.setVisible(false);
-            pnlMenus.setVisible(false);
+            pnlCompras.setVisible(false);
             ListCardsClientes();
             pnlCustomer.toFront();
         }
-        if (actionEvent.getSource() == btnMenus) {
-            pnlMenus.setStyle("-fx-background-color : #00222B");
+        if (actionEvent.getSource() == btnCompras) {
+            pnlCompras.setStyle("-fx-background-color : #00222B");
             pnlOverview.setVisible(false);
             pnlCustomer.setVisible(false);
             pnlOrders.setVisible(false);
             pnlDevelops.setVisible(false);
-            pnlMenus.setVisible(true);
-            pnlMenus.toFront();
+            pnlCompras.setVisible(true);
+            ListCardsLess();
+            ListClientesLess();
+            pnlCompras.toFront();
         }
         if (actionEvent.getSource() == btnOverview) {
             pnlOverview.setStyle("-fx-background-color : #00222B");
@@ -197,7 +262,7 @@ public class Controller implements Initializable {
             pnlCustomer.setVisible(false);
             pnlOrders.setVisible(false);
             pnlDevelops.setVisible(false);
-            pnlMenus.setVisible(false);
+            pnlCompras.setVisible(false);
             ListCards();
             pnlOverview.toFront();
         }
@@ -207,7 +272,7 @@ public class Controller implements Initializable {
             pnlCustomer.setVisible(false);
             pnlOrders.setVisible(false);
             pnlDevelops.setVisible(true);
-            pnlMenus.setVisible(false);
+            pnlCompras.setVisible(false);
             pnlDevelops.toFront();
         }
         if (actionEvent.getSource() == btnSignout) {
@@ -219,7 +284,7 @@ public class Controller implements Initializable {
             pnlCustomer.setVisible(false);
             pnlOrders.setVisible(true);
             pnlDevelops.setVisible(false);
-            pnlMenus.setVisible(false);
+            pnlCompras.setVisible(false);
             ListCardsOrders();
             pnlOrders.toFront();
         }

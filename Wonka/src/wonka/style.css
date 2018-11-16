@@ -42,3 +42,7 @@
 .scroll-pane > .corner {
     -fx-background-color: black;
 }
+
+#fonsiBack{
+    -fx-background-image: url("../images/fondo1.png");
+}

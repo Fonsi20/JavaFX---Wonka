@@ -439,7 +439,7 @@
                   </Label>
                   <TextField fx:id="direccionCliente" alignment="TOP_LEFT" layoutX="39.0" layoutY="263.0" prefHeight="25.0" prefWidth="675.0" promptText="Ponteareas, nº22 CP 45124 Pontevedra España" style="-fx-background-color: #00000B;" />
                </children></Pane>
-            <Pane fx:id="pnlOrders" prefHeight="200.0" prefWidth="200.0" visible="false">
+            <Pane fx:id="pnlOrders" prefHeight="200.0" prefWidth="200.0">
                <children>
                   <TextField layoutX="709.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="Buscar..." style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <Label layoutX="48.0" layoutY="27.0" text="Lista de Cartas" textFill="#e7e5e5">
@@ -456,7 +456,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="nameGame" prefWidth="150.0" promptText="Escoge" style="-fx-background-color: #00000B;" />
+                              <ComboBox fx:id="nameGame" onAction="#activarAtributo" prefWidth="150.0" promptText="Escoge" style="-fx-background-color: #00000B;" />
                               <Label text="Año" textFill="#fa5f7e">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
@@ -564,9 +564,9 @@
                         </Label>
                      </children>
                   </HBox>
-                  <HBox fx:id="atributosJuegos" disable="true" layoutY="286.0" prefHeight="172.0" prefWidth="935.0" style="-fx-background-color: #266D7F;">
+                  <HBox fx:id="atributosJuegos" layoutY="286.0" prefHeight="172.0" prefWidth="935.0" style="-fx-background-color: #266D7F;">
                      <children>
-                        <VBox fx:id="atributosYugi1" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #266D7F;" HBox.hgrow="ALWAYS">
+                        <VBox fx:id="atributosYugi1" disable="true" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #266D7F;" HBox.hgrow="ALWAYS">
                            <padding>
                               <Insets bottom="20.0" left="15.0" right="15.0" top="30.0" />
                            </padding>
@@ -593,7 +593,7 @@
                               <TextField fx:id="yugiAtributo" promptText="Magic" style="-fx-background-color: #00000B;" />
                            </children>
                         </VBox>
-                        <VBox fx:id="atributosYugi2" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #266D7F;" HBox.hgrow="ALWAYS">
+                        <VBox fx:id="atributosYugi2" disable="true" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #266D7F;" HBox.hgrow="ALWAYS">
                            <children>
                               <Label text="Tipo Carta" textFill="WHITE">
                                  <font>
@@ -618,7 +618,7 @@
                               <Insets bottom="20.0" left="15.0" right="15.0" top="30.0" />
                            </padding>
                         </VBox>
-                        <VBox fx:id="atributosMagi1" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #4FA2FF;" HBox.hgrow="ALWAYS">
+                        <VBox fx:id="atributosMagi1" disable="true" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #4FA2FF;" HBox.hgrow="ALWAYS">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Magic">
                                  <font>
@@ -645,7 +645,7 @@
                               <Insets bottom="20.0" left="15.0" right="15.0" top="30.0" />
                            </padding>
                         </VBox>
-                        <VBox fx:id="atributosMagi2" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #4FA2FF;" HBox.hgrow="ALWAYS">
+                        <VBox fx:id="atributosMagi2" disable="true" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #4FA2FF;" HBox.hgrow="ALWAYS">
                            <padding>
                               <Insets bottom="20.0" left="15.0" right="15.0" top="30.0" />
                            </padding>
@@ -667,7 +667,7 @@
                               <TextField fx:id="magiColor" promptText="Azul" style="-fx-background-color: #00000B;" />
                            </children>
                         </VBox>
-                        <VBox fx:id="atributosFOG1" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #266D7F;" HBox.hgrow="ALWAYS">
+                        <VBox fx:id="atributosFOG1" disable="true" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #266D7F;" HBox.hgrow="ALWAYS">
                            <padding>
                               <Insets bottom="20.0" left="15.0" right="15.0" top="30.0" />
                            </padding>
@@ -694,7 +694,7 @@
                               <TextField fx:id="fogCoste" promptText="4N" style="-fx-background-color: #00000B;" />
                            </children>
                         </VBox>
-                        <VBox fx:id="atributosFOG2" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #266D7F;" HBox.hgrow="ALWAYS">
+                        <VBox fx:id="atributosFOG2" disable="true" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #266D7F;" HBox.hgrow="ALWAYS">
                            <padding>
                               <Insets bottom="20.0" left="15.0" right="15.0" top="30.0" />
                            </padding>
@@ -736,7 +736,7 @@
                      </image>
                   </ImageView>
                </children></Pane>
-            <Pane fx:id="pnlOverview" prefHeight="576.0" prefWidth="793.0">
+            <Pane fx:id="pnlOverview" prefHeight="576.0" prefWidth="793.0" visible="false">
                <children>
                   <TextField layoutX="710.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="Buscar..." style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <Label layoutX="48.0" layoutY="27.0" text="Inicio" textFill="#e7e5e5">

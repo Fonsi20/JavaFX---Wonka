@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -34,6 +35,24 @@ public class Controller implements Initializable {
 
     @FXML
     private VBox pnItemsClientesLess = null;
+
+    @FXML
+    private VBox atributosYugi1;
+
+    @FXML
+    private VBox atributosYugi2;
+
+    @FXML
+    private VBox atributosMagi1;
+
+    @FXML
+    private VBox atributosMagi2;
+
+    @FXML
+    private VBox atributosFOG1;
+
+    @FXML
+    private VBox atributosFOG2;
 
     @FXML
     private Button btnOverview;
@@ -72,6 +91,9 @@ public class Controller implements Initializable {
     private AnchorPane home;
 
     @FXML
+    private ComboBox nameGame;
+
+    @FXML
     private ScrollPane ListCards;
 
     @FXML
@@ -88,11 +110,22 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        //Arrancamos todas las listas de todas las pantallas
         ListCards();
         ListCardsOrders();
         ListCardsClientes();
         ListCardsLess();
         ListClientesLess();
+
+        //Cargamos items en la comboBox
+        nameGame.getItems().addAll(
+                "Magic",
+                "Yu Gi Oh",
+                "FOW"
+        );
+
+        //Metodo para poder arrastrar la pantalla libremente
         this.MoverVentanas(this.home);
     }
 
@@ -202,7 +235,7 @@ public class Controller implements Initializable {
                 nodes[i].setOnMouseExited(event -> {
                     nodes[j].setStyle("-fx-background-color : #00000B");
                 });
-                
+
                 pnItemsCartasLess.getChildren().add(nodes[i]);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -230,6 +263,37 @@ public class Controller implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+    }
+
+    public void activarAtributo(ActionEvent actionEvent) {
+
+        String p = (String) nameGame.getSelectionModel().getSelectedItem();
+
+        if ("Magic".equals(p)) {
+            atributosYugi1.setDisable(true);
+            atributosYugi2.setDisable(true);
+            atributosFOG1.setDisable(true);
+            atributosFOG2.setDisable(true);
+            atributosMagi1.setDisable(false);
+            atributosMagi2.setDisable(false);
+        }
+        if ("Yu Gi Oh".equals(p)) {
+            atributosYugi1.setDisable(false);
+            atributosYugi2.setDisable(false);
+            atributosFOG1.setDisable(true);
+            atributosFOG2.setDisable(true);
+            atributosMagi1.setDisable(true);
+            atributosMagi2.setDisable(true);
+        }
+        if ("FOW".equals(p)) {
+            atributosYugi1.setDisable(true);
+            atributosYugi2.setDisable(true);
+            atributosFOG1.setDisable(false);
+            atributosFOG2.setDisable(false);
+            atributosMagi1.setDisable(true);
+            atributosMagi2.setDisable(true);
         }
 
     }

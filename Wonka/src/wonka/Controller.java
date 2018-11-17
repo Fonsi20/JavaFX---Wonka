@@ -1,5 +1,6 @@
 package wonka;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -15,44 +16,16 @@ import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class Controller implements Initializable {
 
     //INICIALIZAMOS LAS PANTALLAS Y TODOS LOS DEMÁS COMPONENETES DE NUESTROS FXML
     @FXML
-    private VBox pnItems = null;
-
-    @FXML
-    private VBox pnItemsOrders = null;
-
-    @FXML
-    private VBox pnItemsClientes = null;
-
-    @FXML
-    private VBox pnItemsCartasLess = null;
-
-    @FXML
-    private VBox pnItemsClientesLess = null;
-
-    @FXML
-    private VBox atributosYugi1;
-
-    @FXML
-    private VBox atributosYugi2;
-
-    @FXML
-    private VBox atributosMagi1;
-
-    @FXML
-    private VBox atributosMagi2;
-
-    @FXML
-    private VBox atributosFOG1;
-
-    @FXML
-    private VBox atributosFOG2;
+    private AnchorPane home;
 
     @FXML
     private Button btnOverview;
@@ -67,46 +40,187 @@ public class Controller implements Initializable {
     private Button btnCompras;
 
     @FXML
+    private Button btnHistorial;
+
+    @FXML
     private Button btnSettings;
 
     @FXML
     private Button btnSignout;
 
     @FXML
-    private Pane pnlCustomer;
-
-    @FXML
-    private Pane pnlOrders;
-
-    @FXML
-    private Pane pnlOverview;
+    private Pane pnlPack;
 
     @FXML
     private Pane pnlDevelops;
 
     @FXML
+    private VBox fonsiBack;
+
+    @FXML
+    private VBox daniBack;
+
+    @FXML
+    private VBox diegoBack;
+
+    @FXML
+    private Pane pnlSignOut;
+
+    @FXML
     private Pane pnlCompras;
-
-    @FXML
-    private AnchorPane home;
-
-    @FXML
-    private ComboBox nameGame;
-
-    @FXML
-    private ScrollPane ListCards;
-
-    @FXML
-    private ScrollPane ListCardsLess;
 
     @FXML
     private ScrollPane ListClientesLess;
 
     @FXML
-    private ScrollPane ListCardsOrders;
+    private VBox pnItemsClientesLess;
+
+    @FXML
+    private ScrollPane ListCardsLess;
+
+    @FXML
+    private VBox pnItemsCartasLess;
+
+    @FXML
+    private JFXButton btnComprarCarta;
+
+    @FXML
+    private JFXButton btnLimpiarListas;
+
+    @FXML
+    private Pane pnlCustomer;
+
+    @FXML
+    private TextField nombreCliente;
+
+    @FXML
+    private TextField edadCliente;
+
+    @FXML
+    private TextField apellidosCliente;
+
+    @FXML
+    private ComboBox sexoCliente;
+
+    @FXML
+    private TextField emailCliente;
+
+    @FXML
+    private TextField telefonoCliente;
 
     @FXML
     private ScrollPane ListCardsClientes;
+
+    @FXML
+    private VBox pnItemsClientes;
+
+    @FXML
+    private TextField direccionCliente;
+
+    @FXML
+    private Pane pnlOrders;
+
+    @FXML
+    private ComboBox nameGame;
+
+    @FXML
+    private TextField yearCard;
+
+    @FXML
+    private TextField stockCard;
+
+    @FXML
+    private TextField nameCard;
+
+    @FXML
+    private TextField idCard;
+
+    @FXML
+    private TextField priceCard;
+
+    @FXML
+    private TextField colecCard;
+
+    @FXML
+    private TextField sumCard;
+
+    @FXML
+    private HBox atributosJuegos;
+
+    @FXML
+    private VBox atributosYugi1;
+
+    @FXML
+    private TextField yugiID;
+
+    @FXML
+    private TextField yugiAtributo;
+
+    @FXML
+    private VBox atributosYugi2;
+
+    @FXML
+    private TextField yugiTipo;
+
+    @FXML
+    private TextField yugiNivel;
+
+    @FXML
+    private TextField yugiSubTIpo;
+
+    @FXML
+    private VBox atributosMagi1;
+
+    @FXML
+    private TextField magiID;
+
+    @FXML
+    private TextField magiCoste;
+
+    @FXML
+    private VBox atributosMagi2;
+
+    @FXML
+    private TextField magiTipo;
+
+    @FXML
+    private TextField magiColor;
+
+    @FXML
+    private VBox atributosFOG1;
+
+    @FXML
+    private TextField fogID;
+
+    @FXML
+    private TextField fogCoste;
+
+    @FXML
+    private VBox atributosFOG2;
+
+    @FXML
+    private TextField fogTipo;
+
+    @FXML
+    private TextField fogColor;
+
+    @FXML
+    private TextField fogRaza;
+
+    @FXML
+    private ScrollPane ListCardsOrders;
+
+    @FXML
+    private VBox pnItemsOrders;
+
+    @FXML
+    private Pane pnlOverview;
+
+    @FXML
+    private ScrollPane ListCards;
+
+    @FXML
+    private VBox pnItems;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -118,11 +232,17 @@ public class Controller implements Initializable {
         ListCardsLess();
         ListClientesLess();
 
-        //Cargamos items en la comboBox
+        //Cargamos items en la comboBox de tipo de juego de carta
         nameGame.getItems().addAll(
                 "Magic",
                 "Yu Gi Oh",
                 "FOW"
+        );
+      
+         //Cargamos items en la comboBox de sexo de cliente
+        sexoCliente.getItems().addAll(
+                "Femenino",
+                "Masculino"                
         );
 
         //Metodo para poder arrastrar la pantalla libremente
@@ -272,6 +392,14 @@ public class Controller implements Initializable {
         String p = (String) nameGame.getSelectionModel().getSelectedItem();
 
         if ("Magic".equals(p)) {
+
+            atributosMagi1.setStyle("-fx-background-color :  #4FA2FF");
+            atributosMagi2.setStyle("-fx-background-color :  #4FA2FF");
+            atributosYugi1.setStyle("-fx-background-color :  #266D7F");
+            atributosYugi2.setStyle("-fx-background-color :   #266D7F");
+            atributosFOG1.setStyle("-fx-background-color :   #266D7F");
+            atributosFOG2.setStyle("-fx-background-color :   #266D7F");
+
             atributosYugi1.setDisable(true);
             atributosYugi2.setDisable(true);
             atributosFOG1.setDisable(true);
@@ -280,6 +408,13 @@ public class Controller implements Initializable {
             atributosMagi2.setDisable(false);
         }
         if ("Yu Gi Oh".equals(p)) {
+            atributosYugi1.setStyle("-fx-background-color :  #4FA2FF");
+            atributosYugi2.setStyle("-fx-background-color :  #4FA2FF");
+            atributosMagi1.setStyle("-fx-background-color :  #266D7F");
+            atributosMagi2.setStyle("-fx-background-color :   #266D7F");
+            atributosFOG1.setStyle("-fx-background-color :   #266D7F");
+            atributosFOG2.setStyle("-fx-background-color :   #266D7F");
+
             atributosYugi1.setDisable(false);
             atributosYugi2.setDisable(false);
             atributosFOG1.setDisable(true);
@@ -288,6 +423,13 @@ public class Controller implements Initializable {
             atributosMagi2.setDisable(true);
         }
         if ("FOW".equals(p)) {
+            atributosFOG1.setStyle("-fx-background-color :  #4FA2FF");
+            atributosFOG2.setStyle("-fx-background-color :  #4FA2FF");
+            atributosYugi1.setStyle("-fx-background-color :  #266D7F");
+            atributosYugi2.setStyle("-fx-background-color :   #266D7F");
+            atributosMagi1.setStyle("-fx-background-color :   #266D7F");
+            atributosMagi2.setStyle("-fx-background-color :   #266D7F");
+
             atributosYugi1.setDisable(true);
             atributosYugi2.setDisable(true);
             atributosFOG1.setDisable(false);

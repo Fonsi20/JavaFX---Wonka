@@ -130,7 +130,7 @@
       <StackPane layoutX="258.0" prefHeight="781.0" prefWidth="935.0" style="-fx-background-color: #00222B;">
          <children>
             <Pane fx:id="pnlPack" prefHeight="200.0" prefWidth="200.0" visible="false" />
-            <Pane fx:id="pnlDevelops" prefHeight="200.0" prefWidth="200.0" visible="false">
+            <Pane fx:id="pnlDevelops" prefHeight="200.0" prefWidth="200.0">
                <children>
                   <ImageView fitHeight="781.0" fitWidth="352.0" layoutX="624.0" layoutY="1.0" opacity="0.41" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -166,7 +166,7 @@
                               </Text>
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="“La mayoría de psiquiatras&#10;concuerdan que sentarse&#10;en un campo de calabazas&#10;es una excelente terapia&#10;para una mente preocupada.”&#10;– Linus">
                                  <font>
-                                    <Font size="16.0" />
+                                    <Font name="System Italic" size="16.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets top="10.0" />
@@ -191,7 +191,7 @@
                               </Text>
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="“Mi vida no tiene dirección,&#10;tampoco objetivos y aun así&#10;soy feliz. ¡No sé por qué! &#10;¿Qué estoy haciendo bien?”&#10;– Snoopy&#10;">
                                  <font>
-                                    <Font size="16.0" />
+                                    <Font name="System Italic" size="16.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets top="10.0" />
@@ -216,7 +216,7 @@
                               </Text>
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="“¿Profesora? ¿Qué tipo&#10;de prueba tendremos hoy?&#10;¿Selección múltiple? ¡Bien!&#10;¡Escojo no tomarlo!”&#10;– Patty&#10;">
                                  <font>
-                                    <Font size="16.0" />
+                                    <Font name="System Italic" size="16.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets top="10.0" />
@@ -301,13 +301,13 @@
                         <Font size="14.0" />
                      </font>
                   </JFXButton>
-                  <JFXTextField layoutX="73.0" layoutY="107.0" prefHeight="25.0" prefWidth="340.0" promptText="Nombre del cliente a buscar...." unFocusColor="WHITE" />
-                  <JFXTextField layoutX="498.0" layoutY="107.0" prefHeight="25.0" prefWidth="340.0" promptText="Nombre de la carta a buscar...." unFocusColor="WHITE" />
+                  <JFXTextField layoutX="23.0" layoutY="107.0" prefHeight="25.0" prefWidth="420.0" promptText="Nombre del cliente a buscar...." style="-fx-background-color: #00222B; -fx-text-fill: #fff;" unFocusColor="WHITE" />
+                  <JFXTextField layoutX="479.0" layoutY="107.0" prefHeight="25.0" prefWidth="420.0" promptText="Nombre de la carta a buscar...." style="-fx-background-color: #00222B; -fx-text-fill: #fff;" unFocusColor="WHITE" />
                </children>
             </Pane>
             <Pane fx:id="pnlCustomer" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
-                  <TextField layoutX="709.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="Buscar..." style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <TextField layoutX="709.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="Buscar..." style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-text-fill: #ffffff;" />
                   <Label layoutX="46.0" layoutY="27.0" text="Clientes" textFill="#e7e5e5">
                      <font>
                         <Font size="24.0" />
@@ -327,13 +327,13 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="nombreCliente" promptText="Emma" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="nombreCliente" promptText="Emma" style="-fx-background-color: #00000B; -fx-text-fill: #ffffff;" />
                               <Label text="Edad" textFill="#fa5f7e">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="edadCliente" promptText="22" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="edadCliente" promptText="22" style="-fx-background-color: #00000B; -fx-text-fill: #ffffff;" />
                            </children>
                         </VBox>
                         <VBox prefHeight="182.0" prefWidth="186.0" spacing="10.0">
@@ -343,13 +343,13 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="apellidosCliente" promptText="McFlurry James" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="apellidosCliente" promptText="McFlurry James" style="-fx-background-color: #00000B; -fx-text-fill: #ffffff;" />
                               <Label text="Sexo" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="sexoCliente" prefHeight="25.0" prefWidth="234.0" promptText="Escoge" style="-fx-background-color: #00000B;" VBox.vgrow="ALWAYS" />
+                              <ComboBox fx:id="sexoCliente" prefHeight="25.0" prefWidth="234.0" promptText="Escoge" style="-fx-background-color: #00000B; -fx-text-fill: #ffffff;" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
                         <VBox prefHeight="143.0" prefWidth="215.0" spacing="10.0">
@@ -359,13 +359,13 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="emailCliente" promptText="google@gmail.com" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="emailCliente" promptText="google@gmail.com" style="-fx-background-color: #00000B; -fx-text-fill: #ffffff;" />
                               <Label text="Teléfono" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="telefonoCliente" promptText="20,4€" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="telefonoCliente" promptText="20,4€" style="-fx-background-color: #00000B; -fx-text-fill: #ffffff;" />
                            </children>
                         </VBox>
                         <VBox alignment="TOP_CENTER" prefHeight="180.0" prefWidth="136.0" spacing="25.0">
@@ -437,11 +437,11 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="direccionCliente" alignment="TOP_LEFT" layoutX="39.0" layoutY="263.0" prefHeight="25.0" prefWidth="675.0" promptText="Ponteareas, nº22 CP 45124 Pontevedra España" style="-fx-background-color: #00000B;" />
+                  <TextField fx:id="direccionCliente" alignment="TOP_LEFT" layoutX="39.0" layoutY="263.0" prefHeight="25.0" prefWidth="675.0" promptText="Ponteareas, nº22 CP 45124 Pontevedra España" style="-fx-background-color: #00000B; -fx-text-fill: #ffffff;" />
                </children></Pane>
-            <Pane fx:id="pnlOrders" prefHeight="200.0" prefWidth="200.0">
+            <Pane fx:id="pnlOrders" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
-                  <TextField layoutX="709.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="Buscar..." style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <TextField layoutX="709.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="Buscar..." style="-fx-text-fill: #ffffff; -fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <Label layoutX="48.0" layoutY="27.0" text="Lista de Cartas" textFill="#e7e5e5">
                      <font>
                         <Font size="24.0" />
@@ -462,13 +462,13 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="yearCard" promptText="1991" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="yearCard" promptText="1991" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
                               <Label text="Stock" textFill="#fa5f7e">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="stockCard" promptText="20" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="stockCard" promptText="20" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
                            </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
@@ -478,19 +478,19 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="nameCard" promptText="Fate" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="nameCard" promptText="Fate" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
                               <Label text="IdCarta" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="idCard" promptText="4512a4" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="idCard" promptText="4512a4" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
                               <Label text="Precio" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="priceCard" promptText="20,4€" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="priceCard" promptText="20,4€" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
                            </children>
                         </VBox>
                         <VBox prefHeight="114.0" prefWidth="369.0" spacing="10.0">
@@ -500,13 +500,13 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="colecCard" promptText="Warrmog" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="colecCard" promptText="Warrmog" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
                               <Label text="Descripcion" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="sumCard" alignment="TOP_LEFT" prefHeight="90.0" prefWidth="369.0" promptText="Lorem Ipsuim..." style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="sumCard" alignment="TOP_LEFT" prefHeight="90.0" prefWidth="369.0" promptText="Lorem Ipsuim..." style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
                            </children>
                         </VBox>
                         <VBox alignment="TOP_CENTER" prefHeight="180.0" prefWidth="136.0" spacing="25.0">
@@ -584,13 +584,13 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="yugiID" promptText="45AF1" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="yugiID" promptText="45AF1" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
                               <Label text="Atributo" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="yugiAtributo" promptText="Magic" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="yugiAtributo" promptText="Magic" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
                            </children>
                         </VBox>
                         <VBox fx:id="atributosYugi2" disable="true" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #266D7F;" HBox.hgrow="ALWAYS">
@@ -600,25 +600,25 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="yugiTipo" promptText="Instant" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="yugiTipo" promptText="Instant" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
                               <Label text="Nivel" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="yugiNivel" promptText="4" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="yugiNivel" promptText="4" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
                               <Label text="Sub Tipo" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="yugiSubTIpo" promptText="Goblin" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="yugiSubTIpo" promptText="Goblin" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
                            </children>
                            <padding>
                               <Insets bottom="20.0" left="15.0" right="15.0" top="30.0" />
                            </padding>
                         </VBox>
-                        <VBox fx:id="atributosMagi1" disable="true" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #4FA2FF;" HBox.hgrow="ALWAYS">
+                        <VBox fx:id="atributosMagi1" disable="true" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #266D7F;" HBox.hgrow="ALWAYS">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Magic">
                                  <font>
@@ -633,19 +633,19 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="magiID" promptText="45AF1" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="magiID" promptText="45AF1" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
                               <Label text="Coste" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="magiCoste" promptText="4B 2I" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="magiCoste" promptText="4B 2I" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
                            </children>
                            <padding>
                               <Insets bottom="20.0" left="15.0" right="15.0" top="30.0" />
                            </padding>
                         </VBox>
-                        <VBox fx:id="atributosMagi2" disable="true" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #4FA2FF;" HBox.hgrow="ALWAYS">
+                        <VBox fx:id="atributosMagi2" disable="true" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #266D7F;" HBox.hgrow="ALWAYS">
                            <padding>
                               <Insets bottom="20.0" left="15.0" right="15.0" top="30.0" />
                            </padding>
@@ -658,13 +658,13 @@
                                     <Insets top="53.0" />
                                  </VBox.margin>
                               </Label>
-                              <TextField fx:id="magiTipo" promptText="Instant" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="magiTipo" promptText="Instant" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
                               <Label text="Color" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="magiColor" promptText="Azul" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="magiColor" promptText="Azul" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
                            </children>
                         </VBox>
                         <VBox fx:id="atributosFOG1" disable="true" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #266D7F;" HBox.hgrow="ALWAYS">
@@ -685,13 +685,13 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="fogID" promptText="45AF1" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="fogID" promptText="45AF1" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
                               <Label text="Coste" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="fogCoste" promptText="4N" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="fogCoste" promptText="4N" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
                            </children>
                         </VBox>
                         <VBox fx:id="atributosFOG2" disable="true" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #266D7F;" HBox.hgrow="ALWAYS">
@@ -704,19 +704,19 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="fogTipo" promptText="Instant" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="fogTipo" promptText="Instant" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
                               <Label text="Color" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="fogColor" promptText="Negro" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="fogColor" promptText="Negro" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
                               <Label text="Raza" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="fogRaza" promptText="Humano" style="-fx-background-color: #00000B;" />
+                              <TextField fx:id="fogRaza" promptText="Humano" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
                            </children>
                         </VBox>
                      </children>
@@ -738,7 +738,7 @@
                </children></Pane>
             <Pane fx:id="pnlOverview" prefHeight="576.0" prefWidth="793.0" visible="false">
                <children>
-                  <TextField layoutX="710.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="Buscar..." style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <TextField layoutX="710.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="Buscar..." style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-text-fill: #fff;" />
                   <Label layoutX="48.0" layoutY="27.0" text="Inicio" textFill="#e7e5e5">
                      <font>
                         <Font size="24.0" />

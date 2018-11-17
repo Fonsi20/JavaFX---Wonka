@@ -1,16 +1,16 @@
 .button
 {
--fx-background-color : #05071F;
--fx-text-fill : #e7e5e5;
+    -fx-background-color : #05071F;
+    -fx-text-fill : #e7e5e5;
 }
 
 .button:hover{
--fx-background-color : #10165F;
+    -fx-background-color : #10165F;
 }
 
 .button:pressed
 {
--fx-background-color : #1620A1;
+    -fx-background-color : #1620A1;
 }
 
 .scroll-pane {
@@ -43,6 +43,6 @@
     -fx-background-color: black;
 }
 
-#fonsiBack{
-    -fx-background-image: url("../images/fondo1.png");
+.TextField {
+    -fx-text-fill: white;
 }

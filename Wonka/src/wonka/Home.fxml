@@ -296,16 +296,21 @@
                         <Font size="14.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="btnLimpiarListas" layoutX="583.0" layoutY="32.0" prefWidth="150.0" style="-fx-background-color: #4CD9FF;" text="Limpiar" textFill="WHITE">
+                  <JFXButton fx:id="btnLimpiarListas" layoutX="583.0" layoutY="32.0" onAction="#accionBorrarCompras" prefWidth="150.0" style="-fx-background-color: #4CD9FF;" text="Limpiar" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </JFXButton>
-                  <JFXTextField layoutX="23.0" layoutY="107.0" prefHeight="25.0" prefWidth="420.0" promptText="Nombre del cliente a buscar...." style="-fx-background-color: #00222B; -fx-text-fill: #fff;" unFocusColor="WHITE" />
-                  <JFXTextField layoutX="479.0" layoutY="107.0" prefHeight="25.0" prefWidth="420.0" promptText="Nombre de la carta a buscar...." style="-fx-background-color: #00222B; -fx-text-fill: #fff;" unFocusColor="WHITE" />
+                  <JFXTextField fx:id="busComCliente" layoutX="23.0" layoutY="107.0" prefHeight="25.0" prefWidth="420.0" promptText="Nombre del cliente a buscar...." style="-fx-background-color: #00222B; -fx-text-fill: #fff;" unFocusColor="WHITE" />
+                  <JFXTextField fx:id="busComCarta" layoutX="479.0" layoutY="107.0" prefHeight="25.0" prefWidth="420.0" promptText="Nombre de la carta a buscar...." style="-fx-background-color: #00222B; -fx-text-fill: #fff;" unFocusColor="WHITE" />
+                  <JFXButton fx:id="btnBuscarCompras" layoutX="412.0" layoutY="32.0" onAction="#accionBuscarCompras" prefWidth="150.0" style="-fx-background-color: #4CD9FF;" text="Buscar" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </JFXButton>
                </children>
             </Pane>
-            <Pane fx:id="pnlCustomer" prefHeight="200.0" prefWidth="200.0">
+            <Pane fx:id="pnlCustomer" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
                   <TextField layoutX="709.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="Buscar..." style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-text-fill: #ffffff;" />
                   <Label layoutX="46.0" layoutY="27.0" text="Clientes" textFill="#e7e5e5">
@@ -349,7 +354,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="sexoCliente" prefHeight="25.0" prefWidth="234.0" promptText="Escoge" style="-fx-background-color: #00000B; -fx-text-fill: #ffffff;" VBox.vgrow="ALWAYS" />
+                              <ComboBox fx:id="sexoCliente" prefHeight="25.0" prefWidth="234.0" promptText="Escoge" style="-fx-background-color: #00000B;" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
                         <VBox prefHeight="143.0" prefWidth="215.0" spacing="10.0">
@@ -370,22 +375,22 @@
                         </VBox>
                         <VBox alignment="TOP_CENTER" prefHeight="180.0" prefWidth="136.0" spacing="25.0">
                            <children>
-                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="115.0" mnemonicParsing="false" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Limpiar Campos" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="btnLimpiarCamposClientes" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="115.0" mnemonicParsing="false" onAction="#accionLimpiarCamposClientes" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Limpiar Campos" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="140.0" mnemonicParsing="false" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Modificar Cliente" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="btnModificarCamposClientes" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="140.0" mnemonicParsing="false" onAction="#accionModificarCamposClientes" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Modificar Cliente" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Borrar Cliente" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="btnBorrarCamposClientes" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#accionBorrarCamposClientes" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Borrar Cliente" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Guardar Cliente" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="btnGuardarCamposClientes" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#accionGuardarCamposClientes" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Guardar Cliente" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -511,22 +516,22 @@
                         </VBox>
                         <VBox alignment="TOP_CENTER" prefHeight="180.0" prefWidth="136.0" spacing="25.0">
                            <children>
-                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="115.0" mnemonicParsing="false" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Limpiar" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="btnLimpiarCarta" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="115.0" mnemonicParsing="false" onAction="#accionLimpiarCarta" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Limpiar" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="140.0" mnemonicParsing="false" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Modificar Carta" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="btnModificarCarta" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="140.0" mnemonicParsing="false" onAction="#accionModificarCarta" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Modificar Carta" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Borrar Carta" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="btnBorrarCarta" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#accionbtnBorrarCarta" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Borrar Carta" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Guardar Carta" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="btnGuardarCarta" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#accionGuardarCarta" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Guardar Carta" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -736,7 +741,7 @@
                      </image>
                   </ImageView>
                </children></Pane>
-            <Pane fx:id="pnlOverview" prefHeight="576.0" prefWidth="793.0" visible="false">
+            <Pane fx:id="pnlOverview" prefHeight="576.0" prefWidth="793.0">
                <children>
                   <TextField layoutX="710.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="Buscar..." style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-text-fill: #fff;" />
                   <Label layoutX="48.0" layoutY="27.0" text="Inicio" textFill="#e7e5e5">

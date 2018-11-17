@@ -1,6 +1,7 @@
 package wonka;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -88,6 +89,15 @@ public class Controller implements Initializable {
     private JFXButton btnLimpiarListas;
 
     @FXML
+    private JFXTextField busComCliente;
+
+    @FXML
+    private JFXTextField busComCarta;
+
+    @FXML
+    private JFXButton btnBuscarCompras;
+
+    @FXML
     private Pane pnlCustomer;
 
     @FXML
@@ -107,6 +117,18 @@ public class Controller implements Initializable {
 
     @FXML
     private TextField telefonoCliente;
+
+    @FXML
+    private Button btnLimpiarCamposClientes;
+
+    @FXML
+    private Button btnModificarCamposClientes;
+
+    @FXML
+    private Button btnBorrarCamposClientes;
+
+    @FXML
+    private Button btnGuardarCamposClientes;
 
     @FXML
     private ScrollPane ListCardsClientes;
@@ -143,6 +165,18 @@ public class Controller implements Initializable {
 
     @FXML
     private TextField sumCard;
+
+    @FXML
+    private Button btnLimpiarCarta;
+
+    @FXML
+    private Button btnModificarCarta;
+
+    @FXML
+    private Button btnBorrarCarta;
+
+    @FXML
+    private Button btnGuardarCarta;
 
     @FXML
     private HBox atributosJuegos;
@@ -238,17 +272,18 @@ public class Controller implements Initializable {
                 "Yu Gi Oh",
                 "FOW"
         );
-      
-         //Cargamos items en la comboBox de sexo de cliente
+
+        //Cargamos items en la comboBox de sexo de cliente
         sexoCliente.getItems().addAll(
                 "Femenino",
-                "Masculino"                
+                "Masculino"
         );
 
         //Metodo para poder arrastrar la pantalla libremente
         this.MoverVentanas(this.home);
     }
 
+    @FXML
     private void MoverVentanas(AnchorPane root) {
 
         AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
@@ -271,6 +306,8 @@ public class Controller implements Initializable {
         //root.setOnMouseReleased(e -> root.setStyle("-fx-cursor: DEFAULT;"));
     }
 
+    @FXML
+    //Carga de la lista de Cartas de la pantalla inicial
     public void ListCards() {
 
         Node[] nodes = new Node[10];
@@ -281,10 +318,10 @@ public class Controller implements Initializable {
                 nodes[i] = FXMLLoader.load(getClass().getResource("ItemCarta.fxml"));
 
                 nodes[i].setOnMouseEntered(event -> {
-                    nodes[j].setStyle("-fx-background-color : #266D7F");
+                    nodes[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
                 });
                 nodes[i].setOnMouseExited(event -> {
-                    nodes[j].setStyle("-fx-background-color : #00000B");
+                    nodes[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
                 });
                 pnItems.getChildren().add(nodes[i]);
             } catch (IOException e) {
@@ -294,6 +331,8 @@ public class Controller implements Initializable {
 
     }
 
+    @FXML
+    //Carga de la lista de Cartas de la pantalla Cartas
     public void ListCardsOrders() {
 
         Node[] nodes = new Node[10];
@@ -304,10 +343,10 @@ public class Controller implements Initializable {
                 nodes[i] = FXMLLoader.load(getClass().getResource("ItemCarta.fxml"));
 
                 nodes[i].setOnMouseEntered(event -> {
-                    nodes[j].setStyle("-fx-background-color : #266D7F");
+                    nodes[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
                 });
                 nodes[i].setOnMouseExited(event -> {
-                    nodes[j].setStyle("-fx-background-color : #00000B");
+                    nodes[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
                 });
                 pnItemsOrders.getChildren().add(nodes[i]);
             } catch (IOException e) {
@@ -317,6 +356,8 @@ public class Controller implements Initializable {
 
     }
 
+    @FXML
+    //Carga de la lista de clientes de la pantalla Clientes
     public void ListCardsClientes() {
 
         Node[] nodes = new Node[10];
@@ -327,10 +368,10 @@ public class Controller implements Initializable {
                 nodes[i] = FXMLLoader.load(getClass().getResource("ItemCliente.fxml"));
 
                 nodes[i].setOnMouseEntered(event -> {
-                    nodes[j].setStyle("-fx-background-color : #266D7F");
+                    nodes[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
                 });
                 nodes[i].setOnMouseExited(event -> {
-                    nodes[j].setStyle("-fx-background-color : #00000B");
+                    nodes[j].setStyle("-fx-background-color : #02030A; -fx-background-radius:5");
                 });
                 pnItemsClientes.getChildren().add(nodes[i]);
             } catch (IOException e) {
@@ -340,6 +381,8 @@ public class Controller implements Initializable {
 
     }
 
+    @FXML
+    //Carga de la lista de cartas de la pantalla Compra
     public void ListCardsLess() {
 
         Node[] nodes = new Node[20];
@@ -350,10 +393,10 @@ public class Controller implements Initializable {
                 nodes[i] = FXMLLoader.load(getClass().getResource("ItemCartaLess.fxml"));
 
                 nodes[i].setOnMouseEntered(event -> {
-                    nodes[j].setStyle("-fx-background-color : #266D7F");
+                    nodes[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
                 });
                 nodes[i].setOnMouseExited(event -> {
-                    nodes[j].setStyle("-fx-background-color : #00000B");
+                    nodes[j].setStyle("-fx-background-color : #02030A; -fx-background-radius:5");
                 });
 
                 pnItemsCartasLess.getChildren().add(nodes[i]);
@@ -364,6 +407,8 @@ public class Controller implements Initializable {
 
     }
 
+    @FXML
+    //Carga de la lista de clientes de la pantalla Compra
     public void ListClientesLess() {
 
         Node[] nodes = new Node[4];
@@ -374,10 +419,10 @@ public class Controller implements Initializable {
                 nodes[i] = FXMLLoader.load(getClass().getResource("ItemClienteLess.fxml"));
 
                 nodes[i].setOnMouseEntered(event -> {
-                    nodes[j].setStyle("-fx-background-color : #266D7F");
+                    nodes[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
                 });
                 nodes[i].setOnMouseExited(event -> {
-                    nodes[j].setStyle("-fx-background-color : #00000B");
+                    nodes[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
                 });
                 pnItemsClientesLess.getChildren().add(nodes[i]);
             } catch (IOException e) {
@@ -387,6 +432,8 @@ public class Controller implements Initializable {
 
     }
 
+    @FXML
+    //Activar los distintos campos de inserción de una carta
     public void activarAtributo(ActionEvent actionEvent) {
 
         String p = (String) nameGame.getSelectionModel().getSelectedItem();
@@ -440,6 +487,8 @@ public class Controller implements Initializable {
 
     }
 
+    @FXML
+    //Acciones al pulsar sobre los botones del menú
     public void handleClicks(ActionEvent actionEvent) {
         if (actionEvent.getSource() == btnCustomers) {
             pnlCustomer.setStyle("-fx-background-color : #00222B");
@@ -494,5 +543,99 @@ public class Controller implements Initializable {
             ListCardsOrders();
             pnlOrders.toFront();
         }
+    }
+
+    @FXML
+    //Borramos al cliente seleccionado en la lista de la BBDD
+    void accionBorrarCamposClientes(ActionEvent event) {
+
+    }
+
+    @FXML
+    //Guardamos al cliente introducido en la BBDD
+    void accionGuardarCamposClientes(ActionEvent event) {
+
+    }
+
+    @FXML
+    //Reseteamos los campos de inserción de un cliente
+    void accionLimpiarCamposClientes(ActionEvent event) {
+
+        nombreCliente.setText("");
+        edadCliente.setText("");
+        direccionCliente.setText("");
+        apellidosCliente.setText("");
+        emailCliente.setText("");
+        telefonoCliente.setText("");
+
+    }
+
+    @FXML
+    //Modificamos los campos de un cliente seleccionado en la lista y lo subimos de nuevo a la BBDD
+    void accionModificarCamposClientes(ActionEvent event) {
+
+    }
+
+    @FXML
+    //Reseteamos los campos de busqueda
+    void accionBorrarCompras(ActionEvent event) {
+
+        busComCarta.setText("");
+        busComCliente.setText("");
+
+    }
+
+    @FXML
+    void accionBuscarCompras(ActionEvent event) {
+
+    }
+
+    @FXML
+    //Modificamos los campos de una carta seleccionada en la lista y la subimos de nuevo a la BBDD
+    void accionModificarCarta(ActionEvent event) {
+
+    }
+
+    @FXML
+    //Borramos la carta seleccionada en la lista de la BBDD
+    void accionbtnBorrarCarta(ActionEvent event) {
+
+    }
+
+    @FXML
+    //Limpiamos los campos de la pantalla carta
+    void accionLimpiarCarta(ActionEvent event) {
+
+        nameCard.setText("");
+        colecCard.setText("");
+        yearCard.setText("");
+        idCard.setText("");
+        stockCard.setText("");
+        priceCard.setText("");
+        sumCard.setText("");
+
+        yugiID.setText("");
+        yugiAtributo.setText("");
+        yugiNivel.setText("");
+        yugiSubTIpo.setText("");
+        yugiTipo.setText("");
+
+        magiColor.setText("");
+        magiCoste.setText("");
+        magiID.setText("");
+        magiTipo.setText("");
+
+        fogColor.setText("");
+        fogCoste.setText("");
+        fogID.setText("");
+        fogRaza.setText("");
+        fogTipo.setText("");
+
+    }
+
+    @FXML
+    //Guardamos la carta introducida en la BBDD
+    void accionGuardarCarta(ActionEvent event) {
+
     }
 }

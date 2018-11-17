@@ -130,7 +130,7 @@
       <StackPane layoutX="258.0" prefHeight="781.0" prefWidth="935.0" style="-fx-background-color: #00222B;">
          <children>
             <Pane fx:id="pnlPack" prefHeight="200.0" prefWidth="200.0" visible="false" />
-            <Pane fx:id="pnlDevelops" prefHeight="200.0" prefWidth="200.0">
+            <Pane fx:id="pnlDevelops" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
                   <ImageView fitHeight="781.0" fitWidth="352.0" layoutX="624.0" layoutY="1.0" opacity="0.41" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -305,7 +305,7 @@
                   <JFXTextField layoutX="479.0" layoutY="107.0" prefHeight="25.0" prefWidth="420.0" promptText="Nombre de la carta a buscar...." style="-fx-background-color: #00222B; -fx-text-fill: #fff;" unFocusColor="WHITE" />
                </children>
             </Pane>
-            <Pane fx:id="pnlCustomer" prefHeight="200.0" prefWidth="200.0" visible="false">
+            <Pane fx:id="pnlCustomer" prefHeight="200.0" prefWidth="200.0">
                <children>
                   <TextField layoutX="709.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="Buscar..." style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-text-fill: #ffffff;" />
                   <Label layoutX="46.0" layoutY="27.0" text="Clientes" textFill="#e7e5e5">

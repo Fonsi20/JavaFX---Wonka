@@ -130,7 +130,7 @@
       <StackPane layoutX="258.0" prefHeight="781.0" prefWidth="935.0" style="-fx-background-color: #00222B;">
          <children>
             <Pane fx:id="pnlSignOut" prefHeight="200.0" prefWidth="200.0" visible="false" />
-            <Pane fx:id="pnlHistorial" prefHeight="200.0" prefWidth="200.0">
+            <Pane fx:id="pnlHistorial" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
                   <Label layoutX="48.0" layoutY="27.0" text="Historial" textFill="#e7e5e5">
                      <font>
@@ -168,7 +168,7 @@
                         </VBox>
                      </content>
                   </ScrollPane>
-                  <JFXButton fx:id="btnCancelarReserva" layoutX="413.0" layoutY="32.0" onAction="#CancelarReservaHistorial" prefWidth="150.0" style="-fx-background-color: #E84429;" text="Cancelar Reserva" textFill="WHITE">
+                  <JFXButton fx:id="btnCancelarReserva" layoutX="413.0" layoutY="32.0" onAction="#CancelarReservaHistorial" prefWidth="150.0" style="-fx-background-color: #fa5f7e;" text="Cancelar Reserva" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -290,7 +290,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <HBox alignment="CENTER_LEFT" layoutX="1.0" layoutY="145.0" prefHeight="42.0" prefWidth="461.0" style="-fx-background-color: #4CD9FF;">
+                  <HBox alignment="CENTER_LEFT" layoutX="1.0" layoutY="145.0" prefHeight="42.0" prefWidth="461.0" style="-fx-background-color: #4CD478;">
                      <children>
                         <Label text="Nombre">
                            <HBox.margin>
@@ -318,7 +318,7 @@
                         </VBox>
                      </content>
                   </ScrollPane>
-                  <HBox alignment="CENTER_LEFT" layoutX="447.0" layoutY="145.0" prefHeight="42.0" prefWidth="488.0" style="-fx-background-color: #4CD9FF;">
+                  <HBox alignment="CENTER_LEFT" layoutX="447.0" layoutY="145.0" prefHeight="42.0" prefWidth="488.0" style="-fx-background-color: #4CD478;">
                      <children>
                         <Label text="Juego">
                            <HBox.margin>
@@ -463,29 +463,29 @@
                         </VBox>
                      </content>
                   </ScrollPane>
-                  <HBox alignment="CENTER_LEFT" layoutX="35.0" layoutY="303.0" prefHeight="42.0" prefWidth="865.0" spacing="80.0" style="-fx-background-color: #00222B;">
+                  <HBox alignment="CENTER_LEFT" layoutX="-2.0" layoutY="303.0" prefHeight="42.0" prefWidth="935.0" spacing="80.0" style="-fx-background-color: #FFC600;">
                      <children>
-                        <Label text="Nombre" textFill="#e7e5e5">
+                        <Label text="Nombre">
                            <HBox.margin>
                               <Insets left="100.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Apellidos" textFill="#e7e5e5">
+                        <Label text="Apellidos">
                            <HBox.margin>
                               <Insets left="20.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Edad" textFill="#e7e5e5">
+                        <Label text="Edad">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Email" textFill="#e7e5e5">
+                        <Label text="Email">
                            <HBox.margin>
                               <Insets left="20.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Teléfono" textFill="#e7e5e5">
+                        <Label text="Teléfono">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
@@ -595,7 +595,7 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="44.0" layoutY="509.0" prefHeight="42.0" prefWidth="865.0" spacing="80.0" style="-fx-background-color: #00222B;">
+                  <HBox alignment="CENTER_LEFT" layoutY="488.0" prefHeight="42.0" prefWidth="935.0" spacing="80.0" style="-fx-background-color: #26407F;">
                      <children>
                         <Label text="Name" textFill="#e7e5e5">
                            <HBox.margin>
@@ -781,9 +781,9 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <ScrollPane fx:id="ListCardsOrders" hbarPolicy="NEVER" layoutX="15.0" layoutY="560.0" prefHeight="203.0" prefWidth="905.0" stylesheets="@style.css">
+                  <ScrollPane fx:id="ListCardsOrders" hbarPolicy="NEVER" layoutX="15.0" layoutY="541.0" prefHeight="228.0" prefWidth="905.0" stylesheets="@style.css">
                      <content>
-                        <VBox fx:id="pnItemsOrders" prefHeight="201.0" prefWidth="903.0" spacing="5.0" style="-fx-background-color: #00222B;">
+                        <VBox fx:id="pnItemsOrders" prefHeight="226.0" prefWidth="903.0" spacing="5.0" style="-fx-background-color: #00222B;">
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
@@ -796,7 +796,7 @@
                      </image>
                   </ImageView>
                </children></Pane>
-            <Pane fx:id="pnlOverview" prefHeight="576.0" prefWidth="793.0" visible="false">
+            <Pane fx:id="pnlOverview" prefHeight="576.0" prefWidth="793.0">
                <children>
                   <TextField layoutX="710.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="Buscar..." style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-text-fill: #fff;" />
                   <Label layoutX="48.0" layoutY="27.0" text="Inicio" textFill="#e7e5e5">
@@ -848,7 +848,7 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="178.0" prefHeight="42.0" prefWidth="865.0" spacing="80.0" style="-fx-background-color: #00222B;">
+                  <HBox alignment="CENTER_LEFT" layoutX="-1.0" layoutY="178.0" prefHeight="42.0" prefWidth="935.0" spacing="80.0" style="-fx-background-color: #fa5f7e;">
                      <children>
                         <Label text="Name" textFill="#e7e5e5">
                            <HBox.margin>

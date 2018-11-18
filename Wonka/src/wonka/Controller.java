@@ -50,7 +50,7 @@ public class Controller implements Initializable {
     private Button btnSignout;
 
     @FXML
-    private Pane pnlPack;
+    private Pane pnlSignOut;
 
     @FXML
     private Pane pnlDevelops;
@@ -65,7 +65,25 @@ public class Controller implements Initializable {
     private VBox diegoBack;
 
     @FXML
-    private Pane pnlSignOut;
+    private Pane pnlHistorial;
+
+    @FXML
+    private ScrollPane ListHistorial;
+
+    @FXML
+    private VBox pnItemsHistorial;
+
+    @FXML
+    private JFXButton btnCancelarReserva;
+
+    @FXML
+    private JFXButton btnLimpiarHistorial;
+
+    @FXML
+    private JFXTextField busClienteHistorial;
+
+    @FXML
+    private JFXButton btnBuscarHistorial;
 
     @FXML
     private Pane pnlCompras;
@@ -265,6 +283,7 @@ public class Controller implements Initializable {
         ListCardsClientes();
         ListCardsLess();
         ListClientesLess();
+        ListHistorial();
 
         //Cargamos items en la comboBox de tipo de juego de carta
         nameGame.getItems().addAll(
@@ -433,6 +452,31 @@ public class Controller implements Initializable {
     }
 
     @FXML
+    //Carga de la lista de clientes con pedidos de la pantalla Historial
+    public void ListHistorial() {
+
+        Node[] nodes = new Node[24];
+        for (int i = 0; i < nodes.length; i++) {
+            try {
+
+                final int j = i;
+                nodes[i] = FXMLLoader.load(getClass().getResource("ItemCliente.fxml"));
+
+                nodes[i].setOnMouseEntered(event -> {
+                    nodes[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+                });
+                nodes[i].setOnMouseExited(event -> {
+                    nodes[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                });
+                pnItemsHistorial.getChildren().add(nodes[i]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    @FXML
     //Activar los distintos campos de inserción de una carta
     public void activarAtributo(ActionEvent actionEvent) {
 
@@ -497,6 +541,7 @@ public class Controller implements Initializable {
             pnlOrders.setVisible(false);
             pnlDevelops.setVisible(false);
             pnlCompras.setVisible(false);
+            pnlHistorial.setVisible(false);
             ListCardsClientes();
             pnlCustomer.toFront();
         }
@@ -507,6 +552,7 @@ public class Controller implements Initializable {
             pnlOrders.setVisible(false);
             pnlDevelops.setVisible(false);
             pnlCompras.setVisible(true);
+            pnlHistorial.setVisible(false);
             ListCardsLess();
             ListClientesLess();
             pnlCompras.toFront();
@@ -518,6 +564,7 @@ public class Controller implements Initializable {
             pnlOrders.setVisible(false);
             pnlDevelops.setVisible(false);
             pnlCompras.setVisible(false);
+            pnlHistorial.setVisible(false);
             ListCards();
             pnlOverview.toFront();
         }
@@ -528,10 +575,19 @@ public class Controller implements Initializable {
             pnlOrders.setVisible(false);
             pnlDevelops.setVisible(true);
             pnlCompras.setVisible(false);
+            pnlHistorial.setVisible(false);
             pnlDevelops.toFront();
         }
-        if (actionEvent.getSource() == btnSignout) {
-            System.exit(0);
+        if (actionEvent.getSource() == btnHistorial) {
+            pnlOrders.setStyle("-fx-background-color : #00222B");
+            pnlOverview.setVisible(false);
+            pnlCustomer.setVisible(false);
+            pnlOrders.setVisible(false);
+            pnlDevelops.setVisible(false);
+            pnlCompras.setVisible(false);
+            pnlHistorial.setVisible(true);
+            ListHistorial();
+            pnlHistorial.toFront();
         }
         if (actionEvent.getSource() == btnOrders) {
             pnlOrders.setStyle("-fx-background-color : #00222B");
@@ -540,8 +596,12 @@ public class Controller implements Initializable {
             pnlOrders.setVisible(true);
             pnlDevelops.setVisible(false);
             pnlCompras.setVisible(false);
+            pnlHistorial.setVisible(false);
             ListCardsOrders();
             pnlOrders.toFront();
+        }
+        if (actionEvent.getSource() == btnSignout) {
+            System.exit(0);
         }
     }
 
@@ -638,4 +698,20 @@ public class Controller implements Initializable {
     void accionGuardarCarta(ActionEvent event) {
 
     }
+
+    @FXML
+    void CancelarReservaHistorial(ActionEvent event) {
+
+    }
+
+    @FXML
+    void accionBorrarHistorial(ActionEvent event) {
+        busClienteHistorial.setText("");
+    }
+
+    @FXML
+    void accionBuscarHistorial(ActionEvent event) {
+
+    }
+
 }

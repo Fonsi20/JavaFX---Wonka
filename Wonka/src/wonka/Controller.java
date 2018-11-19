@@ -13,8 +13,14 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -22,6 +28,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import static wonka.Wonka.sentencia;
 
 public class Controller implements Initializable {
 
@@ -344,8 +351,12 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        //Arrancamos todas las listas de todas las pantallas
-        ListCards();
+        try {
+            //Arrancamos todas las listas de todas las pantallas
+            ListCards();
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ListCardsOrders();
         ListCardsClientes();
         ListCardsLess();
@@ -354,8 +365,8 @@ public class Controller implements Initializable {
 
         //Cargamos items en la comboBox de tipo de juego de carta
         nameGame.getItems().addAll(
-                "Magic",
                 "Yu Gi Oh",
+                "Magic",
                 "FOW"
         );
 
@@ -394,26 +405,37 @@ public class Controller implements Initializable {
 
     @FXML
     //Carga de la lista de Cartas de la pantalla inicial
-    public void ListCards() {
+    public void ListCards() throws SQLException {
+        ResultSet RS = sentencia.executeQuery("SELECT COUNT(*) as count FROM Cartas");
+        RS.next();
+        int numeroNodes = Integer.parseInt(RS.getString("count"));
+        Node[] nodes = new Node[numeroNodes];
+        RS.close();
+        ResultSet RS2 = sentencia.executeQuery("SELECT * FROM Cartas");
+        RS2.next();
+        if (numeroNodes == 0) {
+            System.out.println("NO HAY NADA EN LA LISTA");
+        } else {
+            for (int i = 0; i < nodes.length; i++) {
+                try {
 
-        Node[] nodes = new Node[10];
-        for (int i = 0; i < nodes.length; i++) {
-            try {
+                    final int j = i;
+                    nodes[i] = FXMLLoader.load(getClass().getResource("ItemCarta.fxml"));
 
-                final int j = i;
-                nodes[i] = FXMLLoader.load(getClass().getResource("ItemCarta.fxml"));
+                    nodes[i].setOnMouseEntered(event -> {
+                        nodes[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+                    });
+                    nodes[i].setOnMouseExited(event -> {
+                        nodes[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                    });
+                    pnItems.getChildren().add(nodes[i]);
 
-                nodes[i].setOnMouseEntered(event -> {
-                    nodes[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
-                });
-                nodes[i].setOnMouseExited(event -> {
-                    nodes[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
-                });
-                pnItems.getChildren().add(nodes[i]);
-            } catch (IOException e) {
-                e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
+        RS2.close();
 
     }
 
@@ -600,7 +622,7 @@ public class Controller implements Initializable {
 
     @FXML
     //Acciones al pulsar sobre los botones del menú
-    public void handleClicks(ActionEvent actionEvent) {
+    public void handleClicks(ActionEvent actionEvent) throws SQLException {
         if (actionEvent.getSource() == btnCustomers) {
             pnlCustomer.setStyle("-fx-background-color : #00222B");
             pnlOverview.setVisible(false);

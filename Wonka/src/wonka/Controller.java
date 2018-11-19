@@ -16,6 +16,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -273,6 +274,72 @@ public class Controller implements Initializable {
 
     @FXML
     private VBox pnItems;
+
+    //Propiedades de los items
+    //Prorpiedades del item carta
+    @FXML
+    private Label itemCartaJuego;
+
+    @FXML
+    private Label itemCartaNombre;
+
+    @FXML
+    private Label itemCartaColeccion;
+
+    @FXML
+    private Label itemCartaPrecio;
+
+    @FXML
+    private Button itemCartaStock;
+
+    //Prorpiedades del item cliente
+    @FXML
+    private Label itemClienteNombre;
+
+    @FXML
+    private Label itemClienteApellido;
+
+    @FXML
+    private Label itemClienteEdad;
+
+    @FXML
+    private Label itemClienteEmail;
+
+    @FXML
+    private Label itemClienteTlf;
+
+    //Propiedades del item CartaLess
+    @FXML
+    private Label itemCartaLessJuego;
+
+    @FXML
+    private Label itemCartaLessNombreCarta;
+
+    @FXML
+    private Label itemCartaLessPrecio;
+
+    //Propiedades del item ClienteLess
+    @FXML
+    private Label itemClienteLessNombre;
+
+    @FXML
+    private Label itemClienteLessApellidos;
+
+    //Popiedades de los items de Historial
+    @FXML
+    private Label itemHistorialNombre;
+
+    @FXML
+    private Label itemHistorialNombreCarta;
+
+    @FXML
+    private Label itemHistorialTlf;
+
+    @FXML
+    private Label itemHistorialPrecio;
+
+    @FXML
+    private Button itemHistorialEstado;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

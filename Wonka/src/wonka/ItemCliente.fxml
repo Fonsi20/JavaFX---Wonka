@@ -17,14 +17,14 @@
                 <Insets left="10.0" />
             </HBox.margin>
         </ImageView>
-        <Label maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Juan Magán" textFill="#b7c3d7">
+        <Label fx:id="itemClienteNombre" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Juan Magán" textFill="#b7c3d7">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
          <HBox.margin>
             <Insets left="20.0" right="20.0" />
          </HBox.margin></Label>
-        <Label maxWidth="200.0" minWidth="200.0" prefWidth="200.0" text="Michale Jordan Music" textFill="#b7c3d7">
+        <Label fx:id="itemClienteApellido" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" text="Michale Jordan Music" textFill="#b7c3d7">
             <HBox.margin>
                 <Insets left="20.0" right="20.0" />
             </HBox.margin>
@@ -32,7 +32,7 @@
             <Insets />
          </opaqueInsets>
         </Label>
-        <Label maxWidth="20.0" minWidth="20.0" prefWidth="20.0" text="24" textFill="#b7c3d7">
+        <Label fx:id="itemClienteEdad" maxWidth="20.0" minWidth="20.0" prefWidth="20.0" text="24" textFill="#b7c3d7">
             <HBox.margin>
                 <Insets left="20.0" right="20.0" />
             </HBox.margin>
@@ -40,7 +40,7 @@
             <Insets />
          </opaqueInsets>
         </Label>
-        <Label maxWidth="200.0" minWidth="200.0" prefWidth="200.0" text="juanmigan@gmail.com" textFill="#b7c3d7">
+        <Label fx:id="itemClienteEmail" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" text="juanmigan@gmail.com" textFill="#b7c3d7">
             <HBox.margin>
                 <Insets left="20.0" right="20.0" />
             </HBox.margin>
@@ -48,7 +48,7 @@
             <Insets />
          </opaqueInsets>
         </Label>
-      <Label layoutX="268.0" layoutY="28.0" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="451223456" textFill="#b7c3d7">
+      <Label fx:id="itemClienteTlf" layoutX="268.0" layoutY="28.0" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="451223456" textFill="#b7c3d7">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>

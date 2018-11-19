@@ -8,7 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox fx:id="itemC" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="869.0" spacing="100.0" style="-fx-background-color: #02030A; -fx-background-radius: 5; -fx-background-insets: 0;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="itemC" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="869.0" style="-fx-background-color: #02030A; -fx-background-radius: 5; -fx-background-insets: 0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <ImageView fitHeight="31.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -18,25 +18,28 @@
                 <Insets left="10.0" />
             </HBox.margin>
         </ImageView>
-        <Label text="Blacklottus" textFill="#b7c3d7" />
-        <Label text="Magic" textFill="#b7c3d7">
+        <Label maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="Force of Will" textFill="#b7c3d7">
+         <HBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </HBox.margin></Label>
+        <Label maxWidth="350.0" minWidth="350.0" prefWidth="350.0" text="Magic" textFill="#b7c3d7">
             <HBox.margin>
-                <Insets />
+                <Insets left="10.0" right="10.0" />
             </HBox.margin>
         </Label>
-        <Label text="Warmorg 2014" textFill="#b7c3d7">
+        <Label maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="Warmorg 2014" textFill="#b7c3d7">
             <HBox.margin>
-                <Insets />
+                <Insets left="10.0" right="10.0" />
             </HBox.margin>
         </Label>
-        <Label text="\$200" textFill="#b7c3d7">
+        <Label maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="\$200" textFill="#b7c3d7">
             <HBox.margin>
-                <Insets />
+                <Insets left="10.0" right="10.0" />
             </HBox.margin>
         </Label>
-        <Button mnemonicParsing="false" prefHeight="10.0" prefWidth="60.0" style="-fx-border-color: #00C9FF; -fx-border-radius: 20; -fx-background-color: transparent;" stylesheets="@style.css" text="active">
+        <Button maxWidth="60.0" minWidth="60.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="60.0" style="-fx-border-color: #00C9FF; -fx-border-radius: 20; -fx-background-color: transparent;" stylesheets="@style.css" text="active">
             <HBox.margin>
-                <Insets />
+                <Insets left="10.0" right="10.0" />
             </HBox.margin>
         </Button>
     </children>

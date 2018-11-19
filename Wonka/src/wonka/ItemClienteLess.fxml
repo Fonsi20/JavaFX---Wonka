@@ -7,23 +7,21 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox fx:id="itemC" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="390.0" spacing="25.0" style="-fx-background-color: #02030A; -fx-background-radius: 5; -fx-background-insets: 0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="itemC" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="390.0" style="-fx-background-color: #02030A; -fx-background-radius: 5; -fx-background-insets: 0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <ImageView fitHeight="31.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../images/icons8_Person_32px.png" />
-            </image>
             <HBox.margin>
                 <Insets />
             </HBox.margin>
+         <image>
+            <Image url="@../images/icons8_Person_32px.png" />
+         </image>
         </ImageView>
-        <Label text="Michael" textFill="#b7c3d7" />
-        <Label text="Fernandez Navarro" textFill="#b7c3d7">
-            <HBox.margin>
-                <Insets />
-            </HBox.margin>
-        </Label>
-        <Label text="Freddy@gmail.com" textFill="#b7c3d7">
+        <Label maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Michael" textFill="#b7c3d7">
+         <HBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </HBox.margin></Label>
+        <Label maxWidth="200.0" minWidth="200.0" prefWidth="200.0" text="Fernandez Navarro" textFill="#b7c3d7">
             <HBox.margin>
                 <Insets />
             </HBox.margin>

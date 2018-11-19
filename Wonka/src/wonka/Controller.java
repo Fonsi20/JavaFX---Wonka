@@ -460,7 +460,7 @@ public class Controller implements Initializable {
             try {
 
                 final int j = i;
-                nodes[i] = FXMLLoader.load(getClass().getResource("ItemCliente.fxml"));
+                nodes[i] = FXMLLoader.load(getClass().getResource("ItemHistorial.fxml"));
 
                 nodes[i].setOnMouseEntered(event -> {
                     nodes[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");

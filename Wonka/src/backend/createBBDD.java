@@ -40,6 +40,17 @@ public class createBBDD {
                     + "	PRIMARY KEY (IDCarta)"
                     + ")ENGINE INNODB;");
 
+            sentencia.execute("CREATE TABLE IF NOT EXISTS CARTAS_MAGIC("
+                    + "	IDCarta INT(3) ZEROFILL NOT NULL,"
+                    + "	IDCMagic VARCHAR(10) NOT NULL,"
+                    + "	Color ENUM('Blanco','Azul','Negro','Rojo','Verde','Incoloro') NOT NULL,"
+                    + "	Coste VARCHAR(2) NOT NULL,"
+                    + "	Tipo VARCHAR(10) NOT NULL,"
+                    + "	PRIMARY KEY (IDCarta),"
+                    + "    FOREIGN KEY (IDCarta) REFERENCES CARTAS (IDCarta) ON DELETE CASCADE ON UPDATE CASCADE,"
+                    + "    UNIQUE INDEX FK_CMAGIC (IDCarta)"
+                    + ")ENGINE INNODB;");
+
             sentencia.execute("CREATE TABLE IF NOT EXISTS CARTAS_YUGI("
                     + "	IDCarta INT(3) ZEROFILL NOT NULL,"
                     + "	IDCYugi VARCHAR(10) NOT NULL,"

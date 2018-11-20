@@ -97,6 +97,27 @@ public class createBBDD {
                     + "	UNIQUE INDEX FK_RCliente (IDCliente),"
                     + "	UNIQUE INDEX FK_RCarta (IDCarta)"
                     + ")ENGINE INNODB;");
+            
+            //Cartas Magi
+            sentencia.execute("INSERT INTO cartas ( NombreJuego, Año, Precio, Stock, NombreCarta, Descripcion, Coleccion) VALUES ('Magic','2018','0.50','5','Agente filoscuro','Mientras hayas escrutado este turno, la Agente filoscuro tiene la habilidad de toque mortal y `Siempre que esta criatura haga daño de combate a un jugador, tú robas una carta´. Dimir','Gremios de Ravnica');");
+            sentencia.execute("INSERT INTO cartas ( NombreJuego, Año, Precio, Stock, NombreCarta, Descripcion, Coleccion) VALUES ('Magic','2016','2.49','0','Árbol de la perdición','Defensor. Intercambia el total de vidas del oponente objetivo con la resistencia del Árbol de la perdición.','Luna de horrores');");
+            sentencia.execute("INSERT INTO cartas ( NombreJuego, Año, Precio, Stock, NombreCarta, Descripcion, Coleccion) VALUES ('Magic','2016','0.49','2','Trampa opresiva','La Trampa opresiva entra al campo de batalla girada. Cuando la Trampa opresiva entre al campo de batalla, obtienes dos contadores de energía. Al girar, pagar energía : Gira la criatura o el planeswalker objetivo. No pueden activarse sus habilidades activadas este turno.','Kaladesh');");
+            sentencia.execute("INSERT INTO cartas ( NombreJuego, Año, Precio, Stock, NombreCarta, Descripcion, Coleccion) VALUES ('Magic','2006','1.49','1','Categoría alfa','La criatura encantada obtiene +2/+2 por cada una de las demas criaturas en juego que compartan un tipo de criatura con ella.','Salvat');");
+            sentencia.execute("INSERT INTO cartas ( NombreJuego, Año, Precio, Stock, NombreCarta, Descripcion, Coleccion) VALUES ('Magic','2018','0.15','4','Eviscerar','Destruye la criatura objetivo.','Dominaria');");
+            sentencia.execute("INSERT INTO cartas_magic (IDCarta,IDCMagic, Color, Coste, Tipo) VALUES ('001','164/259 C','Multicolor','3','Criatura - Humano Asesino');");
+            sentencia.execute("INSERT INTO cartas_magic (IDCarta,IDCMagic, Color, Coste, Tipo) VALUES ('002','109/205 H','Negro','4','Criatura - Planta');");
+            sentencia.execute("INSERT INTO cartas_magic (IDCarta,IDCMagic, Color, Coste, Tipo) VALUES ('003','204/264 R','Incoloro','3','Artefacto');");
+            sentencia.execute("INSERT INTO cartas_magic (IDCarta,IDCMagic, Color, Coste, Tipo) VALUES ('004','204/254 R','Verde','3','Encantamiento - Aura');");
+            sentencia.execute("INSERT INTO cartas_magic (IDCarta,IDCMagic, Color, Coste, Tipo) VALUES ('005','091/269 C','Negro','4','Conjuro');");
+            
+            //Cartas Yu-gi-oh
+            sentencia.execute("INSERT INTO cartas ( NombreJuego, Año, Precio, Stock, NombreCarta, Descripcion, Coleccion) VALUES ('Yu-Gi-Oh','2002','4.99','5','Dragón blanco de ojos azules','Este legendario dragón es una poderosa máquina de destrucción. Virtualmente invencible, muy pocos se han enfrentado a esta impresionante criatura y han vivido para contarlo. ','Leyenda del dragón blanco de ojos azules');");
+            sentencia.execute("INSERT INTO cartas ( NombreJuego, Año, Precio, Stock, NombreCarta, Descripcion, Coleccion) VALUES ('Yu-Gi-Oh','2010','0.99','3','Alanegra - Gust el Viento de Cola ','Si no controlas cartas, puedes Invocar esta carta de Modo Especial (desde tu mano). Si un monstruo de tu adversario ataca a un monstruo Alanegra que controles, el monstruo atacante pierde 300 ATK, sólo durante el Damage Step. ','Oscuridad brillante');");
+            sentencia.execute("INSERT INTO cartas_yugi (IDCarta, IDCYugi, TipoCarta, Atributo, Nivel, SubTipo) VALUES ('006','BIK-S001','Monstruo','Luz','8','Dragón')");
+            sentencia.execute("INSERT INTO cartas_yugi (IDCarta, IDCYugi, TipoCarta, Atributo, Nivel, SubTipo) VALUES ('007','LC5D-SP121','Monstruo','Oscuridad','2','Bestia Alada')");
+            
+            
+            
 
         } catch (SQLException e) {
             System.out.println(e);

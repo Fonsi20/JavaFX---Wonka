@@ -15,12 +15,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -28,7 +27,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import static wonka.Wonka.sentencia;
 
 public class Controller implements Initializable {
 
@@ -282,72 +280,8 @@ public class Controller implements Initializable {
     @FXML
     private VBox pnItems;
 
-    //Propiedades de los items
-    //Prorpiedades del item carta
-    @FXML
-    private Label itemCartaJuego;
-
-    @FXML
-    private Label itemCartaNombre;
-
-    @FXML
-    private Label itemCartaColeccion;
-
-    @FXML
-    private Label itemCartaPrecio;
-
-    @FXML
-    private Button itemCartaStock;
-
-    //Prorpiedades del item cliente
-    @FXML
-    private Label itemClienteNombre;
-
-    @FXML
-    private Label itemClienteApellido;
-
-    @FXML
-    private Label itemClienteEdad;
-
-    @FXML
-    private Label itemClienteEmail;
-
-    @FXML
-    private Label itemClienteTlf;
-
-    //Propiedades del item CartaLess
-    @FXML
-    private Label itemCartaLessJuego;
-
-    @FXML
-    private Label itemCartaLessNombreCarta;
-
-    @FXML
-    private Label itemCartaLessPrecio;
-
-    //Propiedades del item ClienteLess
-    @FXML
-    private Label itemClienteLessNombre;
-
-    @FXML
-    private Label itemClienteLessApellidos;
-
-    //Popiedades de los items de Historial
-    @FXML
-    private Label itemHistorialNombre;
-
-    @FXML
-    private Label itemHistorialNombreCarta;
-
-    @FXML
-    private Label itemHistorialTlf;
-
-    @FXML
-    private Label itemHistorialPrecio;
-
-    @FXML
-    private Button itemHistorialEstado;
-
+    private Node[] nodes = new Node[0];
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -406,21 +340,34 @@ public class Controller implements Initializable {
     @FXML
     //Carga de la lista de Cartas de la pantalla inicial
     public void ListCards() throws SQLException {
-        ResultSet RS = sentencia.executeQuery("SELECT COUNT(*) as count FROM Cartas");
-        RS.next();
-        int numeroNodes = Integer.parseInt(RS.getString("count"));
-        Node[] nodes = new Node[numeroNodes];
-        RS.close();
-        ResultSet RS2 = sentencia.executeQuery("SELECT * FROM Cartas");
-        RS2.next();
-        if (numeroNodes == 0) {
-            System.out.println("NO HAY NADA EN LA LISTA");
-        } else {
-            for (int i = 0; i < nodes.length; i++) {
-                try {
-
+        try {
+            Statement S = Wonka.conect.createStatement();
+            ResultSet Res = S.executeQuery("SELECT COUNT(*) AS Cont FROM CARTAS");
+            Res.next();
+            nodes = new Node[Res.getInt("Cont")];
+            Res.close();
+            Res = S.executeQuery("SELECT NombreJuego as NJ, NombreCarta as NC, Coleccion as C, Precio as P, Stock as S FROM CARTAS");
+            try {
+                for (int i = 0; i < nodes.length; i++) {
+                    Res.next();
                     final int j = i;
                     nodes[i] = FXMLLoader.load(getClass().getResource("ItemCarta.fxml"));
+
+                    //Establecimiento de labels
+                    Label itemCartaJuego = (Label) nodes[i].lookup("#itemCartaJuego");
+                    itemCartaJuego.setText(Res.getString("NJ"));
+
+                    Label itemCartaNombre = (Label) nodes[i].lookup("#itemCartaNombre");
+                    itemCartaNombre.setText(Res.getString("NC"));
+
+                    Label itemCartaColeccion = (Label) nodes[i].lookup("#itemCartaColeccion");
+                    itemCartaColeccion.setText(Res.getString("C"));
+
+                    Label itemCartaPrecio = (Label) nodes[i].lookup("#itemCartaPrecio");
+                    itemCartaPrecio.setText(Res.getString("P"));
+
+                    Button itemCartaStock = (Button) nodes[i].lookup("#itemCartaStock");
+                    itemCartaStock.setText(Res.getString("S"));
 
                     nodes[i].setOnMouseEntered(event -> {
                         nodes[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
@@ -428,15 +375,16 @@ public class Controller implements Initializable {
                     nodes[i].setOnMouseExited(event -> {
                         nodes[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
                     });
+
                     pnItems.getChildren().add(nodes[i]);
 
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+        } catch (SQLException x) {
+            System.out.println(x);
         }
-        RS2.close();
-
     }
 
     @FXML

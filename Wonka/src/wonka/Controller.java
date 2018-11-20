@@ -281,7 +281,9 @@ public class Controller implements Initializable {
     private VBox pnItems;
 
     private Node[] nodes = new Node[0];
-    
+    private Node[] nodesCartas = new Node[0];
+    private Node[] nodesClientes = new Node[0];
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -292,7 +294,11 @@ public class Controller implements Initializable {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         ListCardsOrders();
-        ListCardsClientes();
+        try {
+            ListCardsClientes();
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ListCardsLess();
         ListClientesLess();
         ListHistorial();
@@ -344,6 +350,7 @@ public class Controller implements Initializable {
             Statement S = Wonka.conect.createStatement();
             ResultSet Res = S.executeQuery("SELECT COUNT(*) AS Cont FROM CARTAS");
             Res.next();
+            limpiarListas(pnItems);
             nodes = new Node[Res.getInt("Cont")];
             Res.close();
             Res = S.executeQuery("SELECT NombreJuego as NJ, NombreCarta as NC, Coleccion as C, Precio as P, Stock as S FROM CARTAS");
@@ -382,6 +389,7 @@ public class Controller implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            Res.close();
         } catch (SQLException x) {
             System.out.println(x);
         }
@@ -390,49 +398,112 @@ public class Controller implements Initializable {
     @FXML
     //Carga de la lista de Cartas de la pantalla Cartas
     public void ListCardsOrders() {
-
-        Node[] nodes = new Node[10];
-        for (int i = 0; i < nodes.length; i++) {
+        try {
+            Statement S = Wonka.conect.createStatement();
+            ResultSet Res = S.executeQuery("SELECT COUNT(*) AS Cont FROM CARTAS");
+            Res.next();
+            limpiarListas(pnItemsOrders);
+            nodesCartas = new Node[Res.getInt("Cont")];
+            Res.close();
+            Res = S.executeQuery("SELECT NombreJuego as NJ, NombreCarta as NC, Coleccion as C, Precio as P, Stock as S FROM CARTAS");
             try {
+                for (int i = 0; i < nodesCartas.length; i++) {
+                    Res.next();
+                    final int j = i;
+                    nodesCartas[i] = FXMLLoader.load(getClass().getResource("ItemCarta.fxml"));
 
-                final int j = i;
-                nodes[i] = FXMLLoader.load(getClass().getResource("ItemCarta.fxml"));
+                    //Establecimiento de labels
+                    Label itemCartaJuego = (Label) nodesCartas[i].lookup("#itemCartaJuego");
+                    itemCartaJuego.setText(Res.getString("NJ"));
 
-                nodes[i].setOnMouseEntered(event -> {
-                    nodes[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
-                });
-                nodes[i].setOnMouseExited(event -> {
-                    nodes[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
-                });
-                pnItemsOrders.getChildren().add(nodes[i]);
+                    Label itemCartaNombre = (Label) nodesCartas[i].lookup("#itemCartaNombre");
+                    itemCartaNombre.setText(Res.getString("NC"));
+
+                    Label itemCartaColeccion = (Label) nodesCartas[i].lookup("#itemCartaColeccion");
+                    itemCartaColeccion.setText(Res.getString("C"));
+
+                    Label itemCartaPrecio = (Label) nodesCartas[i].lookup("#itemCartaPrecio");
+                    itemCartaPrecio.setText(Res.getString("P"));
+
+                    Button itemCartaStock = (Button) nodesCartas[i].lookup("#itemCartaStock");
+                    itemCartaStock.setText(Res.getString("S"));
+
+                    nodesCartas[i].setOnMouseEntered(event -> {
+                        nodesCartas[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+                    });
+                    nodesCartas[i].setOnMouseExited(event -> {
+                        nodesCartas[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                    });
+//                    nodesCartas[i].setOnMousePressed(event -> {
+//                        nodesCartas[j].setStyle("-fx-background-color :  #454545; -fx-background-radius:5");
+//                    });
+
+                    pnItemsOrders.getChildren().add(nodesCartas[i]);
+
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            Res.close();
+        } catch (SQLException x) {
+            System.out.println(x);
         }
 
     }
 
     @FXML
     //Carga de la lista de clientes de la pantalla Clientes
-    public void ListCardsClientes() {
+    public void ListCardsClientes() throws SQLException {
+        try {
+            Statement S = Wonka.conect.createStatement();
+            ResultSet Res = S.executeQuery("SELECT COUNT(*) AS Cont FROM clientes");
+            Res.next();
+            limpiarListas(pnItemsClientes);
+            nodesClientes = new Node[Res.getInt("Cont")];
+            Res.close();
+            Res = S.executeQuery("SELECT Nombre as N, Apellidos as A, Edad as E, Mail as M, Telefono as T FROM clientes");
 
-        Node[] nodes = new Node[10];
-        for (int i = 0; i < nodes.length; i++) {
             try {
+                for (int i = 0; i < nodesClientes.length; i++) {
+                    Res.next();
+                    final int j = i;
+                    nodesClientes[i] = FXMLLoader.load(getClass().getResource("ItemCliente.fxml"));
 
-                final int j = i;
-                nodes[i] = FXMLLoader.load(getClass().getResource("ItemCliente.fxml"));
+                    //Establecimiento de labels
+                    Label itemClienteNombre = (Label) nodesClientes[i].lookup("#itemClienteNombre");
+                    itemClienteNombre.setText(Res.getString("N"));
 
-                nodes[i].setOnMouseEntered(event -> {
-                    nodes[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
-                });
-                nodes[i].setOnMouseExited(event -> {
-                    nodes[j].setStyle("-fx-background-color : #02030A; -fx-background-radius:5");
-                });
-                pnItemsClientes.getChildren().add(nodes[i]);
+                    Label itemClienteApellido = (Label) nodesClientes[i].lookup("#itemClienteApellido");
+                    itemClienteApellido.setText(Res.getString("A"));
+
+                    Label itemClienteEdad = (Label) nodesClientes[i].lookup("#itemClienteEdad");
+                    itemClienteEdad.setText(Res.getString("E"));
+
+                    Label itemClienteEmail = (Label) nodesClientes[i].lookup("#itemClienteEmail");
+                    itemClienteEmail.setText(Res.getString("M"));
+
+                    Label itemClienteTlf = (Label) nodesClientes[i].lookup("#itemClienteTlf");
+                    itemClienteTlf.setText(Res.getString("T"));
+
+                    nodesClientes[i].setOnMouseEntered(event -> {
+                        nodesClientes[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+                    });
+                    nodesClientes[i].setOnMouseExited(event -> {
+                        nodesClientes[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                    });
+//                    nodesClientes[i].setOnMousePressed(event -> {
+//                        nodesClientes[j].setStyle("-fx-background-color :  #454545; -fx-background-radius:5");
+//                    });
+
+                    pnItemsClientes.getChildren().add(nodesClientes[i]);
+
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            Res.close();
+        } catch (SQLException x) {
+            System.out.println(x);
         }
 
     }
@@ -441,6 +512,7 @@ public class Controller implements Initializable {
     //Carga de la lista de cartas de la pantalla Compra
     public void ListCardsLess() {
 
+        limpiarListas(pnItemsCartasLess);
         Node[] nodes = new Node[20];
         for (int i = 0; i < nodes.length; i++) {
             try {
@@ -467,6 +539,7 @@ public class Controller implements Initializable {
     //Carga de la lista de clientes de la pantalla Compra
     public void ListClientesLess() {
 
+        limpiarListas(pnItemsClientesLess);
         Node[] nodes = new Node[4];
         for (int i = 0; i < nodes.length; i++) {
             try {
@@ -492,6 +565,7 @@ public class Controller implements Initializable {
     //Carga de la lista de clientes con pedidos de la pantalla Historial
     public void ListHistorial() {
 
+        limpiarListas(pnItemsHistorial);
         Node[] nodes = new Node[24];
         for (int i = 0; i < nodes.length; i++) {
             try {
@@ -513,9 +587,14 @@ public class Controller implements Initializable {
 
     }
 
+    public void limpiarListas(VBox items) {
+        items.getChildren().clear();
+    }
+
     @FXML
     //Activar los distintos campos de inserción de una carta
-    public void activarAtributo(ActionEvent actionEvent) {
+    public void activarAtributo(ActionEvent actionEvent
+    ) {
 
         String p = (String) nameGame.getSelectionModel().getSelectedItem();
 
@@ -644,19 +723,22 @@ public class Controller implements Initializable {
 
     @FXML
     //Borramos al cliente seleccionado en la lista de la BBDD
-    void accionBorrarCamposClientes(ActionEvent event) {
+    void accionBorrarCamposClientes(ActionEvent event
+    ) {
 
     }
 
     @FXML
     //Guardamos al cliente introducido en la BBDD
-    void accionGuardarCamposClientes(ActionEvent event) {
+    void accionGuardarCamposClientes(ActionEvent event
+    ) {
 
     }
 
     @FXML
     //Reseteamos los campos de inserción de un cliente
-    void accionLimpiarCamposClientes(ActionEvent event) {
+    void accionLimpiarCamposClientes(ActionEvent event
+    ) {
 
         nombreCliente.setText("");
         edadCliente.setText("");
@@ -669,13 +751,15 @@ public class Controller implements Initializable {
 
     @FXML
     //Modificamos los campos de un cliente seleccionado en la lista y lo subimos de nuevo a la BBDD
-    void accionModificarCamposClientes(ActionEvent event) {
+    void accionModificarCamposClientes(ActionEvent event
+    ) {
 
     }
 
     @FXML
     //Reseteamos los campos de busqueda
-    void accionBorrarCompras(ActionEvent event) {
+    void accionBorrarCompras(ActionEvent event
+    ) {
 
         busComCarta.setText("");
         busComCliente.setText("");
@@ -683,25 +767,29 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void accionBuscarCompras(ActionEvent event) {
+    void accionBuscarCompras(ActionEvent event
+    ) {
 
     }
 
     @FXML
     //Modificamos los campos de una carta seleccionada en la lista y la subimos de nuevo a la BBDD
-    void accionModificarCarta(ActionEvent event) {
+    void accionModificarCarta(ActionEvent event
+    ) {
 
     }
 
     @FXML
     //Borramos la carta seleccionada en la lista de la BBDD
-    void accionbtnBorrarCarta(ActionEvent event) {
+    void accionbtnBorrarCarta(ActionEvent event
+    ) {
 
     }
 
     @FXML
     //Limpiamos los campos de la pantalla carta
-    void accionLimpiarCarta(ActionEvent event) {
+    void accionLimpiarCarta(ActionEvent event
+    ) {
 
         nameCard.setText("");
         colecCard.setText("");
@@ -732,22 +820,26 @@ public class Controller implements Initializable {
 
     @FXML
     //Guardamos la carta introducida en la BBDD
-    void accionGuardarCarta(ActionEvent event) {
+    void accionGuardarCarta(ActionEvent event
+    ) {
 
     }
 
     @FXML
-    void CancelarReservaHistorial(ActionEvent event) {
+    void CancelarReservaHistorial(ActionEvent event
+    ) {
 
     }
 
     @FXML
-    void accionBorrarHistorial(ActionEvent event) {
+    void accionBorrarHistorial(ActionEvent event
+    ) {
         busClienteHistorial.setText("");
     }
 
     @FXML
-    void accionBuscarHistorial(ActionEvent event) {
+    void accionBuscarHistorial(ActionEvent event
+    ) {
 
     }
 

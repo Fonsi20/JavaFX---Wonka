@@ -18,10 +18,10 @@ public class createBBDD {
             sentencia.execute("CREATE TABLE IF NOT EXISTS CLIENTES("
                     + "	IDCliente INT(5) ZEROFILL NOT NULL AUTO_INCREMENT,"
                     + "	Nombre VARCHAR(30) NOT NULL,"
-                    + "	Apellidos VARCHAR(30) NOT NULL,"
+                    + "	Apellidos VARCHAR(60) NOT NULL,"
                     + "	Edad INT(2) NOT NULL,"
                     + "	Sexo BOOLEAN NOT NULL,"
-                    + "	Dirección VARCHAR(30) NOT NULL,"
+                    + "	Dirección VARCHAR(200) NOT NULL,"
                     + "	Telefono VARCHAR(9) NOT NULL,"
                     + "	Mail VARCHAR(30) NOT NULL,"
                     + "	PRIMARY KEY (IDCliente),"
@@ -97,7 +97,7 @@ public class createBBDD {
                     + "	UNIQUE INDEX FK_RCliente (IDCliente),"
                     + "	UNIQUE INDEX FK_RCarta (IDCarta)"
                     + ")ENGINE INNODB;");
-            
+
             //Cartas Magi
             sentencia.execute("INSERT INTO cartas ( NombreJuego, Año, Precio, Stock, NombreCarta, Descripcion, Coleccion) VALUES ('Magic','2018','0.50','5','Agente filoscuro','Mientras hayas escrutado este turno, la Agente filoscuro tiene la habilidad de toque mortal y `Siempre que esta criatura haga daño de combate a un jugador, tú robas una carta´. Dimir','Gremios de Ravnica');");
             sentencia.execute("INSERT INTO cartas ( NombreJuego, Año, Precio, Stock, NombreCarta, Descripcion, Coleccion) VALUES ('Magic','2016','2.49','0','Árbol de la perdición','Defensor. Intercambia el total de vidas del oponente objetivo con la resistencia del Árbol de la perdición.','Luna de horrores');");
@@ -109,15 +109,21 @@ public class createBBDD {
             sentencia.execute("INSERT INTO cartas_magic (IDCarta,IDCMagic, Color, Coste, Tipo) VALUES ('003','204/264 R','Incoloro','3','Artefacto');");
             sentencia.execute("INSERT INTO cartas_magic (IDCarta,IDCMagic, Color, Coste, Tipo) VALUES ('004','204/254 R','Verde','3','Encantamiento - Aura');");
             sentencia.execute("INSERT INTO cartas_magic (IDCarta,IDCMagic, Color, Coste, Tipo) VALUES ('005','091/269 C','Negro','4','Conjuro');");
-            
+
             //Cartas Yu-gi-oh
             sentencia.execute("INSERT INTO cartas ( NombreJuego, Año, Precio, Stock, NombreCarta, Descripcion, Coleccion) VALUES ('Yu-Gi-Oh','2002','4.99','5','Dragón blanco de ojos azules','Este legendario dragón es una poderosa máquina de destrucción. Virtualmente invencible, muy pocos se han enfrentado a esta impresionante criatura y han vivido para contarlo. ','Leyenda del dragón blanco de ojos azules');");
             sentencia.execute("INSERT INTO cartas ( NombreJuego, Año, Precio, Stock, NombreCarta, Descripcion, Coleccion) VALUES ('Yu-Gi-Oh','2010','0.99','3','Alanegra - Gust el Viento de Cola ','Si no controlas cartas, puedes Invocar esta carta de Modo Especial (desde tu mano). Si un monstruo de tu adversario ataca a un monstruo Alanegra que controles, el monstruo atacante pierde 300 ATK, sólo durante el Damage Step. ','Oscuridad brillante');");
             sentencia.execute("INSERT INTO cartas_yugi (IDCarta, IDCYugi, TipoCarta, Atributo, Nivel, SubTipo) VALUES ('006','BIK-S001','Monstruo','Luz','8','Dragón')");
             sentencia.execute("INSERT INTO cartas_yugi (IDCarta, IDCYugi, TipoCarta, Atributo, Nivel, SubTipo) VALUES ('007','LC5D-SP121','Monstruo','Oscuridad','2','Bestia Alada')");
-            
-            
-            
+
+            //Clientes
+            sentencia.execute("insert into clientes (Nombre,Apellidos,Edad,Sexo,Dirección,Telefono,Mail) values"
+                    + "   ('Alfonso','Fernández Alvarez','27',true,'Baixada ao Reiro Nº19 - Ponteareas - Spain','555555520','fonsi20@gmail.com' ),"
+                    + "            ('Michael Jefrey','Alabahma Jordan','52',true,'McBillet Bullet - New York - EEUU','505550020','michaelle_elfagu@gmail.com' ),"
+                    + "            ('Alejandro Baldemoro','de las cortes del este','87',true,'Alandalus NºGinebra - Analuzia - Libre','000055520','ALEJANDROALEALE@gmail.com' ),"
+                    + "            ('Nurianuriaaa','Castor Rojo Madera','5',false,'soy vegana','111203040','tedijequesoyvegana@gmail.com' ),"
+                    + "            ('EL INCREIBLE','Spiderman','31',true,'Gothan City - Bajo el escritorio de Bruce Wayne','232124578','Spoderman@gmail.com' ),"
+                    + "            ('Harry James','Albus Potter','52',true,'Bajo el escritorio de Bruce Wayne tambien','787878788','elfaryVIVE@gmail.com' );");
 
         } catch (SQLException e) {
             System.out.println(e);

@@ -118,7 +118,7 @@ public class createBBDD {
 
             //Clientes
             sentencia.execute("insert into clientes (Nombre,Apellidos,Edad,Sexo,Dirección,Telefono,Mail) values"
-                    + "   ('Alfonso','Fernández Alvarez','27',true,'Baixada ao Reiro Nº19 - Ponteareas - Spain','555555520','fonsi20@gmail.com' ),"
+                    + "            ('Alfonso','Fernández Alvarez','27',true,'Baixada ao Reiro Nº19 - Ponteareas - Spain','555555520','fonsi20@gmail.com' ),"
                     + "            ('Michael Jefrey','Alabahma Jordan','52',true,'McBillet Bullet - New York - EEUU','505550020','michaelle_elfagu@gmail.com' ),"
                     + "            ('Alejandro Baldemoro','de las cortes del este','87',true,'Alandalus NºGinebra - Analuzia - Libre','000055520','ALEJANDROALEALE@gmail.com' ),"
                     + "            ('Nurianuriaaa','Castor Rojo Madera','5',false,'soy vegana','111203040','tedijequesoyvegana@gmail.com' ),"

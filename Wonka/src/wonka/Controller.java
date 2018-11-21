@@ -1,5 +1,6 @@
 package wonka;
 
+import backend.Inserciones;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -13,9 +14,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Level;
@@ -820,26 +823,67 @@ public class Controller implements Initializable {
 
     @FXML
     //Guardamos la carta introducida en la BBDD
-    void accionGuardarCarta(ActionEvent event
-    ) {
+    void accionGuardarCarta(ActionEvent event) {
+
+        ArrayList<String> Carta = new ArrayList<String>();
+
+        Carta.add((String) nameGame.getSelectionModel().getSelectedItem());
+        Carta.add(nameCard.getText());
+        Carta.add(colecCard.getText());
+        Carta.add(yearCard.getText());
+        Carta.add(idCard.getText());
+        Carta.add(stockCard.getText());
+        Carta.add(priceCard.getText());
+        Carta.add(sumCard.getText());
+
+        // try {
+        switch ((String) nameGame.getSelectionModel().getSelectedItem()) {
+
+            case "Magic":
+                Carta.add(magiColor.getText());
+                Carta.add(magiCoste.getText());
+                Carta.add(magiID.getText());
+                Carta.add(magiTipo.getText());
+                Inserciones.insertarCartasMagic(Carta);
+                break;
+            case "Yu Gi Oh":
+                Carta.add(yugiID.getText());
+                Carta.add(yugiAtributo.getText());
+                Carta.add(yugiNivel.getText());
+                Carta.add(yugiSubTIpo.getText());
+                Carta.add(yugiTipo.getText());
+                Inserciones.insertarCartasYuGi(Carta);
+                break;
+            case "FOW":
+                Carta.add(fogColor.getText());
+                Carta.add(fogCoste.getText());
+                Carta.add(fogID.getText());
+                Carta.add(fogRaza.getText());
+                Carta.add(fogTipo.getText());
+                Inserciones.insertarCartasFOW(Carta);
+                break;
+            default:
+                sumCard.setText("SELECIONA UN JUEGO!!");
+                break;
+//            }
+//        } catch (Exception e) {
+//            sumCard.setText("SELECIONA UN JUEGO!!");
+//        }
+        }
+    }
+
+    @FXML
+    void CancelarReservaHistorial(ActionEvent event) {
 
     }
 
     @FXML
-    void CancelarReservaHistorial(ActionEvent event
-    ) {
-
-    }
-
-    @FXML
-    void accionBorrarHistorial(ActionEvent event
-    ) {
+    void accionBorrarHistorial(ActionEvent event) {
         busClienteHistorial.setText("");
     }
 
     @FXML
-    void accionBuscarHistorial(ActionEvent event
-    ) {
+    void accionBuscarHistorial(ActionEvent event) {
 
     }
 

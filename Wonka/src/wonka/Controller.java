@@ -414,13 +414,14 @@ public class Controller implements Initializable {
     //Carga de la lista de Cartas de la pantalla Cartas
     public void ListCardsOrders() {
         try {
+            //String año = null, descripcion = null;
             Statement S = Wonka.conect.createStatement();
             ResultSet Res = S.executeQuery("SELECT COUNT(*) AS Cont FROM CARTAS");
             Res.next();
             limpiarListas(pnItemsOrders);
             nodesCartas = new Node[Res.getInt("Cont")];
             Res.close();
-            Res = S.executeQuery("SELECT NombreJuego as NJ, NombreCarta as NC, Coleccion as C, Precio as P, Stock as S FROM CARTAS");
+            Res = S.executeQuery("SELECT NombreJuego as NJ, NombreCarta as NC, Coleccion as C, Precio as P, Año as A, Descripcion as D, Stock as S FROM CARTAS");
             try {
                 for (int i = 0; i < nodesCartas.length; i++) {
                     Res.next();
@@ -443,6 +444,7 @@ public class Controller implements Initializable {
                     Button itemCartaStock = (Button) nodesCartas[i].lookup("#itemCartaStock");
                     itemCartaStock.setText(Res.getString("S"));
 
+                    //descripcion.setText(Res.getString("D"));
                     nodesCartas[i].setOnMouseEntered(event -> {
                         nodesCartas[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
                     });
@@ -453,13 +455,18 @@ public class Controller implements Initializable {
                     nodesCartas[i].setOnMousePressed(event -> {
 
                         //Cargar informacion en los Edit Text
-                        nameGame.getSelectionModel().getSelectedItem();
+                        if (itemCartaJuego.getText().equals("Yu-Gi-Oh")) {
+                            nameGame.getSelectionModel().select(0);
+                        } else if (itemCartaJuego.getText().equals("Magic")) {
+                            nameGame.getSelectionModel().select(1);
+                        } else if (itemCartaJuego.getText().equals("Force of Will")) {
+                            nameGame.getSelectionModel().select(2);
+                        }
                         nameCard.setText(itemCartaNombre.getText());
                         colecCard.setText(itemCartaColeccion.getText());
                         priceCard.setText(itemCartaPrecio.getText());
-                        //Falta tambien seleccionar el juego en el combobox
-                        yearCard.setText("FALTA");
-                        sumCard.setText("FALTA");
+//                        yearCard.setText(año.getText());
+//                        sumCard.setText(descripcion.getText());
                         stockCard.setText(itemCartaStock.getText());
                         /**
                          * Falta cargar los atributos especificos de cada juego,

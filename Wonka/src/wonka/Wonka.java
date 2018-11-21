@@ -55,7 +55,7 @@ public class Wonka extends Application {
             System.exit(2);
         }
 
-        SessionFactory sessionFactory = NewHibernateUtil.getSessionFactory();
+
 
         mostrarVentanaPrincipal();
 

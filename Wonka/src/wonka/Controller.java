@@ -2,6 +2,7 @@ package wonka;
 
 import backend.Inserciones;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 
@@ -14,7 +15,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -221,7 +221,7 @@ public class Controller implements Initializable {
     private VBox atributosYugi2;
 
     @FXML
-    private TextField yugiTipo;
+    private JFXComboBox<String> yugiTipo;
 
     @FXML
     private TextField yugiNivel;
@@ -245,7 +245,7 @@ public class Controller implements Initializable {
     private TextField magiTipo;
 
     @FXML
-    private TextField magiColor;
+    private JFXComboBox<String> magiColor;
 
     @FXML
     private VBox atributosFOG1;
@@ -263,7 +263,7 @@ public class Controller implements Initializable {
     private TextField fogTipo;
 
     @FXML
-    private TextField fogColor;
+    private JFXComboBox<String> fogColor;
 
     @FXML
     private TextField fogRaza;
@@ -317,6 +317,18 @@ public class Controller implements Initializable {
         sexoCliente.getItems().addAll(
                 "Femenino",
                 "Masculino"
+        );
+
+        magiColor.getItems().addAll(
+                "Blanco", "Azul", "Negro", "Rojo", "Verde", "Incoloro", "Multicolor"
+        );
+
+        yugiTipo.getItems().addAll(
+                "Monstruo", "Mágica", "Trampa"
+        );
+
+        fogColor.getItems().addAll(
+                "Luz", "Oscuridad", "Agua", "Viento", "Fuego", "Neutro", "Multicolor"
         );
 
         //Metodo para poder arrastrar la pantalla libremente
@@ -726,22 +738,19 @@ public class Controller implements Initializable {
 
     @FXML
     //Borramos al cliente seleccionado en la lista de la BBDD
-    void accionBorrarCamposClientes(ActionEvent event
-    ) {
+    void accionBorrarCamposClientes(ActionEvent event) {
 
     }
 
     @FXML
     //Guardamos al cliente introducido en la BBDD
-    void accionGuardarCamposClientes(ActionEvent event
-    ) {
+    void accionGuardarCamposClientes(ActionEvent event) {
 
     }
 
     @FXML
     //Reseteamos los campos de inserción de un cliente
-    void accionLimpiarCamposClientes(ActionEvent event
-    ) {
+    void accionLimpiarCamposClientes(ActionEvent event) {
 
         nombreCliente.setText("");
         edadCliente.setText("");
@@ -754,15 +763,13 @@ public class Controller implements Initializable {
 
     @FXML
     //Modificamos los campos de un cliente seleccionado en la lista y lo subimos de nuevo a la BBDD
-    void accionModificarCamposClientes(ActionEvent event
-    ) {
+    void accionModificarCamposClientes(ActionEvent event) {
 
     }
 
     @FXML
     //Reseteamos los campos de busqueda
-    void accionBorrarCompras(ActionEvent event
-    ) {
+    void accionBorrarCompras(ActionEvent event) {
 
         busComCarta.setText("");
         busComCliente.setText("");
@@ -770,29 +777,25 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void accionBuscarCompras(ActionEvent event
-    ) {
+    void accionBuscarCompras(ActionEvent event) {
 
     }
 
     @FXML
     //Modificamos los campos de una carta seleccionada en la lista y la subimos de nuevo a la BBDD
-    void accionModificarCarta(ActionEvent event
-    ) {
+    void accionModificarCarta(ActionEvent event) {
 
     }
 
     @FXML
     //Borramos la carta seleccionada en la lista de la BBDD
-    void accionbtnBorrarCarta(ActionEvent event
-    ) {
+    void accionbtnBorrarCarta(ActionEvent event) {
 
     }
 
     @FXML
     //Limpiamos los campos de la pantalla carta
-    void accionLimpiarCarta(ActionEvent event
-    ) {
+    void accionLimpiarCarta(ActionEvent event) {
 
         nameCard.setText("");
         colecCard.setText("");
@@ -806,14 +809,11 @@ public class Controller implements Initializable {
         yugiAtributo.setText("");
         yugiNivel.setText("");
         yugiSubTIpo.setText("");
-        yugiTipo.setText("");
 
-        magiColor.setText("");
         magiCoste.setText("");
         magiID.setText("");
         magiTipo.setText("");
 
-        fogColor.setText("");
         fogCoste.setText("");
         fogID.setText("");
         fogRaza.setText("");
@@ -823,52 +823,54 @@ public class Controller implements Initializable {
 
     @FXML
     //Guardamos la carta introducida en la BBDD
-    void accionGuardarCarta(ActionEvent event) {
+    void accionGuardarCarta(ActionEvent event) throws SQLException {
 
         ArrayList<String> Carta = new ArrayList<String>();
 
+        Carta.add(stockCard.getText());
         Carta.add((String) nameGame.getSelectionModel().getSelectedItem());
         Carta.add(nameCard.getText());
+        Carta.add(sumCard.getText());
         Carta.add(colecCard.getText());
         Carta.add(yearCard.getText());
-        Carta.add(idCard.getText());
-        Carta.add(stockCard.getText());
         Carta.add(priceCard.getText());
-        Carta.add(sumCard.getText());
 
-        // try {
-        switch ((String) nameGame.getSelectionModel().getSelectedItem()) {
+        if (((String) nameGame.getSelectionModel().getSelectedItem()) == null) {
+            sumCard.setText("SELECIONA UN JUEGO!!");
+        } else {
+            switch ((String) nameGame.getSelectionModel().getSelectedItem()) {
 
-            case "Magic":
-                Carta.add(magiColor.getText());
-                Carta.add(magiCoste.getText());
-                Carta.add(magiID.getText());
-                Carta.add(magiTipo.getText());
-                Inserciones.insertarCartasMagic(Carta);
-                break;
-            case "Yu Gi Oh":
-                Carta.add(yugiID.getText());
-                Carta.add(yugiAtributo.getText());
-                Carta.add(yugiNivel.getText());
-                Carta.add(yugiSubTIpo.getText());
-                Carta.add(yugiTipo.getText());
-                Inserciones.insertarCartasYuGi(Carta);
-                break;
-            case "FOW":
-                Carta.add(fogColor.getText());
-                Carta.add(fogCoste.getText());
-                Carta.add(fogID.getText());
-                Carta.add(fogRaza.getText());
-                Carta.add(fogTipo.getText());
-                Inserciones.insertarCartasFOW(Carta);
-                break;
-            default:
-                sumCard.setText("SELECIONA UN JUEGO!!");
-                break;
-//            }
-//        } catch (Exception e) {
-//            sumCard.setText("SELECIONA UN JUEGO!!");
-//        }
+                case "Magic":
+
+                    Carta.add((String) magiColor.getSelectionModel().getSelectedItem());
+                    Carta.add(magiCoste.getText());
+                    Carta.add(magiID.getText());
+                    Carta.add(magiTipo.getText());
+                    Inserciones.insertarCartasMagic(Carta);
+                    accionLimpiarCarta(event);
+                    break;
+                case "Yu Gi Oh":
+                    Carta.add(yugiID.getText());
+                    Carta.add(yugiAtributo.getText());
+                    Carta.add(yugiNivel.getText());
+                    Carta.add(yugiSubTIpo.getText());
+                    Carta.add((String) yugiTipo.getSelectionModel().getSelectedItem());
+                    Inserciones.insertarCartasYuGi(Carta);
+                    accionLimpiarCarta(event);
+                    break;
+                case "FOW":
+                    Carta.add((String) fogColor.getSelectionModel().getSelectedItem());
+                    Carta.add(fogCoste.getText());
+                    Carta.add(fogID.getText());
+                    Carta.add(fogRaza.getText());
+                    Carta.add(fogTipo.getText());
+                    Inserciones.insertarCartasFOW(Carta);
+                    accionLimpiarCarta(event);
+                    break;
+            }
+            ListCards();
+            ListCardsOrders();
+            ListCardsLess();
         }
     }
 

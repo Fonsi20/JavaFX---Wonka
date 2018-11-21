@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -496,7 +497,7 @@
                   </Label>
                   <TextField fx:id="direccionCliente" alignment="TOP_LEFT" layoutX="39.0" layoutY="263.0" prefHeight="25.0" prefWidth="675.0" promptText="Ponteareas, nº22 CP 45124 Pontevedra España" style="-fx-background-color: #00000B; -fx-text-fill: #ffffff;" />
                </children></Pane>
-            <Pane fx:id="pnlOrders" prefHeight="200.0" prefWidth="200.0" visible="false">
+            <Pane fx:id="pnlOrders" prefHeight="200.0" prefWidth="200.0">
                <children>
                   <TextField layoutX="709.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="Buscar..." style="-fx-text-fill: #ffffff; -fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <Label layoutX="48.0" layoutY="27.0" text="Lista de Cartas" textFill="#e7e5e5">
@@ -657,7 +658,14 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="yugiTipo" promptText="Instant" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
+                              <JFXComboBox fx:id="yugiTipo" prefHeight="25.0" prefWidth="137.0" promptText="Trampa" style="-fx-background-color: #00000B;">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <padding>
+                                    <Insets left="7.0" />
+                                 </padding>
+                              </JFXComboBox>
                               <Label text="Nivel" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
@@ -721,7 +729,11 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="magiColor" promptText="Azul" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
+                              <JFXComboBox fx:id="magiColor" prefHeight="25.0" prefWidth="133.0" promptText="Azul" style="-fx-background-color: #00000B;">
+                                 <padding>
+                                    <Insets left="7.0" />
+                                 </padding>
+                              </JFXComboBox>
                            </children>
                         </VBox>
                         <VBox fx:id="atributosFOG1" disable="true" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #266D7F;" HBox.hgrow="ALWAYS">
@@ -762,12 +774,16 @@
                                  </font>
                               </Label>
                               <TextField fx:id="fogTipo" promptText="Instant" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
-                              <Label text="Color" textFill="WHITE">
+                              <Label text="Elemento" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="fogColor" promptText="Negro" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
+                              <JFXComboBox fx:id="fogColor" prefHeight="25.0" prefWidth="131.0" promptText="Oscuridad" style="-fx-background-color: #00000B;">
+                                 <padding>
+                                    <Insets left="7.0" />
+                                 </padding>
+                              </JFXComboBox>
                               <Label text="Raza" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
@@ -793,7 +809,7 @@
                      </image>
                   </ImageView>
                </children></Pane>
-            <Pane fx:id="pnlOverview" prefHeight="576.0" prefWidth="793.0">
+            <Pane fx:id="pnlOverview" prefHeight="576.0" prefWidth="793.0" visible="false">
                <children>
                   <TextField layoutX="710.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="Buscar..." style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-text-fill: #fff;" />
                   <Label layoutX="48.0" layoutY="27.0" text="Inicio" textFill="#e7e5e5">

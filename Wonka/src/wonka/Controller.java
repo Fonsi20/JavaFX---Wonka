@@ -449,9 +449,27 @@ public class Controller implements Initializable {
                     nodesCartas[i].setOnMouseExited(event -> {
                         nodesCartas[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
                     });
-//                    nodesCartas[i].setOnMousePressed(event -> {
-//                        nodesCartas[j].setStyle("-fx-background-color :  #454545; -fx-background-radius:5");
-//                    });
+
+                    nodesCartas[i].setOnMousePressed(event -> {
+
+                        //Cargar informacion en los Edit Text
+                        nameGame.getSelectionModel().getSelectedItem();
+                        nameCard.setText(itemCartaNombre.getText());
+                        colecCard.setText(itemCartaColeccion.getText());
+                        priceCard.setText(itemCartaPrecio.getText());
+                        //Falta tambien seleccionar el juego en el combobox
+                        yearCard.setText("FALTA");
+                        sumCard.setText("FALTA");
+                        stockCard.setText(itemCartaStock.getText());
+                        /**
+                         * Falta cargar los atributos especificos de cada juego,
+                         * pero eso será una vez obteneido el item del combobox
+                         *
+                         *
+                         *
+                         *
+                         */
+                    });
 
                     pnItemsOrders.getChildren().add(nodesCartas[i]);
 

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import wonka.Controller;
 import wonka.NewHibernateUtil;
 
 /**

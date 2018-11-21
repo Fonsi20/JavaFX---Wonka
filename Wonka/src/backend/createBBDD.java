@@ -131,14 +131,14 @@ public class createBBDD {
                     + "('Force of Will','2016','3.49','1','La manticora','Cuando esta carta entre en tu campo; Elige uno - Mira la mano de tu oponente y elige una carta. Tu oponente y elige una carta. Tu oponente descarta esa carta; o destruye el añadido o insignia objetivo que controle tu oponente','Legacy Lost'),"
                     + "('Force of Will','2014','2.49','4','Alicia, avatar de las siete tierras','Si te fueran a infligir daño, en vez de eso se lo infligen a esta carta.','The Moonlit Savior'),"
                     + "('Force of Will','2013','1.49','0','Caza de almas','Cada jugador entierra un resonador, luego cada jugador descarta una carta','PR Card'),"
-                    + "('Force of Will','2016','1.99','1','Gwiner, el dragón blanco','Puedes pagar 2 menos para jugar esta carta por cada resonador que contrates que haya sido puesto en tu campo este turno','PR Card')");
+                    + "('Force of Will','2016','1.99','1','Gwiner, el dragón blanco','Puedes pagar 2 menos para jugar esta carta por cada resonador que contrates que haya sido puesto en tu campo este turno','PR Card');");
                     
             
             sentencia.execute("INSERT INTO cartas_fow (IDCarta, IDCFoW, Elemento, Coste, Tipo, Raza) VALUES "
                     + "('011','LEL-090 R','Multicolor','5','Resonador','Quimera'),"
-                    + "('012','RL 1701-2','6','Resonador','Avatar'),"
-                    + "('013','RL1611-1','1','Canto','Ninguna'),"
-                    + "('014','RL1611-2','5','Resonador','Dragón');");
+                    + "('012','RL 1701-2','Agua','6','Resonador','Avatar'),"
+                    + "('013','RL1611-1','Viento','1','Canto','Ninguna'),"
+                    + "('014','RL1611-2','Oscuridad','5','Resonador','Dragón');");
                    
             //Clientes
             sentencia.execute("INSERT INTO clientes (Nombre,Apellidos,Edad,Sexo,Dirección,Telefono,Mail) values"

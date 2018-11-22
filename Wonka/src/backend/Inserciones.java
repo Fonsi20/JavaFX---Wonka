@@ -22,7 +22,7 @@ public class Inserciones {
     public static void insertarCartasMagic(ArrayList<String> Carta) {
         System.out.println("en MAGIC " + Carta);
         int stock = Integer.parseInt(Carta.get(0));
-        float price = Integer.parseInt(Carta.get(6));
+        float price = Float.parseFloat(Carta.get(6));
         CartaMAGIC aux;
         aux = new CartaMAGIC(Carta.get(9), Carta.get(7), Carta.get(8), Carta.get(10), stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), Carta.get(5), price);
         guardarModificar(aux);
@@ -31,7 +31,7 @@ public class Inserciones {
     public static void insertarCartasYuGi(ArrayList<String> Carta) {
         System.out.println("en YUGI " + Carta);
         int stock = Integer.parseInt(Carta.get(0));
-        float price = Integer.parseInt(Carta.get(6));
+        float price = Float.parseFloat(Carta.get(6));
         int nivel = Integer.parseInt(Carta.get(9));
         CartaYUGI aux;
         aux = new CartaYUGI(Carta.get(7), Carta.get(11), Carta.get(8), Carta.get(10), nivel, stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), Carta.get(5), price);

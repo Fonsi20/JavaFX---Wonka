@@ -11,6 +11,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -30,6 +31,7 @@ public class Wonka extends Application {
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
 
+        primaryStage.getIcons().add(new Image("images/Magic.png")); 
         String url = "jdbc:mysql://localhost:3307/?user=root&password=usbw";
         try {
             conect = DriverManager.getConnection(url);
@@ -52,8 +54,6 @@ public class Wonka extends Application {
             System.out.println("Error: " + e);
             System.exit(2);
         }
-
-
 
         mostrarVentanaPrincipal();
 

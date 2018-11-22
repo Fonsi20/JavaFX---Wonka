@@ -11,10 +11,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import org.hibernate.SessionFactory;
 
 /**
  * @author a16alfonsofa
@@ -22,11 +20,11 @@ import org.hibernate.SessionFactory;
 public class Wonka extends Application {
 
     private double x, y;
-    private Stage primaryStage;
-    static Connection conect;
-    static Statement sentencia;
-    static ResultSet res;
-    static int op;
+    public Stage primaryStage;
+    public static Connection conect;
+    public static Statement sentencia;
+    public static ResultSet res;
+    public static int op;
 
     @Override
     public void start(Stage primaryStage) throws Exception {

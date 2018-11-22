@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -541,18 +542,25 @@
                         </VBox>
                         <VBox prefHeight="114.0" prefWidth="369.0" spacing="10.0">
                            <children>
-                              <Label text="Coleccion" textFill="WHITE">
+                              <Label text="Colección" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="colecCard" promptText="Warrmog" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
+                              <TextField fx:id="colecCard" promptText="Nombre de la Colección de la Carta" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
                               <Label text="Descripcion" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="sumCard" alignment="TOP_LEFT" prefHeight="90.0" prefWidth="369.0" promptText="Lorem Ipsuim..." style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
+                              <JFXTextArea fx:id="sumCard" promptText="Descripcion de la carta...." style="-fx-background-color: #00000B; -fx-text-fill: #ffffff; -fx-prompt-text-fill: #fff;" unFocusColor="WHITE" wrapText="true">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <padding>
+                                    <Insets bottom="3.0" left="6.0" right="6.0" top="3.0" />
+                                 </padding>
+                              </JFXTextArea>
                            </children>
                         </VBox>
                         <VBox alignment="TOP_CENTER" prefHeight="180.0" prefWidth="136.0" spacing="25.0">
@@ -796,7 +804,7 @@
                         <Image url="@../images/icons8_Search_52px.png" />
                      </image>
                   </ImageView>
-                  <TextField fx:id="nameCard" layoutX="47.0" layoutY="115.0" prefHeight="25.0" prefWidth="252.0" promptText="Fate" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
+                  <TextField fx:id="nameCard" layoutX="47.0" layoutY="115.0" prefHeight="25.0" prefWidth="252.0" promptText="Nombre de carta" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
                   <TextField layoutX="709.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="Buscar..." style="-fx-text-fill: #ffffff; -fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
                   <Label layoutX="48.0" layoutY="27.0" text="Lista de Cartas" textFill="#e7e5e5">
                      <font>

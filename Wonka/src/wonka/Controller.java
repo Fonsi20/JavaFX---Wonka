@@ -1,8 +1,12 @@
 package wonka;
 
+import Objetos.CartaFOW;
+import Objetos.CartaMAGIC;
+import Objetos.CartaYUGI;
 import backend.Inserciones;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 
@@ -19,6 +23,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Level;
@@ -30,6 +35,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import org.hibernate.Session;
 
 public class Controller implements Initializable {
 
@@ -191,7 +197,7 @@ public class Controller implements Initializable {
     private TextField colecCard;
 
     @FXML
-    private TextField sumCard;
+    private JFXTextArea sumCard;
 
     @FXML
     private Button btnLimpiarCarta;
@@ -308,9 +314,9 @@ public class Controller implements Initializable {
 
         //Cargamos items en la comboBox de tipo de juego de carta
         nameGame.getItems().addAll(
-                "Yu Gi Oh",
+                "Yu-Gi-Oh",
                 "Magic",
-                "FOW"
+                "Force of Will"
         );
 
         //Cargamos items en la comboBox de sexo de cliente
@@ -421,7 +427,7 @@ public class Controller implements Initializable {
             limpiarListas(pnItemsOrders);
             nodesCartas = new Node[Res.getInt("Cont")];
             Res.close();
-            Res = S.executeQuery("SELECT NombreJuego as NJ, NombreCarta as NC, Coleccion as C, Precio as P, Año as A, Descripcion as D, Stock as S FROM CARTAS");
+            Res = S.executeQuery("SELECT NombreJuego as NJ, NombreCarta as NC, Coleccion as C, Precio as P, Stock as S FROM CARTAS");
             try {
                 for (int i = 0; i < nodesCartas.length; i++) {
                     Res.next();
@@ -453,29 +459,119 @@ public class Controller implements Initializable {
                     });
 
                     nodesCartas[i].setOnMousePressed(event -> {
-
+                        //Bloqueamos el campo Nombre Carta para no poder editarlo, para poder volver a escribir pulsar Limpiar.
+                        nameCard.setDisable(true);
                         //Cargar informacion en los Edit Text
-                        if (itemCartaJuego.getText().equals("Yu-Gi-Oh")) {
-                            nameGame.getSelectionModel().select(0);
-                        } else if (itemCartaJuego.getText().equals("Magic")) {
-                            nameGame.getSelectionModel().select(1);
-                        } else if (itemCartaJuego.getText().equals("Force of Will")) {
-                            nameGame.getSelectionModel().select(2);
-                        }
+                        Session s;
+                        s = NewHibernateUtil.getSession();
+                        List<Object> CartaMAGIC = s.createCriteria(CartaMAGIC.class).list();
+                        List<Object> CartaFOW = s.createCriteria(CartaFOW.class).list();
+                        List<Object> CartaYUGI = s.createCriteria(CartaYUGI.class).list();
+                        s.close();
+
                         nameCard.setText(itemCartaNombre.getText());
                         colecCard.setText(itemCartaColeccion.getText());
                         priceCard.setText(itemCartaPrecio.getText());
-//                        yearCard.setText(año.getText());
-//                        sumCard.setText(descripcion.getText());
                         stockCard.setText(itemCartaStock.getText());
-                        /**
-                         * Falta cargar los atributos especificos de cada juego,
-                         * pero eso será una vez obteneido el item del combobox
-                         *
-                         *
-                         *
-                         *
-                         */
+
+                        if (itemCartaJuego.getText().equals("Yu-Gi-Oh")) {
+                            nameGame.getSelectionModel().select(0);
+                            for (Object o : CartaYUGI) {
+                                if (itemCartaNombre.getText().equals(((CartaYUGI) o).getNombreCarta())) {
+
+                                    sumCard.setText(((CartaYUGI) o).getDescripcion());
+                                    yearCard.setText(((CartaYUGI) o).getAno());
+                                    yugiAtributo.setText(((CartaYUGI) o).getAtributo());
+                                    yugiID.setText(((CartaYUGI) o).getIDCYugi());
+                                    yugiNivel.setText(String.valueOf(((CartaYUGI) o).getNivel()));
+                                    yugiSubTIpo.setText(((CartaYUGI) o).getSubTipo());
+
+                                    //"Monstruo", "Mágica", "Trampa"
+                                    if (((CartaYUGI) o).getTipoCarta().equals("Monstruo")) {
+                                        yugiTipo.getSelectionModel().select(0);
+                                    }
+                                    if (((CartaYUGI) o).getTipoCarta().equals("Mágica")) {
+                                        yugiTipo.getSelectionModel().select(1);
+                                    }
+                                    if (((CartaYUGI) o).getTipoCarta().equals("Trampa")) {
+                                        yugiTipo.getSelectionModel().select(2);
+                                    }
+                                }
+                            }
+                        } else if (itemCartaJuego.getText().equals("Magic")) {
+                            nameGame.getSelectionModel().select(1);
+                            for (Object o : CartaMAGIC) {
+                                if (itemCartaNombre.getText().equals(((CartaMAGIC) o).getNombreCarta())) {
+
+                                    sumCard.setText(((CartaMAGIC) o).getDescripcion());
+                                    yearCard.setText(((CartaMAGIC) o).getAno());
+                                    magiCoste.setText(((CartaMAGIC) o).getCoste());
+                                    magiID.setText(((CartaMAGIC) o).getIDCMagic());
+                                    magiTipo.setText(((CartaMAGIC) o).getTipo());
+
+                                    //"Blanco", "Azul", "Negro", "Rojo", "Verde", "Incoloro", "Multicolor"
+                                    if (((CartaMAGIC) o).getColor().equals("Blanco")) {
+                                        magiColor.getSelectionModel().select(0);
+                                    }
+                                    if (((CartaMAGIC) o).getColor().equals("Azul")) {
+                                        magiColor.getSelectionModel().select(1);
+                                    }
+                                    if (((CartaMAGIC) o).getColor().equals("Negro")) {
+                                        magiColor.getSelectionModel().select(2);
+                                    }
+                                    if (((CartaMAGIC) o).getColor().equals("Rojo")) {
+                                        magiColor.getSelectionModel().select(3);
+                                    }
+                                    if (((CartaMAGIC) o).getColor().equals("Verde")) {
+                                        magiColor.getSelectionModel().select(4);
+                                    }
+                                    if (((CartaMAGIC) o).getColor().equals("Incoloro")) {
+                                        magiColor.getSelectionModel().select(5);
+                                    }
+                                    if (((CartaMAGIC) o).getColor().equals("Multicolor")) {
+                                        magiColor.getSelectionModel().select(6);
+                                    }
+
+                                }
+                            }
+                        } else if (itemCartaJuego.getText().equals("Force of Will")) {
+                            nameGame.getSelectionModel().select(2);
+                            for (Object o : CartaFOW) {
+                                if (itemCartaNombre.getText().equals(((CartaFOW) o).getNombreCarta())) {
+
+                                    sumCard.setText(((CartaFOW) o).getDescripcion());
+                                    yearCard.setText(((CartaFOW) o).getAno());
+                                    fogCoste.setText(((CartaFOW) o).getCoste());
+                                    fogID.setText(((CartaFOW) o).getIDCFoW());
+                                    fogRaza.setText(((CartaFOW) o).getRaza());
+                                    fogTipo.setText(((CartaFOW) o).getTipo());
+
+                                    //"Luz", "Oscuridad", "Agua", "Viento", "Fuego", "Neutro", "Multicolor"
+                                    if (((CartaFOW) o).getElemento().equals("Luz")) {
+                                        fogColor.getSelectionModel().select(0);
+                                    }
+                                    if (((CartaFOW) o).getElemento().equals("Oscuridad")) {
+                                        fogColor.getSelectionModel().select(1);
+                                    }
+                                    if (((CartaFOW) o).getElemento().equals("Agua")) {
+                                        fogColor.getSelectionModel().select(2);
+                                    }
+                                    if (((CartaFOW) o).getElemento().equals("Viento")) {
+                                        fogColor.getSelectionModel().select(3);
+                                    }
+                                    if (((CartaFOW) o).getElemento().equals("Fuego")) {
+                                        fogColor.getSelectionModel().select(4);
+                                    }
+                                    if (((CartaFOW) o).getElemento().equals("Neutro")) {
+                                        fogColor.getSelectionModel().select(5);
+                                    }
+                                    if (((CartaFOW) o).getElemento().equals("Multicolor")) {
+                                        fogColor.getSelectionModel().select(6);
+                                    }
+
+                                }
+                            }
+                        }
                     });
 
                     pnItemsOrders.getChildren().add(nodesCartas[i]);
@@ -654,7 +750,7 @@ public class Controller implements Initializable {
             atributosMagi1.setDisable(false);
             atributosMagi2.setDisable(false);
         }
-        if ("Yu Gi Oh".equals(p)) {
+        if ("Yu-Gi-Oh".equals(p)) {
             atributosYugi1.setStyle("-fx-background-color :  #4FA2FF");
             atributosYugi2.setStyle("-fx-background-color :  #4FA2FF");
             atributosMagi1.setStyle("-fx-background-color :  #266D7F");
@@ -669,7 +765,7 @@ public class Controller implements Initializable {
             atributosMagi1.setDisable(true);
             atributosMagi2.setDisable(true);
         }
-        if ("FOW".equals(p)) {
+        if ("Force of Will".equals(p)) {
             atributosFOG1.setStyle("-fx-background-color :  #4FA2FF");
             atributosFOG2.setStyle("-fx-background-color :  #4FA2FF");
             atributosYugi1.setStyle("-fx-background-color :  #266D7F");
@@ -808,8 +904,55 @@ public class Controller implements Initializable {
 
     @FXML
     //Modificamos los campos de una carta seleccionada en la lista y la subimos de nuevo a la BBDD
-    void accionModificarCarta(ActionEvent event) {
+    void accionModificarCarta(ActionEvent event) throws SQLException {
 
+        ArrayList<String> Carta = new ArrayList<String>();
+
+        Carta.add(stockCard.getText());
+        Carta.add((String) nameGame.getSelectionModel().getSelectedItem());
+        Carta.add(nameCard.getText());
+        Carta.add(sumCard.getText());
+        Carta.add(colecCard.getText());
+        Carta.add(yearCard.getText());
+        Carta.add(priceCard.getText());
+
+        if (((String) nameGame.getSelectionModel().getSelectedItem()) == null) {
+            sumCard.setText("SELECIONA UN JUEGO!!");
+        } else {
+            switch ((String) nameGame.getSelectionModel().getSelectedItem()) {
+
+                case "Magic":
+
+                    Carta.add((String) magiColor.getSelectionModel().getSelectedItem());
+                    Carta.add(magiCoste.getText());
+                    Carta.add(magiID.getText());
+                    Carta.add(magiTipo.getText());
+                    Inserciones.actualizarCartaMagic(Carta);
+                    accionLimpiarCarta(event);
+                    break;
+                case "Yu-Gi-Oh":
+                    Carta.add(yugiID.getText());
+                    Carta.add((String) yugiTipo.getSelectionModel().getSelectedItem());
+                    Carta.add(yugiAtributo.getText());
+                    Carta.add(yugiSubTIpo.getText());
+                    Carta.add(yugiNivel.getText());
+                    Inserciones.actualizarCartaYuGi(Carta);
+                    accionLimpiarCarta(event);
+                    break;
+                case "Force of Will":
+                    Carta.add((String) fogColor.getSelectionModel().getSelectedItem());
+                    Carta.add(fogID.getText());
+                    Carta.add(fogCoste.getText());
+                    Carta.add(fogTipo.getText());
+                    Carta.add(fogRaza.getText());
+                    Inserciones.actualizarCartaFOW(Carta);
+                    accionLimpiarCarta(event);
+                    break;
+            }
+            ListCards();
+            ListCardsOrders();
+            ListCardsLess();
+        }
     }
 
     @FXML
@@ -821,11 +964,12 @@ public class Controller implements Initializable {
     @FXML
     //Limpiamos los campos de la pantalla carta
     void accionLimpiarCarta(ActionEvent event) {
+        //Activamos campo nombre carta para poder añadir una
+        nameCard.setDisable(false);
 
         nameCard.setText("");
         colecCard.setText("");
         yearCard.setText("");
-        idCard.setText("");
         stockCard.setText("");
         priceCard.setText("");
         sumCard.setText("");
@@ -874,7 +1018,7 @@ public class Controller implements Initializable {
                     Inserciones.insertarCartasMagic(Carta);
                     accionLimpiarCarta(event);
                     break;
-                case "Yu Gi Oh":
+                case "Yu-Gi-Oh":
                     Carta.add(yugiID.getText());
                     Carta.add(yugiAtributo.getText());
                     Carta.add(yugiNivel.getText());
@@ -883,7 +1027,7 @@ public class Controller implements Initializable {
                     Inserciones.insertarCartasYuGi(Carta);
                     accionLimpiarCarta(event);
                     break;
-                case "FOW":
+                case "Force of Will":
                     Carta.add((String) fogColor.getSelectionModel().getSelectedItem());
                     Carta.add(fogCoste.getText());
                     Carta.add(fogID.getText());

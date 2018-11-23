@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wonka;
 
-import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,7 +17,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 /**
  *
@@ -55,21 +48,15 @@ public class FXMLLoginController implements Initializable {
     private void handleButtonAction(ActionEvent event) throws IOException {
 
         if (event.getSource() == btnEnter) {
-
-            System.out.println("Entró en el onClick");
-            System.out.println(edPass.getText());
-            System.out.println(edUser.getText());
-
             if (edUser.getText().equals("root") && edPass.getText().equals("root")) {
 
-                System.out.println("Logeado!!!");
                 Parent segunda = FXMLLoader.load(getClass().getResource("Home.fxml"));
                 Stage HomeStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 HomeStage.setScene(new Scene(segunda));
                 HomeStage.toFront();
                 //HomeStage.setFullScreen(true);
                 //Wonka.moverPantalla(segunda);
-                
+
                 HomeStage.show();
             } else {
                 edPass.setText("");
@@ -84,7 +71,7 @@ public class FXMLLoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-          this.MoverVentanas(this.login);
+        this.MoverVentanas(this.login);
     }
 
     private void MoverVentanas(AnchorPane root) {
@@ -103,11 +90,6 @@ public class FXMLLoginController implements Initializable {
             Stage stage = (Stage) root.getScene().getWindow();
             stage.setX(e.getScreenX() + xOffset.get());
             stage.setY(e.getScreenY() + yOffset.get());
-            //root.setStyle("-fx-cursor: CLOSED_HAND;");
         });
-
-       // root.setOnMouseReleased(e -> root.setStyle("-fx-cursor: DEFAULT;"));
-
     }
-
 }

@@ -174,18 +174,18 @@
                   </ScrollPane>
                   <JFXButton fx:id="btnCancelarReserva" layoutX="413.0" layoutY="32.0" onAction="#CancelarReservaHistorial" prefWidth="150.0" style="-fx-background-color: #fa5f7e;" text="Cancelar Reserva" textFill="WHITE">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="btnLimpiarHistorial" layoutX="583.0" layoutY="32.0" onAction="#accionBorrarHistorial" prefWidth="150.0" style="-fx-background-color: #4CD9FF;" text="Limpiar" textFill="WHITE">
+                  <JFXButton fx:id="btnLimpiarHistorial" layoutX="583.0" layoutY="32.0" onAction="#accionBorrarHistorial" prefWidth="150.0" style="-fx-background-color: #00C9FF;" text="Limpiar" textFill="WHITE">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </JFXButton>
                   <JFXTextField fx:id="busClienteHistorial" layoutX="34.0" layoutY="103.0" prefHeight="25.0" prefWidth="420.0" promptText="Nombre del cliente a buscar...." style="-fx-background-color: #00222B; -fx-text-fill: #fff;" unFocusColor="WHITE" />
-                  <JFXButton fx:id="btnBuscarHistorial" layoutX="750.0" layoutY="32.0" onAction="#accionBuscarHistorial" prefWidth="150.0" style="-fx-background-color: #4CD9FF;" text="Buscar" textFill="WHITE">
+                  <JFXButton fx:id="btnBuscarHistorial" layoutX="750.0" layoutY="32.0" onAction="#accionBuscarHistorial" prefWidth="150.0" style="-fx-background-color: #00C9FF;" text="Buscar" textFill="WHITE">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </JFXButton>
                </children>
@@ -347,26 +347,29 @@
                   </ScrollPane>
                   <JFXButton fx:id="btnComprarCarta" layoutX="751.0" layoutY="32.0" prefWidth="150.0" style="-fx-background-color: #4CD478;" text="Comprar" textFill="WHITE">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="btnLimpiarListas" layoutX="583.0" layoutY="32.0" onAction="#accionBorrarCompras" prefWidth="150.0" style="-fx-background-color: #4CD9FF;" text="Limpiar" textFill="WHITE">
+                  <JFXButton fx:id="btnLimpiarListas" layoutX="583.0" layoutY="32.0" onAction="#accionBorrarCompras" prefWidth="150.0" style="-fx-background-color: #00C9FF;" text="Limpiar" textFill="WHITE">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </JFXButton>
                   <JFXTextField fx:id="busComCliente" layoutX="23.0" layoutY="107.0" prefHeight="25.0" prefWidth="420.0" promptText="Nombre del cliente a buscar...." style="-fx-background-color: #00222B; -fx-text-fill: #fff;" unFocusColor="WHITE" />
                   <JFXTextField fx:id="busComCarta" layoutX="479.0" layoutY="107.0" prefHeight="25.0" prefWidth="420.0" promptText="Nombre de la carta a buscar...." style="-fx-background-color: #00222B; -fx-text-fill: #fff;" unFocusColor="WHITE" />
-                  <JFXButton fx:id="btnBuscarCompras" layoutX="412.0" layoutY="32.0" onAction="#accionBuscarCompras" prefWidth="150.0" style="-fx-background-color: #4CD9FF;" text="Buscar" textFill="WHITE">
+                  <JFXButton fx:id="btnBuscarCompras" layoutX="412.0" layoutY="32.0" onAction="#accionBuscarCompras" prefWidth="150.0" style="-fx-background-color: #00C9FF;" text="Buscar" textFill="WHITE">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </JFXButton>
                </children>
             </Pane>
             <Pane fx:id="pnlCustomer" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
-                  <TextField layoutX="709.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="Buscar..." style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-text-fill: #ffffff;" />
+                  <TextField layoutX="709.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="Buscar nombre cliente..." style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-text-fill: #ffffff;">
+                     <padding>
+                        <Insets left="10.0" right="40.0" />
+                     </padding></TextField>
                   <Label layoutX="46.0" layoutY="27.0" text="Clientes" textFill="#e7e5e5">
                      <font>
                         <Font size="24.0" />
@@ -799,18 +802,21 @@
                         </VBox>
                      </content>
                   </ScrollPane>
-                  <ImageView fitHeight="17.0" fitWidth="16.0" layoutX="864.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/icons8_Search_52px.png" />
-                     </image>
-                  </ImageView>
                   <TextField fx:id="nameCard" layoutX="47.0" layoutY="115.0" prefHeight="25.0" prefWidth="252.0" promptText="Nombre de carta" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B;" />
-                  <TextField layoutX="709.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="Buscar..." style="-fx-text-fill: #ffffff; -fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
+                  <TextField fx:id="entradaBusquedaCartas" layoutX="709.0" layoutY="35.0" onKeyPressed="#accionBuscarAñadirCarta" prefHeight="27.0" prefWidth="183.0" promptText="Buscar nombre de carta.." style="-fx-text-fill: #ffffff; -fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;">
+                     <padding>
+                        <Insets left="10.0" right="40.0" />
+                     </padding></TextField>
                   <Label layoutX="48.0" layoutY="27.0" text="Lista de Cartas" textFill="#e7e5e5">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
+                  <ImageView fitHeight="17.0" fitWidth="16.0" layoutX="864.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons8_Search_52px.png" />
+                     </image>
+                  </ImageView>
                   <Label layoutX="47.0" layoutY="88.0" text="Nombre de Carta" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -819,7 +825,10 @@
                </children></Pane>
             <Pane fx:id="pnlOverview" prefHeight="576.0" prefWidth="793.0">
                <children>
-                  <TextField fx:id="entradaBusquedaInicio" layoutX="710.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="Buscar..." style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-text-fill: #fff;" />
+                  <TextField fx:id="entradaBusquedaInicio" layoutX="709.0" layoutY="35.0" onKeyPressed="#accionBuscarCarta" prefHeight="27.0" prefWidth="183.0" promptText="Buscar nombre de carta..." style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-text-fill: #fff;">
+                     <padding>
+                        <Insets left="10.0" right="40.0" />
+                     </padding></TextField>
                   <Label layoutX="48.0" layoutY="27.0" text="Inicio" textFill="#e7e5e5">
                      <font>
                         <Font size="24.0" />

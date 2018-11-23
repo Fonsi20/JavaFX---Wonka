@@ -3,6 +3,7 @@ package wonka;
 import Objetos.CartaFOW;
 import Objetos.CartaMAGIC;
 import Objetos.CartaYUGI;
+import backend.Bajas;
 import backend.Inserciones;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -339,6 +340,7 @@ public class Controller implements Initializable {
 
         //Metodo para poder arrastrar la pantalla libremente
         this.MoverVentanas(this.home);
+
     }
 
     @FXML
@@ -480,7 +482,9 @@ public class Controller implements Initializable {
                                 if (itemCartaNombre.getText().equals(((CartaYUGI) o).getNombreCarta())) {
 
                                     sumCard.setText(((CartaYUGI) o).getDescripcion());
-                                    yearCard.setText(((CartaYUGI) o).getAno());
+                                    String[] parts = (((CartaYUGI) o).getAno()).split("-");
+                                    String year = parts[0];
+                                    yearCard.setText(year);
                                     yugiAtributo.setText(((CartaYUGI) o).getAtributo());
                                     yugiID.setText(((CartaYUGI) o).getIDCYugi());
                                     yugiNivel.setText(String.valueOf(((CartaYUGI) o).getNivel()));
@@ -504,7 +508,9 @@ public class Controller implements Initializable {
                                 if (itemCartaNombre.getText().equals(((CartaMAGIC) o).getNombreCarta())) {
 
                                     sumCard.setText(((CartaMAGIC) o).getDescripcion());
-                                    yearCard.setText(((CartaMAGIC) o).getAno());
+                                    String[] parts = (((CartaMAGIC) o).getAno()).split("-");
+                                    String year = parts[0];
+                                    yearCard.setText(year);
                                     magiCoste.setText(((CartaMAGIC) o).getCoste());
                                     magiID.setText(((CartaMAGIC) o).getIDCMagic());
                                     magiTipo.setText(((CartaMAGIC) o).getTipo());
@@ -540,7 +546,9 @@ public class Controller implements Initializable {
                                 if (itemCartaNombre.getText().equals(((CartaFOW) o).getNombreCarta())) {
 
                                     sumCard.setText(((CartaFOW) o).getDescripcion());
-                                    yearCard.setText(((CartaFOW) o).getAno());
+                                    String[] parts = (((CartaFOW) o).getAno()).split("-");
+                                    String year = parts[0];
+                                    yearCard.setText(year);
                                     fogCoste.setText(((CartaFOW) o).getCoste());
                                     fogID.setText(((CartaFOW) o).getIDCFoW());
                                     fogRaza.setText(((CartaFOW) o).getRaza());
@@ -956,8 +964,15 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    //Borramos la carta seleccionada en la lista de la BBDD
-    void accionbtnBorrarCarta(ActionEvent event) {
+    //Borramos la carta seleccionada en la lista
+    void accionbtnBorrarCarta(ActionEvent event) throws SQLException {
+
+        String nombreCarta = nameCard.getText();
+        Bajas.eliminarCarta(nombreCarta);
+        accionLimpiarCarta(event);
+        ListCards();
+        ListCardsOrders();
+        ListCardsLess();
 
     }
 

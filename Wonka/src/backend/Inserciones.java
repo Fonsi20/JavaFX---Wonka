@@ -41,7 +41,7 @@ public class Inserciones {
     public static void insertarCartasFOW(ArrayList<String> Carta) {
         System.out.println("en FOW " + Carta);
         int stock = Integer.parseInt(Carta.get(0));
-        float price = Integer.parseInt(Carta.get(6));
+        float price = Float.parseFloat(Carta.get(6));
         CartaFOW aux;
         aux = new CartaFOW(Carta.get(7), Carta.get(9), Carta.get(8), Carta.get(11), Carta.get(10), stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), Carta.get(5), price);
         guardarModificar(aux);

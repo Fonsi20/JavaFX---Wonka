@@ -651,9 +651,28 @@ public class Controller implements Initializable {
                     nodesClientes[i].setOnMouseExited(event -> {
                         nodesClientes[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
                     });
-//                    nodesClientes[i].setOnMousePressed(event -> {
-//                        nodesClientes[j].setStyle("-fx-background-color :  #454545; -fx-background-radius:5");
-//                    });
+                    nodesClientes[i].setOnMousePressed(event -> {
+                        Session s;
+                        s = NewHibernateUtil.getSession();
+                        List<Object> Clientes = s.createCriteria(Cliente.class).list();
+                        s.close();
+
+                        nombreCliente.setText(itemClienteNombre.getText());
+                        apellidosCliente.setText(itemClienteApellido.getText());
+                        edadCliente.setText(itemClienteEdad.getText());
+                        emailCliente.setText(itemClienteEmail.getText());
+                        telefonoCliente.setText(itemClienteTlf.getText());
+                        for (Object C : Clientes) {
+                            if (itemClienteNombre.getText().equals(((Cliente) C).getNombre())) {
+                                if (((Cliente) C).isSexo() == false) {
+                                    sexoCliente.getSelectionModel().select(0);
+                                } else {
+                                    sexoCliente.getSelectionModel().select(1);
+                                }
+                                direccionCliente.setText(((Cliente) C).getDireccion());
+                            }
+                        }
+                    });
 
                     pnItemsClientes.getChildren().add(nodesClientes[i]);
 

@@ -819,7 +819,7 @@
                </children></Pane>
             <Pane fx:id="pnlOverview" prefHeight="576.0" prefWidth="793.0">
                <children>
-                  <TextField layoutX="710.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="Buscar..." style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-text-fill: #fff;" />
+                  <TextField fx:id="entradaBusquedaInicio" layoutX="710.0" layoutY="35.0" prefHeight="27.0" prefWidth="183.0" promptText="Buscar..." style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-text-fill: #fff;" />
                   <Label layoutX="48.0" layoutY="27.0" text="Inicio" textFill="#e7e5e5">
                      <font>
                         <Font size="24.0" />
@@ -829,7 +829,7 @@
                      <children>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="150.0">
                            <children>
-                              <Label text="22000" textFill="#2a73ff">
+                              <Label fx:id="lblTotalCartas" text="22000" textFill="#2a73ff">
                                  <font>
                                     <Font name="System Bold" size="26.0" />
                                  </font>
@@ -839,7 +839,7 @@
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="150.0">
                            <children>
-                              <Label text="1500" textFill="#26bfbc">
+                              <Label fx:id="lblTotalClientes" text="1500" textFill="#26bfbc">
                                  <font>
                                     <Font name="System Bold" size="26.0" />
                                  </font>
@@ -849,7 +849,7 @@
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="150.0">
                            <children>
-                              <Label text="1000" textFill="#fa5f7e">
+                              <Label fx:id="lblPedidosPendientes" text="1000" textFill="#fa5f7e">
                                  <font>
                                     <Font name="System Bold" size="26.0" />
                                  </font>
@@ -859,7 +859,7 @@
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="150.0">
                            <children>
-                              <Label text="780" textFill="WHITE">
+                              <Label fx:id="lblCartasVendidas" text="780" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="26.0" />
                                  </font>

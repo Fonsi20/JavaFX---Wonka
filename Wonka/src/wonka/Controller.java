@@ -1,8 +1,6 @@
 package wonka;
 
-import Objetos.CartaFOW;
-import Objetos.CartaMAGIC;
-import Objetos.CartaYUGI;
+import Objetos.*;
 import backend.Bajas;
 import backend.Inserciones;
 import com.jfoenix.controls.JFXButton;
@@ -290,6 +288,21 @@ public class Controller implements Initializable {
     @FXML
     private VBox pnItems;
 
+    @FXML
+    private TextField entradaBusquedaInicio;
+
+    @FXML
+    private Label lblTotalCartas;
+
+    @FXML
+    private Label lblTotalClientes;
+
+    @FXML
+    private Label lblPedidosPendientes;
+
+    @FXML
+    private Label lblCartasVendidas;
+
     private Node[] nodes = new Node[0];
     private Node[] nodesCartas = new Node[0];
     private Node[] nodesClientes = new Node[0];
@@ -340,6 +353,9 @@ public class Controller implements Initializable {
 
         //Metodo para poder arrastrar la pantalla libremente
         this.MoverVentanas(this.home);
+
+        //Metodo Inizialización de informacion DASHBOARD
+        CargarDatosDashboard();
 
     }
 
@@ -1071,6 +1087,20 @@ public class Controller implements Initializable {
     @FXML
     void accionBuscarHistorial(ActionEvent event) {
 
+    }
+
+    private void CargarDatosDashboard() {
+        Session s;
+        s = NewHibernateUtil.getSession();
+        List<Object> Carta = s.createCriteria(Carta.class).list();
+        List<Object> Cliente = s.createCriteria(Cliente.class).list();
+        List<Object> Reservas = s.createCriteria(Reserva.class).list();
+        List<Object> Ventas = s.createCriteria(Venta.class).list();
+        lblTotalCartas.setText(Integer.toString(Carta.size()));
+        lblTotalClientes.setText(Integer.toString(Cliente.size()));
+        lblCartasVendidas.setText(Integer.toString(Reservas.size()));
+        lblPedidosPendientes.setText(Integer.toString(Ventas.size()));
+        s.close();
     }
 
 }

@@ -140,6 +140,20 @@ public class Inserciones {
         }
     }
 
+    public static void InsertarCompra(Carta CarCompra, Cliente CliCompra) {
+        int cantidad = 1;
+        Venta aux;
+        aux = new Venta(CarCompra, CliCompra, cantidad);
+        guardarModificar(aux);
+    }
+
+    public static void InsertarReserva(Carta CarCompra, Cliente CliCompra) {
+        int cantidad = 1;
+        Reserva aux;
+        aux = new Reserva(CarCompra, CliCompra, cantidad);
+        guardarModificar(aux);
+    }
+
     public static void guardarModificar(Object objeto) {
         Session sesion;
         try {

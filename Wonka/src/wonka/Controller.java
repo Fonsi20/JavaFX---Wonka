@@ -316,6 +316,7 @@ public class Controller implements Initializable {
     private Node[] nodesClientes = new Node[0];
     private Node[] nodesCartasLess = new Node[0];
     private Node[] nodesClientesLess = new Node[0];
+    private Node[] nodesHistorial = new Node[0];
 
     private String idClienteCompra;
     private String idCartaCompra;
@@ -337,7 +338,11 @@ public class Controller implements Initializable {
         }
         ListCardsLess();
         ListClientesLess();
-        ListHistorial();
+        try {
+            ListHistorial();
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         //Cargamos items en la comboBox de tipo de juego de carta
         nameGame.getItems().addAll(
@@ -818,28 +823,101 @@ public class Controller implements Initializable {
 
     @FXML
     //Carga de la lista de clientes con pedidos de la pantalla Historial
-    public void ListHistorial() {
-
-        limpiarListas(pnItemsHistorial);
-        Node[] nodes = new Node[24];
-        for (int i = 0; i < nodes.length; i++) {
-            try {
-
-                final int j = i;
-                nodes[i] = FXMLLoader.load(getClass().getResource("ItemHistorial.fxml"));
-
-                nodes[i].setOnMouseEntered(event -> {
-                    nodes[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
-                });
-                nodes[i].setOnMouseExited(event -> {
-                    nodes[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
-                });
-                pnItemsHistorial.getChildren().add(nodes[i]);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
+    public void ListHistorial() throws SQLException {
+//ERROR IMPORTANDO LOS DATOS PARA MOSTRARLOS EN LA LISTA
+        System.out.println("PROBLEMA IMPORTANO LISTA - Metodo ListHistorial()");
+//        Statement S = Wonka.conect.createStatement();
+//        ResultSet Res = S.executeQuery("SELECT COUNT(*) AS ContV FROM Ventas;");
+//        ResultSet Res2 = S.executeQuery("SELECT COUNT(*) AS ContR FROM Reservas;");
+//        Res.next();
+//        Res2.next();
+//        limpiarListas(pnItemsHistorial);
+//        nodesClientesLess = new Node[Res.getInt("ContV") + Res2.getInt("ContR")];
+//        Res.close();
+//        Res2.close();
+//        Res = S.executeQuery("SELECT"
+//                + "C.Nombre as N, C.Apellidos as A, C.Telefono as T, CAR.NombreCarta as NC, CAR.Precio as P FROM Ventas as V"
+//                + " LEFT JOIN CLIENTES as C ON C.IDCliente = V.IDCliente"
+//                + " 	INNER JOIN cartas as CAR on CAR.IDCarta = V.IDCarta;");
+//        Res2 = S.executeQuery("SELECT"
+//                + "C.Nombre as N, C.Apellidos as A, C.Telefono as T, CAR.NombreCarta as NC, CAR.Precio as P FROM Reservas as R"
+//                + " LEFT JOIN CLIENTES as C ON C.IDCliente = R.IDCliente"
+//                + " 	INNER JOIN cartas as CAR on CAR.IDCarta = R.IDCarta;");
+//        nodesHistorial = new Node[Res.getInt("ContV") + Res2.getInt("ContR")];
+//        for (int i = 0; i < nodes.length; i++) {
+//            Res.next();
+//            Res2.next();
+//            int contadorV = Res.getInt("ContV");
+//            int contadorR = Res2.getInt("ContR");
+//            while (contadorV != 0) {
+//                try {
+//                    final int j = i;
+//                    nodesHistorial[i] = FXMLLoader.load(getClass().getResource("ItemHistorial.fxml"));
+//
+//                    //Establecimiento de labels
+//                    Label itemHistoriaNomCliente = (Label) nodesHistorial[i].lookup("#itemHistorialNombre");
+//                    itemHistoriaNomCliente.setText(Res.getString("N") + " " + Res.getString("A"));
+//
+//                    Label itemHistoriaNomCarta = (Label) nodesHistorial[i].lookup("#itemHistorialNombreCarta");
+//                    itemHistoriaNomCarta.setText(Res.getString("NC"));
+//
+//                    Label itemHistoriaTlf = (Label) nodesHistorial[i].lookup("#itemHistorialTlf");
+//                    itemHistoriaTlf.setText(Res.getString("T"));
+//
+//                    Label itemHistoriaPrecio = (Label) nodesHistorial[i].lookup("#itemHistorialPrecio");
+//                    itemHistoriaPrecio.setText(Res.getString("P"));
+//
+//                    Label itemHistoriaEstado = (Label) nodesHistorial[i].lookup("#itemHistorialEstado");
+//                    itemHistoriaEstado.setText("Vendida");
+//
+//                    nodesHistorial[i].setOnMouseEntered(event -> {
+//                        nodesHistorial[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+//                    });
+//                    nodesHistorial[i].setOnMouseExited(event -> {
+//                        nodesHistorial[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+//                    });
+//                    pnItemsHistorial.getChildren().add(nodesHistorial[i]);
+//                    contadorV--;
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            while (contadorR != 0) {
+//                try {
+//                    final int j = i;
+//                    nodesHistorial[i] = FXMLLoader.load(getClass().getResource("ItemHistorial.fxml"));
+//
+//                    //Establecimiento de labels
+//                    Label itemHistoriaNomCliente = (Label) nodesHistorial[i].lookup("#itemHistorialNombre");
+//                    itemHistoriaNomCliente.setText(Res2.getString("N") + " " + Res2.getString("A"));
+//
+//                    Label itemHistoriaNomCarta = (Label) nodesHistorial[i].lookup("#itemHistorialNombreCarta");
+//                    itemHistoriaNomCarta.setText(Res2.getString("NC"));
+//
+//                    Label itemHistoriaTlf = (Label) nodesHistorial[i].lookup("#itemHistorialTlf");
+//                    itemHistoriaTlf.setText(Res2.getString("T"));
+//
+//                    Label itemHistoriaPrecio = (Label) nodesHistorial[i].lookup("#itemHistorialPrecio");
+//                    itemHistoriaPrecio.setText(Res2.getString("P"));
+//
+//                    Label itemHistoriaEstado = (Label) nodesHistorial[i].lookup("#itemHistorialEstado");
+//                    itemHistoriaEstado.setText("Reservada");
+//
+//                    nodesHistorial[i].setOnMouseEntered(event -> {
+//                        nodesHistorial[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+//                    });
+//                    nodesHistorial[i].setOnMouseExited(event -> {
+//                        nodesHistorial[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+//                    });
+//                    pnItemsHistorial.getChildren().add(nodesHistorial[i]);
+//                    contadorR--;
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//        Res.close();
+//        Res2.close();
     }
 
     public void limpiarListas(VBox items) {
@@ -1423,17 +1501,15 @@ public class Controller implements Initializable {
                         nodesClientesLess[i].setOnMouseExited(event -> {
                             nodesClientesLess[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
                         });
-                        nodesCartasLess[i].setOnMousePressed(event -> {
+                        nodesClientesLess[i].setOnMousePressed(event -> {
                             for (Object C : Cliente) {
                                 if (itemNombreCliente.getText().equals(((Cliente) C).getNombre())) {
-                                    idCartaCompra = Integer.toString(((Cliente) C).getIDCliente());
-                                    busComCarta.setText(((Cliente) C).getNombre() + " " + ((Cliente) C).getApellidos());
+                                    idClienteCompra = Integer.toString(((Cliente) C).getIDCliente());
+                                    busComCliente.setText(((Cliente) C).getNombre() + " " + ((Cliente) C).getApellidos());
                                 }
                             }
                         });
-
                         pnItemsClientesLess.getChildren().add(nodesClientesLess[i]);
-
                         i++;
                     }
                 }
@@ -1442,8 +1518,79 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void accionBuscarComprasCarta(KeyEvent evento
-    ) {
+    void accionBuscarComprasCarta(KeyEvent evento) throws IOException {
+
+        if (evento.getCode().equals(KeyCode.ENTER)) {
+            String nombreCarta;
+            String nombreCartaTrasTamaño;
+            int contador = 0, i = 0;
+            Session s;
+            s = NewHibernateUtil.getSession();
+            List<Object> Carta = s.createCriteria(Carta.class).list();
+            s.close();
+            int longitudNombre = 0;
+            longitudNombre = busComCarta.getText().length();
+            for (Object o : Carta) {
+                nombreCarta = ((Carta) o).getNombreCarta();
+                if (longitudNombre < nombreCarta.length()) {
+                    nombreCartaTrasTamaño = nombreCarta.substring(0, longitudNombre);
+                } else {
+                    nombreCartaTrasTamaño = nombreCarta;
+                }
+                if (nombreCartaTrasTamaño.toLowerCase().equals(busComCarta.getText().toLowerCase())) {
+                    contador++;
+                }
+            }
+
+            System.out.println(contador);
+
+            if ("".equals(busComCarta.getText()) || contador == 0) {
+                System.out.println("NINGUNO");
+                ListCardsLess();
+            } else {
+                limpiarListas(pnItemsCartasLess);
+                nodesCartasLess = new Node[contador];
+                for (Object o : Carta) {
+                    nombreCarta = ((Carta) o).getNombreCarta();
+                    if (longitudNombre < nombreCarta.length()) {
+                        nombreCartaTrasTamaño = nombreCarta.substring(0, longitudNombre);
+                    } else {
+                        nombreCartaTrasTamaño = nombreCarta;
+                    }
+                    if (nombreCartaTrasTamaño.toLowerCase().equals(busComCarta.getText().toLowerCase())) {
+                        final int j = i;
+                        nodesCartasLess[i] = FXMLLoader.load(getClass().getResource("ItemCartaLess.fxml"));
+
+                        //Establecimiento de labels
+                        Label itemNombreJuegoCarta = (Label) nodesCartasLess[i].lookup("#itemCartaLessJuego");
+                        itemNombreJuegoCarta.setText(((Carta) o).getNombreJuego());
+
+                        Label itemNombreCartaCarta = (Label) nodesCartasLess[i].lookup("#itemCartaLessNombreCarta");
+                        itemNombreCartaCarta.setText(((Carta) o).getNombreCarta());
+
+                        Label itemPrecioCartaCarta = (Label) nodesCartasLess[i].lookup("#itemCartaLessPrecio");
+                        itemPrecioCartaCarta.setText(Float.toString(((Carta) o).getPrecio()));
+
+                        nodesCartasLess[i].setOnMouseEntered(event -> {
+                            nodesCartasLess[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+                        });
+                        nodesCartasLess[i].setOnMouseExited(event -> {
+                            nodesCartasLess[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                        });
+                        nodesCartasLess[i].setOnMousePressed(event -> {
+                            for (Object C : Carta) {
+                                if (itemNombreCartaCarta.getText().equals(((Carta) C).getNombreCarta())) {
+                                    idCartaCompra = Integer.toString(((Carta) C).getIDCarta());
+                                    busComCarta.setText(((Carta) C).getNombreCarta());
+                                }
+                            }
+                        });
+                        pnItemsCartasLess.getChildren().add(nodesCartasLess[i]);
+                        i++;
+                    }
+                }
+            }
+        }
 
     }
 
@@ -1615,7 +1762,7 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void accionComprarCarta(ActionEvent event) {
+    void accionComprarCarta(ActionEvent event) throws SQLException {
         Session s;
         s = NewHibernateUtil.getSession();
         List<Object> Carta = s.createCriteria(Carta.class).list();
@@ -1631,19 +1778,25 @@ public class Controller implements Initializable {
         }
 
         for (Object o : Carta) {
-            if (Integer.parseInt(idCartaCompra) == ((Carta) o).getIDCarta() && ((Carta) o).getStock() >= 1) {
-                System.out.println("VENTAAAA");
-                CartaCompra = (Carta) o;
-                Inserciones.InsertarCompra(CartaCompra, ClienteCompra);
+            if (Integer.parseInt(idCartaCompra) == ((Carta) o).getIDCarta()) {
+                if (((Carta) o).getStock() >= 1) {
+                    ((Carta) o).setStock(((Carta) o).getStock() - 1);
+                    String[] parts = (((Carta) o).getAno()).split("-");
+                    String year = parts[0];
+                    ((Carta) o).setAno(year);
+                    CartaCompra = (Carta) o;
+                    Inserciones.InsertarCompra(CartaCompra, ClienteCompra);
+                    System.out.println("ya hizo la compra");
+                    Inserciones.guardarModificar(CartaCompra);
+                    System.out.println("ya cambio el stock");
+                    System.out.println(((Carta) o).getStock());
+                } else {
+                    CartaCompra = (Carta) o;
+                    Inserciones.InsertarReserva(CartaCompra, ClienteCompra);
+                }
             }
-            if (Integer.parseInt(idCartaCompra) == ((Carta) o).getIDCarta() && ((Carta) o).getStock() == 0) {
-                System.out.println("RESERVAAA");
-                CartaCompra = (Carta) o;
-                Inserciones.InsertarReserva(CartaCompra, ClienteCompra);
-            }
-            System.out.println("FOOOOR");
+
         }
-        System.out.println("nos vamos");
         ListHistorial();
         CargarDatosDashboard();
     }

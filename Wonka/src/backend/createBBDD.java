@@ -83,8 +83,8 @@ public class createBBDD {
                     + "	PRIMARY KEY (IDVenta),"
                     + "	FOREIGN KEY (IDCliente) REFERENCES CLIENTES(IDCliente) ON DELETE CASCADE ON UPDATE CASCADE,"
                     + "	FOREIGN KEY (IDCarta) REFERENCES CARTAS (IDCarta) ON DELETE CASCADE ON UPDATE CASCADE,"
-                    + "	UNIQUE INDEX FK_VCliente (IDCliente),"
-                    + "	UNIQUE INDEX FK_VCarta (IDCarta)"
+                    + "	INDEX FK_VCliente (IDCliente),"
+                    + "	INDEX FK_VCarta (IDCarta)"
                     + ")ENGINE INNODB;");
 
             sentencia.execute("CREATE TABLE IF NOT EXISTS RESERVAS("
@@ -94,8 +94,8 @@ public class createBBDD {
                     + "	PRIMARY KEY (IDCarta,IDCliente),"
                     + "	FOREIGN KEY (IDCliente) REFERENCES CLIENTES(IDCliente) ON DELETE CASCADE ON UPDATE CASCADE,"
                     + "	FOREIGN KEY (IDCarta) REFERENCES CARTAS (IDCarta) ON DELETE CASCADE ON UPDATE CASCADE,"
-                    + "	UNIQUE INDEX FK_RCliente (IDCliente),"
-                    + "	UNIQUE INDEX FK_RCarta (IDCarta)"
+                    + "	INDEX FK_RCliente (IDCliente),"
+                    + "	INDEX FK_RCarta (IDCarta)"
                     + ")ENGINE INNODB;");
 
             //Cartas Magi

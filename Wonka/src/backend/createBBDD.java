@@ -78,7 +78,7 @@ public class createBBDD {
             sentencia.execute("CREATE TABLE IF NOT EXISTS VENTAS("
                     + "	IDVenta INT(5) ZEROFILL NOT NULL AUTO_INCREMENT,"
                     + "	IDCliente INT(5) ZEROFILL NOT NULL,"
-                    + "	IDCarta INT(5) ZEROFILL NOT NULL,"
+                    + "	IDCarta INT(3) ZEROFILL NOT NULL,"
                     + "	Cantidad INT(2) NOT NULL,"
                     + "	PRIMARY KEY (IDVenta),"
                     + "	FOREIGN KEY (IDCliente) REFERENCES CLIENTES(IDCliente) ON DELETE CASCADE ON UPDATE CASCADE,"
@@ -88,7 +88,7 @@ public class createBBDD {
                     + ")ENGINE INNODB;");
 
             sentencia.execute("CREATE TABLE IF NOT EXISTS RESERVAS("
-                    + "	IDCarta INT(5) ZEROFILL NOT NULL,"
+                    + "	IDCarta INT(3) ZEROFILL NOT NULL,"
                     + "	IDCliente INT(5) ZEROFILL NOT NULL,"
                     + "	Cantidad INT(2) NOT NULL,"
                     + "	PRIMARY KEY (IDCarta,IDCliente),"
@@ -132,8 +132,6 @@ public class createBBDD {
                     + "('Force of Will','2014','2.49','4','Alicia, avatar de las siete tierras','Si te fueran a infligir daño, en vez de eso se lo infligen a esta carta.','The Moonlit Savior'),"
                     + "('Force of Will','2013','1.49','0','Caza de almas','Cada jugador entierra un resonador, luego cada jugador descarta una carta','PR Card'),"
                     + "('Force of Will','2016','1.99','1','Gwiner, el dragón blanco','Puedes pagar 2 menos para jugar esta carta por cada resonador que contrates que haya sido puesto en tu campo este turno','PR Card');");
-                    
-            
             sentencia.execute("INSERT INTO cartas_fow (IDCarta, IDCFoW, Elemento, Coste, Tipo, Raza) VALUES "
                     + "('011','LEL-090 R','Multicolor','5','Resonador','Quimera'),"
                     + "('012','RL 1701-2','Agua','6','Resonador','Avatar'),"
@@ -148,6 +146,22 @@ public class createBBDD {
                     + "('Nuria','Muñoz Carrera','25',false,'Avenida Gran Via nº33 - Vigo - Spain','411203040','nuriamuñoz@gmail.com' ),"
                     + "('Bonifacio','Rodríguez Álvarez','55',true,'Camino del rio nº19 - Mos - Spain','232124578','bonifaciorodriguez@gmail.com' ),"
                     + "('Leonardo','Costas Zapatero','42',true,'Calle Miramar nº23 - Cangas - Spain','787878788','leonardocostas@gmail.com' );");
+            
+            //Ventas
+            sentencia.execute("INSERT INTO ventas (IDCliente, IDCarta, Cantidad) values"
+                    + "('00001','001','1'),"
+                    + "('00002','002','2'),"
+                    + "('00003','005','2'),"
+                    + "('00004','013','1'),"
+                    + "('00005','009','3'),"
+                    + "('00006','006','1');");
+            
+            
+            //Reservas
+            sentencia.execute("INSERT INTO reservas (IDCarta, IDCliente, Cantidad) values"
+                    + "('002','00001','2'),"
+                    + "('010','00004','3'),"
+                    + "('013','00003','1');");
 
         } catch (SQLException e) {
             System.out.println(e);

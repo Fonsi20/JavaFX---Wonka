@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -139,60 +140,88 @@ public class Inserciones {
             System.out.println("NO PODEMOS MODIFICAR UNA CARTA INEXISTENTE");
         }
     }
-    
-    public static void insertarCliente(ArrayList<String>Cliente) throws SQLException{
-        System.out.println("en Clientes "+Cliente);
+
+    public static void insertarCliente(ArrayList<String> Cliente) throws SQLException {
+        System.out.println("en Clientes " + Cliente);
         boolean sexo;
-        if (Cliente.get(3).equals("0")){
+        if (Cliente.get(3).equals("0")) {
             sexo = false;
-        }else{
+        } else {
             sexo = true;
         }
-        Cliente aux = new Cliente(Integer.parseInt(Cliente.get(2)),Cliente.get(0),Cliente.get(1),Cliente.get(4),Cliente.get(5),Cliente.get(6),sexo);
+        Cliente aux = new Cliente(Integer.parseInt(Cliente.get(2)), Cliente.get(0), Cliente.get(1), Cliente.get(4), Cliente.get(5), Cliente.get(6), sexo);
         guardarModificar(aux);
     }
-    
-    public static void actualizarCliente(ArrayList<String>Cliente) throws SQLException{
+
+    public static void actualizarCliente(ArrayList<String> Cliente) throws SQLException {
         Cliente temp = null;
         Statement S = Wonka.conect.createStatement();
-        ResultSet Res = S.executeQuery("SELECT IDCliente AS ID FROM Clientes WHERE Nombre='"+ Cliente.get(0) +"';");
+        ResultSet Res = S.executeQuery("SELECT IDCliente AS ID FROM Clientes WHERE Nombre='" + Cliente.get(0) + "';");
         Res.next();
         temp = comprovacionesBBDD.comprobarCliente(Res.getInt("ID"));
         Res.close();
-        
-        if(temp != null){
+
+        if (temp != null) {
             temp.setNombre(Cliente.get(0));
             temp.setApellidos(Cliente.get(1));
             temp.setEdad(Integer.parseInt(Cliente.get(2)));
             boolean sexo;
-            if(Cliente.get(3).equals("0")){
+            if (Cliente.get(3).equals("0")) {
                 sexo = true;
-            }else{
+            } else {
                 sexo = false;
             }
             temp.setSexo(sexo);
             temp.setDireccion(Cliente.get(4));
             temp.setTelefono(Cliente.get(5));
             temp.setMail(Cliente.get(6));
-            
+
             guardarModificar(temp);
-        }else{
+        } else {
             System.out.println("NO EXISTE ESE CLIENTE");
         }
     }
 
-    public static void InsertarCompra(Carta CarCompra, Cliente CliCompra) {
-        int cantidad = 1;
+    public static void InsertarCompra(Carta CarCompra, Cliente CliCompra, int cantidad) {
         Venta aux;
         aux = new Venta(CarCompra, CliCompra, cantidad);
         guardarModificar(aux);
     }
 
-    public static void InsertarReserva(Carta CarCompra, Cliente CliCompra) {
-        int cantidad = 1;
+    public static void InsertarReserva(Carta CarCompra, Cliente CliCompra, int cantidad) {
         Reserva aux;
         aux = new Reserva(CarCompra, CliCompra, cantidad);
         guardarModificar(aux);
+    }
+
+    public static void automatizacionStock() throws SQLException {
+
+        Statement S = Wonka.conect.createStatement();
+        ResultSet Res = S.executeQuery("SELECT count(*) as count FROM Reservas;");
+        Res.next();
+        if (Res.getInt("count") == 5) {
+            Session s;
+            s = NewHibernateUtil.getSession();
+            List<Object> Reservas = s.createCriteria(Reserva.class).list();
+            Reserva auxReservas = null;
+            try {
+                for (Object o : Reservas) {
+                    InsertarCompra(((Reserva) o).getIDCarta(), ((Reserva) o).getIDCliente(), ((Reserva) o).getCantidad());
+                    auxReservas = (Reserva) o;
+                    Carta carAux = ((Reserva) o).getIDCarta();
+                    carAux.setStock(5);
+                    String[] parts = carAux.getAno().split("-");
+                    String year = parts[0];
+                    carAux.setAno(year);
+                    s.beginTransaction();
+                    s.update(carAux);
+                    s.getTransaction().commit();
+                    eliminar(auxReservas);
+                }
+            } catch (NumberFormatException e) {
+            }
+            s.close();
+        }
     }
 
     public static void guardarModificar(Object objeto) {

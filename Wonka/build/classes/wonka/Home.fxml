@@ -352,6 +352,7 @@
                   </JFXButton>
                   <JFXTextField fx:id="busComCliente" layoutX="23.0" layoutY="107.0" onKeyPressed="#accionBuscarComprasCliente" prefHeight="25.0" prefWidth="420.0" promptText="Nombre del cliente a buscar...." style="-fx-background-color: #00222B; -fx-text-fill: #fff;" unFocusColor="WHITE" />
                   <JFXTextField fx:id="busComCarta" layoutX="479.0" layoutY="107.0" onKeyPressed="#accionBuscarComprasCarta" prefHeight="25.0" prefWidth="420.0" promptText="Nombre de la carta a buscar...." style="-fx-background-color: #00222B; -fx-text-fill: #fff;" unFocusColor="WHITE" />
+                  <TextField fx:id="textAreaCantidadCompra" layoutX="411.0" layoutY="32.0" prefHeight="30.0" prefWidth="149.0" promptText="Cantidad" />
                </children>
             </Pane>
             <Pane fx:id="pnlCustomer" prefHeight="200.0" prefWidth="200.0" visible="false">
@@ -853,7 +854,7 @@
                                     <Font name="System Bold" size="26.0" />
                                  </font>
                               </Label>
-                              <Label text="Cartas Vendidas" textFill="#e7e5e5" />
+                              <Label text="Ventas Realizadas" textFill="#e7e5e5" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="150.0">

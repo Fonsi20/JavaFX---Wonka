@@ -311,6 +311,9 @@ public class Controller implements Initializable {
     @FXML
     private Label lblCartasVendidas;
 
+    @FXML
+    private TextField textAreaCantidadCompra;
+
     private Node[] nodes = new Node[0];
     private Node[] nodesCartas = new Node[0];
     private Node[] nodesClientes = new Node[0];
@@ -1406,7 +1409,7 @@ public class Controller implements Initializable {
 
     @FXML
     //Borramos al cliente seleccionado en la lista de la BBDD
-    void accionBorrarCamposClientes(ActionEvent event) throws SQLException{
+    void accionBorrarCamposClientes(ActionEvent event) throws SQLException {
         String nombre = nombreCliente.getText();
         Bajas.eliminarCliente(nombre);
         accionLimpiarCamposClientes(event);
@@ -1427,7 +1430,7 @@ public class Controller implements Initializable {
         Cliente.add(direccionCliente.getText());
         Cliente.add(telefonoCliente.getText());
         Cliente.add(emailCliente.getText());
-        
+
         Inserciones.insertarCliente(Cliente);
 
         accionLimpiarCamposClientes(event);
@@ -1799,6 +1802,9 @@ public class Controller implements Initializable {
 
     @FXML
     void accionComprarCarta(ActionEvent event) throws SQLException {
+
+        int cantidadV = 0, cantidadR = 0, cantidadStock = 0;
+
         Session s;
         s = NewHibernateUtil.getSession();
         List<Object> Carta = s.createCriteria(Carta.class).list();
@@ -1806,34 +1812,54 @@ public class Controller implements Initializable {
         s.close();
         Carta CartaCompra = null;
         Cliente ClienteCompra = null;
-
-        for (Object c : Cliente) {
-            if (Integer.parseInt(idClienteCompra) == ((Cliente) c).getIDCliente()) {
-                ClienteCompra = (Cliente) c;
-            }
-        }
-
-        for (Object o : Carta) {
-            if (Integer.parseInt(idCartaCompra) == ((Carta) o).getIDCarta()) {
-                if (((Carta) o).getStock() >= 1) {
-                    ((Carta) o).setStock(((Carta) o).getStock() - 1);
-                    String[] parts = (((Carta) o).getAno()).split("-");
-                    String year = parts[0];
-                    ((Carta) o).setAno(year);
-                    CartaCompra = (Carta) o;
-                    Inserciones.InsertarCompra(CartaCompra, ClienteCompra);
-                    System.out.println("ya hizo la compra");
-                    Inserciones.guardarModificar(CartaCompra);
-                    System.out.println("ya cambio el stock");
-                    System.out.println(((Carta) o).getStock());
-                } else {
-                    CartaCompra = (Carta) o;
-                    Inserciones.InsertarReserva(CartaCompra, ClienteCompra);
+        try {
+            Integer.parseInt(textAreaCantidadCompra.getText());
+            int cantidad = Integer.parseInt(textAreaCantidadCompra.getText());
+            for (Object c : Cliente) {
+                if (Integer.parseInt(idClienteCompra) == ((Cliente) c).getIDCliente()) {
+                    ClienteCompra = (Cliente) c;
                 }
             }
+            for (Object o : Carta) {
+                if (Integer.parseInt(idCartaCompra) == ((Carta) o).getIDCarta()) {
+                    cantidadStock = ((Carta) o).getStock();
 
+                    if (cantidad <= cantidadStock) {
+                        ((Carta) o).setStock(((Carta) o).getStock() - cantidad);
+                        String[] parts = (((Carta) o).getAno()).split("-");
+                        String year = parts[0];
+                        ((Carta) o).setAno(year);
+                        CartaCompra = (Carta) o;
+                        Inserciones.InsertarCompra(CartaCompra, ClienteCompra, cantidad);
+                        Inserciones.guardarModificar(CartaCompra);
+                    } else {
+                        cantidadR = cantidad - cantidadStock;
+                        cantidadV = cantidad - cantidadR;
+                        System.out.println(cantidadR + " : " + cantidadV + " : " + cantidadStock + " : " + cantidad);
+                        if (cantidadV > 0) {
+                            ((Carta) o).setStock(((Carta) o).getStock() - cantidadV);
+                            String[] parts = (((Carta) o).getAno()).split("-");
+                            String year = parts[0];
+                            ((Carta) o).setAno(year);
+                            CartaCompra = (Carta) o;
+                            Inserciones.InsertarCompra(CartaCompra, ClienteCompra, cantidadV);
+                            Inserciones.guardarModificar(CartaCompra);
+                        }
+                        if (cantidadR > 0) {
+                            CartaCompra = (Carta) o;
+                            Inserciones.InsertarReserva(CartaCompra, ClienteCompra, cantidadR);
+                        }
+                    }
+                }
+            }
+        } catch (NumberFormatException e) {
+            textAreaCantidadCompra.setText("Introduce un número");
         }
+        Inserciones.automatizacionStock();
         ListHistorial();
+        ListCards();
+        ListCardsOrders();
+        ListCardsLess();
         CargarDatosDashboard();
     }
 

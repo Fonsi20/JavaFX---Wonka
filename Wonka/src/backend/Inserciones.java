@@ -139,6 +139,47 @@ public class Inserciones {
             System.out.println("NO PODEMOS MODIFICAR UNA CARTA INEXISTENTE");
         }
     }
+    
+    public static void insertarCliente(ArrayList<String>Cliente) throws SQLException{
+        System.out.println("en Clientes "+Cliente);
+        boolean sexo;
+        if (Cliente.get(3).equals("0")){
+            sexo = false;
+        }else{
+            sexo = true;
+        }
+        Cliente aux = new Cliente(Integer.parseInt(Cliente.get(2)),Cliente.get(0),Cliente.get(1),Cliente.get(4),Cliente.get(5),Cliente.get(6),sexo);
+        guardarModificar(aux);
+    }
+    
+    public static void actualizarCliente(ArrayList<String>Cliente) throws SQLException{
+        Cliente temp = null;
+        Statement S = Wonka.conect.createStatement();
+        ResultSet Res = S.executeQuery("SELECT IDCliente AS ID FROM Clientes WHERE Nombre='"+ Cliente.get(0) +"';");
+        Res.next();
+        temp = comprovacionesBBDD.comprobarCliente(Res.getInt("ID"));
+        Res.close();
+        
+        if(temp != null){
+            temp.setNombre(Cliente.get(0));
+            temp.setApellidos(Cliente.get(1));
+            temp.setEdad(Integer.parseInt(Cliente.get(2)));
+            boolean sexo;
+            if(Cliente.get(3).equals("0")){
+                sexo = true;
+            }else{
+                sexo = false;
+            }
+            temp.setSexo(sexo);
+            temp.setDireccion(Cliente.get(4));
+            temp.setTelefono(Cliente.get(5));
+            temp.setMail(Cliente.get(6));
+            
+            guardarModificar(temp);
+        }else{
+            System.out.println("NO EXISTE ESE CLIENTE");
+        }
+    }
 
     public static void InsertarCompra(Carta CarCompra, Cliente CliCompra) {
         int cantidad = 1;

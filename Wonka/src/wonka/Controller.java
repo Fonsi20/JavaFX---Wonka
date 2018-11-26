@@ -1406,14 +1406,35 @@ public class Controller implements Initializable {
 
     @FXML
     //Borramos al cliente seleccionado en la lista de la BBDD
-    void accionBorrarCamposClientes(ActionEvent event) {
-
+    void accionBorrarCamposClientes(ActionEvent event) throws SQLException{
+        String nombre = nombreCliente.getText();
+        Bajas.eliminarCliente(nombre);
+        accionLimpiarCamposClientes(event);
+        ListCardsClientes();
+        ListClientesLess();
+        ListCardsOrders();
+        CargarDatosDashboard();
     }
 
     @FXML
     //Guardamos al cliente introducido en la BBDD
-    void accionGuardarCamposClientes(ActionEvent event) {
+    void accionGuardarCamposClientes(ActionEvent event) throws SQLException {
+        ArrayList<String> Cliente = new ArrayList<String>();
+        Cliente.add(nombreCliente.getText());
+        Cliente.add(apellidosCliente.getText());
+        Cliente.add(edadCliente.getText());
+        Cliente.add("" + sexoCliente.getSelectionModel().getSelectedIndex());
+        Cliente.add(direccionCliente.getText());
+        Cliente.add(telefonoCliente.getText());
+        Cliente.add(emailCliente.getText());
+        
+        Inserciones.insertarCliente(Cliente);
 
+        accionLimpiarCamposClientes(event);
+        ListCardsClientes();
+        ListClientesLess();
+        ListCardsOrders();
+        CargarDatosDashboard();
     }
 
     @FXML
@@ -1431,7 +1452,22 @@ public class Controller implements Initializable {
 
     @FXML
     //Modificamos los campos de un cliente seleccionado en la lista y lo subimos de nuevo a la BBDD
-    void accionModificarCamposClientes(ActionEvent event) {
+    void accionModificarCamposClientes(ActionEvent event) throws SQLException {
+        ArrayList<String> Cliente = new ArrayList<String>();
+        Cliente.add(nombreCliente.getText());
+        Cliente.add(apellidosCliente.getText());
+        Cliente.add(edadCliente.getText());
+        Cliente.add("" + sexoCliente.getSelectionModel().getSelectedIndex());
+        Cliente.add(direccionCliente.getText());
+        Cliente.add(telefonoCliente.getText());
+        Cliente.add(emailCliente.getText());
+
+        Inserciones.actualizarCliente(Cliente);
+        accionLimpiarCamposClientes(event);
+        ListCardsClientes();
+        ListClientesLess();
+        ListCardsOrders();
+        CargarDatosDashboard();
 
     }
 

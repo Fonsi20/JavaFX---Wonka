@@ -53,4 +53,17 @@ public class comprovacionesBBDD {
         return fow;
     }
 
+    public static Cliente comprobarCliente(int cod) {
+        Session sesion;
+        Cliente temp = null;
+        try {
+            sesion = NewHibernateUtil.getSession();
+            temp = (Cliente) sesion.get(Cliente.class, cod);
+            sesion.close();
+        } catch (HibernateException e) {
+            System.out.println(e.getMessage());
+        }
+        return temp;
+    }
+
 }

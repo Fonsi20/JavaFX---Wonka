@@ -50,4 +50,18 @@ public class Bajas {
         Res.close();
     }
 
+    public static void eliminarCliente(String nombre) throws SQLException {
+        Statement S = Wonka.conect.createStatement();
+        ResultSet Res = S.executeQuery("SELECT IDCliente AS ID FROM Clientes WHERE Nombre='" + nombre + "';");
+        Res.next();
+        Cliente temp = comprovacionesBBDD.comprobarCliente(Res.getInt("ID"));
+
+        if (temp != null) {
+            Inserciones.eliminar(temp);
+        } else {
+            System.out.println("NO EXISTE ESE CLIENTE");
+        }
+        Res.close();
+    }
+
 }

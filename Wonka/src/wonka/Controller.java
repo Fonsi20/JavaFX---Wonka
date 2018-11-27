@@ -3,6 +3,7 @@ package wonka;
 import Objetos.*;
 import backend.Bajas;
 import backend.Inserciones;
+import backend.comprobacionesDatos;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
@@ -886,7 +887,7 @@ public class Controller implements Initializable {
                 }
             }
             ResVentas.close();
-            if(ResReservas == null){
+            if (ResReservas == null) {
                 ResReservas = ResLoad();
                 System.out.println("Era null");
             }
@@ -899,7 +900,7 @@ public class Controller implements Initializable {
                     //Establecimiento de labels
                     Label itemHistoriaNomCliente = (Label) nodesHistorial[i].lookup("#itemHistorialNombre");
                     itemHistoriaNomCliente.setText(ResReservas.getString("N") + " " + ResReservas.getString("A"));
-                    
+
                     Label itemHistoriaNomCarta = (Label) nodesHistorial[i].lookup("#itemHistorialNombreCarta");
                     itemHistoriaNomCarta.setText(ResReservas.getString("NC"));
 
@@ -1438,6 +1439,8 @@ public class Controller implements Initializable {
     @FXML
     //Guardamos al cliente introducido en la BBDD
     void accionGuardarCamposClientes(ActionEvent event) throws SQLException {
+
+        int correcto = 0;
         ArrayList<String> Cliente = new ArrayList<String>();
         Cliente.add(nombreCliente.getText());
         Cliente.add(apellidosCliente.getText());
@@ -1447,9 +1450,30 @@ public class Controller implements Initializable {
         Cliente.add(telefonoCliente.getText());
         Cliente.add(emailCliente.getText());
 
-        Inserciones.insertarCliente(Cliente);
+        correcto = comprobacionesDatos.comprobarCliente(Cliente);
 
-        accionLimpiarCamposClientes(event);
+        if (correcto == 0) {
+            Inserciones.insertarCliente(Cliente);
+        }
+        if (correcto == 1) {
+            edadCliente.setText("Introduce un número");
+            edadCliente.setStyle("  -fx-border-color:#f45454;"
+                    + "    -fx-border-radius:0.15em;"
+                    + "    -fx-background-color:#00000b;"
+                    + "    -fx-border-size:0.15em;"
+                    + "    -fx-text-fill:#f45454;");
+        }
+
+        if (correcto == 2) {
+            telefonoCliente.setText("Introduce un número de 9 digitos");
+            telefonoCliente.setStyle("  -fx-border-color:#f45454;"
+                    + "    -fx-border-radius:0.15em;"
+                    + "    -fx-background-color:#00000b;"
+                    + "    -fx-border-size:0.15em;"
+                    + "    -fx-text-fill:#f45454;");
+        }
+
+        //accionLimpiarCamposClientes(event);
         ListCardsClientes();
         ListClientesLess();
         ListCardsOrders();

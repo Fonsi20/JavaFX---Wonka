@@ -22,11 +22,16 @@
          <HBox.margin>
             <Insets left="20.0" right="20.0" />
          </HBox.margin></Label>
-        <Label fx:id="itemHistorialNombreCarta" maxWidth="350.0" minWidth="350.0" prefWidth="350.0" text="Mira el fuego de mis ojos" textFill="#b7c3d7">
+        <Label fx:id="itemHistorialNombreCarta" maxWidth="300.0" minWidth="300.0" prefWidth="300.0" text="Mira el fuego de mis ojos" textFill="#b7c3d7">
             <HBox.margin>
                 <Insets />
             </HBox.margin>
         </Label>
+      <Label fx:id="itemHistoriaCantidad" text="14" textFill="WHITE">
+         <HBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </HBox.margin>
+      </Label>
         <Label fx:id="itemHistorialTlf" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="555201245" textFill="#b7c3d7">
             <HBox.margin>
                 <Insets left="10.0" right="10.0" />

@@ -189,9 +189,50 @@ public class Inserciones {
     }
 
     public static void InsertarReserva(Carta CarCompra, Cliente CliCompra, int cantidad) {
+
+        Session s;
+        s = NewHibernateUtil.getSession();
+        List<Object> Reservas = s.createCriteria(Reserva.class).list();
         Reserva aux;
-        aux = new Reserva(CarCompra, CliCompra, cantidad);
-        guardarModificar(aux);
+        Carta carAux = null;
+        Cliente cliAux = null;
+        boolean existe = false;
+        int cantidadObjeto = 0;
+        try {
+            for (Object o : Reservas) {
+
+                carAux = ((Reserva) o).getIDCarta();
+                cliAux = ((Reserva) o).getIDCliente();
+
+                if (carAux.getIDCarta() == CarCompra.getIDCarta() && cliAux.getIDCliente() == CliCompra.getIDCliente()) {
+                    ((Reserva) o).setCantidad(cantidad + ((Reserva) o).getCantidad());
+                    cantidadObjeto = ((Reserva) o).getCantidad();
+                    existe = true;
+                }
+
+            }
+            if (existe == true) {
+                System.out.println(cantidadObjeto);
+                aux = new Reserva(CarCompra, CliCompra, cantidadObjeto);
+                s.beginTransaction();
+                s.update(carAux);
+                s.getTransaction().commit();
+                guardarModificar(aux);
+            }
+
+            if (existe == false) {
+                System.out.println(cantidadObjeto);
+                aux = new Reserva(CarCompra, CliCompra, cantidad);
+                s.beginTransaction();
+                s.update(carAux);
+                s.getTransaction().commit();
+                guardarModificar(aux);
+            }
+
+        } catch (NumberFormatException e) {
+        }
+        s.close();
+
     }
 
     public static void automatizacionStock() throws SQLException {

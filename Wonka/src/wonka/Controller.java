@@ -501,6 +501,8 @@ public class Controller implements Initializable {
                         //Bloqueamos el campo Nombre Carta para no poder editarlo, para poder volver a escribir pulsar Limpiar.
                         nameCard.setDisable(true);
                         btnGuardarCarta.setDisable(true);
+                        btnModificarCarta.setDisable(false);
+                        btnBorrarCarta.setDisable(false);
                         //Cargar informacion en los Edit Text
                         Session s;
                         s = NewHibernateUtil.getSession();
@@ -674,6 +676,9 @@ public class Controller implements Initializable {
                         nodesClientes[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
                     });
                     nodesClientes[i].setOnMousePressed(event -> {
+                        btnModificarCamposClientes.setDisable(false);
+                        btnBorrarCamposClientes.setDisable(false);
+                        btnGuardarCamposClientes.setDisable(true);
                         Session s;
                         s = NewHibernateUtil.getSession();
                         List<Object> Clientes = s.createCriteria(Cliente.class).list();
@@ -995,6 +1000,7 @@ public class Controller implements Initializable {
             pnlCompras.setVisible(false);
             pnlHistorial.setVisible(false);
             ListCardsClientes();
+            accionLimpiarCamposClientes(actionEvent);
             pnlCustomer.toFront();
         }
         if (actionEvent.getSource() == btnCompras) {
@@ -1050,6 +1056,7 @@ public class Controller implements Initializable {
             pnlCompras.setVisible(false);
             pnlHistorial.setVisible(false);
             ListCardsOrders();
+            accionLimpiarCarta(actionEvent);
             pnlOrders.toFront();
         }
         if (actionEvent.getSource() == btnSignout) {
@@ -1450,6 +1457,9 @@ public class Controller implements Initializable {
         apellidosCliente.setText("");
         emailCliente.setText("");
         telefonoCliente.setText("");
+        btnModificarCamposClientes.setDisable(true);
+        btnBorrarCamposClientes.setDisable(true);
+        btnGuardarCamposClientes.setDisable(false);
 
     }
 
@@ -1480,6 +1490,7 @@ public class Controller implements Initializable {
 
         busComCarta.setText("");
         busComCliente.setText("");
+        textAreaCantidadCompra.setText("");
 
     }
 
@@ -1707,6 +1718,8 @@ public class Controller implements Initializable {
         //Activamos campo nombre carta para poder añadir una
         nameCard.setDisable(false);
         btnGuardarCarta.setDisable(false);
+        btnModificarCarta.setDisable(true);
+        btnBorrarCarta.setDisable(true);
 
         nameCard.setText("");
         colecCard.setText("");

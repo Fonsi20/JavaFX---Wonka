@@ -71,7 +71,7 @@
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/icons8_Person_32px.png" />
+                        <Image url="@../images/personMenu.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -143,26 +143,26 @@
                      <children>
                         <Label text="Nombre">
                            <HBox.margin>
-                              <Insets left="100.0" />
+                              <Insets left="110.0" />
                            </HBox.margin>
                         </Label>
                         <Label layoutX="154.0" layoutY="23.0" text="Nombre Carta">
                            <HBox.margin>
-                              <Insets left="120.0" right="200.0" />
+                              <Insets left="105.0" right="200.0" />
                            </HBox.margin>
                         </Label>
                         <Label text="Cantidad">
                            <HBox.margin>
-                              <Insets left="10.0" right="10.0" />
+                              <Insets left="10.0" />
                            </HBox.margin>
                         </Label>
                         <Label layoutX="348.0" layoutY="23.0" text="Teléfono">
                            <HBox.margin>
-                              <Insets left="30.0" right="40.0" />
+                              <Insets left="30.0" right="30.0" />
                            </HBox.margin></Label>
                         <Label layoutX="350.0" layoutY="23.0" text="Precio">
                            <HBox.margin>
-                              <Insets right="40.0" />
+                              <Insets right="48.0" />
                            </HBox.margin>
                         </Label>
                         <Label layoutX="380.0" layoutY="23.0" text="Estado" />
@@ -298,7 +298,7 @@
                      <children>
                         <Label text="Nombre">
                            <HBox.margin>
-                              <Insets left="80.0" right="80.0" />
+                              <Insets left="90.0" right="20.0" />
                            </HBox.margin>
                         </Label>
                         <Label text="Apellidos">
@@ -321,12 +321,12 @@
                      <children>
                         <Label text="Juego">
                            <HBox.margin>
-                              <Insets left="100.0" />
+                              <Insets left="90.0" right="20.0" />
                            </HBox.margin>
                         </Label>
                         <Label text="Nombre Carta">
                            <HBox.margin>
-                              <Insets left="60.0" right="80.0" />
+                              <Insets left="60.0" right="20.0" />
                            </HBox.margin>
                         </Label>
                         <Label layoutX="154.0" layoutY="23.0" text="Precio">
@@ -461,26 +461,26 @@
                         </VBox>
                      </content>
                   </ScrollPane>
-                  <HBox alignment="CENTER_LEFT" layoutX="-2.0" layoutY="303.0" prefHeight="42.0" prefWidth="935.0" style="-fx-background-color: #FFC600;">
+                  <HBox alignment="CENTER_LEFT" layoutX="-1.0" layoutY="303.0" prefHeight="42.0" prefWidth="935.0" style="-fx-background-color: #FFC600;">
                      <children>
                         <Label text="Nombre">
                            <HBox.margin>
-                              <Insets left="120.0" right="80.0" />
+                              <Insets left="110.0" right="90.0" />
                            </HBox.margin>
                         </Label>
                         <Label text="Apellidos">
                            <HBox.margin>
-                              <Insets left="20.0" right="160.0" />
+                              <Insets left="20.0" right="155.0" />
                            </HBox.margin>
                         </Label>
                         <Label text="Edad">
                            <HBox.margin>
-                              <Insets left="10.0" right="90.0" />
+                              <Insets left="10.0" right="70.0" />
                            </HBox.margin>
                         </Label>
                         <Label text="Email">
                            <HBox.margin>
-                              <Insets left="20.0" right="140.0" />
+                              <Insets left="20.0" right="154.0" />
                            </HBox.margin>
                         </Label>
                         <Label text="Teléfono">
@@ -592,22 +592,22 @@
                      <children>
                         <Label text="Juego" textFill="#e7e5e5">
                            <HBox.margin>
-                              <Insets left="100.0" right="80.0" />
+                              <Insets left="90.0" right="90.0" />
                            </HBox.margin>
                         </Label>
                         <Label text="Nombre Carta" textFill="#e7e5e5">
                            <HBox.margin>
-                              <Insets left="20.0" right="240.0" />
+                              <Insets left="20.0" right="260.0" />
                            </HBox.margin>
                         </Label>
                         <Label text="Collection" textFill="#e7e5e5">
                            <HBox.margin>
-                              <Insets left="10.0" right="100.0" />
+                              <Insets left="10.0" right="70.0" />
                            </HBox.margin>
                         </Label>
                         <Label text="Price" textFill="#e7e5e5">
                            <HBox.margin>
-                              <Insets left="20.0" right="60.0" />
+                              <Insets left="20.0" right="50.0" />
                            </HBox.margin>
                         </Label>
                         <Label text="Status" textFill="#e7e5e5">
@@ -878,7 +878,7 @@
                      <children>
                         <Label text="Juego" textFill="#e7e5e5">
                            <HBox.margin>
-                              <Insets left="100.0" right="80.0" />
+                              <Insets left="90.0" right="80.0" />
                            </HBox.margin>
                         </Label>
                         <Label text="Nombre Carta" textFill="#e7e5e5">
@@ -888,12 +888,12 @@
                         </Label>
                         <Label text="Collection" textFill="#e7e5e5">
                            <HBox.margin>
-                              <Insets left="10.0" right="100.0" />
+                              <Insets left="50.0" right="65.0" />
                            </HBox.margin>
                         </Label>
                         <Label text="Price" textFill="#e7e5e5">
                            <HBox.margin>
-                              <Insets left="20.0" right="60.0" />
+                              <Insets left="20.0" right="50.0" />
                            </HBox.margin>
                         </Label>
                         <Label text="Status" textFill="#e7e5e5">

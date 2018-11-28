@@ -12,7 +12,7 @@
     <children>
         <ImageView fitHeight="31.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../images/icons8_GPS_Antenna_64px_1.png" />
+                <Image url="@../images/icons8_Person_32px.png" />
             </image>
             <HBox.margin>
                 <Insets left="10.0" />
@@ -27,9 +27,9 @@
                 <Insets />
             </HBox.margin>
         </Label>
-      <Label fx:id="itemHistoriaCantidad" text="14" textFill="WHITE">
+      <Label fx:id="itemHistoriaCantidad" maxWidth="20.0" minWidth="20.0" prefWidth="20.0" text="10" textFill="WHITE">
          <HBox.margin>
-            <Insets left="20.0" right="20.0" />
+            <Insets right="20.0" />
          </HBox.margin>
       </Label>
         <Label fx:id="itemHistorialTlf" maxWidth="70.0" minWidth="70.0" prefWidth="70.0" text="555201245" textFill="#b7c3d7">

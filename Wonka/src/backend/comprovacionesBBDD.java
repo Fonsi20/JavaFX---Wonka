@@ -66,4 +66,16 @@ public class comprovacionesBBDD {
         return temp;
     }
 
+    public static Reserva comprobarReserva(int cod, int cod2) {
+        Session sesion;
+        Reserva temp = null;
+        int Codigo = Integer.parseInt(cod+""+cod2);
+        try {
+            sesion = NewHibernateUtil.getSession();
+            temp = (Reserva) sesion.get(Reserva.class, Codigo);
+        } catch (HibernateException e) {
+            System.out.println(e.getMessage());
+        }
+        return temp;
+    }
 }

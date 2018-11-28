@@ -833,8 +833,6 @@ public class Controller implements Initializable {
     @FXML
     //Carga de la lista de clientes con pedidos de la pantalla Historial
     public void ListHistorial() throws SQLException {
-//ERROR IMPORTANDO LOS DATOS PARA MOSTRARLOS EN LA LISTA
-        System.out.println("PROBLEMA IMPORTANO LISTA - Metodo ListHistorial()");
         Statement S = Wonka.conect.createStatement();
         ResultSet ResVentas = S.executeQuery("SELECT COUNT(*) AS ContV FROM Ventas;");
         ResVentas.next();
@@ -844,98 +842,94 @@ public class Controller implements Initializable {
         ResReservas.next();
         int RCont = ResReservas.getInt("ContR");
         ResReservas.close();
-        ResReservas = null;
         limpiarListas(pnItemsHistorial);
         ResVentas = S.executeQuery("SELECT"
-                + " C.Nombre as N, C.Apellidos as A, C.Telefono as T, CAR.NombreCarta as NC, CAR.Precio as P FROM Ventas as V"
+                + " C.Nombre as N, C.Apellidos as A, C.Telefono as T, CAR.NombreCarta as NC, CAR.Precio as P, V.Cantidad AS Cant FROM Ventas as V"
                 + " LEFT JOIN CLIENTES as C ON C.IDCliente = V.IDCliente"
-                + " 	INNER JOIN cartas as CAR on CAR.IDCarta = V.IDCarta ORDER BY N ASC;");
+                + " 	INNER JOIN cartas as CAR on CAR.IDCarta = V.IDCarta ORDER BY N ASC;");       
         nodesHistorial = new Node[VCont + RCont];
-        for (int i = 0; i < nodesHistorial.length; i++) {
-            while (VCont != 0) {
-                try {
-                    ResVentas.next();
-                    final int j = i;
-                    nodesHistorial[i] = FXMLLoader.load(getClass().getResource("ItemHistorial.fxml"));
+        int i = 0;
+        for (i = 0; i < VCont; i++) {
+            System.out.println("Venta "+i);
+            try {
+                ResVentas.next();
+                nodesHistorial[i] = FXMLLoader.load(getClass().getResource("ItemHistorial.fxml"));
 
-                    //Establecimiento de labels
-                    Label itemHistoriaNomCliente = (Label) nodesHistorial[i].lookup("#itemHistorialNombre");
-                    itemHistoriaNomCliente.setText(ResVentas.getString("N") + " " + ResVentas.getString("A"));
+                //Establecimiento de labels
+                Label itemHistoriaNomCliente = (Label) nodesHistorial[i].lookup("#itemHistorialNombre");
+                itemHistoriaNomCliente.setText(ResVentas.getString("N") + " " + ResVentas.getString("A"));
 
-                    Label itemHistoriaNomCarta = (Label) nodesHistorial[i].lookup("#itemHistorialNombreCarta");
-                    itemHistoriaNomCarta.setText(ResVentas.getString("NC"));
+                Label itemHistoriaNomCarta = (Label) nodesHistorial[i].lookup("#itemHistorialNombreCarta");
+                itemHistoriaNomCarta.setText(ResVentas.getString("NC"));
+                
+                Label itemHistoriaCantidad = (Label) nodesHistorial[i].lookup("#itemHistoriaCantidad");
+                itemHistoriaCantidad.setText(ResVentas.getString("Cant"));
 
-                    Label itemHistoriaTlf = (Label) nodesHistorial[i].lookup("#itemHistorialTlf");
-                    itemHistoriaTlf.setText(ResVentas.getString("T"));
+                Label itemHistoriaTlf = (Label) nodesHistorial[i].lookup("#itemHistorialTlf");
+                itemHistoriaTlf.setText(ResVentas.getString("T"));
 
-                    Label itemHistoriaPrecio = (Label) nodesHistorial[i].lookup("#itemHistorialPrecio");
-                    itemHistoriaPrecio.setText(ResVentas.getString("P"));
+                Label itemHistoriaPrecio = (Label) nodesHistorial[i].lookup("#itemHistorialPrecio");
+                itemHistoriaPrecio.setText(ResVentas.getString("P"));
 
-                    Button itemHistoriaEstado = (Button) nodesHistorial[i].lookup("#itemHistorialEstado");
-                    itemHistoriaEstado.setText("Vendida");
+                Button itemHistoriaEstado = (Button) nodesHistorial[i].lookup("#itemHistorialEstado");
+                itemHistoriaEstado.setText("Vendida");
+                pnItemsHistorial.getChildren().add(nodesHistorial[i]);
 
-                    nodesHistorial[i].setOnMouseEntered(event -> {
-                        nodesHistorial[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
-                    });
-                    nodesHistorial[i].setOnMouseExited(event -> {
-                        nodesHistorial[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
-                    });
-                    pnItemsHistorial.getChildren().add(nodesHistorial[i]);
-                    VCont--;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                final int j = i;
+                nodesHistorial[i].setOnMouseEntered(event -> {
+                    nodesHistorial[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+                });
+                nodesHistorial[i].setOnMouseExited(event -> {
+                    nodesHistorial[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            ResVentas.close();
-            if (ResReservas == null) {
-                ResReservas = ResLoad();
-                System.out.println("Era null");
-            }
-            while (RCont != 0) {
-                try {
-                    ResReservas.next();
-                    final int j = i;
-                    nodesHistorial[i] = FXMLLoader.load(getClass().getResource("ItemHistorial.fxml"));
-
-                    //Establecimiento de labels
-                    Label itemHistoriaNomCliente = (Label) nodesHistorial[i].lookup("#itemHistorialNombre");
-                    itemHistoriaNomCliente.setText(ResReservas.getString("N") + " " + ResReservas.getString("A"));
-
-                    Label itemHistoriaNomCarta = (Label) nodesHistorial[i].lookup("#itemHistorialNombreCarta");
-                    itemHistoriaNomCarta.setText(ResReservas.getString("NC"));
-
-                    Label itemHistoriaTlf = (Label) nodesHistorial[i].lookup("#itemHistorialTlf");
-                    itemHistoriaTlf.setText(ResReservas.getString("T"));
-
-                    Label itemHistoriaPrecio = (Label) nodesHistorial[i].lookup("#itemHistorialPrecio");
-                    itemHistoriaPrecio.setText(ResReservas.getString("P"));
-
-                    Button itemHistoriaEstado = (Button) nodesHistorial[i].lookup("#itemHistorialEstado");
-                    itemHistoriaEstado.setText("Reservada");
-
-                    nodesHistorial[i].setOnMouseEntered(event -> {
-                        nodesHistorial[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
-                    });
-                    nodesHistorial[i].setOnMouseExited(event -> {
-                        nodesHistorial[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
-                    });
-                    pnItemsHistorial.getChildren().add(nodesHistorial[i]);
-                    RCont--;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            ResReservas.close();
         }
-    }
-
-    public static ResultSet ResLoad() throws SQLException {
-        Statement S = Wonka.conect.createStatement();
-        ResultSet RESLOAD = S.executeQuery("SELECT"
-                + " C.Nombre as N, C.Apellidos as A, C.Telefono as T, CAR.NombreCarta as NC, CAR.Precio as P FROM Reservas as R"
+        ResVentas.close();
+        ResReservas = S.executeQuery("SELECT"
+                + " C.Nombre as N, C.Apellidos as A, C.Telefono as T, CAR.NombreCarta as NC, CAR.Precio as P ,R.Cantidad AS Cant FROM Reservas as R"
                 + " LEFT JOIN CLIENTES as C ON C.IDCliente = R.IDCliente"
                 + " 	INNER JOIN cartas as CAR on CAR.IDCarta = R.IDCarta ORDER BY N ASC;");
-        return RESLOAD;
+        for (i = i; i < nodesHistorial.length; i++) {
+            try {
+                ResReservas.next();
+
+                nodesHistorial[i] = FXMLLoader.load(getClass().getResource("ItemHistorial.fxml"));
+
+                //Establecimiento de labels
+                Label itemHistoriaNomCliente = (Label) nodesHistorial[i].lookup("#itemHistorialNombre");
+                itemHistoriaNomCliente.setText(ResReservas.getString("N") + " " + ResReservas.getString("A"));
+
+                Label itemHistoriaNomCarta = (Label) nodesHistorial[i].lookup("#itemHistorialNombreCarta");
+                itemHistoriaNomCarta.setText(ResReservas.getString("NC"));
+
+                Label itemHistoriaCantidad = (Label) nodesHistorial[i].lookup("#itemHistoriaCantidad");
+                itemHistoriaCantidad.setText(ResReservas.getString("Cant"));
+                
+                Label itemHistoriaTlf = (Label) nodesHistorial[i].lookup("#itemHistorialTlf");
+                itemHistoriaTlf.setText(ResReservas.getString("T"));
+
+                Label itemHistoriaPrecio = (Label) nodesHistorial[i].lookup("#itemHistorialPrecio");
+                itemHistoriaPrecio.setText(ResReservas.getString("P"));
+
+                Button itemHistoriaEstado = (Button) nodesHistorial[i].lookup("#itemHistorialEstado");
+                itemHistoriaEstado.setText("Reservada");
+
+                pnItemsHistorial.getChildren().add(nodesHistorial[i]);
+
+                final int j = i;
+                nodesHistorial[i].setOnMouseEntered(event -> {
+                    nodesHistorial[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+                });
+                nodesHistorial[i].setOnMouseExited(event -> {
+                    nodesHistorial[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        ResReservas.close();
     }
 
     public void limpiarListas(VBox items) {

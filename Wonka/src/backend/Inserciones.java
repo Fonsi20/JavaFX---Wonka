@@ -220,8 +220,9 @@ public class Inserciones {
             if (existe == true) {
                 System.out.println(cantidadObjeto);
                 aux = new Reserva(CarCompra, CliCompra, cantidadObjeto);
+                System.out.println("EXISTE: " + CarCompra + " : " + CliCompra + " : " + cantidadObjeto);
                 s.beginTransaction();
-                s.update(carAux);
+                s.saveOrUpdate(carAux);
                 s.getTransaction().commit();
                 guardarModificar(aux);
             }
@@ -229,8 +230,9 @@ public class Inserciones {
             if (existe == false) {
                 System.out.println(cantidadObjeto);
                 aux = new Reserva(CarCompra, CliCompra, cantidad);
+                System.out.println("NO EXISTE: " + CarCompra + " " + CliCompra + " " + cantidad);
                 s.beginTransaction();
-                s.update(carAux);
+                s.saveOrUpdate(aux);
                 s.getTransaction().commit();
                 guardarModificar(aux);
             }
@@ -261,7 +263,7 @@ public class Inserciones {
                     String year = parts[0];
                     carAux.setAno(year);
                     s.beginTransaction();
-                    s.update(carAux);
+                    s.saveOrUpdate(carAux);
                     s.getTransaction().commit();
                     eliminar(auxReservas);
                 }

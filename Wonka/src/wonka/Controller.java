@@ -1440,6 +1440,27 @@ public class Controller implements Initializable {
     //Guardamos al cliente introducido en la BBDD
     void accionGuardarCamposClientes(ActionEvent event) throws SQLException {
 
+        edadCliente.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        telefonoCliente.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        nombreCliente.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        apellidosCliente.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        emailCliente.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        direccionCliente.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        sexoCliente.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
         int correcto = 0;
         ArrayList<String> Cliente = new ArrayList<String>();
         Cliente.add(nombreCliente.getText());
@@ -1456,21 +1477,68 @@ public class Controller implements Initializable {
             Inserciones.insertarCliente(Cliente);
         }
         if (correcto == 1) {
-            edadCliente.setText("Introduce un número");
+            edadCliente.setText("");
+            edadCliente.setPromptText("Introduce un número");
             edadCliente.setStyle("  -fx-border-color:#f45454;"
                     + "    -fx-border-radius:0.15em;"
                     + "    -fx-background-color:#00000b;"
                     + "    -fx-border-size:0.15em;"
-                    + "    -fx-text-fill:#f45454;");
+                    + "    -fx-prompt-text-fill:#f45454;"
+                    + "    -fx-text-fill:#fff;");
         }
 
         if (correcto == 2) {
-            telefonoCliente.setText("Introduce un número de 9 digitos");
+            telefonoCliente.setText("");
+            telefonoCliente.setPromptText("Introduce un número de 9 digitos");
             telefonoCliente.setStyle("  -fx-border-color:#f45454;"
                     + "    -fx-border-radius:0.15em;"
                     + "    -fx-background-color:#00000b;"
                     + "    -fx-border-size:0.15em;"
-                    + "    -fx-text-fill:#f45454;");
+                    + "    -fx-prompt-text-fill:#f45454;"
+                    + "    -fx-text-fill:#fff;");
+        }
+
+        if (correcto == 3) {
+            nombreCliente.setText("");
+            nombreCliente.setStyle("  -fx-border-color:#f45454;"
+                    + "    -fx-border-radius:0.15em;"
+                    + "    -fx-background-color:#00000b;"
+                    + "    -fx-border-size:0.15em;"
+                    + "    -fx-prompt-text-fill:#f45454;"
+                    + "    -fx-text-fill:#fff;");
+
+            apellidosCliente.setText("");
+            apellidosCliente.setStyle("  -fx-border-color:#f45454;"
+                    + "    -fx-border-radius:0.15em;"
+                    + "    -fx-background-color:#00000b;"
+                    + "    -fx-border-size:0.15em;"
+                    + "    -fx-prompt-text-fill:#f45454;"
+                    + "    -fx-text-fill:#fff;");
+
+            emailCliente.setText("");
+            emailCliente.setStyle("  -fx-border-color:#f45454;"
+                    + "    -fx-border-radius:0.15em;"
+                    + "    -fx-background-color:#00000b;"
+                    + "    -fx-border-size:0.15em;"
+                    + "    -fx-prompt-text-fill:#f45454;"
+                    + "    -fx-text-fill:#fff;");
+
+            direccionCliente.setText("");
+            direccionCliente.setStyle("  -fx-border-color:#f45454;"
+                    + "    -fx-border-radius:0.15em;"
+                    + "    -fx-background-color:#00000b;"
+                    + "    -fx-border-size:0.15em;"
+                    + "    -fx-prompt-text-fill:#f45454;"
+                    + "    -fx-text-fill:#fff;");
+        }
+
+        if (correcto == 4) {
+            sexoCliente.setStyle("  -fx-border-color:#f45454;"
+                    + "    -fx-border-radius:0.15em;"
+                    + "    -fx-background-color:#00000b;"
+                    + "    -fx-border-size:0.15em;"
+                    + "    -fx-prompt-text-fill:#f45454;"
+                    + "    -fx-text-fill:#fff;");
         }
 
         //accionLimpiarCamposClientes(event);
@@ -1494,12 +1562,56 @@ public class Controller implements Initializable {
         btnBorrarCamposClientes.setDisable(true);
         btnGuardarCamposClientes.setDisable(false);
 
+        edadCliente.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        telefonoCliente.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        nombreCliente.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        apellidosCliente.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        emailCliente.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        direccionCliente.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        sexoCliente.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
     }
 
     @FXML
     //Modificamos los campos de un cliente seleccionado en la lista y lo subimos de nuevo a la BBDD
     void accionModificarCamposClientes(ActionEvent event) throws SQLException {
+
+        edadCliente.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        telefonoCliente.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        nombreCliente.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        apellidosCliente.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        emailCliente.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        direccionCliente.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        sexoCliente.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
         ArrayList<String> Cliente = new ArrayList<String>();
+        int correcto = 0;
         Cliente.add(nombreCliente.getText());
         Cliente.add(apellidosCliente.getText());
         Cliente.add(edadCliente.getText());
@@ -1508,8 +1620,77 @@ public class Controller implements Initializable {
         Cliente.add(telefonoCliente.getText());
         Cliente.add(emailCliente.getText());
 
-        Inserciones.actualizarCliente(Cliente);
-        accionLimpiarCamposClientes(event);
+        correcto = comprobacionesDatos.comprobarCliente(Cliente);
+
+        if (correcto == 0) {
+            Inserciones.actualizarCliente(Cliente);
+        }
+        if (correcto == 1) {
+            edadCliente.setText("");
+            edadCliente.setPromptText("Introduce un número");
+            edadCliente.setStyle("  -fx-border-color:#f45454;"
+                    + "    -fx-border-radius:0.15em;"
+                    + "    -fx-background-color:#00000b;"
+                    + "    -fx-border-size:0.15em;"
+                    + "    -fx-prompt-text-fill:#f45454;"
+                    + "    -fx-text-fill:#fff;");
+        }
+
+        if (correcto == 2) {
+            telefonoCliente.setText("");
+            telefonoCliente.setPromptText("Introduce un número de 9 digitos");
+            telefonoCliente.setStyle("  -fx-border-color:#f45454;"
+                    + "    -fx-border-radius:0.15em;"
+                    + "    -fx-background-color:#00000b;"
+                    + "    -fx-border-size:0.15em;"
+                    + "    -fx-prompt-text-fill:#f45454;"
+                    + "    -fx-text-fill:#fff;");
+        }
+
+        if (correcto == 3) {
+            nombreCliente.setText("");
+            nombreCliente.setStyle("  -fx-border-color:#f45454;"
+                    + "    -fx-border-radius:0.15em;"
+                    + "    -fx-background-color:#00000b;"
+                    + "    -fx-border-size:0.15em;"
+                    + "    -fx-prompt-text-fill:#f45454;"
+                    + "    -fx-text-fill:#fff;");
+
+            apellidosCliente.setText("");
+            apellidosCliente.setStyle("  -fx-border-color:#f45454;"
+                    + "    -fx-border-radius:0.15em;"
+                    + "    -fx-background-color:#00000b;"
+                    + "    -fx-border-size:0.15em;"
+                    + "    -fx-prompt-text-fill:#f45454;"
+                    + "    -fx-text-fill:#fff;");
+
+            emailCliente.setText("");
+            emailCliente.setStyle("  -fx-border-color:#f45454;"
+                    + "    -fx-border-radius:0.15em;"
+                    + "    -fx-background-color:#00000b;"
+                    + "    -fx-border-size:0.15em;"
+                    + "    -fx-prompt-text-fill:#f45454;"
+                    + "    -fx-text-fill:#fff;");
+
+            direccionCliente.setText("");
+            direccionCliente.setStyle("  -fx-border-color:#f45454;"
+                    + "    -fx-border-radius:0.15em;"
+                    + "    -fx-background-color:#00000b;"
+                    + "    -fx-border-size:0.15em;"
+                    + "    -fx-prompt-text-fill:#f45454;"
+                    + "    -fx-text-fill:#fff;");
+        }
+
+        if (correcto == 4) {
+            sexoCliente.setStyle("  -fx-border-color:#f45454;"
+                    + "    -fx-border-radius:0.15em;"
+                    + "    -fx-background-color:#00000b;"
+                    + "    -fx-border-size:0.15em;"
+                    + "    -fx-prompt-text-fill:#f45454;"
+                    + "    -fx-text-fill:#fff;");
+        }
+
+        //accionLimpiarCamposClientes(event);
         ListCardsClientes();
         ListClientesLess();
         ListCardsOrders();
@@ -1681,8 +1862,60 @@ public class Controller implements Initializable {
     //Modificamos los campos de una carta seleccionada en la lista y la subimos de nuevo a la BBDD
     void accionModificarCarta(ActionEvent event) throws SQLException {
 
-        ArrayList<String> Carta = new ArrayList<String>();
+        //Genericas
+        stockCard.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
 
+        sumCard.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        nameCard.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        colecCard.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        yearCard.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        priceCard.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        //Magic
+        magiCoste.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        magiID.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        magiTipo.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        //FOW
+        fogCoste.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        fogID.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        fogRaza.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        fogTipo.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        //Yu gi oh
+        yugiAtributo.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+        yugiID.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+        yugiNivel.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+        yugiSubTIpo.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        ArrayList<String> Carta = new ArrayList<String>();
+        int correcto = 0;
         Carta.add(stockCard.getText());
         Carta.add((String) nameGame.getSelectionModel().getSelectedItem());
         Carta.add(nameCard.getText());
@@ -1692,7 +1925,12 @@ public class Controller implements Initializable {
         Carta.add(priceCard.getText());
 
         if (((String) nameGame.getSelectionModel().getSelectedItem()) == null) {
-            sumCard.setText("SELECIONA UN JUEGO!!");
+            nameGame.setStyle("  -fx-border-color:#f45454;"
+                    + "    -fx-border-radius:0.15em;"
+                    + "    -fx-background-color:#00000b;"
+                    + "    -fx-border-size:0.15em;"
+                    + "    -fx-prompt-text-fill:#f45454;"
+                    + "    -fx-text-fill:#fff;");
         } else {
             switch ((String) nameGame.getSelectionModel().getSelectedItem()) {
 
@@ -1702,28 +1940,237 @@ public class Controller implements Initializable {
                     Carta.add(magiCoste.getText());
                     Carta.add(magiID.getText());
                     Carta.add(magiTipo.getText());
-                    Inserciones.actualizarCartaMagic(Carta);
-                    accionLimpiarCarta(event);
                     break;
                 case "Yu-Gi-Oh":
                     Carta.add(yugiID.getText());
-                    Carta.add((String) yugiTipo.getSelectionModel().getSelectedItem());
                     Carta.add(yugiAtributo.getText());
-                    Carta.add(yugiSubTIpo.getText());
                     Carta.add(yugiNivel.getText());
-                    Inserciones.actualizarCartaYuGi(Carta);
-                    accionLimpiarCarta(event);
+                    Carta.add(yugiSubTIpo.getText());
+                    Carta.add((String) yugiTipo.getSelectionModel().getSelectedItem());
                     break;
                 case "Force of Will":
                     Carta.add((String) fogColor.getSelectionModel().getSelectedItem());
-                    Carta.add(fogID.getText());
                     Carta.add(fogCoste.getText());
-                    Carta.add(fogTipo.getText());
+                    Carta.add(fogID.getText());
                     Carta.add(fogRaza.getText());
-                    Inserciones.actualizarCartaFOW(Carta);
-                    accionLimpiarCarta(event);
+                    Carta.add(fogTipo.getText());
                     break;
             }
+
+            correcto = comprobacionesDatos.comprobarCarta(Carta);
+
+            if (correcto == 1) {
+                stockCard.setText("");
+                stockCard.setStyle("  -fx-border-color:#f45454;"
+                        + "    -fx-border-radius:0.15em;"
+                        + "    -fx-background-color:#00000b;"
+                        + "    -fx-border-size:0.15em;"
+                        + "    -fx-prompt-text-fill:#f45454;"
+                        + "    -fx-text-fill:#fff;");
+            }
+
+            if (correcto == 3) {
+                sumCard.setText("");
+                sumCard.setStyle("  -fx-border-color:#f45454;"
+                        + "    -fx-border-radius:0.15em;"
+                        + "    -fx-background-color:#00000b;"
+                        + "    -fx-border-size:0.15em;"
+                        + "    -fx-prompt-text-fill:#f45454;"
+                        + "    -fx-text-fill:#fff;");
+
+                nameCard.setText("");
+                nameCard.setStyle("  -fx-border-color:#f45454;"
+                        + "    -fx-border-radius:0.15em;"
+                        + "    -fx-background-color:#00000b;"
+                        + "    -fx-border-size:0.15em;"
+                        + "    -fx-prompt-text-fill:#f45454;"
+                        + "    -fx-text-fill:#fff;");
+
+                colecCard.setText("");
+                colecCard.setStyle("  -fx-border-color:#f45454;"
+                        + "    -fx-border-radius:0.15em;"
+                        + "    -fx-background-color:#00000b;"
+                        + "    -fx-border-size:0.15em;"
+                        + "    -fx-prompt-text-fill:#f45454;"
+                        + "    -fx-text-fill:#fff;");
+
+            }
+
+            if (correcto == 2) {
+                yearCard.setText("");
+                yearCard.setPromptText("Introduce un número de 4 digitos");
+                yearCard.setStyle("  -fx-border-color:#f45454;"
+                        + "    -fx-border-radius:0.15em;"
+                        + "    -fx-background-color:#00000b;"
+                        + "    -fx-border-size:0.15em;"
+                        + "    -fx-prompt-text-fill:#f45454;"
+                        + "    -fx-text-fill:#fff;");
+            }
+
+            if (correcto == 4) {
+                priceCard.setText("");
+                priceCard.setPromptText("Introduce un número");
+                priceCard.setStyle("  -fx-border-color:#f45454;"
+                        + "    -fx-border-radius:0.15em;"
+                        + "    -fx-background-color:#00000b;"
+                        + "    -fx-border-size:0.15em;"
+                        + "    -fx-prompt-text-fill:#f45454;"
+                        + "    -fx-text-fill:#fff;");
+            }
+
+            switch ((String) nameGame.getSelectionModel().getSelectedItem()) {
+                case "Magic":
+                    if (correcto == 5) {
+                        magiCoste.setText("");
+                        magiCoste.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+
+                        magiID.setText("");
+                        magiID.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+
+                        magiTipo.setText("");
+                        magiTipo.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+                    }
+
+                    if (correcto == 9) {
+                        magiColor.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+                    }
+
+                    if (correcto == 0) {
+                        Inserciones.actualizarCartaMagic(Carta);
+                        accionLimpiarCarta(event);
+                        break;
+                    } else {
+                        break;
+                    }
+
+                case "Yu-Gi-Oh":
+                    if (correcto == 6) {
+                        yugiAtributo.setText("");
+                        yugiAtributo.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+
+                        yugiID.setText("");
+                        yugiID.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+
+                        yugiSubTIpo.setText("");
+                        yugiSubTIpo.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+                    }
+
+                    if (correcto == 8) {
+                        yugiNivel.setText("");
+                        yugiNivel.setPromptText("Un Número");
+                        yugiNivel.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+                    }
+
+                    if (correcto == 10) {
+                        yugiTipo.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+                    }
+
+                    if (correcto == 0) {
+                        Inserciones.actualizarCartaYuGi(Carta);
+                        accionLimpiarCarta(event);
+                        break;
+                    } else {
+                        break;
+                    }
+
+                case "Force of Will":
+                    if (correcto == 7) {
+                        fogCoste.setText("");
+                        fogCoste.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+
+                        fogID.setText("");
+                        fogID.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+
+                        fogRaza.setText("");
+                        fogRaza.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+
+                        fogTipo.setText("");
+                        fogTipo.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+                    }
+
+                    if (correcto == 11) {
+                        fogColor.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+                    }
+
+                    if (correcto == 0) {
+                        Inserciones.actualizarCartaFOW(Carta);
+                        accionLimpiarCarta(event);
+                        break;
+                    } else {
+                        break;
+                    }
+            }
+
             ListCards();
             ListCardsOrders();
             ListCardsLess();
@@ -1754,26 +2201,78 @@ public class Controller implements Initializable {
         btnModificarCarta.setDisable(true);
         btnBorrarCarta.setDisable(true);
 
+        //Genericas
         nameCard.setText("");
         colecCard.setText("");
         yearCard.setText("");
         stockCard.setText("");
         priceCard.setText("");
         sumCard.setText("");
+        stockCard.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
 
+        sumCard.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        nameCard.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        colecCard.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        yearCard.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        priceCard.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        nameGame.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        //Magic
+        magiCoste.setText("");
+        magiID.setText("");
+        magiTipo.setText("");
+        magiCoste.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        magiID.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        magiTipo.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        //FOW
+        fogCoste.setText("");
+        fogID.setText("");
+        fogRaza.setText("");
+        fogTipo.setText("");
+        fogCoste.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        fogID.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        fogRaza.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        fogTipo.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        //Yu gi oh
         yugiID.setText("");
         yugiAtributo.setText("");
         yugiNivel.setText("");
         yugiSubTIpo.setText("");
 
-        magiCoste.setText("");
-        magiID.setText("");
-        magiTipo.setText("");
-
-        fogCoste.setText("");
-        fogID.setText("");
-        fogRaza.setText("");
-        fogTipo.setText("");
+        yugiAtributo.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+        yugiID.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+        yugiNivel.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+        yugiSubTIpo.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
 
     }
 
@@ -1781,8 +2280,61 @@ public class Controller implements Initializable {
     //Guardamos la carta introducida en la BBDD
     void accionGuardarCarta(ActionEvent event) throws SQLException {
 
+        //Genericas
+        stockCard.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        sumCard.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        nameCard.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        colecCard.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        yearCard.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        priceCard.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        //Magic
+        magiCoste.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        magiID.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        magiTipo.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        //FOW
+        fogCoste.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        fogID.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        fogRaza.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        fogTipo.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
+        //Yu gi oh
+        yugiAtributo.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+        yugiID.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+        yugiNivel.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+        yugiSubTIpo.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
+
         ArrayList<String> Carta = new ArrayList<String>();
 
+        int correcto = 0;
         Carta.add(stockCard.getText());
         Carta.add((String) nameGame.getSelectionModel().getSelectedItem());
         Carta.add(nameCard.getText());
@@ -1792,7 +2344,12 @@ public class Controller implements Initializable {
         Carta.add(priceCard.getText());
 
         if (((String) nameGame.getSelectionModel().getSelectedItem()) == null) {
-            sumCard.setText("SELECIONA UN JUEGO!!");
+            nameGame.setStyle("  -fx-border-color:#f45454;"
+                    + "    -fx-border-radius:0.15em;"
+                    + "    -fx-background-color:#00000b;"
+                    + "    -fx-border-size:0.15em;"
+                    + "    -fx-prompt-text-fill:#f45454;"
+                    + "    -fx-text-fill:#fff;");
         } else {
             switch ((String) nameGame.getSelectionModel().getSelectedItem()) {
 
@@ -1802,8 +2359,6 @@ public class Controller implements Initializable {
                     Carta.add(magiCoste.getText());
                     Carta.add(magiID.getText());
                     Carta.add(magiTipo.getText());
-                    Inserciones.insertarCartasMagic(Carta);
-                    accionLimpiarCarta(event);
                     break;
                 case "Yu-Gi-Oh":
                     Carta.add(yugiID.getText());
@@ -1811,8 +2366,6 @@ public class Controller implements Initializable {
                     Carta.add(yugiNivel.getText());
                     Carta.add(yugiSubTIpo.getText());
                     Carta.add((String) yugiTipo.getSelectionModel().getSelectedItem());
-                    Inserciones.insertarCartasYuGi(Carta);
-                    accionLimpiarCarta(event);
                     break;
                 case "Force of Will":
                     Carta.add((String) fogColor.getSelectionModel().getSelectedItem());
@@ -1820,9 +2373,221 @@ public class Controller implements Initializable {
                     Carta.add(fogID.getText());
                     Carta.add(fogRaza.getText());
                     Carta.add(fogTipo.getText());
-                    Inserciones.insertarCartasFOW(Carta);
-                    accionLimpiarCarta(event);
                     break;
+            }
+
+            correcto = comprobacionesDatos.comprobarCarta(Carta);
+
+            if (correcto == 1) {
+                stockCard.setText("");
+                stockCard.setStyle("  -fx-border-color:#f45454;"
+                        + "    -fx-border-radius:0.15em;"
+                        + "    -fx-background-color:#00000b;"
+                        + "    -fx-border-size:0.15em;"
+                        + "    -fx-prompt-text-fill:#f45454;"
+                        + "    -fx-text-fill:#fff;");
+            }
+
+            if (correcto == 3) {
+                sumCard.setText("");
+                sumCard.setStyle("  -fx-border-color:#f45454;"
+                        + "    -fx-border-radius:0.15em;"
+                        + "    -fx-background-color:#00000b;"
+                        + "    -fx-border-size:0.15em;"
+                        + "    -fx-prompt-text-fill:#f45454;"
+                        + "    -fx-text-fill:#fff;");
+
+                nameCard.setText("");
+                nameCard.setStyle("  -fx-border-color:#f45454;"
+                        + "    -fx-border-radius:0.15em;"
+                        + "    -fx-background-color:#00000b;"
+                        + "    -fx-border-size:0.15em;"
+                        + "    -fx-prompt-text-fill:#f45454;"
+                        + "    -fx-text-fill:#fff;");
+
+                colecCard.setText("");
+                colecCard.setStyle("  -fx-border-color:#f45454;"
+                        + "    -fx-border-radius:0.15em;"
+                        + "    -fx-background-color:#00000b;"
+                        + "    -fx-border-size:0.15em;"
+                        + "    -fx-prompt-text-fill:#f45454;"
+                        + "    -fx-text-fill:#fff;");
+
+            }
+
+            if (correcto == 2) {
+                yearCard.setText("");
+                yearCard.setPromptText("Introduce un número de 4 digitos");
+                yearCard.setStyle("  -fx-border-color:#f45454;"
+                        + "    -fx-border-radius:0.15em;"
+                        + "    -fx-background-color:#00000b;"
+                        + "    -fx-border-size:0.15em;"
+                        + "    -fx-prompt-text-fill:#f45454;"
+                        + "    -fx-text-fill:#fff;");
+            }
+
+            if (correcto == 4) {
+                priceCard.setText("");
+                priceCard.setPromptText("Introduce un número");
+                priceCard.setStyle("  -fx-border-color:#f45454;"
+                        + "    -fx-border-radius:0.15em;"
+                        + "    -fx-background-color:#00000b;"
+                        + "    -fx-border-size:0.15em;"
+                        + "    -fx-prompt-text-fill:#f45454;"
+                        + "    -fx-text-fill:#fff;");
+            }
+
+            switch ((String) nameGame.getSelectionModel().getSelectedItem()) {
+                case "Magic":
+                    if (correcto == 5) {
+                        magiCoste.setText("");
+                        magiCoste.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+
+                        magiID.setText("");
+                        magiID.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+
+                        magiTipo.setText("");
+                        magiTipo.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+                    }
+
+                    if (correcto == 9) {
+                        magiColor.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+                    }
+
+                    if (correcto == 0) {
+                        Inserciones.insertarCartasMagic(Carta);
+                        accionLimpiarCarta(event);
+                        break;
+                    } else {
+                        break;
+                    }
+
+                case "Yu-Gi-Oh":
+                    if (correcto == 6) {
+                        yugiAtributo.setText("");
+                        yugiAtributo.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+
+                        yugiID.setText("");
+                        yugiID.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+
+                        yugiSubTIpo.setText("");
+                        yugiSubTIpo.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+                    }
+
+                    if (correcto == 8) {
+                        yugiNivel.setText("");
+                        yugiNivel.setPromptText("Un Número");
+                        yugiNivel.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+                    }
+
+                    if (correcto == 10) {
+                        yugiTipo.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+                    }
+
+                    if (correcto == 0) {
+                        Inserciones.insertarCartasYuGi(Carta);
+                        accionLimpiarCarta(event);
+                        break;
+                    } else {
+                        break;
+                    }
+
+                case "Force of Will":
+                    if (correcto == 7) {
+                        fogCoste.setText("");
+                        fogCoste.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+
+                        fogID.setText("");
+                        fogID.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+
+                        fogRaza.setText("");
+                        fogRaza.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+
+                        fogTipo.setText("");
+                        fogTipo.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+                    }
+
+                    if (correcto == 11) {
+                        fogColor.setStyle("  -fx-border-color:#f45454;"
+                                + "    -fx-border-radius:0.15em;"
+                                + "    -fx-background-color:#00000b;"
+                                + "    -fx-border-size:0.15em;"
+                                + "    -fx-prompt-text-fill:#f45454;"
+                                + "    -fx-text-fill:#fff;");
+                    }
+
+                    if (correcto == 0) {
+                        Inserciones.insertarCartasFOW(Carta);
+                        accionLimpiarCarta(event);
+                        break;
+                    } else {
+                        break;
+                    }
             }
             ListCards();
             ListCardsOrders();
@@ -1832,17 +2597,20 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void CancelarReservaHistorial(ActionEvent event) {
+    void CancelarReservaHistorial(ActionEvent event
+    ) {
 
     }
 
     @FXML
-    void accionBorrarHistorial(ActionEvent event) {
+    void accionBorrarHistorial(ActionEvent event
+    ) {
         busClienteHistorial.setText("");
     }
 
     @FXML
-    void accionBuscarHistorial(ActionEvent event) {
+    void accionBuscarHistorial(ActionEvent event
+    ) {
 
     }
 
@@ -1850,6 +2618,8 @@ public class Controller implements Initializable {
     void accionComprarCarta(ActionEvent event) throws SQLException {
 
         int cantidadV = 0, cantidadR = 0, cantidadStock = 0;
+        textAreaCantidadCompra.setStyle(" -fx-background-color:#00000b;"
+                + "    -fx-text-fill:#fff;");
 
         Session s;
         s = NewHibernateUtil.getSession();
@@ -1899,7 +2669,13 @@ public class Controller implements Initializable {
                 }
             }
         } catch (NumberFormatException e) {
-            textAreaCantidadCompra.setText("Introduce un número");
+            textAreaCantidadCompra.setStyle("-fx - border - color:#f45454;"
+                    + "    -fx-border-radius:0.15em;"
+                    + "    -fx-background-color:#00000b;"
+                    + "    -fx-border-size:0.15em;"
+                    + "    -fx-prompt-text-fill:#f45454;"
+                    + "    -fx-text-fill:#fff;");
+
         }
         Inserciones.automatizacionStock();
         ListHistorial();

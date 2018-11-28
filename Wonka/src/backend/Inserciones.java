@@ -24,8 +24,10 @@ public class Inserciones {
         System.out.println("en MAGIC " + Carta);
         int stock = Integer.parseInt(Carta.get(0));
         float price = Float.parseFloat(Carta.get(6));
+        String[] parts = (Carta.get(5)).split("-");
+        String year = parts[0];
         CartaMAGIC aux;
-        aux = new CartaMAGIC(Carta.get(9), Carta.get(7), Carta.get(8), Carta.get(10), stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), Carta.get(5), price);
+        aux = new CartaMAGIC(Carta.get(9), Carta.get(7), Carta.get(8), Carta.get(10), stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), year, price);
         guardarModificar(aux);
     }
 
@@ -34,8 +36,10 @@ public class Inserciones {
         int stock = Integer.parseInt(Carta.get(0));
         float price = Float.parseFloat(Carta.get(6));
         int nivel = Integer.parseInt(Carta.get(9));
+        String[] parts = (Carta.get(5)).split("-");
+        String year = parts[0];
         CartaYUGI aux;
-        aux = new CartaYUGI(Carta.get(7), Carta.get(11), Carta.get(8), Carta.get(10), nivel, stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), Carta.get(5), price);
+        aux = new CartaYUGI(Carta.get(7), Carta.get(11), Carta.get(8), Carta.get(10), nivel, stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), year, price);
         guardarModificar(aux);
     }
 
@@ -43,8 +47,10 @@ public class Inserciones {
         System.out.println("en FOW " + Carta);
         int stock = Integer.parseInt(Carta.get(0));
         float price = Float.parseFloat(Carta.get(6));
+        String[] parts = (Carta.get(5)).split("-");
+        String year = parts[0];
         CartaFOW aux;
-        aux = new CartaFOW(Carta.get(7), Carta.get(9), Carta.get(8), Carta.get(11), Carta.get(10), stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), Carta.get(5), price);
+        aux = new CartaFOW(Carta.get(7), Carta.get(9), Carta.get(8), Carta.get(11), Carta.get(10), stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), year, price);
         guardarModificar(aux);
     }
 

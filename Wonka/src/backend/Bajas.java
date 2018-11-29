@@ -63,5 +63,39 @@ public class Bajas {
         }
         Res.close();
     }
+public static void eliminarReserva(String NCliente, String NCarta) throws SQLException {
+        int IDCliente = 0;
+        int IDCarta = 0;
+        Cliente OCliente;
+        Carta OCarta;
+        
+        Statement S = Wonka.conect.createStatement();
+        ResultSet Res = S.executeQuery("SELECT IDCliente AS ID,Nombre AS N,Apellidos AS A FROM Clientes;");
+        while (Res.isLast() != true) {
+            Res.next();
+            if(NCliente.equals(Res.getString("N")+" "+Res.getString("A"))){
+                IDCliente = Res.getInt("ID");
+                Res.close();
+                break;
+            }
+        }
+        Res = S.executeQuery("SELECT IDCarta AS ID FROM CARTAS WHERE NombreCarta='" + NCarta + "';");
+        Res.next();
+        IDCarta = Res.getInt("ID");
+        Res.close();
+        
+        OCliente = comprovacionesBBDD.comprobarCliente(IDCliente);
+        OCarta = comprovacionesBBDD.comprobarCarta(IDCarta);
+        
+        Reserva temp = comprovacionesBBDD.comprobarReserva(OCarta, OCliente);
+        
+        if(temp != null){
+            Inserciones.eliminar(temp);
+        } else {
+            System.out.println("NO EXISTE ESA RESERVA");
+        }
+        
+    }
 
 }
+

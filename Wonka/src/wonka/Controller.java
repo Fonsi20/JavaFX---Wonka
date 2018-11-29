@@ -2615,6 +2615,7 @@ public class Controller implements Initializable {
                 String NCarta = ((Label) nodesHistorial[i].lookup("#itemHistorialNombreCarta")).getText();
                 try {
                     Bajas.eliminarReserva(NCliente, NCarta);
+                    ListHistorial();
                 } catch (SQLException x) {
                     System.out.println(x.getMessage());
                 }

@@ -52,6 +52,20 @@ public class comprovacionesBBDD {
         }
         return fow;
     }
+    
+    public static Carta comprobarCarta(int cod) {
+
+        Session sesion;
+        Carta Card = null;
+        try {
+            sesion = NewHibernateUtil.getSession();
+            Card = (Carta) sesion.get(Carta.class, cod);
+            sesion.close();
+        } catch (HibernateException e) {
+            System.out.println(e.getMessage());
+        }
+        return Card;
+    }
 
     public static Cliente comprobarCliente(int cod) {
         Session sesion;
@@ -66,13 +80,15 @@ public class comprovacionesBBDD {
         return temp;
     }
 
-    public static Reserva comprobarReserva(int cod, int cod2) {
+    public static Reserva comprobarReserva(Carta cod, Cliente cod2) {
         Session sesion;
-        Reserva temp = null;
-        int Codigo = Integer.parseInt(cod+""+cod2);
+        Reserva temp = new Reserva();
+        //Le damos los cods al temporal para que tenga las referencias
+        temp.setIDCarta(cod);
+        temp.setIDCliente(cod2);
         try {
             sesion = NewHibernateUtil.getSession();
-            temp = (Reserva) sesion.get(Reserva.class, Codigo);
+            temp = (Reserva) sesion.get(Reserva.class, temp);
         } catch (HibernateException e) {
             System.out.println(e.getMessage());
         }

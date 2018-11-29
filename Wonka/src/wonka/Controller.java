@@ -846,11 +846,11 @@ public class Controller implements Initializable {
         ResVentas = S.executeQuery("SELECT"
                 + " C.Nombre as N, C.Apellidos as A, C.Telefono as T, CAR.NombreCarta as NC, CAR.Precio as P, V.Cantidad AS Cant FROM Ventas as V"
                 + " LEFT JOIN CLIENTES as C ON C.IDCliente = V.IDCliente"
-                + " 	INNER JOIN cartas as CAR on CAR.IDCarta = V.IDCarta ORDER BY N ASC;");       
+                + " 	INNER JOIN cartas as CAR on CAR.IDCarta = V.IDCarta ORDER BY N ASC;");
         nodesHistorial = new Node[VCont + RCont];
         int i = 0;
         for (i = 0; i < VCont; i++) {
-            System.out.println("Venta "+i);
+            System.out.println("Venta " + i);
             try {
                 ResVentas.next();
                 nodesHistorial[i] = FXMLLoader.load(getClass().getResource("ItemHistorial.fxml"));
@@ -861,7 +861,7 @@ public class Controller implements Initializable {
 
                 Label itemHistoriaNomCarta = (Label) nodesHistorial[i].lookup("#itemHistorialNombreCarta");
                 itemHistoriaNomCarta.setText(ResVentas.getString("NC"));
-                
+
                 Label itemHistoriaCantidad = (Label) nodesHistorial[i].lookup("#itemHistoriaCantidad");
                 itemHistoriaCantidad.setText(ResVentas.getString("Cant"));
 
@@ -906,7 +906,7 @@ public class Controller implements Initializable {
 
                 Label itemHistoriaCantidad = (Label) nodesHistorial[i].lookup("#itemHistoriaCantidad");
                 itemHistoriaCantidad.setText(ResReservas.getString("Cant"));
-                
+
                 Label itemHistoriaTlf = (Label) nodesHistorial[i].lookup("#itemHistorialTlf");
                 itemHistoriaTlf.setText(ResReservas.getString("T"));
 
@@ -924,6 +924,23 @@ public class Controller implements Initializable {
                 });
                 nodesHistorial[i].setOnMouseExited(event -> {
                     nodesHistorial[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                });
+                nodesHistorial[i].setOnMouseClicked(event -> {
+                    nodesHistorial[j].setStyle("-fx-background-color : #17414C; -fx-background-radius:5");
+                    nodesHistorial[j].setOnMouseExited(null);
+                    nodesHistorial[j].setOnMouseEntered(null);
+                    for (int x = 0; x < nodesHistorial.length; x++) {
+                        if (x != j) {
+                            nodesHistorial[x].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                            final int x2 = x;
+                            nodesHistorial[x].setOnMouseExited(event2 -> {
+                                nodesHistorial[x2].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                            });
+                            nodesHistorial[x].setOnMouseEntered(event2 -> {
+                                nodesHistorial[x2].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+                            });
+                        }
+                    }
                 });
             } catch (IOException e) {
                 e.printStackTrace();
@@ -2591,9 +2608,19 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void CancelarReservaHistorial(ActionEvent event
-    ) {
+    void CancelarReservaHistorial(ActionEvent event) {
+        for (int i = 0; i < nodesHistorial.length; i++) {
+            if (nodesHistorial[i].getStyle().equals("-fx-background-color : #17414C; -fx-background-radius:5")) {
+                String NCliente = ((Label) nodesHistorial[i].lookup("#itemHistorialNombre")).getText();
+                String NCarta = ((Label) nodesHistorial[i].lookup("#itemHistorialNombreCarta")).getText();
+                try {
+                    Bajas.eliminarReserva(NCliente, NCarta);
+                } catch (SQLException x) {
+                    System.out.println(x.getMessage());
+                }
 
+            }
+        }
     }
 
     @FXML

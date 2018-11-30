@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -47,30 +50,48 @@ public class FXMLLoginController implements Initializable {
     @FXML
     private void handleButtonAction(ActionEvent event) throws IOException {
 
-        if (event.getSource() == btnEnter) {
-            if (edUser.getText().equals("root") && edPass.getText().equals("root")) {
-
-                Parent segunda = FXMLLoader.load(getClass().getResource("Home.fxml"));
-                Stage HomeStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                HomeStage.setScene(new Scene(segunda));
-                HomeStage.toFront();
-                //HomeStage.setFullScreen(true);
-                //Wonka.moverPantalla(segunda);
-
-                HomeStage.show();
-            } else {
-                edPass.setText("");
-                edUser.setText("Usuario o Contraseña incorrecta");
+        Task<Void> sleeper = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    Thread.sleep(400);
+                } catch (InterruptedException e) {
+                }
+                return null;
             }
-        }
-        if (event.getSource() == btnSingUp) {
-            System.exit(0);
-        }
+        };
+        sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event2) {
 
+                try {
+                    if (event.getSource() == btnEnter) {
+                        if (edUser.getText().toLowerCase().equals("root") && edPass.getText().toLowerCase().equals("root")) {
+                            Parent segunda = FXMLLoader.load(getClass().getResource("Home.fxml"));
+                            Stage HomeStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            HomeStage.setScene(new Scene(segunda));
+                            HomeStage.toFront();
+                            HomeStage.show();
+                        } else {
+                            edPass.setText("");
+                            edUser.setText("");
+                            edUser.setPromptText("Usuario o Contraseña incorrecta");
+                        }
+                    }
+                    if (event.getSource() == btnSingUp) {
+                        System.exit(0);
+                    }
+
+                } catch (IOException e) {
+                    System.out.println(e);
+                }
+            }
+        });
+        new Thread(sleeper).start();
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL location, ResourceBundle resources) {
         this.MoverVentanas(this.login);
     }
 

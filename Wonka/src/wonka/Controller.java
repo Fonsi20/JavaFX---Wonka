@@ -2625,14 +2625,93 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    void accionBorrarHistorial(ActionEvent event
-    ) {
+    void accionBorrarHistorial(ActionEvent event) {
         busClienteHistorial.setText("");
     }
 
     @FXML
-    void accionBuscarHistorial(ActionEvent event
-    ) {
+    void accionBuscarHistorial(ActionEvent evento) {
+
+        if (evento.getCode().equals(KeyCode.ENTER)) {
+            String nombreCliente;
+            String nombreClienteTrasTamaño;
+            int contador = 0, i = 0;
+            Session s;
+            s = NewHibernateUtil.getSession();
+            List<Object> Reservas = s.createCriteria(Reserva.class).list();
+            s.close();
+            int longitudNombre = 0;
+            longitudNombre = busClienteHistorial.getText().length();
+            for (Object o : Reservas) {
+                nombreCliente = ((Cliente) o).getNombre();
+                if (longitudNombre < nombreCliente.length()) {
+                    nombreClienteTrasTamaño = nombreCliente.substring(0, longitudNombre);
+                } else {
+                    nombreClienteTrasTamaño = nombreCliente;
+                }
+                if (nombreClienteTrasTamaño.toLowerCase().equals(busClienteHistorial.getText().toLowerCase())) {
+                    contador++;
+                }
+            }
+
+            System.out.println(contador);
+
+            if ("".equals(busClienteHistorial.getText()) || contador == 0) {
+                System.out.println("NINGUNO");
+                ListClientesLess();
+            } else {
+                limpiarListas(pnItemsClientesLess);
+                nodesClientesLess = new Node[contador];
+                for (Object o : Reservas) {
+                    nombreCliente = ((Cliente) o).getNombre();
+                    if (longitudNombre < nombreCliente.length()) {
+                        nombreClienteTrasTamaño = nombreCliente.substring(0, longitudNombre);
+                    } else {
+                        nombreClienteTrasTamaño = nombreCliente;
+                    }
+                    if (nombreClienteTrasTamaño.toLowerCase().equals(busClienteHistorial.getText().toLowerCase())) {
+                        final int j = i;
+                        nodesHistorial[i] = FXMLLoader.load(getClass().getResource("ItemHistorial.fxml"));
+
+                        //Establecimiento de labels
+                        Label itemNombreCliHistorial = (Label) nodesHistorial[i].lookup("#itemHistorialNombre");
+                        itemNombreCliHistorial.setText(((Reserva) o).getIDCliente().getNombre());
+
+                        Label itemNombreCarHistorial = (Label) nodesHistorial[i].lookup("#itemHistorialNombreCarta");
+                        itemNombreCarHistorial.setText(((Reserva) o).getIDCarta().getNombreCarta());
+
+                        Label itemHistorialCanti = (Label) nodesHistorial[i].lookup("#itemHistoriaCantidad");
+                        itemHistorialCanti.setText(Integer.toString(((Reserva) o).getIDCarta().getStock()));
+
+                        Label itemHistorialTlf = (Label) nodesHistorial[i].lookup("#itemHistorialTlf");
+                        itemHistorialTlf.setText(((Reserva) o).getIDCliente().getTelefono());
+
+                        Label itemHistorialPrecio = (Label) nodesHistorial[i].lookup("#itemHistorialPrecio");
+                        itemHistorialPrecio.setText(Float.toString(((Reserva) o).getIDCarta().getPrecio()));
+
+                        Label itemHistorialEstado = (Label) nodesHistorial[i].lookup("#itemHistorialEstado");
+                        itemHistorialEstado.setText(((Reserva) o).get());
+
+                        nodesHistorial[i].setOnMouseEntered(event -> {
+                            nodesHistorial[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+                        });
+                        nodesHistorial[i].setOnMouseExited(event -> {
+                            nodesHistorial[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                        });
+                        nodesHistorial[i].setOnMousePressed(event -> {
+                            for (Object C : Reservas) {
+                                if (itemNombreCliHistorial.getText().equals(((Cliente) C).getNombre())) {
+                                    idClienteCompra = Integer.toString(((Cliente) C).getIDCliente());
+                                    busClienteHistorial.setText(((Cliente) C).getNombre() + " " + ((Cliente) C).getApellidos());
+                                }
+                            }
+                        });
+                        pnItemsClientesLess.getChildren().add(nodesClientesLess[i]);
+                        i++;
+                    }
+                }
+            }
+        }
 
     }
 

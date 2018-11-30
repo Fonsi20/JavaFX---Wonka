@@ -190,7 +190,7 @@
                   <JFXTextField fx:id="busClienteHistorial" layoutX="34.0" layoutY="103.0" prefHeight="25.0" prefWidth="420.0" promptText="Nombre del cliente a buscar...." style="-fx-background-color: #00222B; -fx-text-fill: #fff;" unFocusColor="WHITE" />
                </children>
             </Pane>
-            <Pane fx:id="pnlDevelops" prefHeight="200.0" prefWidth="200.0" visible="false">
+            <Pane fx:id="pnlDevelops" prefHeight="200.0" prefWidth="200.0">
                <children>
                   <ImageView fitHeight="781.0" fitWidth="352.0" layoutX="624.0" layoutY="1.0" opacity="0.41" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -209,14 +209,14 @@
                   </ImageView>
                   <HBox layoutX="-4.0" layoutY="1.0" prefHeight="781.0" prefWidth="935.0">
                      <children>
-                        <VBox id="fonsiBack" fx:id="fonsiBack" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                        <VBox id="fonsiBack" fx:id="fonsiBack" alignment="CENTER" maxWidth="500.0" minWidth="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../images/fonsi.png" />
                                  </image>
                               </ImageView>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Alfonso Fernández Álvarez">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Alfonso Fernández">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
                                  </font>
@@ -241,7 +241,7 @@
                                     <Image url="@../images/dani.png" />
                                  </image>
                               </ImageView>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Daniel Dolores de Cabeza">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Daniel Bastos">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
                                  </font>
@@ -266,7 +266,7 @@
                                     <Image url="@../images/diego.png" />
                                  </image>
                               </ImageView>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Diego Di Kronos Amazing">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Diego Vilariño">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
                                  </font>
@@ -600,17 +600,17 @@
                               <Insets left="20.0" right="260.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Collection" textFill="#e7e5e5">
+                        <Label text="Colección" textFill="#e7e5e5">
                            <HBox.margin>
                               <Insets left="10.0" right="70.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Price" textFill="#e7e5e5">
+                        <Label text="Precio" textFill="#e7e5e5">
                            <HBox.margin>
                               <Insets left="20.0" right="50.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Status" textFill="#e7e5e5">
+                        <Label text="Cantidad" textFill="#e7e5e5">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
@@ -624,7 +624,7 @@
                               <Insets bottom="20.0" left="15.0" right="15.0" top="30.0" />
                            </padding>
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Yu Gi Ho">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Yu Gi Oh">
                                  <font>
                                     <Font name="System Bold" size="16.0" />
                                  </font>
@@ -819,7 +819,7 @@
                      </font>
                   </Label>
                </children></Pane>
-            <Pane fx:id="pnlOverview" prefHeight="576.0" prefWidth="793.0">
+            <Pane fx:id="pnlOverview" prefHeight="576.0" prefWidth="793.0" visible="false">
                <children>
                   <TextField fx:id="entradaBusquedaInicio" layoutX="709.0" layoutY="35.0" onKeyPressed="#accionBuscarCarta" prefHeight="27.0" prefWidth="183.0" promptText="Buscar nombre de carta..." style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-text-fill: #fff;">
                      <padding>
@@ -886,17 +886,17 @@
                               <Insets left="20.0" right="240.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Collection" textFill="#e7e5e5">
+                        <Label text="Colección" textFill="#e7e5e5">
                            <HBox.margin>
                               <Insets left="50.0" right="65.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Price" textFill="#e7e5e5">
+                        <Label text="Precio" textFill="#e7e5e5">
                            <HBox.margin>
                               <Insets left="20.0" right="50.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Status" textFill="#e7e5e5">
+                        <Label text="Cantidad" textFill="#e7e5e5">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>

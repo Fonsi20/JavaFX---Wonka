@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,11 +32,17 @@ import java.util.logging.Logger;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.hibernate.Session;
 
@@ -286,6 +293,9 @@ public class Controller implements Initializable {
     private Pane pnlOverview;
 
     @FXML
+    private Pane MostrarCarta;
+
+    @FXML
     private ScrollPane ListCards;
 
     @FXML
@@ -313,7 +323,88 @@ public class Controller implements Initializable {
     private Label lblCartasVendidas;
 
     @FXML
+    private VBox MenuPrincipal;
+
+    @FXML
+    private StackPane PantallasHome;
+
+    @FXML
     private TextField textAreaCantidadCompra;
+
+    @FXML
+    private ImageView MCImagenCarta;
+
+    @FXML
+    private ImageView iconoX;
+
+    @FXML
+    private Text MCNombreC;
+
+    @FXML
+    private Text MCColeccion;
+
+    @FXML
+    private TextArea MCDescripcion;
+
+    @FXML
+    private Text MCPrecio;
+
+    @FXML
+    private Text MCStock;
+
+    @FXML
+    private Text MCAno;
+
+    @FXML
+    private VBox MCBloqueYuGi;
+
+    @FXML
+    private TextField MCyuID;
+
+    @FXML
+    private TextField MCyuTIPOC;
+
+    @FXML
+    private TextField MCyuAtribu;
+
+    @FXML
+    private TextField MCyuLVL;
+
+    @FXML
+    private TextField MCyuSub;
+
+    @FXML
+    private VBox MCBloqueMagic;
+
+    @FXML
+    private TextField MCmagicID;
+
+    @FXML
+    private TextField MCmagicTIPOC;
+
+    @FXML
+    private TextField MCmagicCoste;
+
+    @FXML
+    private TextField MCmagicColor;
+
+    @FXML
+    private VBox MCBloqueFow;
+
+    @FXML
+    private TextField MCfowID;
+
+    @FXML
+    private TextField MCfowTIPOC;
+
+    @FXML
+    private TextField MCfowCoste;
+
+    @FXML
+    private TextField MCfowElemento;
+
+    @FXML
+    private TextField MCfowRaza;
 
     private Node[] nodes = new Node[0];
     private Node[] nodesCartas = new Node[0];
@@ -440,12 +531,146 @@ public class Controller implements Initializable {
                     nodes[i].setOnMouseEntered(event -> {
                         nodes[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
                     });
+
                     nodes[i].setOnMouseExited(event -> {
                         nodes[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
                     });
 
-                    pnItems.getChildren().add(nodes[i]);
+                    nodes[i].setOnMouseClicked(event -> {
 
+                        Session s;
+                        s = NewHibernateUtil.getSession();
+                        List<Object> CartaMAGIC = s.createCriteria(CartaMAGIC.class).list();
+                        List<Object> CartaFOW = s.createCriteria(CartaFOW.class).list();
+                        List<Object> CartaYUGI = s.createCriteria(CartaYUGI.class).list();
+                        s.close();
+
+                        MCNombreC.setText(itemCartaNombre.getText());
+                        MCColeccion.setText("Coleccion: " + itemCartaColeccion.getText());
+                        MCPrecio.setText("Precio: " + itemCartaPrecio.getText());
+                        MCStock.setText("Stock: " + itemCartaStock.getText());
+
+                        if (itemCartaJuego.getText().equals("Yu-Gi-Oh")) {
+                            MCBloqueYuGi.setDisable(false);
+                            MCBloqueFow.setDisable(true);
+                            MCBloqueMagic.setDisable(true);
+                            for (Object o : CartaYUGI) {
+                                if (itemCartaNombre.getText().equals(((CartaYUGI) o).getNombreCarta())) {
+
+                                    MCDescripcion.setText(((CartaYUGI) o).getDescripcion());
+                                    String[] parts = (((CartaYUGI) o).getAno()).split("-");
+                                    String year = parts[0];
+                                    MCAno.setText("Año: " + year);
+                                    MCyuAtribu.setText(((CartaYUGI) o).getAtributo());
+                                    MCyuID.setText(((CartaYUGI) o).getIDCYugi());
+                                    MCyuLVL.setText(String.valueOf(((CartaYUGI) o).getNivel()));
+                                    MCyuSub.setText(((CartaYUGI) o).getSubTipo());
+
+                                    //"Monstruo", "Mágica", "Trampa"
+                                    if (((CartaYUGI) o).getTipoCarta().equals("Monstruo")) {
+                                        MCyuTIPOC.setText("Monstruo");
+                                    }
+                                    if (((CartaYUGI) o).getTipoCarta().equals("Mágica")) {
+                                        MCyuTIPOC.setText("Mágica");
+                                    }
+                                    if (((CartaYUGI) o).getTipoCarta().equals("Trampa")) {
+                                        MCyuTIPOC.setText("Trampa");
+                                    }
+                                    MostrarCarta.setVisible(true);
+                                    MenuPrincipal.setDisable(true);
+                                    PantallasHome.setDisable(true);
+                                }
+                            }
+                        } else if (itemCartaJuego.getText().equals("Magic")) {
+                            MCBloqueYuGi.setDisable(true);
+                            MCBloqueFow.setDisable(true);
+                            MCBloqueMagic.setDisable(false);
+                            for (Object o : CartaMAGIC) {
+                                if (itemCartaNombre.getText().equals(((CartaMAGIC) o).getNombreCarta())) {
+
+                                    MCDescripcion.setText(((CartaMAGIC) o).getDescripcion());
+                                    String[] parts = (((CartaMAGIC) o).getAno()).split("-");
+                                    String year = parts[0];
+                                    MCAno.setText("Año: " + year);
+                                    MCmagicCoste.setText(((CartaMAGIC) o).getCoste());
+                                    MCmagicID.setText(((CartaMAGIC) o).getIDCMagic());
+                                    MCmagicTIPOC.setText(((CartaMAGIC) o).getTipo());
+
+                                    //"Blanco", "Azul", "Negro", "Rojo", "Verde", "Incoloro", "Multicolor"
+                                    if (((CartaMAGIC) o).getColor().equals("Blanco")) {
+                                        MCmagicColor.setText("Blanco");
+                                    }
+                                    if (((CartaMAGIC) o).getColor().equals("Azul")) {
+                                        MCmagicColor.setText("Azul");
+                                    }
+                                    if (((CartaMAGIC) o).getColor().equals("Negro")) {
+                                        MCmagicColor.setText("Negro");
+                                    }
+                                    if (((CartaMAGIC) o).getColor().equals("Rojo")) {
+                                        MCmagicColor.setText("Rojo");
+                                    }
+                                    if (((CartaMAGIC) o).getColor().equals("Verde")) {
+                                        MCmagicColor.setText("Verde");
+                                    }
+                                    if (((CartaMAGIC) o).getColor().equals("Incoloro")) {
+                                        MCmagicColor.setText("Incoloro");
+                                    }
+                                    if (((CartaMAGIC) o).getColor().equals("Multicolor")) {
+                                        MCmagicColor.setText("Multicolor");
+                                    }
+                                    MostrarCarta.setVisible(true);
+                                    MenuPrincipal.setDisable(true);
+                                    PantallasHome.setDisable(true);
+
+                                }
+                            }
+                        } else if (itemCartaJuego.getText().equals("Force of Will")) {
+                            MCBloqueYuGi.setDisable(true);
+                            MCBloqueFow.setDisable(false);
+                            MCBloqueMagic.setDisable(true);
+                            for (Object o : CartaFOW) {
+                                if (itemCartaNombre.getText().equals(((CartaFOW) o).getNombreCarta())) {
+
+                                    MCDescripcion.setText(((CartaFOW) o).getDescripcion());
+                                    String[] parts = (((CartaFOW) o).getAno()).split("-");
+                                    String year = parts[0];
+                                    MCAno.setText("Año: " + year);
+                                    MCfowCoste.setText(((CartaFOW) o).getCoste());
+                                    MCfowID.setText(((CartaFOW) o).getIDCFoW());
+                                    MCfowRaza.setText(((CartaFOW) o).getRaza());
+                                    MCfowTIPOC.setText(((CartaFOW) o).getTipo());
+
+                                    //"Luz", "Oscuridad", "Agua", "Viento", "Fuego", "Neutro", "Multicolor"
+                                    if (((CartaFOW) o).getElemento().equals("Luz")) {
+                                        MCfowElemento.setText("Luz");
+                                    }
+                                    if (((CartaFOW) o).getElemento().equals("Oscuridad")) {
+                                        MCfowElemento.setText("Oscuridad");
+                                    }
+                                    if (((CartaFOW) o).getElemento().equals("Agua")) {
+                                        MCfowElemento.setText("Agua");
+                                    }
+                                    if (((CartaFOW) o).getElemento().equals("Viento")) {
+                                        MCfowElemento.setText("Viento");
+                                    }
+                                    if (((CartaFOW) o).getElemento().equals("Fuego")) {
+                                        MCfowElemento.setText("Fuego");
+                                    }
+                                    if (((CartaFOW) o).getElemento().equals("Neutro")) {
+                                        MCfowElemento.setText("Neutro");
+                                    }
+                                    if (((CartaFOW) o).getElemento().equals("Multicolor")) {
+                                        MCfowElemento.setText("Multicolor");
+                                    }
+                                    MostrarCarta.setVisible(true);
+                                    MenuPrincipal.setDisable(true);
+                                    PantallasHome.setDisable(true);
+
+                                }
+                            }
+                        }
+                    });
+                    pnItems.getChildren().add(nodes[i]);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -496,6 +721,24 @@ public class Controller implements Initializable {
                     });
                     nodesCartas[i].setOnMouseExited(event -> {
                         nodesCartas[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                    });
+
+                    nodesCartas[i].setOnMouseClicked(event -> {
+                        nodesCartas[j].setStyle("-fx-background-color : #17414C; -fx-background-radius:5");
+                        nodesCartas[j].setOnMouseExited(null);
+                        nodesCartas[j].setOnMouseEntered(null);
+                        for (int x = 0; x < nodesCartas.length; x++) {
+                            if (x != j) {
+                                nodesCartas[x].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                                final int x2 = x;
+                                nodesCartas[x].setOnMouseExited(event2 -> {
+                                    nodesCartas[x2].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                                });
+                                nodesCartas[x].setOnMouseEntered(event2 -> {
+                                    nodesCartas[x2].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+                                });
+                            }
+                        }
                     });
 
                     nodesCartas[i].setOnMousePressed(event -> {
@@ -673,9 +916,29 @@ public class Controller implements Initializable {
                     nodesClientes[i].setOnMouseEntered(event -> {
                         nodesClientes[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
                     });
+
                     nodesClientes[i].setOnMouseExited(event -> {
                         nodesClientes[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
                     });
+
+                    nodesClientes[i].setOnMouseClicked(event -> {
+                        nodesClientes[j].setStyle("-fx-background-color : #17414C; -fx-background-radius:5");
+                        nodesClientes[j].setOnMouseExited(null);
+                        nodesClientes[j].setOnMouseEntered(null);
+                        for (int x = 0; x < nodesClientes.length; x++) {
+                            if (x != j) {
+                                nodesClientes[x].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                                final int x2 = x;
+                                nodesClientes[x].setOnMouseExited(event2 -> {
+                                    nodesClientes[x2].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                                });
+                                nodesClientes[x].setOnMouseEntered(event2 -> {
+                                    nodesClientes[x2].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+                                });
+                            }
+                        }
+                    });
+
                     nodesClientes[i].setOnMousePressed(event -> {
                         btnModificarCamposClientes.setDisable(false);
                         btnBorrarCamposClientes.setDisable(false);
@@ -745,9 +1008,29 @@ public class Controller implements Initializable {
                     nodesCartasLess[i].setOnMouseEntered(event -> {
                         nodesCartasLess[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
                     });
+
                     nodesCartasLess[i].setOnMouseExited(event -> {
                         nodesCartasLess[j].setStyle("-fx-background-color : #02030A; -fx-background-radius:5");
                     });
+
+                    nodesCartasLess[i].setOnMouseClicked(event -> {
+                        nodesCartasLess[j].setStyle("-fx-background-color : #17414C; -fx-background-radius:5");
+                        nodesCartasLess[j].setOnMouseExited(null);
+                        nodesCartasLess[j].setOnMouseEntered(null);
+                        for (int x = 0; x < nodesCartasLess.length; x++) {
+                            if (x != j) {
+                                nodesCartasLess[x].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                                final int x2 = x;
+                                nodesCartasLess[x].setOnMouseExited(event2 -> {
+                                    nodesCartasLess[x2].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                                });
+                                nodesCartasLess[x].setOnMouseEntered(event2 -> {
+                                    nodesCartasLess[x2].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+                                });
+                            }
+                        }
+                    });
+
                     nodesCartasLess[i].setOnMousePressed(event -> {
                         Session s;
                         s = NewHibernateUtil.getSession();
@@ -801,9 +1084,29 @@ public class Controller implements Initializable {
                     nodesClientesLess[i].setOnMouseEntered(event -> {
                         nodesClientesLess[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
                     });
+
                     nodesClientesLess[i].setOnMouseExited(event -> {
                         nodesClientesLess[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
                     });
+
+                    nodesClientesLess[i].setOnMouseClicked(event -> {
+                        nodesClientesLess[j].setStyle("-fx-background-color : #17414C; -fx-background-radius:5");
+                        nodesClientesLess[j].setOnMouseExited(null);
+                        nodesClientesLess[j].setOnMouseEntered(null);
+                        for (int x = 0; x < nodesClientesLess.length; x++) {
+                            if (x != j) {
+                                nodesClientesLess[x].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                                final int x2 = x;
+                                nodesClientesLess[x].setOnMouseExited(event2 -> {
+                                    nodesClientesLess[x2].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                                });
+                                nodesClientesLess[x].setOnMouseEntered(event2 -> {
+                                    nodesClientesLess[x2].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+                                });
+                            }
+                        }
+                    });
+
                     nodesClientesLess[i].setOnMousePressed(event -> {
                         Session s;
                         s = NewHibernateUtil.getSession();
@@ -1148,6 +1451,23 @@ public class Controller implements Initializable {
                         nodes[i].setOnMouseExited(event -> {
                             nodes[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
                         });
+                        nodes[i].setOnMouseClicked(event -> {
+                            nodes[j].setStyle("-fx-background-color : #17414C; -fx-background-radius:5");
+                            nodes[j].setOnMouseExited(null);
+                            nodes[j].setOnMouseEntered(null);
+                            for (int x = 0; x < nodes.length; x++) {
+                                if (x != j) {
+                                    nodes[x].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                                    final int x2 = x;
+                                    nodes[x].setOnMouseExited(event2 -> {
+                                        nodes[x2].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                                    });
+                                    nodes[x].setOnMouseEntered(event2 -> {
+                                        nodes[x2].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+                                    });
+                                }
+                            }
+                        });
 
                         pnItems.getChildren().add(nodes[i]);
 
@@ -1223,6 +1543,24 @@ public class Controller implements Initializable {
                         });
                         nodesCartas[i].setOnMouseExited(event -> {
                             nodesCartas[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                        });
+
+                        nodesCartas[i].setOnMouseClicked(event -> {
+                            nodesCartas[j].setStyle("-fx-background-color : #17414C; -fx-background-radius:5");
+                            nodesCartas[j].setOnMouseExited(null);
+                            nodesCartas[j].setOnMouseEntered(null);
+                            for (int x = 0; x < nodesCartas.length; x++) {
+                                if (x != j) {
+                                    nodesCartas[x].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                                    final int x2 = x;
+                                    nodesCartas[x].setOnMouseExited(event2 -> {
+                                        nodesCartas[x2].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                                    });
+                                    nodesCartas[x].setOnMouseEntered(event2 -> {
+                                        nodesCartas[x2].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+                                    });
+                                }
+                            }
                         });
 
                         nodesCartas[i].setOnMousePressed(event -> {
@@ -1421,6 +1759,23 @@ public class Controller implements Initializable {
                         });
                         nodesClientes[i].setOnMouseExited(event -> {
                             nodesClientes[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                        });
+                        nodesClientes[i].setOnMouseClicked(event -> {
+                            nodesClientes[j].setStyle("-fx-background-color : #17414C; -fx-background-radius:5");
+                            nodesClientes[j].setOnMouseExited(null);
+                            nodesClientes[j].setOnMouseEntered(null);
+                            for (int x = 0; x < nodesClientes.length; x++) {
+                                if (x != j) {
+                                    nodesClientes[x].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                                    final int x2 = x;
+                                    nodesClientes[x].setOnMouseExited(event2 -> {
+                                        nodesClientes[x2].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                                    });
+                                    nodesClientes[x].setOnMouseEntered(event2 -> {
+                                        nodesClientes[x2].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+                                    });
+                                }
+                            }
                         });
 
                         pnItemsClientes.getChildren().add(nodesClientes[i]);
@@ -1776,6 +2131,23 @@ public class Controller implements Initializable {
                         nodesClientesLess[i].setOnMouseExited(event -> {
                             nodesClientesLess[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
                         });
+                        nodesClientesLess[i].setOnMouseClicked(event -> {
+                            nodesClientesLess[j].setStyle("-fx-background-color : #17414C; -fx-background-radius:5");
+                            nodesClientesLess[j].setOnMouseExited(null);
+                            nodesClientesLess[j].setOnMouseEntered(null);
+                            for (int x = 0; x < nodesClientesLess.length; x++) {
+                                if (x != j) {
+                                    nodesClientesLess[x].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                                    final int x2 = x;
+                                    nodesClientesLess[x].setOnMouseExited(event2 -> {
+                                        nodesClientesLess[x2].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                                    });
+                                    nodesClientesLess[x].setOnMouseEntered(event2 -> {
+                                        nodesClientesLess[x2].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+                                    });
+                                }
+                            }
+                        });
                         nodesClientesLess[i].setOnMousePressed(event -> {
                             for (Object C : Cliente) {
                                 if (itemNombreCliente.getText().equals(((Cliente) C).getNombre())) {
@@ -1851,6 +2223,23 @@ public class Controller implements Initializable {
                         });
                         nodesCartasLess[i].setOnMouseExited(event -> {
                             nodesCartasLess[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                        });
+                        nodesCartasLess[i].setOnMouseClicked(event -> {
+                            nodesCartasLess[j].setStyle("-fx-background-color : #17414C; -fx-background-radius:5");
+                            nodesCartasLess[j].setOnMouseExited(null);
+                            nodesCartasLess[j].setOnMouseEntered(null);
+                            for (int x = 0; x < nodesCartasLess.length; x++) {
+                                if (x != j) {
+                                    nodesCartasLess[x].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                                    final int x2 = x;
+                                    nodesCartasLess[x].setOnMouseExited(event2 -> {
+                                        nodesCartasLess[x2].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                                    });
+                                    nodesCartasLess[x].setOnMouseEntered(event2 -> {
+                                        nodesCartasLess[x2].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+                                    });
+                                }
+                            }
                         });
                         nodesCartasLess[i].setOnMousePressed(event -> {
                             for (Object C : Carta) {
@@ -2616,103 +3005,13 @@ public class Controller implements Initializable {
                 try {
                     Bajas.eliminarReserva(NCliente, NCarta);
                     ListHistorial();
+                    CargarDatosDashboard();
                 } catch (SQLException x) {
                     System.out.println(x.getMessage());
                 }
 
             }
         }
-    }
-
-    @FXML
-    void accionBorrarHistorial(ActionEvent event) {
-        busClienteHistorial.setText("");
-    }
-
-    @FXML
-    void accionBuscarHistorial(ActionEvent evento) {
-
-        if (evento.getCode().equals(KeyCode.ENTER)) {
-            String nombreCliente;
-            String nombreClienteTrasTamaño;
-            int contador = 0, i = 0;
-            Session s;
-            s = NewHibernateUtil.getSession();
-            List<Object> Reservas = s.createCriteria(Reserva.class).list();
-            s.close();
-            int longitudNombre = 0;
-            longitudNombre = busClienteHistorial.getText().length();
-            for (Object o : Reservas) {
-                nombreCliente = ((Cliente) o).getNombre();
-                if (longitudNombre < nombreCliente.length()) {
-                    nombreClienteTrasTamaño = nombreCliente.substring(0, longitudNombre);
-                } else {
-                    nombreClienteTrasTamaño = nombreCliente;
-                }
-                if (nombreClienteTrasTamaño.toLowerCase().equals(busClienteHistorial.getText().toLowerCase())) {
-                    contador++;
-                }
-            }
-
-            System.out.println(contador);
-
-            if ("".equals(busClienteHistorial.getText()) || contador == 0) {
-                System.out.println("NINGUNO");
-                ListClientesLess();
-            } else {
-                limpiarListas(pnItemsClientesLess);
-                nodesClientesLess = new Node[contador];
-                for (Object o : Reservas) {
-                    nombreCliente = ((Cliente) o).getNombre();
-                    if (longitudNombre < nombreCliente.length()) {
-                        nombreClienteTrasTamaño = nombreCliente.substring(0, longitudNombre);
-                    } else {
-                        nombreClienteTrasTamaño = nombreCliente;
-                    }
-                    if (nombreClienteTrasTamaño.toLowerCase().equals(busClienteHistorial.getText().toLowerCase())) {
-                        final int j = i;
-                        nodesHistorial[i] = FXMLLoader.load(getClass().getResource("ItemHistorial.fxml"));
-
-                        //Establecimiento de labels
-                        Label itemNombreCliHistorial = (Label) nodesHistorial[i].lookup("#itemHistorialNombre");
-                        itemNombreCliHistorial.setText(((Reserva) o).getIDCliente().getNombre());
-
-                        Label itemNombreCarHistorial = (Label) nodesHistorial[i].lookup("#itemHistorialNombreCarta");
-                        itemNombreCarHistorial.setText(((Reserva) o).getIDCarta().getNombreCarta());
-
-                        Label itemHistorialCanti = (Label) nodesHistorial[i].lookup("#itemHistoriaCantidad");
-                        itemHistorialCanti.setText(Integer.toString(((Reserva) o).getIDCarta().getStock()));
-
-                        Label itemHistorialTlf = (Label) nodesHistorial[i].lookup("#itemHistorialTlf");
-                        itemHistorialTlf.setText(((Reserva) o).getIDCliente().getTelefono());
-
-                        Label itemHistorialPrecio = (Label) nodesHistorial[i].lookup("#itemHistorialPrecio");
-                        itemHistorialPrecio.setText(Float.toString(((Reserva) o).getIDCarta().getPrecio()));
-
-                        Label itemHistorialEstado = (Label) nodesHistorial[i].lookup("#itemHistorialEstado");
-                        itemHistorialEstado.setText(((Reserva) o).get());
-
-                        nodesHistorial[i].setOnMouseEntered(event -> {
-                            nodesHistorial[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
-                        });
-                        nodesHistorial[i].setOnMouseExited(event -> {
-                            nodesHistorial[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
-                        });
-                        nodesHistorial[i].setOnMousePressed(event -> {
-                            for (Object C : Reservas) {
-                                if (itemNombreCliHistorial.getText().equals(((Cliente) C).getNombre())) {
-                                    idClienteCompra = Integer.toString(((Cliente) C).getIDCliente());
-                                    busClienteHistorial.setText(((Cliente) C).getNombre() + " " + ((Cliente) C).getApellidos());
-                                }
-                            }
-                        });
-                        pnItemsClientesLess.getChildren().add(nodesClientesLess[i]);
-                        i++;
-                    }
-                }
-            }
-        }
-
     }
 
     @FXML
@@ -2799,6 +3098,50 @@ public class Controller implements Initializable {
         lblCartasVendidas.setText(Integer.toString(Reservas.size()));
         lblPedidosPendientes.setText(Integer.toString(Ventas.size()));
         s.close();
+    }
+
+    @FXML
+    void accionSalirMostrarCarta(MouseEvent event) {
+        limpiarCamposMostrar();
+        MostrarCarta.setVisible(false);
+        PantallasHome.setDisable(false);
+        MenuPrincipal.setDisable(false);
+    }
+
+    public void limpiarCamposMostrar() {
+
+        InputStream inStream = getClass().getResourceAsStream("/images/ReversoCard.jpg");
+        Image imageObject = new Image(inStream);
+
+        MCBloqueFow.setDisable(true);
+        MCBloqueMagic.setDisable(true);
+        MCBloqueYuGi.setDisable(true);
+
+        MCAno.setText("");
+        MCColeccion.setText("");
+        MCDescripcion.setText("");
+        MCImagenCarta.setImage(imageObject);
+        MCNombreC.setText("");
+        MCPrecio.setText("");
+        MCStock.setText("");
+
+        MCfowCoste.setText("");
+        MCfowElemento.setText("");
+        MCfowID.setText("");
+        MCfowRaza.setText("");
+        MCfowTIPOC.setText("");
+
+        MCmagicColor.setText("");
+        MCmagicCoste.setText("");
+        MCmagicID.setText("");
+        MCmagicTIPOC.setText("");
+
+        MCyuAtribu.setText("");
+        MCyuID.setText("");
+        MCyuLVL.setText("");
+        MCyuSub.setText("");
+        MCyuTIPOC.setText("");
+
     }
 
 }

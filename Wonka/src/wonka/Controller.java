@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import java.io.File;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -43,6 +44,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.hibernate.Session;
 
@@ -406,6 +408,9 @@ public class Controller implements Initializable {
     @FXML
     private TextField MCfowRaza;
 
+    @FXML
+    private Button btnSubirImagen;
+
     private Node[] nodes = new Node[0];
     private Node[] nodesCartas = new Node[0];
     private Node[] nodesClientes = new Node[0];
@@ -415,6 +420,8 @@ public class Controller implements Initializable {
 
     private String idClienteCompra;
     private String idCartaCompra;
+
+    private File selectedFile;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -3142,6 +3149,24 @@ public class Controller implements Initializable {
         MCyuSub.setText("");
         MCyuTIPOC.setText("");
 
+    }
+
+    @FXML
+    void selectImg(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Imagenes", "*.jpg", "*.png")
+        );
+        try {
+            selectedFile = fileChooser.showOpenDialog(stage);
+            //String filepath = selectedFile.getAbsolutePath();
+            btnSubirImagen.setText("Imagen Lista");
+            String url = "file:" + selectedFile.getAbsolutePath();
+            MCImagenCarta.setImage(new Image(url));
+        } catch (Exception e) {
+
+        }
     }
 
 }

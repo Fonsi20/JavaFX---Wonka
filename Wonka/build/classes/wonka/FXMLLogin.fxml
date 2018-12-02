@@ -6,24 +6,26 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" fx:id="login" prefHeight="450.0" prefWidth="900.0" style="-fx-background-color: #00222B;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wonka.FXMLLoginController">
    <children>
-      <ImageView id="fondo.jpg" fitHeight="457.0" fitWidth="494.0" layoutX="-31.0" layoutY="2.0" opacity="0.43" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="fondo.jpg" fitHeight="457.0" fitWidth="494.0" layoutX="-31.0" opacity="0.43" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/fondo.jpg" />
          </image>
       </ImageView>
-      <ImageView id="broom.jpg" fitHeight="54.0" fitWidth="54.0" layoutX="55.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView id="broom.jpg" fitHeight="54.0" fitWidth="54.0" layoutX="206.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/witch-hat.png" />
          </image>
       </ImageView>
       <AnchorPane layoutX="497.0" layoutY="37.0" prefHeight="376.0" prefWidth="367.0" style="-fx-background-color: #00C9FF;">
          <children>
-            <JFXButton fx:id="btnEnter" layoutX="35.0" layoutY="290.0" onAction="#handleButtonAction" prefHeight="32.0" prefWidth="287.0" style="-fx-background-color: #00222B;" text="Enter" textFill="WHITE">
+            <JFXButton fx:id="btnEnter" layoutX="35.0" layoutY="270.0" onAction="#handleButtonAction" prefHeight="32.0" prefWidth="287.0" style="-fx-background-color: #00222B;" text="Enter" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -35,17 +37,25 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Text>
+            <JFXButton fx:id="btnSingUp" layoutX="35.0" layoutY="310.0" onAction="#handleButtonAction" prefHeight="32.0" prefWidth="287.0" style="-fx-background-color: #f45454;" text="Salir" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </JFXButton>
          </children></AnchorPane>
-      <Text fill="WHITE" layoutX="113.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wizards">
+      <Text layoutX="45.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wizards">
          <font>
             <Font name="Constantia Bold" size="45.0" />
          </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#21a9d1" />
+                  <Stop color="#8098bc" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
       </Text>
-      <Text fill="WHITE" layoutX="55.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Be watter my friend, like in yout mind. sRex Copyleft:&#10;Alfonso Fernández, Daniel Bastos and Diego Velazquez" />
-      <JFXButton fx:id="btnSingUp" layoutX="55.0" layoutY="273.0" onAction="#handleButtonAction" prefHeight="32.0" prefWidth="133.0" style="-fx-background-color: #00C9FF;" text="Salir" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </JFXButton>
+      <Text fill="WHITE" layoutX="56.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Proyecto para Acceso a Datos( ADD) &#10;Programa gestor de  clientes, pedidos y cartas de los juegos:&#10;Magic, Force of Wild y Yu Gi Oh.&#10;Desarrolllado en 2018 y propiedad de:&#10;Alfonso Fernández, Daniel Bastos yDiego Vilariño" />
    </children>
 </AnchorPane>

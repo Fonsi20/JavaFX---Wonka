@@ -9,6 +9,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -23,7 +25,7 @@
 
 <AnchorPane fx:id="home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="781.0" prefWidth="1187.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wonka.Controller">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: #00000B;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox fx:id="MenuPrincipal" alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: #00000B;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="123.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -31,7 +33,8 @@
                </image>
                <VBox.margin>
                   <Insets bottom="10.0" top="50.0" />
-               </VBox.margin></ImageView>
+               </VBox.margin>
+            </ImageView>
             <Label text="Administrador" textFill="#e7e5e5">
                <VBox.margin>
                   <Insets bottom="20.0" />
@@ -129,9 +132,9 @@
             </Button>
          </children>
       </VBox>
-      <StackPane layoutX="258.0" prefHeight="781.0" prefWidth="935.0" style="-fx-background-color: #00222B;">
+      <StackPane fx:id="PantallasHome" layoutX="258.0" prefHeight="781.0" prefWidth="935.0" style="-fx-background-color: #00222B;">
          <children>
-            <Pane fx:id="pnlSignOut" prefHeight="200.0" prefWidth="200.0" visible="false" />
+            <Pane fx:id="pnlSignOut" prefHeight="200.0" prefWidth="849.0" visible="false" />
             <Pane fx:id="pnlHistorial" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
                   <Label layoutX="48.0" layoutY="27.0" text="Historial" textFill="#e7e5e5">
@@ -139,7 +142,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <HBox alignment="CENTER_LEFT" layoutY="150.0" prefHeight="42.0" prefWidth="935.0" style="-fx-background-color: #4CD9FF;">
+                  <HBox alignment="CENTER_LEFT" layoutY="88.0" prefHeight="42.0" prefWidth="935.0" style="-fx-background-color: #4CD9FF;">
                      <children>
                         <Label text="Nombre">
                            <HBox.margin>
@@ -168,29 +171,23 @@
                         <Label layoutX="380.0" layoutY="23.0" text="Estado" />
                      </children>
                   </HBox>
-                  <ScrollPane fx:id="ListHistorial" hbarPolicy="NEVER" layoutX="15.0" layoutY="197.0" prefHeight="570.0" prefWidth="905.0" stylesheets="@style.css">
+                  <ScrollPane fx:id="ListHistorial" hbarPolicy="NEVER" layoutX="15.0" layoutY="135.0" prefHeight="633.0" prefWidth="905.0" stylesheets="@style.css">
                      <content>
-                        <VBox fx:id="pnItemsHistorial" prefHeight="568.0" prefWidth="903.0" spacing="5.0" style="-fx-background-color: #00222B;">
+                        <VBox fx:id="pnItemsHistorial" prefHeight="634.0" prefWidth="903.0" spacing="5.0" style="-fx-background-color: #00222B;">
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </VBox>
                      </content>
                   </ScrollPane>
-                  <JFXButton fx:id="btnCancelarReserva" layoutX="583.0" layoutY="32.0" onAction="#CancelarReservaHistorial" prefWidth="150.0" style="-fx-background-color: #fa5f7e;" text="Cancelar Reserva" textFill="WHITE">
+                  <JFXButton fx:id="btnCancelarReserva" layoutX="751.0" layoutY="32.0" onAction="#CancelarReservaHistorial" prefWidth="150.0" style="-fx-background-color: #fa5f7e;" text="Cancelar Reserva" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="btnLimpiarHistorial" layoutX="751.0" layoutY="32.0" onAction="#accionBorrarHistorial" prefWidth="150.0" style="-fx-background-color: #00C9FF;" text="Limpiar" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXTextField fx:id="busClienteHistorial" layoutX="34.0" layoutY="103.0" prefHeight="25.0" prefWidth="420.0" promptText="Nombre del cliente a buscar...." style="-fx-background-color: #00222B; -fx-text-fill: #fff;" unFocusColor="WHITE" />
                </children>
             </Pane>
-            <Pane fx:id="pnlDevelops" prefHeight="200.0" prefWidth="200.0">
+            <Pane fx:id="pnlDevelops" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
                   <ImageView fitHeight="781.0" fitWidth="352.0" layoutX="624.0" layoutY="1.0" opacity="0.41" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -426,7 +423,7 @@
                               <TextField fx:id="telefonoCliente" promptText="20,4€" style="-fx-background-color: #00000B; -fx-text-fill: #ffffff; -fx-prompt-text-fill: #fff;" />
                            </children>
                         </VBox>
-                        <VBox alignment="TOP_CENTER" prefHeight="180.0" prefWidth="136.0" spacing="25.0">
+                        <VBox alignment="TOP_CENTER" prefHeight="180.0" prefWidth="136.0" spacing="15.0">
                            <children>
                               <Button fx:id="btnLimpiarCamposClientes" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="115.0" mnemonicParsing="false" onAction="#accionLimpiarCamposClientes" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Limpiar Campos" textAlignment="CENTER" textFill="WHITE">
                                  <font>
@@ -449,6 +446,9 @@
                                  </font>
                               </Button>
                            </children>
+                           <padding>
+                              <Insets left="18.0" top="15.0" />
+                           </padding>
                         </VBox>
                      </children>
                   </HBox>
@@ -497,11 +497,11 @@
                   </Label>
                   <TextField fx:id="direccionCliente" alignment="TOP_LEFT" layoutX="39.0" layoutY="263.0" prefHeight="25.0" prefWidth="675.0" promptText="Ponteareas, nº22 CP 45124 Pontevedra España" style="-fx-background-color: #00000B; -fx-text-fill: #ffffff; -fx-prompt-text-fill: #fff;" />
                </children></Pane>
-            <Pane fx:id="pnlOrders" prefHeight="200.0" prefWidth="200.0" visible="false">
+            <Pane fx:id="pnlOrders" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" layoutX="48.0" layoutY="88.0" prefHeight="182.0" prefWidth="857.0" spacing="50.0">
+                  <HBox alignment="CENTER_LEFT" layoutX="48.0" layoutY="88.0" prefHeight="182.0" prefWidth="857.0" spacing="20.0">
                      <children>
-                        <VBox prefHeight="112.0" prefWidth="100.0" spacing="10.0">
+                        <VBox prefHeight="112.0" prefWidth="150.0" spacing="10.0">
                            <children>
                               <Label text="Nombre Juego" textFill="WHITE">
                                  <font>
@@ -520,7 +520,7 @@
                               <TextField fx:id="stockCard" promptText="20" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B; -fx-prompt-text-fill: #fff;" />
                            </children>
                         </VBox>
-                        <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                        <VBox prefHeight="200.0" prefWidth="150.0" spacing="10.0">
                            <children>
                               <Label text="Precio" textFill="WHITE">
                                  <font>
@@ -562,24 +562,29 @@
                               </JFXTextArea>
                            </children>
                         </VBox>
-                        <VBox alignment="TOP_CENTER" prefHeight="180.0" prefWidth="136.0" spacing="25.0">
+                        <VBox alignment="TOP_CENTER" prefHeight="180.0" prefWidth="136.0" spacing="15.0">
                            <children>
-                              <Button fx:id="btnLimpiarCarta" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="115.0" mnemonicParsing="false" onAction="#accionLimpiarCarta" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Limpiar" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="btnSubirImagen" layoutX="10.0" maxHeight="25.0" maxWidth="120.0" minHeight="25.0" minWidth="120.0" mnemonicParsing="false" onAction="#selectImg" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #26407F;" text="Subir Imagen" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btnModificarCarta" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="140.0" mnemonicParsing="false" onAction="#accionModificarCarta" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Modificar Carta" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="btnLimpiarCarta" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="115.0" maxHeight="25.0" maxWidth="120.0" minHeight="25.0" minWidth="120.0" mnemonicParsing="false" onAction="#accionLimpiarCarta" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Limpiar" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btnBorrarCarta" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#accionbtnBorrarCarta" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Borrar Carta" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="btnModificarCarta" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="140.0" maxHeight="25.0" maxWidth="120.0" minHeight="25.0" minWidth="120.0" mnemonicParsing="false" onAction="#accionModificarCarta" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Modificar Carta" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btnGuardarCarta" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#accionGuardarCarta" prefWidth="120.0" style="-fx-background-color: #4CD478;" text="Guardar Carta" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="btnBorrarCarta" alignment="CENTER" contentDisplay="CENTER" maxHeight="25.0" maxWidth="120.0" minHeight="25.0" minWidth="120.0" mnemonicParsing="false" onAction="#accionbtnBorrarCarta" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Borrar Carta" textAlignment="CENTER" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="btnGuardarCarta" alignment="CENTER" contentDisplay="CENTER" maxHeight="25.0" maxWidth="120.0" minHeight="25.0" minWidth="120.0" mnemonicParsing="false" onAction="#accionGuardarCarta" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #4CD478;" text="Guardar Carta" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -798,7 +803,7 @@
                         </VBox>
                      </content>
                   </ScrollPane>
-                  <TextField fx:id="nameCard" layoutX="47.0" layoutY="115.0" prefHeight="25.0" prefWidth="252.0" promptText="Nombre de carta" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B; -fx-prompt-text-fill: #fff;" />
+                  <TextField fx:id="nameCard" layoutX="47.0" layoutY="115.0" prefHeight="25.0" prefWidth="320.0" promptText="Nombre de carta" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B; -fx-prompt-text-fill: #fff;" />
                   <TextField fx:id="entradaBusquedaCartas" layoutX="709.0" layoutY="35.0" onKeyPressed="#accionBuscarAñadirCarta" prefHeight="27.0" prefWidth="183.0" promptText="Buscar nombre de carta.." style="-fx-text-fill: #ffffff; -fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;">
                      <padding>
                         <Insets left="10.0" right="40.0" />
@@ -921,6 +926,216 @@
             </Pane>
          </children>
       </StackPane>
+      <Pane fx:id="MostrarCarta" layoutX="280.0" layoutY="160.0" prefHeight="481.0" prefWidth="880.0" style="-fx-background-color: #0c0c0c;" visible="false">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" />
+            <ImageView fx:id="MCImagenCarta" fitHeight="471.0" fitWidth="340.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/ReversoCard.jpg" />
+               </image>
+            </ImageView>
+            <VBox layoutX="346.0" layoutY="4.0" maxHeight="481.0" maxWidth="534.0" minHeight="401.0" minWidth="534.0" prefHeight="481.0" prefWidth="534.0">
+               <children>
+                  <HBox maxHeight="150.0" maxWidth="200.0" minHeight="150.0" minWidth="200.0" prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <VBox maxHeight="90.0" maxWidth="170.0" minHeight="90.0" minWidth="170.0" prefHeight="90.0" prefWidth="170.0">
+                           <children>
+                              <HBox maxHeight="150.0" maxWidth="505.0" minHeight="150.0" minWidth="505.0" prefHeight="150.0" prefWidth="505.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <VBox maxHeight="150.0" maxWidth="180.0" minHeight="150.0" minWidth="180.0" prefHeight="150.0" prefWidth="180.0">
+                                       <children>
+                                          <Text fx:id="MCNombreC" fill="#07a8ff" strokeType="OUTSIDE" strokeWidth="0.0" text="Trampa Opresiva">
+                                             <font>
+                                                <Font name="System Bold" size="20.0" />
+                                             </font>
+                                          </Text>
+                                          <Text fx:id="MCColeccion" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Coleccion: Kaladesh" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="366.0" prefWidth="534.0" style="-fx-background-color: #151515;">
+                     <children>
+                        <VBox minWidth="133.0" prefHeight="200.0" prefWidth="150.0">
+                           <children>
+                              <Text fx:id="MCPrecio" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio: ">
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="5.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <Separator prefWidth="200.0">
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="5.0" />
+                                 </VBox.margin>
+                              </Separator>
+                              <Text fx:id="MCStock" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Stock: ">
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="5.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <Separator prefWidth="200.0">
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="5.0" />
+                                 </VBox.margin>
+                              </Separator>
+                              <Text fx:id="MCAno" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Año: ">
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="5.0" />
+                                 </VBox.margin>
+                              </Text>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="MCBloqueYuGi" minWidth="133.0" prefHeight="200.0" prefWidth="150.0" style="-fx-background-color: #202020;">
+                           <children>
+                              <Text fill="#fa5f7e" strokeType="OUTSIDE" strokeWidth="0.0" text="Yu Gi Oh">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Id Carta">
+                                 <VBox.margin>
+                                    <Insets bottom="2.0" top="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <TextField fx:id="MCyuID" editable="false" focusTraversable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" style="-fx-background-color: #0c0c0c; -fx-text-fill: #fff;" />
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo Carta">
+                                 <VBox.margin>
+                                    <Insets bottom="2.0" top="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <TextField fx:id="MCyuTIPOC" editable="false" focusTraversable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" style="-fx-background-color: #0c0c0c; -fx-text-fill: #fff;" />
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Atributo">
+                                 <VBox.margin>
+                                    <Insets bottom="2.0" top="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <TextField fx:id="MCyuAtribu" editable="false" focusTraversable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" style="-fx-background-color: #0c0c0c; -fx-text-fill: #fff;" />
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nivel">
+                                 <VBox.margin>
+                                    <Insets bottom="2.0" top="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <TextField fx:id="MCyuLVL" editable="false" focusTraversable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" style="-fx-background-color: #0c0c0c; -fx-text-fill: #fff;" />
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Sub Tipo">
+                                 <VBox.margin>
+                                    <Insets bottom="2.0" top="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <TextField fx:id="MCyuSub" editable="false" focusTraversable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" style="-fx-background-color: #0c0c0c; -fx-text-fill: #fff;" />
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets left="6.0" />
+                           </padding>
+                        </VBox>
+                        <VBox fx:id="MCBloqueMagic" minWidth="133.0" prefHeight="200.0" prefWidth="150.0">
+                           <children>
+                              <Text fill="#fa5f7e" strokeType="OUTSIDE" strokeWidth="0.0" text="Magic">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Id Carta">
+                                 <VBox.margin>
+                                    <Insets bottom="2.0" top="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <TextField fx:id="MCmagicID" editable="false" focusTraversable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" style="-fx-background-color: #0c0c0c; -fx-text-fill: #fff;" />
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo">
+                                 <VBox.margin>
+                                    <Insets bottom="2.0" top="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <TextField fx:id="MCmagicTIPOC" editable="false" focusTraversable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" style="-fx-background-color: #0c0c0c; -fx-text-fill: #fff;" />
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Coste">
+                                 <VBox.margin>
+                                    <Insets bottom="2.0" top="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <TextField fx:id="MCmagicCoste" editable="false" focusTraversable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" style="-fx-background-color: #0c0c0c; -fx-text-fill: #fff;" />
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Color">
+                                 <VBox.margin>
+                                    <Insets bottom="2.0" top="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <TextField fx:id="MCmagicColor" editable="false" focusTraversable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" style="-fx-background-color: #0c0c0c; -fx-text-fill: #fff;" />
+                           </children>
+                           <padding>
+                              <Insets left="6.0" />
+                           </padding>
+                        </VBox>
+                        <VBox fx:id="MCBloqueFow" minWidth="133.0" prefHeight="200.0" prefWidth="150.0" style="-fx-background-color: #202020;">
+                           <children>
+                              <Text fill="#fa5f7e" strokeType="OUTSIDE" strokeWidth="0.0" text="Force of Will">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Id Carta">
+                                 <VBox.margin>
+                                    <Insets bottom="2.0" top="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <TextField fx:id="MCfowID" editable="false" focusTraversable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" style="-fx-background-color: #0c0c0c; -fx-text-fill: #fff;" />
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo">
+                                 <VBox.margin>
+                                    <Insets bottom="2.0" top="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <TextField fx:id="MCfowTIPOC" editable="false" focusTraversable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" style="-fx-background-color: #0c0c0c; -fx-text-fill: #fff;" />
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Coste">
+                                 <VBox.margin>
+                                    <Insets bottom="2.0" top="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <TextField fx:id="MCfowCoste" editable="false" focusTraversable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" style="-fx-background-color: #0c0c0c; -fx-text-fill: #fff;" />
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Elemento">
+                                 <VBox.margin>
+                                    <Insets bottom="2.0" top="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <TextField fx:id="MCfowElemento" editable="false" focusTraversable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" style="-fx-background-color: #0c0c0c; -fx-text-fill: #fff;" />
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Raza">
+                                 <VBox.margin>
+                                    <Insets bottom="2.0" top="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                              <TextField fx:id="MCfowRaza" editable="false" focusTraversable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" style="-fx-background-color: #0c0c0c; -fx-text-fill: #fff;" />
+                           </children>
+                           <padding>
+                              <Insets left="6.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <ImageView fx:id="iconoX" fitHeight="16.0" fitWidth="16.0" layoutX="850.0" layoutY="15.0" onMouseClicked="#accionSalirMostrarCarta" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/close.png" />
+               </image>
+            </ImageView>
+            <TextArea fx:id="MCDescripcion" editable="false" focusTraversable="false" layoutX="365.0" layoutY="70.0" maxHeight="70.0" maxWidth="499.0" minHeight="70.0" minWidth="499.0" prefHeight="70.0" prefWidth="499.0" style="-fx-control-inner-background: #151515; -fx-text-fill: #fff; -fx-border-radius: 5em; -fx-text-box-border: transparent; -fx-focus-color: transparent; -fx-background-insets: 0; -fx-background-color: #0c0c0c;" wrapText="true" />
+         </children>
+      </Pane>
    </children>
    <effect>
       <DropShadow color="#1b1eeb" />

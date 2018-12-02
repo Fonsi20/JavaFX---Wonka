@@ -54,7 +54,7 @@ public class FXMLLoginController implements Initializable {
             @Override
             protected Void call() throws Exception {
                 try {
-                    Thread.sleep(400);
+                    Thread.sleep(200);
                 } catch (InterruptedException e) {
                 }
                 return null;

@@ -37,6 +37,7 @@ public class createBBDD {
                     + "	NombreCarta VARCHAR(40) NOT NULL,"
                     + "	Descripcion VARCHAR(900) NOT NULL,"
                     + "	Coleccion VARCHAR(100) NOT NULL,"
+                    + " IMG LongBlob NULL,"
                     + "	PRIMARY KEY (IDCarta)"
                     + ")ENGINE INNODB;");
 

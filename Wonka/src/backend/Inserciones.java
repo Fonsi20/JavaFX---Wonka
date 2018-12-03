@@ -20,18 +20,18 @@ public class Inserciones {
 
     public SessionFactory sessionFactory = NewHibernateUtil.getSessionFactory();
 
-    public static void insertarCartasMagic(ArrayList<String> Carta) {
+    public static void insertarCartasMagic(ArrayList<String> Carta, byte[] IMG) {
         System.out.println("en MAGIC " + Carta);
         int stock = Integer.parseInt(Carta.get(0));
         float price = Float.parseFloat(Carta.get(6));
         String[] parts = (Carta.get(5)).split("-");
         String year = parts[0];
         CartaMAGIC aux;
-        aux = new CartaMAGIC(Carta.get(9), Carta.get(7), Carta.get(8), Carta.get(10), stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), year, price);
+        aux = new CartaMAGIC(Carta.get(9), Carta.get(7), Carta.get(8), Carta.get(10), stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), year, price, IMG);
         guardarModificar(aux);
     }
 
-    public static void insertarCartasYuGi(ArrayList<String> Carta) {
+    public static void insertarCartasYuGi(ArrayList<String> Carta, byte[] IMG) {
         System.out.println("en YUGI " + Carta);
         int stock = Integer.parseInt(Carta.get(0));
         float price = Float.parseFloat(Carta.get(6));
@@ -39,22 +39,22 @@ public class Inserciones {
         String[] parts = (Carta.get(5)).split("-");
         String year = parts[0];
         CartaYUGI aux;
-        aux = new CartaYUGI(Carta.get(7), Carta.get(11), Carta.get(8), Carta.get(10), nivel, stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), year, price);
+        aux = new CartaYUGI(Carta.get(7), Carta.get(11), Carta.get(8), Carta.get(10), nivel, stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), year, price, IMG);
         guardarModificar(aux);
     }
 
-    public static void insertarCartasFOW(ArrayList<String> Carta) {
+    public static void insertarCartasFOW(ArrayList<String> Carta, byte[] IMG) {
         System.out.println("en FOW " + Carta);
         int stock = Integer.parseInt(Carta.get(0));
         float price = Float.parseFloat(Carta.get(6));
         String[] parts = (Carta.get(5)).split("-");
         String year = parts[0];
         CartaFOW aux;
-        aux = new CartaFOW(Carta.get(7), Carta.get(9), Carta.get(8), Carta.get(11), Carta.get(10), stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), year, price);
+        aux = new CartaFOW(Carta.get(7), Carta.get(9), Carta.get(8), Carta.get(11), Carta.get(10), stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), year, price, IMG);
         guardarModificar(aux);
     }
 
-    public static void actualizarCartaMagic(ArrayList<String> Carta) throws SQLException {
+    public static void actualizarCartaMagic(ArrayList<String> Carta, byte[] IMG) throws SQLException {
         CartaMAGIC mag = null;
         String nombre = Carta.get(2);
         Statement S = Wonka.conect.createStatement();
@@ -76,6 +76,7 @@ public class Inserciones {
             mag.setColeccion(Carta.get(4));
             mag.setPrecio(Float.parseFloat(Carta.get(6)));
             mag.setAno(Carta.get(5));
+            mag.setIMG(IMG);
 
             guardarModificar(mag);
 
@@ -84,7 +85,7 @@ public class Inserciones {
         }
     }
 
-    public static void actualizarCartaYuGi(ArrayList<String> Carta) throws SQLException {
+    public static void actualizarCartaYuGi(ArrayList<String> Carta, byte[] IMG) throws SQLException {
         CartaYUGI yu = null;
         String nombre = Carta.get(2);
         Statement S = Wonka.conect.createStatement();
@@ -108,6 +109,7 @@ public class Inserciones {
             yu.setColeccion(Carta.get(4));
             yu.setPrecio(Float.parseFloat(Carta.get(6)));
             yu.setAno(Carta.get(5));
+            yu.setIMG(IMG);
 
             guardarModificar(yu);
 
@@ -116,7 +118,7 @@ public class Inserciones {
         }
     }
 
-    public static void actualizarCartaFOW(ArrayList<String> Carta) throws SQLException {
+    public static void actualizarCartaFOW(ArrayList<String> Carta, byte[] IMG) throws SQLException {
         CartaFOW fow = null;
         String nombre = Carta.get(2);
         Statement S = Wonka.conect.createStatement();
@@ -139,6 +141,7 @@ public class Inserciones {
             fow.setColeccion(Carta.get(4));
             fow.setPrecio(Float.parseFloat(Carta.get(6)));
             fow.setAno(Carta.get(5));
+            fow.setIMG(IMG);
 
             guardarModificar(fow);
 

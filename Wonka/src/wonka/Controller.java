@@ -8,6 +8,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import javafx.event.ActionEvent;
 
@@ -21,6 +23,7 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.Files;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -564,6 +567,15 @@ public class Controller implements Initializable {
                             for (Object o : CartaYUGI) {
                                 if (itemCartaNombre.getText().equals(((CartaYUGI) o).getNombreCarta())) {
 
+                                    if (((CartaYUGI) o).getIMG() != null) {
+
+                                        Image img = new Image(new ByteArrayInputStream(((CartaYUGI) o).getIMG()));
+                                        MCImagenCarta.setImage(img);
+                                    } else {
+                                        String url = "file:src/images/ReversoCard.jpg";
+                                        MCImagenCarta.setImage(new Image(url));
+                                    }
+
                                     MCDescripcion.setText(((CartaYUGI) o).getDescripcion());
                                     String[] parts = (((CartaYUGI) o).getAno()).split("-");
                                     String year = parts[0];
@@ -594,6 +606,15 @@ public class Controller implements Initializable {
                             MCBloqueMagic.setDisable(false);
                             for (Object o : CartaMAGIC) {
                                 if (itemCartaNombre.getText().equals(((CartaMAGIC) o).getNombreCarta())) {
+
+                                    if (((CartaMAGIC) o).getIMG() != null) {
+
+                                        Image img = new Image(new ByteArrayInputStream(((CartaMAGIC) o).getIMG()));
+                                        MCImagenCarta.setImage(img);
+                                    } else {
+                                        String url = "file:src/images/ReversoCard.jpg";
+                                        MCImagenCarta.setImage(new Image(url));
+                                    }
 
                                     MCDescripcion.setText(((CartaMAGIC) o).getDescripcion());
                                     String[] parts = (((CartaMAGIC) o).getAno()).split("-");
@@ -638,6 +659,14 @@ public class Controller implements Initializable {
                             for (Object o : CartaFOW) {
                                 if (itemCartaNombre.getText().equals(((CartaFOW) o).getNombreCarta())) {
 
+                                    if (((CartaFOW) o).getIMG() != null) {
+
+                                        Image img = new Image(new ByteArrayInputStream(((CartaFOW) o).getIMG()));
+                                        MCImagenCarta.setImage(img);
+                                    } else {
+                                        String url = "file:src/images/ReversoCard.jpg";
+                                        MCImagenCarta.setImage(new Image(url));
+                                    }
                                     MCDescripcion.setText(((CartaFOW) o).getDescripcion());
                                     String[] parts = (((CartaFOW) o).getAno()).split("-");
                                     String year = parts[0];
@@ -772,6 +801,12 @@ public class Controller implements Initializable {
                             for (Object o : CartaYUGI) {
                                 if (itemCartaNombre.getText().equals(((CartaYUGI) o).getNombreCarta())) {
 
+                                    if(((CartaYUGI)o).getIMG()==null){
+                                        btnSubirImagen.setText("Subir imagen");
+                                    }else{
+                                        btnSubirImagen.setText("Modificar imagen");
+                                    }
+                                    
                                     sumCard.setText(((CartaYUGI) o).getDescripcion());
                                     String[] parts = (((CartaYUGI) o).getAno()).split("-");
                                     String year = parts[0];
@@ -798,6 +833,12 @@ public class Controller implements Initializable {
                             for (Object o : CartaMAGIC) {
                                 if (itemCartaNombre.getText().equals(((CartaMAGIC) o).getNombreCarta())) {
 
+                                    if(((CartaMAGIC)o).getIMG()==null){
+                                        btnSubirImagen.setText("Subir imagen");
+                                    }else{
+                                        btnSubirImagen.setText("Modificar imagen");
+                                    }
+                                    
                                     sumCard.setText(((CartaMAGIC) o).getDescripcion());
                                     String[] parts = (((CartaMAGIC) o).getAno()).split("-");
                                     String year = parts[0];
@@ -836,6 +877,12 @@ public class Controller implements Initializable {
                             for (Object o : CartaFOW) {
                                 if (itemCartaNombre.getText().equals(((CartaFOW) o).getNombreCarta())) {
 
+                                    if(((CartaFOW)o).getIMG()==null){
+                                        btnSubirImagen.setText("Subir imagen");
+                                    }else{
+                                        btnSubirImagen.setText("Modificar imagen");
+                                    }
+                                    
                                     sumCard.setText(((CartaFOW) o).getDescripcion());
                                     String[] parts = (((CartaFOW) o).getAno()).split("-");
                                     String year = parts[0];
@@ -2267,7 +2314,7 @@ public class Controller implements Initializable {
 
     @FXML
     //Modificamos los campos de una carta seleccionada en la lista y la subimos de nuevo a la BBDD
-    void accionModificarCarta(ActionEvent event) throws SQLException {
+    void accionModificarCarta(ActionEvent event) throws SQLException, IOException {
 
         //Genericas
         stockCard.setStyle(" -fx-background-color:#00000b;"
@@ -2330,6 +2377,8 @@ public class Controller implements Initializable {
         Carta.add(colecCard.getText());
         Carta.add(yearCard.getText());
         Carta.add(priceCard.getText());
+        System.out.println(selectedFile.getAbsolutePath());
+        byte[] IMG = Files.readAllBytes(selectedFile.toPath());
 
         if (((String) nameGame.getSelectionModel().getSelectedItem()) == null) {
             nameGame.setStyle("  -fx-border-color:#f45454;"
@@ -2463,7 +2512,7 @@ public class Controller implements Initializable {
                     }
 
                     if (correcto == 0) {
-                        Inserciones.actualizarCartaMagic(Carta);
+                        Inserciones.actualizarCartaMagic(Carta, IMG);
                         accionLimpiarCarta(event);
                         break;
                     } else {
@@ -2518,7 +2567,7 @@ public class Controller implements Initializable {
                     }
 
                     if (correcto == 0) {
-                        Inserciones.actualizarCartaYuGi(Carta);
+                        Inserciones.actualizarCartaYuGi(Carta, IMG);
                         accionLimpiarCarta(event);
                         break;
                     } else {
@@ -2570,7 +2619,7 @@ public class Controller implements Initializable {
                     }
 
                     if (correcto == 0) {
-                        Inserciones.actualizarCartaFOW(Carta);
+                        Inserciones.actualizarCartaFOW(Carta, IMG);
                         accionLimpiarCarta(event);
                         break;
                     } else {
@@ -2615,6 +2664,7 @@ public class Controller implements Initializable {
         stockCard.setText("");
         priceCard.setText("");
         sumCard.setText("");
+        btnSubirImagen.setText("Subir imagen");
         stockCard.setStyle(" -fx-background-color:#00000b;"
                 + "    -fx-text-fill:#fff;");
 
@@ -2685,7 +2735,7 @@ public class Controller implements Initializable {
 
     @FXML
     //Guardamos la carta introducida en la BBDD
-    void accionGuardarCarta(ActionEvent event) throws SQLException {
+    void accionGuardarCarta(ActionEvent event) throws SQLException, IOException {
 
         //Genericas
         stockCard.setStyle(" -fx-background-color:#00000b;"
@@ -2749,6 +2799,8 @@ public class Controller implements Initializable {
         Carta.add(colecCard.getText());
         Carta.add(yearCard.getText());
         Carta.add(priceCard.getText());
+        System.out.println(selectedFile.getAbsolutePath());
+        byte[] IMG = Files.readAllBytes(selectedFile.toPath());
 
         if (((String) nameGame.getSelectionModel().getSelectedItem()) == null) {
             nameGame.setStyle("  -fx-border-color:#f45454;"
@@ -2882,7 +2934,7 @@ public class Controller implements Initializable {
                     }
 
                     if (correcto == 0) {
-                        Inserciones.insertarCartasMagic(Carta);
+                        Inserciones.insertarCartasMagic(Carta, IMG);
                         accionLimpiarCarta(event);
                         break;
                     } else {
@@ -2937,7 +2989,7 @@ public class Controller implements Initializable {
                     }
 
                     if (correcto == 0) {
-                        Inserciones.insertarCartasYuGi(Carta);
+                        Inserciones.insertarCartasYuGi(Carta, IMG);
                         accionLimpiarCarta(event);
                         break;
                     } else {
@@ -2989,7 +3041,7 @@ public class Controller implements Initializable {
                     }
 
                     if (correcto == 0) {
-                        Inserciones.insertarCartasFOW(Carta);
+                        Inserciones.insertarCartasFOW(Carta, IMG);
                         accionLimpiarCarta(event);
                         break;
                     } else {
@@ -3160,10 +3212,7 @@ public class Controller implements Initializable {
         );
         try {
             selectedFile = fileChooser.showOpenDialog(stage);
-            //String filepath = selectedFile.getAbsolutePath();
             btnSubirImagen.setText("Imagen Lista");
-            String url = "file:" + selectedFile.getAbsolutePath();
-            MCImagenCarta.setImage(new Image(url));
         } catch (Exception e) {
 
         }

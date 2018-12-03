@@ -56,6 +56,6 @@
             </LinearGradient>
          </fill>
       </Text>
-      <Text fill="WHITE" layoutX="56.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Proyecto para Acceso a Datos( ADD) &#10;Programa gestor de  clientes, pedidos y cartas de los juegos:&#10;Magic, Force of Wild y Yu Gi Oh.&#10;Desarrolllado en 2018 y propiedad de:&#10;Alfonso Fernández, Daniel Bastos yDiego Vilariño" />
+      <Text fill="WHITE" layoutX="56.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Proyecto para Acceso a Datos( ADD) &#10;Programa gestor de  clientes, pedidos y cartas de los juegos:&#10;Magic, Force of Will y Yu Gi Oh.&#10;Desarrolllado en 2018 y propiedad de:&#10;Alfonso Fernández, Daniel Bastos y Diego Vilariño" />
    </children>
 </AnchorPane>

@@ -71,7 +71,6 @@ public class Inserciones {
             mag.setTipo(Carta.get(10));
             mag.setStock(Integer.parseInt(Carta.get(0)));
             mag.setNombreJuego(Carta.get(1));
-            //mag.setNombreCarta(Carta.get(2));
             mag.setDescripcion(Carta.get(3));
             mag.setColeccion(Carta.get(4));
             mag.setPrecio(Float.parseFloat(Carta.get(6)));
@@ -98,13 +97,12 @@ public class Inserciones {
             System.out.println(Carta.get(9));
             //String IDCYugi, String TipoCarta, String Atributo, String SubTipo, int Nivel, int Stock, String NombreJuego, String NombreCarta, String Descripcion, String Coleccion, String Ano, float Precio
             yu.setIDCYugi(Carta.get(7));
-            yu.setTipoCarta(Carta.get(8));
-            yu.setAtributo(Carta.get(9));
+            yu.setTipoCarta(Carta.get(11));
+            yu.setAtributo(Carta.get(8));
             yu.setSubTipo(Carta.get(10));
-            yu.setNivel(Integer.parseInt(Carta.get(11)));
+            yu.setNivel(Integer.parseInt(Carta.get(9)));
             yu.setStock(Integer.parseInt(Carta.get(0)));
             yu.setNombreJuego(Carta.get(1));
-            //yu.setNombreCarta(Carta.get(2));
             yu.setDescripcion(Carta.get(3));
             yu.setColeccion(Carta.get(4));
             yu.setPrecio(Float.parseFloat(Carta.get(6)));
@@ -130,13 +128,12 @@ public class Inserciones {
 
             //String Elemento, String IDCFoW, String Coste, String Tipo, String Raza, int Stock, String NombreJuego, String NombreCarta, String Descripcion, String Coleccion, String Ano, float Precio
             fow.setElemento(Carta.get(7));
-            fow.setIDCFoW(Carta.get(8));
-            fow.setCoste(Carta.get(9));
-            fow.setTipo(Carta.get(11));
-            fow.setRaza(Carta.get(10));
+            fow.setIDCFoW(Carta.get(9));
+            fow.setCoste(Carta.get(8));
+            fow.setTipo(Carta.get(10));
+            fow.setRaza(Carta.get(11));
             fow.setStock(Integer.parseInt(Carta.get(0)));
             fow.setNombreJuego(Carta.get(1));
-            //fow.setNombreCarta(Carta.get(2));
             fow.setDescripcion(Carta.get(3));
             fow.setColeccion(Carta.get(4));
             fow.setPrecio(Float.parseFloat(Carta.get(6)));

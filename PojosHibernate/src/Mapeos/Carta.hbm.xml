@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="Objetos.Carta" table="cartas">
+    <id name="IDCarta">
+      <generator class="identity"/>
+    </id>
+    <property column="Stock" name="Stock"/>
+    <property column="NombreJuego" name="NombreJuego"/>
+    <property column="NombreCarta" name="NombreCarta"/>
+    <property column="Descripcion" name="Descripcion"/>
+    <property column="Coleccion" name="Coleccion"/>
+    <property column="Año" name="Ano"/>
+    <property column="Precio" name="Precio"/>
+    <property column="IMG" name="IMG"/>
+    
+    <!-- Relaciones -->
+    <set inverse="true" name="Reservas" table="reservas">
+      <key>
+        <column name="IDCarta" not-null="true"/>
+      </key>
+      <one-to-many class="Objetos.Reserva"/>
+    </set>
+    <set inverse="true" name="Ventas" table="ventas">
+      <key>
+        <column name="IDCarta" not-null="true"/>
+      </key>
+      <one-to-many class="Objetos.Venta"/>
+    </set>
+    
+    <!-- Subclases -->
+    <!-- Magic -->
+    <joined-subclass name="Objetos.CartaMAGIC" table="cartas_magic">
+      <key column="IDCarta"/>
+      <property name="IDCMagic"/>
+      <property name="Color"/>
+      <property name="Coste"/>
+      <property name="Tipo"/>
+    </joined-subclass>
+    <!-- Force of Will -->
+    <joined-subclass name="Objetos.CartaFOW" table="cartas_fow">
+      <key column="IDCarta"/>
+      <property name="IDCFoW"/>
+      <property name="Elemento"/>
+      <property name="Coste"/>
+      <property name="Tipo"/>
+      <property name="Raza"/>
+    </joined-subclass>
+    <!-- Yu-Gi-Oh -->
+    <joined-subclass name="Objetos.CartaYUGI" table="cartas_yugi">
+      <key column="IDCarta"/>
+      <property name="IDCYugi"/>
+      <property name="TipoCarta"/>
+      <property name="Atributo"/>
+      <property name="Nivel"/>
+      <property name="SubTipo"/>
+    </joined-subclass>
+  </class>
+</hibernate-mapping>

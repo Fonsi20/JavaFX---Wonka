@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="Objetos.Venta" table="ventas">
+        <id name="IDVenta" column="IDVenta">
+            <generator class="identity"/>
+        </id>
+        <many-to-one name="Carta" class="Objetos.Carta">
+            <column name="IDCarta" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="Cliente" class="Objetos.Cliente">
+            <column name="IDCliente" not-null="true"/>
+        </many-to-one>
+        <property name="Cantidad" column="Cantidad"/>
+        
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="Objetos.Cliente" table="clientes">
+        <id name="IDCliente">
+            <generator class="identity"/>
+        </id>
+        <property name="Nombre" column="Nombre"/>
+        <property name="Apellidos" column="Apellidos"/>
+        <property name="Direccion" column="Dirección"/>
+        <property name="Telefono" column="Telefono"/>
+        <property name="Mail" column="Mail"/>
+        <property name="Edad" column="Edad"/>
+        <property name="Sexo" column="Sexo"/>
+        
+        <!-- Relaciones -->
+        <set name="Reservas" table="reservas" inverse="true">
+            <key>
+                <column name="IDCliente" not-null="true" unique="true"/>
+            </key>
+            <one-to-many class="Objetos.Reserva"/>
+        </set>
+        
+        <set name="Ventas" table="ventas" inverse="true">
+            <key>
+                <column name="IDCliente" not-null="true" unique="true"/>
+            </key>
+            <one-to-many class="Objetos.Venta"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -7,6 +7,16 @@ import backend.comprobacionesDatos;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import com.lynden.gmapsfx.GoogleMapView;
+import com.lynden.gmapsfx.MapComponentInitializedListener;
+import com.lynden.gmapsfx.javascript.object.GoogleMap;
+import com.lynden.gmapsfx.javascript.object.InfoWindow;
+import com.lynden.gmapsfx.javascript.object.InfoWindowOptions;
+import com.lynden.gmapsfx.javascript.object.LatLong;
+import com.lynden.gmapsfx.javascript.object.MapOptions;
+import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
+import com.lynden.gmapsfx.javascript.object.Marker;
+import com.lynden.gmapsfx.javascript.object.MarkerOptions;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import javafx.event.ActionEvent;
@@ -46,7 +56,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.hibernate.Session;
 
-public class Controller implements Initializable {
+public class Controller implements Initializable , MapComponentInitializedListener{
 
 // <editor-fold defaultstate="collapsed" desc="Declaraciones de elementos de la interfaz">
     //INICIALIZAMOS LAS PANTALLAS Y TODOS LOS DEMÁS COMPONENETES DE NUESTROS FXML
@@ -343,6 +353,10 @@ public class Controller implements Initializable {
 
     @FXML
     private Button btnSubirImagen;
+    
+    @FXML
+    private GoogleMapView gmaps;
+    private GoogleMap map;
 
     // </editor-fold>
     
@@ -362,7 +376,9 @@ public class Controller implements Initializable {
     // <editor-fold defaultstate="collapsed" desc="Método de inicialización">
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        gmaps.addMapInializedListener(this);
+     
+       
         try {
             //Arrancamos todas las listas de todas las pantallas
             ListCards();
@@ -416,6 +432,41 @@ public class Controller implements Initializable {
 
     }
     // </editor-fold>
+    
+    @Override
+    public void mapInitialized() {
+           LatLong joeSmithLocation = new LatLong(42.2260838,-8.7604453);
+       
+        
+        
+        //Set the initial properties of the map.
+        MapOptions mapOptions = new MapOptions();
+        
+        mapOptions.center(new LatLong(42.2260838,-8.7604453))
+                .mapType(MapTypeIdEnum.ROADMAP)
+                .overviewMapControl(false)
+                .panControl(false)
+                .rotateControl(false)
+                .scaleControl(false)
+                .streetViewControl(false)
+                .zoomControl(false)
+                .zoom(13);
+                   
+        map = gmaps.createMap(mapOptions);
+
+        //Add markers to the map
+        MarkerOptions markerOptions1 = new MarkerOptions();
+        markerOptions1.position(joeSmithLocation);
+        
+
+        
+        Marker joeSmithMarker = new Marker(markerOptions1);
+      
+        map.addMarker( joeSmithMarker );
+      
+
+        
+    }   
 
     // <editor-fold defaultstate="collapsed" desc="Método de control de campos editables para la ventana de Cartas">
     @FXML

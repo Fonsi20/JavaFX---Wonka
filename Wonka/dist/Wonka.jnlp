@@ -8,8 +8,9 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Wonka.jar" size="3574839" download="eager" />
+    <jar href="Wonka.jar" size="3605716" download="eager" />
     <jar href="lib\Clases.jar" size="26407" download="eager" />
+    <jar href="lib\GMapsFX-2.10.0.jar" size="154471" download="eager" />
     <jar href="lib\antlr-2.7.7.jar" size="437548" download="eager" />
     <jar href="lib\c3p0-0.9.2.1.jar" size="422423" download="eager" />
     <jar href="lib\dom4j-1.6.1.jar" size="309995" download="eager" />

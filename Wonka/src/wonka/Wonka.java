@@ -26,35 +26,13 @@ public class Wonka extends Application {
     public static Statement sentencia;
     public static ResultSet res;
     public static int op;
+    static boolean basedatos;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
 
         primaryStage.getIcons().add(new Image("images/Magic.png")); 
-        String url = "jdbc:mysql://localhost:3307/?user=root&password=usbw";
-        try {
-            conect = DriverManager.getConnection(url);
-            sentencia = conect.createStatement();
-
-        } catch (SQLException e) {
-            System.out.println("Error: " + e);
-            System.exit(1);
-        }
-        try {
-            if (!sentencia.executeQuery("show databases like 'TIENDACARTAS'").first()) {
-                createBBDD.crearTablas(sentencia);
-                System.out.println("--- Base de datos CREADA ---\n");
-            } else {
-                sentencia.execute("use TIENDACARTAS");
-                System.out.println("--- Base de datos CREADA ---\n");
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Error: " + e);
-            System.exit(2);
-        }
-
         mostrarVentanaPrincipal();
 
     }

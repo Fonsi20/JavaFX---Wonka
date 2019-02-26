@@ -1,9 +1,14 @@
 package wonka;
 
+import backend.createBBDD;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
@@ -17,9 +22,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import static wonka.Wonka.conect;
+import static wonka.Wonka.sentencia;
+import org.neodatis.odb.ODBFactory;
+import org.neodatis.odb.ODBServer;
 
 /**
  *
@@ -27,7 +37,7 @@ import javafx.stage.Stage;
  */
 public class FXMLLoginController implements Initializable {
 
-    private double x, y;
+    private double x, y;    
 
     @FXML
     private Label label;
@@ -42,13 +52,16 @@ public class FXMLLoginController implements Initializable {
     private Button btnEnter;
 
     @FXML
+    private RadioButton rbHibernate;
+
+    @FXML
     private PasswordField edPass;
 
     @FXML
     private TextField edUser;
 
     @FXML
-    private void handleButtonAction(ActionEvent event) throws IOException {
+    private void handleButtonAction(ActionEvent event) throws IOException, InterruptedException{
 
         Task<Void> sleeper = new Task<Void>() {
             @Override
@@ -67,11 +80,46 @@ public class FXMLLoginController implements Initializable {
                 try {
                     if (event.getSource() == btnEnter) {
                         if (edUser.getText().toLowerCase().equals("root") && edPass.getText().toLowerCase().equals("root")) {
+
+                            if (rbHibernate.isSelected()) {
+                                String url = "jdbc:mysql://localhost:3307/?user=root&password=usbw";
+                                try {
+                                    conect = DriverManager.getConnection(url);
+                                    sentencia = conect.createStatement();
+
+                                } catch (SQLException e) {
+                                    System.out.println("Error: " + e);
+                                    System.exit(1);
+                                }
+                                try {
+                                    if (!sentencia.executeQuery("show databases like 'TIENDACARTAS'").first()) {
+                                        createBBDD.crearTablas(sentencia);
+                                        System.out.println("--- Base de datos CREADA ---\n");
+                                    } else {
+                                        sentencia.execute("use TIENDACARTAS");
+                                        System.out.println("--- Base de datos CREADA ---\n");
+                                    }Wonka.basedatos = true;
+
+                                } catch (SQLException e) {
+                                    System.out.println("Error: " + e);
+                                    System.exit(2);
+                                }
+                            } else {
+                                //Inicio del servidor: 
+                                System.out.println("Iniciando programa:");
+                                ODBServer server = ODBFactory.openServer(8000);
+                                server.addBase("neoWonka", "neoWonka.neo");
+                                server.startServer(true);
+                                Thread.sleep(100);
+                                Wonka.basedatos = false;
+
+                            }
                             Parent segunda = FXMLLoader.load(getClass().getResource("Home.fxml"));
                             Stage HomeStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                             HomeStage.setScene(new Scene(segunda));
                             HomeStage.toFront();
                             HomeStage.show();
+                            
                         } else {
                             edPass.setText("");
                             edUser.setText("");
@@ -84,6 +132,8 @@ public class FXMLLoginController implements Initializable {
 
                 } catch (IOException e) {
                     System.out.println(e);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(FXMLLoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -93,6 +143,7 @@ public class FXMLLoginController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.MoverVentanas(this.login);
+
     }
 
     private void MoverVentanas(AnchorPane root) {

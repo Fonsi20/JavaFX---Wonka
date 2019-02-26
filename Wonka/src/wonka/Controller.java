@@ -55,8 +55,16 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.hibernate.Session;
+import org.neodatis.odb.ODB;
+import org.neodatis.odb.ODBFactory;
+import org.neodatis.odb.ObjectValues;
+import org.neodatis.odb.Objects;
+import org.neodatis.odb.Values;
+import org.neodatis.odb.core.query.criteria.ICriterion;
+import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
+import org.neodatis.odb.impl.core.query.values.ValuesCriteriaQuery;
 
-public class Controller implements Initializable , MapComponentInitializedListener{
+public class Controller implements Initializable, MapComponentInitializedListener {
 
 // <editor-fold defaultstate="collapsed" desc="Declaraciones de elementos de la interfaz">
     //INICIALIZAMOS LAS PANTALLAS Y TODOS LOS DEMÁS COMPONENETES DE NUESTROS FXML
@@ -353,13 +361,12 @@ public class Controller implements Initializable , MapComponentInitializedListen
 
     @FXML
     private Button btnSubirImagen;
-    
+
     @FXML
     private GoogleMapView gmaps;
     private GoogleMap map;
 
     // </editor-fold>
-    
     private Node[] nodes = new Node[0];
     private Node[] nodesCartas = new Node[0];
     private Node[] nodesClientes = new Node[0];
@@ -377,27 +384,34 @@ public class Controller implements Initializable , MapComponentInitializedListen
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         gmaps.addMapInializedListener(this);
-     
-       
+        System.out.println("uno");
+
         try {
             //Arrancamos todas las listas de todas las pantallas
             ListCards();
         } catch (SQLException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println("dos");
         ListCardsOrders();
+        System.out.println("tres");
         try {
             ListCardsClientes();
         } catch (SQLException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println("cuatro");
+
         ListCardsLess();
+        System.out.println("cinco");
         ListClientesLess();
+        System.out.println("seis");
         try {
             ListHistorial();
         } catch (SQLException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println("siete");
 
         //Cargamos items en la comboBox de tipo de juego de carta
         nameGame.getItems().addAll(
@@ -432,17 +446,15 @@ public class Controller implements Initializable , MapComponentInitializedListen
 
     }
     // </editor-fold>
-    
+
     @Override
     public void mapInitialized() {
-           LatLong joeSmithLocation = new LatLong(42.2260838,-8.7604453);
-       
-        
-        
+        LatLong joeSmithLocation = new LatLong(42.2260838, -8.7604453);
+
         //Set the initial properties of the map.
         MapOptions mapOptions = new MapOptions();
-        
-        mapOptions.center(new LatLong(42.2260838,-8.7604453))
+
+        mapOptions.center(new LatLong(42.2260838, -8.7604453))
                 .mapType(MapTypeIdEnum.ROADMAP)
                 .overviewMapControl(false)
                 .panControl(false)
@@ -451,22 +463,18 @@ public class Controller implements Initializable , MapComponentInitializedListen
                 .streetViewControl(false)
                 .zoomControl(false)
                 .zoom(13);
-                   
+
         map = gmaps.createMap(mapOptions);
 
         //Add markers to the map
         MarkerOptions markerOptions1 = new MarkerOptions();
         markerOptions1.position(joeSmithLocation);
-        
 
-        
         Marker joeSmithMarker = new Marker(markerOptions1);
-      
-        map.addMarker( joeSmithMarker );
-      
 
-        
-    }   
+        map.addMarker(joeSmithMarker);
+
+    }
 
     // <editor-fold defaultstate="collapsed" desc="Método de control de campos editables para la ventana de Cartas">
     @FXML
@@ -630,35 +638,251 @@ public class Controller implements Initializable , MapComponentInitializedListen
     @FXML
     //Carga de la lista de Cartas de la pantalla inicial
     public void ListCards() throws SQLException {
-        try {
-            Statement S = Wonka.conect.createStatement();
-            ResultSet Res = S.executeQuery("SELECT COUNT(*) AS Cont FROM CARTAS");
-            Res.next();
+        if (Wonka.basedatos == true) {
+            try {
+                Statement S = Wonka.conect.createStatement();
+                ResultSet Res = S.executeQuery("SELECT COUNT(*) AS Cont FROM CARTAS");
+                Res.next();
+                limpiarListas(pnItems);
+                nodes = new Node[Res.getInt("Cont")];
+                Res.close();
+                Res = S.executeQuery("SELECT NombreJuego as NJ, NombreCarta as NC, Coleccion as C, Precio as P, Stock as S FROM CARTAS");
+                try {
+                    for (int i = 0; i < nodes.length; i++) {
+                        Res.next();
+                        final int j = i;
+                        nodes[i] = FXMLLoader.load(getClass().getResource("ItemCarta.fxml"));
+
+                        //Establecimiento de labels
+                        Label itemCartaJuego = (Label) nodes[i].lookup("#itemCartaJuego");
+                        itemCartaJuego.setText(Res.getString("NJ"));
+
+                        Label itemCartaNombre = (Label) nodes[i].lookup("#itemCartaNombre");
+                        itemCartaNombre.setText(Res.getString("NC"));
+
+                        Label itemCartaColeccion = (Label) nodes[i].lookup("#itemCartaColeccion");
+                        itemCartaColeccion.setText(Res.getString("C"));
+
+                        Label itemCartaPrecio = (Label) nodes[i].lookup("#itemCartaPrecio");
+                        itemCartaPrecio.setText(Res.getString("P"));
+
+                        Button itemCartaStock = (Button) nodes[i].lookup("#itemCartaStock");
+                        itemCartaStock.setText(Res.getString("S"));
+
+                        nodes[i].setOnMouseEntered(event -> {
+                            nodes[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+                        });
+
+                        nodes[i].setOnMouseExited(event -> {
+                            nodes[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                        });
+
+                        nodes[i].setOnMouseClicked(event -> {
+
+                            Session s;
+                            s = NewHibernateUtil.getSession();
+                            List<Object> CartaMAGIC = s.createCriteria(CartaMAGIC.class).list();
+                            List<Object> CartaFOW = s.createCriteria(CartaFOW.class).list();
+                            List<Object> CartaYUGI = s.createCriteria(CartaYUGI.class).list();
+                            s.close();
+
+                            MCNombreC.setText(itemCartaNombre.getText());
+                            MCColeccion.setText("Coleccion: " + itemCartaColeccion.getText());
+                            MCPrecio.setText("Precio: " + itemCartaPrecio.getText());
+                            MCStock.setText("Stock: " + itemCartaStock.getText());
+
+                            if (itemCartaJuego.getText().equals("Yu-Gi-Oh")) {
+                                MCBloqueYuGi.setDisable(false);
+                                MCBloqueFow.setDisable(true);
+                                MCBloqueMagic.setDisable(true);
+                                for (Object o : CartaYUGI) {
+                                    if (itemCartaNombre.getText().equals(((CartaYUGI) o).getNombreCarta())) {
+
+                                        if (((CartaYUGI) o).getIMG() != null) {
+
+                                            Image img = new Image(new ByteArrayInputStream(((CartaYUGI) o).getIMG()));
+                                            MCImagenCarta.setImage(img);
+                                        } else {
+                                            String url = "file:src/images/ReversoCard.jpg";
+                                            MCImagenCarta.setImage(new Image(url));
+                                        }
+
+                                        MCDescripcion.setText(((CartaYUGI) o).getDescripcion());
+                                        String[] parts = (((CartaYUGI) o).getAno()).split("-");
+                                        String year = parts[0];
+                                        MCAno.setText("Año: " + year);
+                                        MCyuAtribu.setText(((CartaYUGI) o).getAtributo());
+                                        MCyuID.setText(((CartaYUGI) o).getIDCYugi());
+                                        MCyuLVL.setText(String.valueOf(((CartaYUGI) o).getNivel()));
+                                        MCyuSub.setText(((CartaYUGI) o).getSubTipo());
+
+                                        //"Monstruo", "Mágica", "Trampa"
+                                        if (((CartaYUGI) o).getTipoCarta().equals("Monstruo")) {
+                                            MCyuTIPOC.setText("Monstruo");
+                                        }
+                                        if (((CartaYUGI) o).getTipoCarta().equals("Mágica")) {
+                                            MCyuTIPOC.setText("Mágica");
+                                        }
+                                        if (((CartaYUGI) o).getTipoCarta().equals("Trampa")) {
+                                            MCyuTIPOC.setText("Trampa");
+                                        }
+                                        MostrarCarta.setVisible(true);
+                                        MenuPrincipal.setDisable(true);
+                                        PantallasHome.setDisable(true);
+                                    }
+                                }
+                            } else if (itemCartaJuego.getText().equals("Magic")) {
+                                MCBloqueYuGi.setDisable(true);
+                                MCBloqueFow.setDisable(true);
+                                MCBloqueMagic.setDisable(false);
+                                for (Object o : CartaMAGIC) {
+                                    if (itemCartaNombre.getText().equals(((CartaMAGIC) o).getNombreCarta())) {
+
+                                        if (((CartaMAGIC) o).getIMG() != null) {
+
+                                            Image img = new Image(new ByteArrayInputStream(((CartaMAGIC) o).getIMG()));
+                                            MCImagenCarta.setImage(img);
+                                        } else {
+                                            String url = "file:src/images/ReversoCard.jpg";
+                                            MCImagenCarta.setImage(new Image(url));
+                                        }
+
+                                        MCDescripcion.setText(((CartaMAGIC) o).getDescripcion());
+                                        String[] parts = (((CartaMAGIC) o).getAno()).split("-");
+                                        String year = parts[0];
+                                        MCAno.setText("Año: " + year);
+                                        MCmagicCoste.setText(((CartaMAGIC) o).getCoste());
+                                        MCmagicID.setText(((CartaMAGIC) o).getIDCMagic());
+                                        MCmagicTIPOC.setText(((CartaMAGIC) o).getTipo());
+
+                                        //"Blanco", "Azul", "Negro", "Rojo", "Verde", "Incoloro", "Multicolor"
+                                        if (((CartaMAGIC) o).getColor().equals("Blanco")) {
+                                            MCmagicColor.setText("Blanco");
+                                        }
+                                        if (((CartaMAGIC) o).getColor().equals("Azul")) {
+                                            MCmagicColor.setText("Azul");
+                                        }
+                                        if (((CartaMAGIC) o).getColor().equals("Negro")) {
+                                            MCmagicColor.setText("Negro");
+                                        }
+                                        if (((CartaMAGIC) o).getColor().equals("Rojo")) {
+                                            MCmagicColor.setText("Rojo");
+                                        }
+                                        if (((CartaMAGIC) o).getColor().equals("Verde")) {
+                                            MCmagicColor.setText("Verde");
+                                        }
+                                        if (((CartaMAGIC) o).getColor().equals("Incoloro")) {
+                                            MCmagicColor.setText("Incoloro");
+                                        }
+                                        if (((CartaMAGIC) o).getColor().equals("Multicolor")) {
+                                            MCmagicColor.setText("Multicolor");
+                                        }
+                                        MostrarCarta.setVisible(true);
+                                        MenuPrincipal.setDisable(true);
+                                        PantallasHome.setDisable(true);
+
+                                    }
+                                }
+                            } else if (itemCartaJuego.getText().equals("Force of Will")) {
+                                MCBloqueYuGi.setDisable(true);
+                                MCBloqueFow.setDisable(false);
+                                MCBloqueMagic.setDisable(true);
+                                for (Object o : CartaFOW) {
+                                    if (itemCartaNombre.getText().equals(((CartaFOW) o).getNombreCarta())) {
+
+                                        if (((CartaFOW) o).getIMG() != null) {
+
+                                            Image img = new Image(new ByteArrayInputStream(((CartaFOW) o).getIMG()));
+                                            MCImagenCarta.setImage(img);
+                                        } else {
+                                            String url = "file:src/images/ReversoCard.jpg";
+                                            MCImagenCarta.setImage(new Image(url));
+                                        }
+                                        MCDescripcion.setText(((CartaFOW) o).getDescripcion());
+                                        String[] parts = (((CartaFOW) o).getAno()).split("-");
+                                        String year = parts[0];
+                                        MCAno.setText("Año: " + year);
+                                        MCfowCoste.setText(((CartaFOW) o).getCoste());
+                                        MCfowID.setText(((CartaFOW) o).getIDCFoW());
+                                        MCfowRaza.setText(((CartaFOW) o).getRaza());
+                                        MCfowTIPOC.setText(((CartaFOW) o).getTipo());
+
+                                        //"Luz", "Oscuridad", "Agua", "Viento", "Fuego", "Neutro", "Multicolor"
+                                        if (((CartaFOW) o).getElemento().equals("Luz")) {
+                                            MCfowElemento.setText("Luz");
+                                        }
+                                        if (((CartaFOW) o).getElemento().equals("Oscuridad")) {
+                                            MCfowElemento.setText("Oscuridad");
+                                        }
+                                        if (((CartaFOW) o).getElemento().equals("Agua")) {
+                                            MCfowElemento.setText("Agua");
+                                        }
+                                        if (((CartaFOW) o).getElemento().equals("Viento")) {
+                                            MCfowElemento.setText("Viento");
+                                        }
+                                        if (((CartaFOW) o).getElemento().equals("Fuego")) {
+                                            MCfowElemento.setText("Fuego");
+                                        }
+                                        if (((CartaFOW) o).getElemento().equals("Neutro")) {
+                                            MCfowElemento.setText("Neutro");
+                                        }
+                                        if (((CartaFOW) o).getElemento().equals("Multicolor")) {
+                                            MCfowElemento.setText("Multicolor");
+                                        }
+                                        MostrarCarta.setVisible(true);
+                                        MenuPrincipal.setDisable(true);
+                                        PantallasHome.setDisable(true);
+
+                                    }
+                                }
+                            }
+                        });
+                        pnItems.getChildren().add(nodes[i]);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Res.close();
+            } catch (SQLException x) {
+                System.out.println(x);
+            }
+        } else {
+
+            //Aqui va cargar listas cartas desde neodatis
+            ODB odb = ODBFactory.openClient("localhost", 8000, "neoWonka");
+            Values val = odb.getValues(new ValuesCriteriaQuery(Carta.class).count("IDCarta"));
+            ObjectValues ov = val.nextValues();
+            int value = Integer.parseInt(String.valueOf(ov.getByAlias("IDCarta")));
             limpiarListas(pnItems);
-            nodes = new Node[Res.getInt("Cont")];
-            Res.close();
-            Res = S.executeQuery("SELECT NombreJuego as NJ, NombreCarta as NC, Coleccion as C, Precio as P, Stock as S FROM CARTAS");
+            nodes = new Node[value];
+            Values valCarta = odb.getValues(new ValuesCriteriaQuery(Carta.class)
+                    .field("NombreJuego")
+                    .field("NombreCarta")
+                    .field("Coleccion")
+                    .field("Precio")
+                    .field("Stock"));
             try {
                 for (int i = 0; i < nodes.length; i++) {
-                    Res.next();
+                    valCarta.next();
+                    ObjectValues ovCarta = (ObjectValues) val.next();
                     final int j = i;
                     nodes[i] = FXMLLoader.load(getClass().getResource("ItemCarta.fxml"));
 
                     //Establecimiento de labels
                     Label itemCartaJuego = (Label) nodes[i].lookup("#itemCartaJuego");
-                    itemCartaJuego.setText(Res.getString("NJ"));
+                    itemCartaJuego.setText((String) ovCarta.getByAlias("NombreJuego"));
 
                     Label itemCartaNombre = (Label) nodes[i].lookup("#itemCartaNombre");
-                    itemCartaNombre.setText(Res.getString("NC"));
+                    itemCartaNombre.setText((String) ovCarta.getByAlias("NombreCarta"));
 
                     Label itemCartaColeccion = (Label) nodes[i].lookup("#itemCartaColeccion");
-                    itemCartaColeccion.setText(Res.getString("C"));
+                    itemCartaColeccion.setText((String) ovCarta.getByAlias("Coleccion"));
 
                     Label itemCartaPrecio = (Label) nodes[i].lookup("#itemCartaPrecio");
-                    itemCartaPrecio.setText(Res.getString("P"));
+                    itemCartaPrecio.setText((String) ovCarta.getByAlias("Precio"));
 
                     Button itemCartaStock = (Button) nodes[i].lookup("#itemCartaStock");
-                    itemCartaStock.setText(Res.getString("S"));
+                    itemCartaStock.setText((String) ovCarta.getByAlias("Stock"));
 
                     nodes[i].setOnMouseEntered(event -> {
                         nodes[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
@@ -670,12 +894,18 @@ public class Controller implements Initializable , MapComponentInitializedListen
 
                     nodes[i].setOnMouseClicked(event -> {
 
-                        Session s;
-                        s = NewHibernateUtil.getSession();
-                        List<Object> CartaMAGIC = s.createCriteria(CartaMAGIC.class).list();
-                        List<Object> CartaFOW = s.createCriteria(CartaFOW.class).list();
-                        List<Object> CartaYUGI = s.createCriteria(CartaYUGI.class).list();
-                        s.close();
+                        /**
+                         * Session s; s = NewHibernateUtil.getSession();
+                         * List<Object> CartaMAGIC =
+                         * s.createCriteria(CartaMAGIC.class).list();
+                         * List<Object> CartaFOW =
+                         * s.createCriteria(CartaFOW.class).list(); List<Object>
+                         * CartaYUGI = s.createCriteria(CartaYUGI.class).list();
+                         * s.close();*
+                         */
+                        Objects<CartaYUGI> valCartaYugi = odb.getObjects(new CriteriaQuery(CartaYUGI.class));
+                        Objects<CartaMAGIC> valCartaMagic = odb.getObjects(new CriteriaQuery(CartaMAGIC.class));
+                        Objects<CartaFOW> valCartaFow = odb.getObjects(new CriteriaQuery(CartaFOW.class));
 
                         MCNombreC.setText(itemCartaNombre.getText());
                         MCColeccion.setText("Coleccion: " + itemCartaColeccion.getText());
@@ -686,7 +916,8 @@ public class Controller implements Initializable , MapComponentInitializedListen
                             MCBloqueYuGi.setDisable(false);
                             MCBloqueFow.setDisable(true);
                             MCBloqueMagic.setDisable(true);
-                            for (Object o : CartaYUGI) {
+                            while (valCartaYugi.hasNext()) {
+                                Object o = valCartaYugi.next();
                                 if (itemCartaNombre.getText().equals(((CartaYUGI) o).getNombreCarta())) {
 
                                     if (((CartaYUGI) o).getIMG() != null) {
@@ -726,7 +957,8 @@ public class Controller implements Initializable , MapComponentInitializedListen
                             MCBloqueYuGi.setDisable(true);
                             MCBloqueFow.setDisable(true);
                             MCBloqueMagic.setDisable(false);
-                            for (Object o : CartaMAGIC) {
+                            while (valCartaMagic.hasNext()) {
+                                Object o = valCartaMagic.next();
                                 if (itemCartaNombre.getText().equals(((CartaMAGIC) o).getNombreCarta())) {
 
                                     if (((CartaMAGIC) o).getIMG() != null) {
@@ -778,7 +1010,8 @@ public class Controller implements Initializable , MapComponentInitializedListen
                             MCBloqueYuGi.setDisable(true);
                             MCBloqueFow.setDisable(false);
                             MCBloqueMagic.setDisable(true);
-                            for (Object o : CartaFOW) {
+                            while (valCartaFow.hasNext()) {
+                                Object o = valCartaFow.next();
                                 if (itemCartaNombre.getText().equals(((CartaFOW) o).getNombreCarta())) {
 
                                     if (((CartaFOW) o).getIMG() != null) {
@@ -833,9 +1066,8 @@ public class Controller implements Initializable , MapComponentInitializedListen
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Res.close();
-        } catch (SQLException x) {
-            System.out.println(x);
+            odb.close();
+
         }
     }
     //</editor-fold>
@@ -844,36 +1076,250 @@ public class Controller implements Initializable , MapComponentInitializedListen
     @FXML
     //Carga de la lista de Cartas de la pantalla Cartas
     public void ListCardsOrders() {
-        try {
-            //String año = null, descripcion = null;
-            Statement S = Wonka.conect.createStatement();
-            ResultSet Res = S.executeQuery("SELECT COUNT(*) AS Cont FROM CARTAS");
-            Res.next();
+        if (Wonka.basedatos == true) {
+            try {
+                //String año = null, descripcion = null;
+                Statement S = Wonka.conect.createStatement();
+                ResultSet Res = S.executeQuery("SELECT COUNT(*) AS Cont FROM CARTAS");
+                Res.next();
+                limpiarListas(pnItemsOrders);
+                nodesCartas = new Node[Res.getInt("Cont")];
+                Res.close();
+                Res = S.executeQuery("SELECT NombreJuego as NJ, NombreCarta as NC, Coleccion as C, Precio as P, Stock as S FROM CARTAS");
+                try {
+                    for (int i = 0; i < nodesCartas.length; i++) {
+                        Res.next();
+                        final int j = i;
+                        nodesCartas[i] = FXMLLoader.load(getClass().getResource("ItemCarta.fxml"));
+
+                        //Establecimiento de labels
+                        Label itemCartaJuego = (Label) nodesCartas[i].lookup("#itemCartaJuego");
+                        itemCartaJuego.setText(Res.getString("NJ"));
+
+                        Label itemCartaNombre = (Label) nodesCartas[i].lookup("#itemCartaNombre");
+                        itemCartaNombre.setText(Res.getString("NC"));
+
+                        Label itemCartaColeccion = (Label) nodesCartas[i].lookup("#itemCartaColeccion");
+                        itemCartaColeccion.setText(Res.getString("C"));
+
+                        Label itemCartaPrecio = (Label) nodesCartas[i].lookup("#itemCartaPrecio");
+                        itemCartaPrecio.setText(Res.getString("P"));
+
+                        Button itemCartaStock = (Button) nodesCartas[i].lookup("#itemCartaStock");
+                        itemCartaStock.setText(Res.getString("S"));
+
+                        nodesCartas[i].setOnMouseEntered(event -> {
+                            nodesCartas[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+                        });
+                        nodesCartas[i].setOnMouseExited(event -> {
+                            nodesCartas[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                        });
+
+                        nodesCartas[i].setOnMouseClicked(event -> {
+                            nodesCartas[j].setStyle("-fx-background-color : #17414C; -fx-background-radius:5");
+                            nodesCartas[j].setOnMouseExited(null);
+                            nodesCartas[j].setOnMouseEntered(null);
+                            for (int x = 0; x < nodesCartas.length; x++) {
+                                if (x != j) {
+                                    nodesCartas[x].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                                    final int x2 = x;
+                                    nodesCartas[x].setOnMouseExited(event2 -> {
+                                        nodesCartas[x2].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                                    });
+                                    nodesCartas[x].setOnMouseEntered(event2 -> {
+                                        nodesCartas[x2].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+                                    });
+                                }
+                            }
+                        });
+
+                        nodesCartas[i].setOnMousePressed(event -> {
+                            //Bloqueamos el campo Nombre Carta para no poder editarlo, para poder volver a escribir pulsar Limpiar.
+                            nameCard.setDisable(true);
+                            btnGuardarCarta.setDisable(true);
+                            btnModificarCarta.setDisable(false);
+                            btnBorrarCarta.setDisable(false);
+                            //Cargar informacion en los Edit Text
+                            Session s;
+                            s = NewHibernateUtil.getSession();
+                            List<Object> CartaMAGIC = s.createCriteria(CartaMAGIC.class).list();
+                            List<Object> CartaFOW = s.createCriteria(CartaFOW.class).list();
+                            List<Object> CartaYUGI = s.createCriteria(CartaYUGI.class).list();
+                            s.close();
+
+                            nameCard.setText(itemCartaNombre.getText());
+                            colecCard.setText(itemCartaColeccion.getText());
+                            priceCard.setText(itemCartaPrecio.getText());
+                            stockCard.setText(itemCartaStock.getText());
+
+                            if (itemCartaJuego.getText().equals("Yu-Gi-Oh")) {
+                                nameGame.getSelectionModel().select(0);
+                                for (Object o : CartaYUGI) {
+                                    if (itemCartaNombre.getText().equals(((CartaYUGI) o).getNombreCarta())) {
+
+                                        if (((CartaYUGI) o).getIMG() == null) {
+                                            btnSubirImagen.setText("Subir imagen");
+                                        } else {
+                                            btnSubirImagen.setText("Modificar imagen");
+                                        }
+
+                                        sumCard.setText(((CartaYUGI) o).getDescripcion());
+                                        String[] parts = (((CartaYUGI) o).getAno()).split("-");
+                                        String year = parts[0];
+                                        yearCard.setText(year);
+                                        yugiAtributo.setText(((CartaYUGI) o).getAtributo());
+                                        yugiID.setText(((CartaYUGI) o).getIDCYugi());
+                                        yugiNivel.setText(String.valueOf(((CartaYUGI) o).getNivel()));
+                                        yugiSubTIpo.setText(((CartaYUGI) o).getSubTipo());
+
+                                        //"Monstruo", "Mágica", "Trampa"
+                                        if (((CartaYUGI) o).getTipoCarta().equals("Monstruo")) {
+                                            yugiTipo.getSelectionModel().select(0);
+                                        }
+                                        if (((CartaYUGI) o).getTipoCarta().equals("Mágica")) {
+                                            yugiTipo.getSelectionModel().select(1);
+                                        }
+                                        if (((CartaYUGI) o).getTipoCarta().equals("Trampa")) {
+                                            yugiTipo.getSelectionModel().select(2);
+                                        }
+                                    }
+                                }
+                            } else if (itemCartaJuego.getText().equals("Magic")) {
+                                nameGame.getSelectionModel().select(1);
+                                for (Object o : CartaMAGIC) {
+                                    if (itemCartaNombre.getText().equals(((CartaMAGIC) o).getNombreCarta())) {
+
+                                        if (((CartaMAGIC) o).getIMG() == null) {
+                                            btnSubirImagen.setText("Subir imagen");
+                                        } else {
+                                            btnSubirImagen.setText("Modificar imagen");
+                                        }
+
+                                        sumCard.setText(((CartaMAGIC) o).getDescripcion());
+                                        String[] parts = (((CartaMAGIC) o).getAno()).split("-");
+                                        String year = parts[0];
+                                        yearCard.setText(year);
+                                        magiCoste.setText(((CartaMAGIC) o).getCoste());
+                                        magiID.setText(((CartaMAGIC) o).getIDCMagic());
+                                        magiTipo.setText(((CartaMAGIC) o).getTipo());
+
+                                        //"Blanco", "Azul", "Negro", "Rojo", "Verde", "Incoloro", "Multicolor"
+                                        if (((CartaMAGIC) o).getColor().equals("Blanco")) {
+                                            magiColor.getSelectionModel().select(0);
+                                        }
+                                        if (((CartaMAGIC) o).getColor().equals("Azul")) {
+                                            magiColor.getSelectionModel().select(1);
+                                        }
+                                        if (((CartaMAGIC) o).getColor().equals("Negro")) {
+                                            magiColor.getSelectionModel().select(2);
+                                        }
+                                        if (((CartaMAGIC) o).getColor().equals("Rojo")) {
+                                            magiColor.getSelectionModel().select(3);
+                                        }
+                                        if (((CartaMAGIC) o).getColor().equals("Verde")) {
+                                            magiColor.getSelectionModel().select(4);
+                                        }
+                                        if (((CartaMAGIC) o).getColor().equals("Incoloro")) {
+                                            magiColor.getSelectionModel().select(5);
+                                        }
+                                        if (((CartaMAGIC) o).getColor().equals("Multicolor")) {
+                                            magiColor.getSelectionModel().select(6);
+                                        }
+
+                                    }
+                                }
+                            } else if (itemCartaJuego.getText().equals("Force of Will")) {
+                                nameGame.getSelectionModel().select(2);
+                                for (Object o : CartaFOW) {
+                                    if (itemCartaNombre.getText().equals(((CartaFOW) o).getNombreCarta())) {
+
+                                        if (((CartaFOW) o).getIMG() == null) {
+                                            btnSubirImagen.setText("Subir imagen");
+                                        } else {
+                                            btnSubirImagen.setText("Modificar imagen");
+                                        }
+
+                                        sumCard.setText(((CartaFOW) o).getDescripcion());
+                                        String[] parts = (((CartaFOW) o).getAno()).split("-");
+                                        String year = parts[0];
+                                        yearCard.setText(year);
+                                        fogCoste.setText(((CartaFOW) o).getCoste());
+                                        fogID.setText(((CartaFOW) o).getIDCFoW());
+                                        fogRaza.setText(((CartaFOW) o).getRaza());
+                                        fogTipo.setText(((CartaFOW) o).getTipo());
+
+                                        //"Luz", "Oscuridad", "Agua", "Viento", "Fuego", "Neutro", "Multicolor"
+                                        if (((CartaFOW) o).getElemento().equals("Luz")) {
+                                            fogColor.getSelectionModel().select(0);
+                                        }
+                                        if (((CartaFOW) o).getElemento().equals("Oscuridad")) {
+                                            fogColor.getSelectionModel().select(1);
+                                        }
+                                        if (((CartaFOW) o).getElemento().equals("Agua")) {
+                                            fogColor.getSelectionModel().select(2);
+                                        }
+                                        if (((CartaFOW) o).getElemento().equals("Viento")) {
+                                            fogColor.getSelectionModel().select(3);
+                                        }
+                                        if (((CartaFOW) o).getElemento().equals("Fuego")) {
+                                            fogColor.getSelectionModel().select(4);
+                                        }
+                                        if (((CartaFOW) o).getElemento().equals("Neutro")) {
+                                            fogColor.getSelectionModel().select(5);
+                                        }
+                                        if (((CartaFOW) o).getElemento().equals("Multicolor")) {
+                                            fogColor.getSelectionModel().select(6);
+                                        }
+
+                                    }
+                                }
+                            }
+                        });
+
+                        pnItemsOrders.getChildren().add(nodesCartas[i]);
+
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Res.close();
+            } catch (SQLException x) {
+                System.out.println(x);
+            }
+        } else {
+            ODB odb = ODBFactory.openClient("localhost", 8000, "neoWonka");
+            Values val = odb.getValues(new ValuesCriteriaQuery(Carta.class).count("IDCarta"));
+            ObjectValues ov = val.nextValues();
+            int value = Integer.parseInt(String.valueOf(ov.getByAlias("IDCarta")));
             limpiarListas(pnItemsOrders);
-            nodesCartas = new Node[Res.getInt("Cont")];
-            Res.close();
-            Res = S.executeQuery("SELECT NombreJuego as NJ, NombreCarta as NC, Coleccion as C, Precio as P, Stock as S FROM CARTAS");
+            nodesCartas = new Node[value];
+            Values valCarta = odb.getValues(new ValuesCriteriaQuery(Carta.class)
+                    .field("NombreJuego")
+                    .field("NombreCarta")
+                    .field("Coleccion")
+                    .field("Precio")
+                    .field("Stock"));
             try {
                 for (int i = 0; i < nodesCartas.length; i++) {
-                    Res.next();
+                    valCarta.next();
                     final int j = i;
                     nodesCartas[i] = FXMLLoader.load(getClass().getResource("ItemCarta.fxml"));
 
                     //Establecimiento de labels
                     Label itemCartaJuego = (Label) nodesCartas[i].lookup("#itemCartaJuego");
-                    itemCartaJuego.setText(Res.getString("NJ"));
+                    itemCartaJuego.setText((String) ov.getByAlias("NombreJuego"));
 
                     Label itemCartaNombre = (Label) nodesCartas[i].lookup("#itemCartaNombre");
-                    itemCartaNombre.setText(Res.getString("NC"));
+                    itemCartaNombre.setText((String) ov.getByAlias("NombreCarta"));
 
                     Label itemCartaColeccion = (Label) nodesCartas[i].lookup("#itemCartaColeccion");
-                    itemCartaColeccion.setText(Res.getString("C"));
+                    itemCartaColeccion.setText((String) ov.getByAlias("Coleccion"));
 
                     Label itemCartaPrecio = (Label) nodesCartas[i].lookup("#itemCartaPrecio");
-                    itemCartaPrecio.setText(Res.getString("P"));
+                    itemCartaPrecio.setText((String) ov.getByAlias("Precio"));
 
                     Button itemCartaStock = (Button) nodesCartas[i].lookup("#itemCartaStock");
-                    itemCartaStock.setText(Res.getString("S"));
+                    itemCartaStock.setText((String) ov.getByAlias("Stock"));
 
                     nodesCartas[i].setOnMouseEntered(event -> {
                         nodesCartas[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
@@ -907,13 +1353,16 @@ public class Controller implements Initializable , MapComponentInitializedListen
                         btnModificarCarta.setDisable(false);
                         btnBorrarCarta.setDisable(false);
                         //Cargar informacion en los Edit Text
-                        Session s;
+                        /* Session s;
                         s = NewHibernateUtil.getSession();
                         List<Object> CartaMAGIC = s.createCriteria(CartaMAGIC.class).list();
                         List<Object> CartaFOW = s.createCriteria(CartaFOW.class).list();
                         List<Object> CartaYUGI = s.createCriteria(CartaYUGI.class).list();
-                        s.close();
+                        s.close();*/
 
+                        Objects<CartaYUGI> valCartaYugi = odb.getObjects(new CriteriaQuery(CartaYUGI.class));
+                        Objects<CartaMAGIC> valCartaMagic = odb.getObjects(new CriteriaQuery(CartaMAGIC.class));
+                        Objects<CartaFOW> valCartaFow = odb.getObjects(new CriteriaQuery(CartaFOW.class));
                         nameCard.setText(itemCartaNombre.getText());
                         colecCard.setText(itemCartaColeccion.getText());
                         priceCard.setText(itemCartaPrecio.getText());
@@ -921,7 +1370,8 @@ public class Controller implements Initializable , MapComponentInitializedListen
 
                         if (itemCartaJuego.getText().equals("Yu-Gi-Oh")) {
                             nameGame.getSelectionModel().select(0);
-                            for (Object o : CartaYUGI) {
+                            while (valCartaYugi.hasNext()) {
+                                Object o = valCartaYugi.next();
                                 if (itemCartaNombre.getText().equals(((CartaYUGI) o).getNombreCarta())) {
 
                                     if (((CartaYUGI) o).getIMG() == null) {
@@ -953,7 +1403,8 @@ public class Controller implements Initializable , MapComponentInitializedListen
                             }
                         } else if (itemCartaJuego.getText().equals("Magic")) {
                             nameGame.getSelectionModel().select(1);
-                            for (Object o : CartaMAGIC) {
+                            while (valCartaMagic.hasNext()) {
+                                Object o = valCartaMagic.next();
                                 if (itemCartaNombre.getText().equals(((CartaMAGIC) o).getNombreCarta())) {
 
                                     if (((CartaMAGIC) o).getIMG() == null) {
@@ -997,7 +1448,8 @@ public class Controller implements Initializable , MapComponentInitializedListen
                             }
                         } else if (itemCartaJuego.getText().equals("Force of Will")) {
                             nameGame.getSelectionModel().select(2);
-                            for (Object o : CartaFOW) {
+                            while (valCartaFow.hasNext()) {
+                                Object o = valCartaFow.next();
                                 if (itemCartaNombre.getText().equals(((CartaFOW) o).getNombreCarta())) {
 
                                     if (((CartaFOW) o).getIMG() == null) {
@@ -1049,9 +1501,7 @@ public class Controller implements Initializable , MapComponentInitializedListen
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Res.close();
-        } catch (SQLException x) {
-            System.out.println(x);
+            odb.close();
         }
 
     }
@@ -1061,36 +1511,135 @@ public class Controller implements Initializable , MapComponentInitializedListen
     @FXML
     //Carga de la lista de clientes de la pantalla Clientes
     public void ListCardsClientes() throws SQLException {
-        try {
-            Statement S = Wonka.conect.createStatement();
-            ResultSet Res = S.executeQuery("SELECT COUNT(*) AS Cont FROM clientes");
-            Res.next();
-            limpiarListas(pnItemsClientes);
-            nodesClientes = new Node[Res.getInt("Cont")];
-            Res.close();
-            Res = S.executeQuery("SELECT Nombre as N, Apellidos as A, Edad as E, Mail as M, Telefono as T FROM clientes");
+        if (Wonka.basedatos == true) {
+            try {
+                Statement S = Wonka.conect.createStatement();
+                ResultSet Res = S.executeQuery("SELECT COUNT(*) AS Cont FROM clientes");
+                Res.next();
+                limpiarListas(pnItemsClientes);
+                nodesClientes = new Node[Res.getInt("Cont")];
+                Res.close();
+                Res = S.executeQuery("SELECT Nombre as N, Apellidos as A, Edad as E, Mail as M, Telefono as T FROM clientes");
 
+                try {
+                    for (int i = 0; i < nodesClientes.length; i++) {
+                        Res.next();
+                        final int j = i;
+                        nodesClientes[i] = FXMLLoader.load(getClass().getResource("ItemCliente.fxml"));
+
+                        //Establecimiento de labels
+                        Label itemClienteNombre = (Label) nodesClientes[i].lookup("#itemClienteNombre");
+                        itemClienteNombre.setText(Res.getString("N"));
+
+                        Label itemClienteApellido = (Label) nodesClientes[i].lookup("#itemClienteApellido");
+                        itemClienteApellido.setText(Res.getString("A"));
+
+                        Label itemClienteEdad = (Label) nodesClientes[i].lookup("#itemClienteEdad");
+                        itemClienteEdad.setText(Res.getString("E"));
+
+                        Label itemClienteEmail = (Label) nodesClientes[i].lookup("#itemClienteEmail");
+                        itemClienteEmail.setText(Res.getString("M"));
+
+                        Label itemClienteTlf = (Label) nodesClientes[i].lookup("#itemClienteTlf");
+                        itemClienteTlf.setText(Res.getString("T"));
+
+                        nodesClientes[i].setOnMouseEntered(event -> {
+                            nodesClientes[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+                        });
+
+                        nodesClientes[i].setOnMouseExited(event -> {
+                            nodesClientes[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                        });
+
+                        nodesClientes[i].setOnMouseClicked(event -> {
+                            nodesClientes[j].setStyle("-fx-background-color : #17414C; -fx-background-radius:5");
+                            nodesClientes[j].setOnMouseExited(null);
+                            nodesClientes[j].setOnMouseEntered(null);
+                            for (int x = 0; x < nodesClientes.length; x++) {
+                                if (x != j) {
+                                    nodesClientes[x].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                                    final int x2 = x;
+                                    nodesClientes[x].setOnMouseExited(event2 -> {
+                                        nodesClientes[x2].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
+                                    });
+                                    nodesClientes[x].setOnMouseEntered(event2 -> {
+                                        nodesClientes[x2].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
+                                    });
+                                }
+                            }
+                        });
+
+                        nodesClientes[i].setOnMousePressed(event -> {
+                            btnModificarCamposClientes.setDisable(false);
+                            btnBorrarCamposClientes.setDisable(false);
+                            btnGuardarCamposClientes.setDisable(true);
+                            Session s;
+                            s = NewHibernateUtil.getSession();
+                            List<Object> Clientes = s.createCriteria(Cliente.class).list();
+                            s.close();
+
+                            nombreCliente.setText(itemClienteNombre.getText());
+                            apellidosCliente.setText(itemClienteApellido.getText());
+                            edadCliente.setText(itemClienteEdad.getText());
+                            emailCliente.setText(itemClienteEmail.getText());
+                            telefonoCliente.setText(itemClienteTlf.getText());
+                            for (Object C : Clientes) {
+                                if (itemClienteNombre.getText().equals(((Cliente) C).getNombre())) {
+                                    if (((Cliente) C).isSexo() == false) {
+                                        sexoCliente.getSelectionModel().select(0);
+                                    } else {
+                                        sexoCliente.getSelectionModel().select(1);
+                                    }
+                                    direccionCliente.setText(((Cliente) C).getDireccion());
+                                }
+                            }
+                        });
+
+                        pnItemsClientes.getChildren().add(nodesClientes[i]);
+
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Res.close();
+            } catch (SQLException x) {
+                System.out.println(x);
+            }
+        } else {
+
+            ODB odb = ODBFactory.openClient("localhost", 8000, "neoWonka");
+            Values val = odb.getValues(new ValuesCriteriaQuery(Cliente.class).count("IDCliente"));
+            ObjectValues ov = val.nextValues();
+            int value = Integer.parseInt(String.valueOf(ov.getByAlias("IDCliente")));
+            limpiarListas(pnItemsClientes);
+            nodesClientes = new Node[value];
+            Values valCliente = odb.getValues(new ValuesCriteriaQuery(Cliente.class)
+                    .field("Nombre")
+                    .field("Apellidos")
+                    .field("Edad")
+                    .field("Mail")
+                    .field("Telefono"));
             try {
                 for (int i = 0; i < nodesClientes.length; i++) {
-                    Res.next();
+                    valCliente.next();
                     final int j = i;
                     nodesClientes[i] = FXMLLoader.load(getClass().getResource("ItemCliente.fxml"));
 
                     //Establecimiento de labels
                     Label itemClienteNombre = (Label) nodesClientes[i].lookup("#itemClienteNombre");
-                    itemClienteNombre.setText(Res.getString("N"));
+                    itemClienteNombre.setText((String) ov.getByAlias("Nombre"));
 
                     Label itemClienteApellido = (Label) nodesClientes[i].lookup("#itemClienteApellido");
-                    itemClienteApellido.setText(Res.getString("A"));
+                    itemClienteApellido.setText((String) ov.getByAlias("Apellidos"));
 
                     Label itemClienteEdad = (Label) nodesClientes[i].lookup("#itemClienteEdad");
-                    itemClienteEdad.setText(Res.getString("E"));
+                    itemClienteEdad.setText((String) ov.getByAlias("Edad"));
 
                     Label itemClienteEmail = (Label) nodesClientes[i].lookup("#itemClienteEmail");
-                    itemClienteEmail.setText(Res.getString("M"));
+                    itemClienteEmail.setText((String) ov.getByAlias("Mail"));
 
                     Label itemClienteTlf = (Label) nodesClientes[i].lookup("#itemClienteTlf");
-                    itemClienteTlf.setText(Res.getString("T"));
+                    itemClienteTlf.setText((String) ov.getByAlias("Telefono"));
 
                     nodesClientes[i].setOnMouseEntered(event -> {
                         nodesClientes[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
@@ -1150,9 +1699,7 @@ public class Controller implements Initializable , MapComponentInitializedListen
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Res.close();
-        } catch (SQLException x) {
-            System.out.println(x);
+            odb.close();
         }
 
     }

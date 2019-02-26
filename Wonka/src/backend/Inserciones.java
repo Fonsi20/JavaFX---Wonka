@@ -9,6 +9,14 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.neodatis.odb.ODB;
+import org.neodatis.odb.ODBFactory;
+import org.neodatis.odb.Objects;
+import org.neodatis.odb.Values;
+import org.neodatis.odb.core.query.criteria.ICriterion;
+import org.neodatis.odb.core.query.criteria.Where;
+import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
+import org.neodatis.odb.impl.core.query.values.ValuesCriteriaQuery;
 import wonka.NewHibernateUtil;
 import wonka.Wonka;
 
@@ -18,7 +26,16 @@ import wonka.Wonka;
  */
 public class Inserciones {
 
-    public SessionFactory sessionFactory = NewHibernateUtil.getSessionFactory();
+    public static SessionFactory sessionFactory;
+    public static ODB odb;
+
+    public void BDReady() {
+        if (Wonka.basedatos == true) {
+            sessionFactory = NewHibernateUtil.getSessionFactory();
+        } else {
+            odb = ODBFactory.openClient("localhost", 8000, "noeWonka");
+        }
+    }
 
     public static void insertarCartasMagic(ArrayList<String> Carta, byte[] IMG) {
         System.out.println("en MAGIC " + Carta);
@@ -28,7 +45,13 @@ public class Inserciones {
         String year = parts[0];
         CartaMAGIC aux;
         aux = new CartaMAGIC(Carta.get(9), Carta.get(7), Carta.get(8), Carta.get(10), stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), year, price, IMG);
-        guardarModificar(aux);
+        if (Wonka.basedatos == true) {
+            guardarModificar(aux);
+        } else {
+            odb.store(aux);
+            odb.close();
+        }
+
     }
 
     public static void insertarCartasYuGi(ArrayList<String> Carta, byte[] IMG) {
@@ -40,7 +63,12 @@ public class Inserciones {
         String year = parts[0];
         CartaYUGI aux;
         aux = new CartaYUGI(Carta.get(7), Carta.get(11), Carta.get(8), Carta.get(10), nivel, stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), year, price, IMG);
-        guardarModificar(aux);
+        if (Wonka.basedatos == true) {
+            guardarModificar(aux);
+        } else {
+            odb.store(aux);
+            odb.close();
+        }
     }
 
     public static void insertarCartasFOW(ArrayList<String> Carta, byte[] IMG) {
@@ -51,17 +79,28 @@ public class Inserciones {
         String year = parts[0];
         CartaFOW aux;
         aux = new CartaFOW(Carta.get(7), Carta.get(9), Carta.get(8), Carta.get(11), Carta.get(10), stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), year, price, IMG);
-        guardarModificar(aux);
+        if (Wonka.basedatos == true) {
+            guardarModificar(aux);
+        } else {
+            odb.store(aux);
+            odb.close();
+        }
     }
 
     public static void actualizarCartaMagic(ArrayList<String> Carta, byte[] IMG) throws SQLException {
         CartaMAGIC mag = null;
         String nombre = Carta.get(2);
-        Statement S = Wonka.conect.createStatement();
-        ResultSet Res = S.executeQuery("SELECT IDCarta AS id FROM CARTAS WHERE NombreCarta='" + nombre + "';");
-        Res.next();
-        mag = comprovacionesBBDD.comprobarCartaMagic(Res.getInt("id"));
-        Res.close();
+        if (Wonka.basedatos == true) {
+            Statement S = Wonka.conect.createStatement();
+            ResultSet Res = S.executeQuery("SELECT IDCarta AS id FROM CARTAS WHERE NombreCarta='" + nombre + "';");
+            Res.next();
+            mag = comprovacionesBBDD.comprobarCartaMagic(Res.getInt("id"));
+            Res.close();
+        } else {
+            ICriterion crit = Where.equal("NombreCarta", nombre);
+            CriteriaQuery query = new CriteriaQuery(CartaMAGIC.class, crit);
+            mag = (CartaMAGIC) odb.getObjectFromId(query.getOidOfObjectToQuery());
+        }
         if (mag != null) {
 
             //String IDCMagic, String Color, String Coste, String Tipo, int Stock, String NombreJuego, String NombreCarta, String Descripcion, String Coleccion, String Ano, float Precio
@@ -77,7 +116,12 @@ public class Inserciones {
             mag.setAno(Carta.get(5));
             mag.setIMG(IMG);
 
-            guardarModificar(mag);
+            if (Wonka.basedatos == true) {
+                guardarModificar(mag);
+            } else {
+                odb.store(mag);
+                odb.close();
+            }
 
         } else {
             System.out.println("NO PODEMOS MODIFICAR UNA CARTA INEXISTENTE");
@@ -87,11 +131,17 @@ public class Inserciones {
     public static void actualizarCartaYuGi(ArrayList<String> Carta, byte[] IMG) throws SQLException {
         CartaYUGI yu = null;
         String nombre = Carta.get(2);
-        Statement S = Wonka.conect.createStatement();
-        ResultSet Res = S.executeQuery("SELECT IDCarta AS id FROM CARTAS WHERE NombreCarta='" + nombre + "';");
-        Res.next();
-        yu = comprovacionesBBDD.comprobarCartaYugi(Res.getInt("id"));
-        Res.close();
+        if (Wonka.basedatos == true) {
+            Statement S = Wonka.conect.createStatement();
+            ResultSet Res = S.executeQuery("SELECT IDCarta AS id FROM CARTAS WHERE NombreCarta='" + nombre + "';");
+            Res.next();
+            yu = comprovacionesBBDD.comprobarCartaYugi(Res.getInt("id"));
+            Res.close();
+        } else {
+            ICriterion crit = Where.equal("NombreCarta", nombre);
+            CriteriaQuery query = new CriteriaQuery(CartaYUGI.class, crit);
+            yu = (CartaYUGI) odb.getObjectFromId(query.getOidOfObjectToQuery());
+        }
         if (yu != null) {
 
             System.out.println(Carta.get(9));
@@ -109,7 +159,12 @@ public class Inserciones {
             yu.setAno(Carta.get(5));
             yu.setIMG(IMG);
 
-            guardarModificar(yu);
+            if (Wonka.basedatos == true) {
+                guardarModificar(yu);
+            } else {
+                odb.store(yu);
+                odb.close();
+            }
 
         } else {
             System.out.println("NO PODEMOS MODIFICAR UNA CARTA INEXISTENTE");
@@ -119,11 +174,17 @@ public class Inserciones {
     public static void actualizarCartaFOW(ArrayList<String> Carta, byte[] IMG) throws SQLException {
         CartaFOW fow = null;
         String nombre = Carta.get(2);
-        Statement S = Wonka.conect.createStatement();
-        ResultSet Res = S.executeQuery("SELECT IDCarta AS id FROM CARTAS WHERE NombreCarta='" + nombre + "';");
-        Res.next();
-        fow = comprovacionesBBDD.comprobarCartaFOW(Res.getInt("id"));
-        Res.close();
+        if (Wonka.basedatos == true) {
+            Statement S = Wonka.conect.createStatement();
+            ResultSet Res = S.executeQuery("SELECT IDCarta AS id FROM CARTAS WHERE NombreCarta='" + nombre + "';");
+            Res.next();
+            fow = comprovacionesBBDD.comprobarCartaFOW(Res.getInt("id"));
+            Res.close();
+        } else {
+            ICriterion crit = Where.equal("NombreCarta", nombre);
+            CriteriaQuery query = new CriteriaQuery(CartaFOW.class, crit);
+            fow = (CartaFOW) odb.getObjectFromId(query.getOidOfObjectToQuery());
+        }
         if (fow != null) {
 
             //String Elemento, String IDCFoW, String Coste, String Tipo, String Raza, int Stock, String NombreJuego, String NombreCarta, String Descripcion, String Coleccion, String Ano, float Precio
@@ -140,7 +201,12 @@ public class Inserciones {
             fow.setAno(Carta.get(5));
             fow.setIMG(IMG);
 
-            guardarModificar(fow);
+            if (Wonka.basedatos == true) {
+                guardarModificar(fow);
+            } else {
+                odb.store(fow);
+                odb.close();
+            }
 
         } else {
             System.out.println("NO PODEMOS MODIFICAR UNA CARTA INEXISTENTE");
@@ -156,16 +222,27 @@ public class Inserciones {
             sexo = true;
         }
         Cliente aux = new Cliente(Integer.parseInt(Cliente.get(2)), Cliente.get(0), Cliente.get(1), Cliente.get(4), Cliente.get(5), Cliente.get(6), sexo);
-        guardarModificar(aux);
+        if (Wonka.basedatos == true) {
+            guardarModificar(aux);
+        } else {
+            odb.store(aux);
+            odb.close();
+        }
     }
 
     public static void actualizarCliente(ArrayList<String> Cliente) throws SQLException {
         Cliente temp = null;
-        Statement S = Wonka.conect.createStatement();
-        ResultSet Res = S.executeQuery("SELECT IDCliente AS ID FROM Clientes WHERE Nombre='" + Cliente.get(0) + "';");
-        Res.next();
-        temp = comprovacionesBBDD.comprobarCliente(Res.getInt("ID"));
-        Res.close();
+        if (Wonka.basedatos == true) {
+            Statement S = Wonka.conect.createStatement();
+            ResultSet Res = S.executeQuery("SELECT IDCliente AS ID FROM Clientes WHERE Nombre='" + Cliente.get(0) + "';");
+            Res.next();
+            temp = comprovacionesBBDD.comprobarCliente(Res.getInt("ID"));
+            Res.close();
+        } else {
+            ICriterion crit = Where.equal("Nombre", Cliente.get(0));
+            CriteriaQuery query = new CriteriaQuery(CartaFOW.class, crit);
+            temp = (Cliente) odb.getObjectFromId(query.getOidOfObjectToQuery());
+        }
 
         if (temp != null) {
             temp.setNombre(Cliente.get(0));
@@ -182,7 +259,12 @@ public class Inserciones {
             temp.setTelefono(Cliente.get(5));
             temp.setMail(Cliente.get(6));
 
-            guardarModificar(temp);
+            if (Wonka.basedatos == true) {
+                guardarModificar(temp);
+            } else {
+                odb.store(temp);
+                odb.close();
+            }
         } else {
             System.out.println("NO EXISTE ESE CLIENTE");
         }
@@ -191,58 +273,95 @@ public class Inserciones {
     public static void InsertarCompra(Carta CarCompra, Cliente CliCompra, int cantidad) {
         Venta aux;
         aux = new Venta(CarCompra, CliCompra, cantidad);
-        guardarModificar(aux);
+        if (Wonka.basedatos == true) {
+            guardarModificar(aux);
+        } else {
+            odb.store(aux);
+            odb.close();
+        }
     }
 
     public static void InsertarReserva(Carta CarCompra, Cliente CliCompra, int cantidad) {
-
-        Session s;
-        s = NewHibernateUtil.getSession();
-        List<Object> Reservas = s.createCriteria(Reserva.class).list();
         Reserva aux;
         Carta carAux = null;
         Cliente cliAux = null;
         boolean existe = false;
         int cantidadObjeto = 0;
+        List<Object> Reservas = null;
         try {
-            for (Object o : Reservas) {
+            if (Wonka.basedatos == true) {
+                Session s;
+                s = NewHibernateUtil.getSession();
+                Reservas = s.createCriteria(Reserva.class).list();
+                for (Object o : Reservas) {
 
-                carAux = ((Reserva) o).getIDCarta();
-                cliAux = ((Reserva) o).getIDCliente();
+                    carAux = ((Reserva) o).getIDCarta();
+                    cliAux = ((Reserva) o).getIDCliente();
 
-                if (carAux.getIDCarta() == CarCompra.getIDCarta() && cliAux.getIDCliente() == CliCompra.getIDCliente()) {
-                    ((Reserva) o).setCantidad(cantidad + ((Reserva) o).getCantidad());
-                    cantidadObjeto = ((Reserva) o).getCantidad();
-                    existe = true;
+                    if (carAux.getIDCarta() == CarCompra.getIDCarta() && cliAux.getIDCliente() == CliCompra.getIDCliente()) {
+                        ((Reserva) o).setCantidad(cantidad + ((Reserva) o).getCantidad());
+                        cantidadObjeto = ((Reserva) o).getCantidad();
+                        existe = true;
+                    }
+
                 }
+            } else {
+                Objects<Reserva> valReservas = odb.getObjects(new CriteriaQuery(Reserva.class));
+                while (valReservas.hasNext()) {
+                    Object o = valReservas.next();
+                    carAux = ((Reserva) o).getIDCarta();
+                    cliAux = ((Reserva) o).getIDCliente();
 
+                    if (carAux.getIDCarta() == CarCompra.getIDCarta() && cliAux.getIDCliente() == CliCompra.getIDCliente()) {
+                        ((Reserva) o).setCantidad(cantidad + ((Reserva) o).getCantidad());
+                        cantidadObjeto = ((Reserva) o).getCantidad();
+                        existe = true;
+                    }
+                }
             }
+
             if (existe == true) {
                 System.out.println(cantidadObjeto);
                 aux = new Reserva(CarCompra, CliCompra, cantidadObjeto);
                 System.out.println("EXISTE: " + CarCompra + " : " + CliCompra + " : " + cantidadObjeto);
-                s.beginTransaction();
-                s.saveOrUpdate(carAux);
-                s.getTransaction().commit();
-                guardarModificar(aux);
+                if (Wonka.basedatos == true) {
+                    Session s;
+                    s = NewHibernateUtil.getSession();
+                    s.beginTransaction();
+                    s.saveOrUpdate(carAux);
+                    s.getTransaction().commit();
+                    guardarModificar(aux);
+                    s.close();
+                } else {
+                    odb.store(aux);
+                    odb.close();
+                }
             }
 
             if (existe == false) {
                 System.out.println(cantidadObjeto);
                 aux = new Reserva(CarCompra, CliCompra, cantidad);
                 System.out.println("NO EXISTE: " + CarCompra + " " + CliCompra + " " + cantidad);
-                s.beginTransaction();
-                s.saveOrUpdate(aux);
-                s.getTransaction().commit();
-                guardarModificar(aux);
+                if (Wonka.basedatos == true) {
+                    Session s;
+                    s = NewHibernateUtil.getSession();
+                    s.beginTransaction();
+                    s.saveOrUpdate(aux);
+                    s.getTransaction().commit();
+                    guardarModificar(aux);
+                    s.close();
+                } else {
+                    odb.store(aux);
+                    odb.close();
+                }
             }
 
         } catch (NumberFormatException e) {
         }
-        s.close();
 
     }
 
+    //Pendiente
     public static void automatizacionStock() throws SQLException {
 
         Statement S = Wonka.conect.createStatement();
@@ -273,6 +392,7 @@ public class Inserciones {
         }
     }
 
+    //Inalterables
     public static void guardarModificar(Object objeto) {
         Session sesion;
         try {

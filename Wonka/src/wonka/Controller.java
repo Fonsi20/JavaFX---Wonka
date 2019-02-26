@@ -10,8 +10,6 @@ import com.jfoenix.controls.JFXTextField;
 import com.lynden.gmapsfx.GoogleMapView;
 import com.lynden.gmapsfx.MapComponentInitializedListener;
 import com.lynden.gmapsfx.javascript.object.GoogleMap;
-import com.lynden.gmapsfx.javascript.object.InfoWindow;
-import com.lynden.gmapsfx.javascript.object.InfoWindowOptions;
 import com.lynden.gmapsfx.javascript.object.LatLong;
 import com.lynden.gmapsfx.javascript.object.MapOptions;
 import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
@@ -2252,18 +2250,34 @@ public class Controller implements Initializable, MapComponentInitializedListene
 
     // <editor-fold defaultstate="collapsed" desc="Método de carga de los contadores de ventas,cartas,clientes,etc">
     private void CargarDatosDashboard() {
-        Session s;
-        s = NewHibernateUtil.getSession();
-        List<Object> Carta = s.createCriteria(Carta.class).list();
-        List<Object> Cliente = s.createCriteria(Cliente.class).list();
-        List<Object> Reservas = s.createCriteria(Reserva.class).list();
-        List<Object> Ventas = s.createCriteria(Venta.class).list();
 
-        lblTotalCartas.setText(Integer.toString(Carta.size()));
-        lblTotalClientes.setText(Integer.toString(Cliente.size()));
-        lblCartasVendidas.setText(Integer.toString(Reservas.size()));
-        lblPedidosPendientes.setText(Integer.toString(Ventas.size()));
-        s.close();
+        if (Wonka.basedatos == true) {
+            Session s;
+            s = NewHibernateUtil.getSession();
+            List<Object> Carta = s.createCriteria(Carta.class).list();
+            List<Object> Cliente = s.createCriteria(Cliente.class).list();
+            List<Object> Reservas = s.createCriteria(Reserva.class).list();
+            List<Object> Ventas = s.createCriteria(Venta.class).list();
+
+            lblTotalCartas.setText(Integer.toString(Carta.size()));
+            lblTotalClientes.setText(Integer.toString(Cliente.size()));
+            lblCartasVendidas.setText(Integer.toString(Reservas.size()));
+            lblPedidosPendientes.setText(Integer.toString(Ventas.size()));
+            s.close();
+        } else {
+            ODB odb = ODBFactory.openClient("localhost", 8000, "neoWonka");
+
+            Objects<Carta> Carta = odb.getObjects(new CriteriaQuery(Carta.class));
+            Objects<Cliente> Cliente = odb.getObjects(new CriteriaQuery(Cliente.class));
+            Objects<Reserva> Reservas = odb.getObjects(new CriteriaQuery(Reserva.class));
+            Objects<Venta> Ventas = odb.getObjects(new CriteriaQuery(Venta.class));
+
+            lblTotalCartas.setText(Integer.toString(Carta.size()));
+            lblTotalClientes.setText(Integer.toString(Cliente.size()));
+            lblCartasVendidas.setText(Integer.toString(Reservas.size()));
+            lblPedidosPendientes.setText(Integer.toString(Ventas.size()));
+        }
+
     }
     // </editor-fold>
 

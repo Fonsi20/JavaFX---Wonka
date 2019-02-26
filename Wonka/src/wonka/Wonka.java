@@ -26,7 +26,7 @@ public class Wonka extends Application {
     public static Statement sentencia;
     public static ResultSet res;
     public static int op;
-    static boolean basedatos;
+    public static boolean basedatos;
 
     @Override
     public void start(Stage primaryStage) throws Exception {

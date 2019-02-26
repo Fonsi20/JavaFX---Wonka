@@ -1621,27 +1621,25 @@ public class Controller implements Initializable, MapComponentInitializedListene
                     .field("Telefono"));
             try {
                 for (int i = 0; i < nodesClientes.length; i++) {
-                    valCliente.next();
-
+                    ObjectValues ovv = valCliente.next();
                     final int j = i;
                     nodesClientes[i] = FXMLLoader.load(getClass().getResource("ItemCliente.fxml"));
-                    System.out.println((String)valCliente.getFirst().getByAlias("Nombre"));
                     //Establecimiento de labels
                     Label itemClienteNombre = (Label) nodesClientes[i].lookup("#itemClienteNombre");
-                    itemClienteNombre.setText((String)valCliente.getFirst().getByAlias("Nombre"));
-                    System.out.println("PIPO 22245645642");
-                    
+                    itemClienteNombre.setText((String) ovv.getByAlias("Nombre"));
+
                     Label itemClienteApellido = (Label) nodesClientes[i].lookup("#itemClienteApellido");
-                    itemClienteApellido.setText((String) ov.getByAlias("Apellidos"));
+                    itemClienteApellido.setText((String) ovv.getByAlias("Apellidos"));
 
                     Label itemClienteEdad = (Label) nodesClientes[i].lookup("#itemClienteEdad");
-                    itemClienteEdad.setText((String) ov.getByAlias("Edad"));
-
+                    itemClienteEdad.setText(String.valueOf(ovv.getByAlias("Edad")));
+                    
                     Label itemClienteEmail = (Label) nodesClientes[i].lookup("#itemClienteEmail");
-                    itemClienteEmail.setText((String) ov.getByAlias("Mail"));
+                    itemClienteEmail.setText((String) ovv.getByAlias("Mail"));
 
                     Label itemClienteTlf = (Label) nodesClientes[i].lookup("#itemClienteTlf");
-                    itemClienteTlf.setText((String) ov.getByAlias("Telefono"));
+                    itemClienteTlf.setText((String) ovv.getByAlias("Telefono"));
+
 
                     nodesClientes[i].setOnMouseEntered(event -> {
                         nodesClientes[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
@@ -1959,10 +1957,10 @@ public class Controller implements Initializable, MapComponentInitializedListene
 
                     //Establecimiento de labels
                     Label itemClienteNombre = (Label) nodesClientesLess[i].lookup("#itemClienteLessNombre");
-                    itemClienteNombre.setText((String) ov.getByAlias("Nombre"));
+                    itemClienteNombre.setText((String) valclieteLess.getFirst().getByAlias("Nombre"));
 
                     Label itemClienteApellido = (Label) nodesClientesLess[i].lookup("#itemClienteLessApellidos");
-                    itemClienteApellido.setText((String) ov.getByAlias("Apellidos"));
+                    itemClienteApellido.setText((String) valclieteLess.getFirst().getByAlias("Apellidos"));
 
                     nodesClientesLess[i].setOnMouseEntered(event -> {
                         nodesClientesLess[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
@@ -2323,6 +2321,7 @@ public class Controller implements Initializable, MapComponentInitializedListene
         correcto = comprobacionesDatos.comprobarCliente(Cliente);
 
         if (correcto == 0) {
+            Inserciones.BDReady();
             Inserciones.insertarCliente(Cliente);
         }
         if (correcto == 1) {

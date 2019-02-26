@@ -36,6 +36,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Level;
@@ -55,8 +56,9 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.hibernate.Session;
+import wonka.I18N;
 
-public class Controller implements Initializable , MapComponentInitializedListener{
+public class Controller implements Initializable, MapComponentInitializedListener {
 
 // <editor-fold defaultstate="collapsed" desc="Declaraciones de elementos de la interfaz">
     //INICIALIZAMOS LAS PANTALLAS Y TODOS LOS DEMÁS COMPONENETES DE NUESTROS FXML
@@ -353,13 +355,12 @@ public class Controller implements Initializable , MapComponentInitializedListen
 
     @FXML
     private Button btnSubirImagen;
-    
+
     @FXML
     private GoogleMapView gmaps;
     private GoogleMap map;
 
     // </editor-fold>
-    
     private Node[] nodes = new Node[0];
     private Node[] nodesCartas = new Node[0];
     private Node[] nodesClientes = new Node[0];
@@ -377,8 +378,7 @@ public class Controller implements Initializable , MapComponentInitializedListen
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         gmaps.addMapInializedListener(this);
-     
-       
+
         try {
             //Arrancamos todas las listas de todas las pantallas
             ListCards();
@@ -432,17 +432,15 @@ public class Controller implements Initializable , MapComponentInitializedListen
 
     }
     // </editor-fold>
-    
+
     @Override
     public void mapInitialized() {
-           LatLong joeSmithLocation = new LatLong(42.2260838,-8.7604453);
-       
-        
-        
+        LatLong joeSmithLocation = new LatLong(42.2260838, -8.7604453);
+
         //Set the initial properties of the map.
         MapOptions mapOptions = new MapOptions();
-        
-        mapOptions.center(new LatLong(42.2260838,-8.7604453))
+
+        mapOptions.center(new LatLong(42.2260838, -8.7604453))
                 .mapType(MapTypeIdEnum.ROADMAP)
                 .overviewMapControl(false)
                 .panControl(false)
@@ -451,22 +449,18 @@ public class Controller implements Initializable , MapComponentInitializedListen
                 .streetViewControl(false)
                 .zoomControl(false)
                 .zoom(13);
-                   
+
         map = gmaps.createMap(mapOptions);
 
         //Add markers to the map
         MarkerOptions markerOptions1 = new MarkerOptions();
         markerOptions1.position(joeSmithLocation);
-        
 
-        
         Marker joeSmithMarker = new Marker(markerOptions1);
-      
-        map.addMarker( joeSmithMarker );
-      
 
-        
-    }   
+        map.addMarker(joeSmithMarker);
+
+    }
 
     // <editor-fold defaultstate="collapsed" desc="Método de control de campos editables para la ventana de Cartas">
     @FXML

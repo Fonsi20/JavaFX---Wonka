@@ -1,7 +1,11 @@
 package backend;
 
+import Objetos.CartaMAGIC;
+import Objetos.Cliente;
 import java.sql.SQLException;
 import java.sql.Statement;
+import org.neodatis.odb.ODB;
+import org.neodatis.odb.ODBFactory;
 
 /**
  *
@@ -126,7 +130,7 @@ public class createBBDD {
                     + "('008','RGBT-SP060','Mágica','Mágica','0','Mágica normal'),"
                     + "('009','LCYW-SP238','Trampa','Trampa','0','Trampa normal'),"
                     + "('010','DOSC-SP020','Monstruo','Oscuridad','1','Demonio');");
-            
+
             //Cartas Force of will
             sentencia.execute("INSERT INTO cartas ( NombreJuego, Año, Precio, Stock, NombreCarta, Descripcion, Coleccion) VALUES "
                     + "('Force of Will','2016','3.49','1','La manticora','Cuando esta carta entre en tu campo; Elige uno - Mira la mano de tu oponente y elige una carta. Tu oponente y elige una carta. Tu oponente descarta esa carta; o destruye el añadido o insignia objetivo que controle tu oponente','Legacy Lost'),"
@@ -138,7 +142,7 @@ public class createBBDD {
                     + "('012','RL 1701-2','Agua','6','Resonador','Avatar'),"
                     + "('013','RL1611-1','Viento','1','Canto','Ninguna'),"
                     + "('014','RL1611-2','Oscuridad','5','Resonador','Dragón');");
-                   
+
             //Clientes
             sentencia.execute("INSERT INTO clientes (Nombre,Apellidos,Edad,Sexo,Dirección,Telefono,Mail) values"
                     + "('Alfonso','Fernández Alvarez','27',true,'Baixada ao Reiro Nº19 - Ponteareas - Spain','555555520','fonsi20@gmail.com' ),"
@@ -147,7 +151,7 @@ public class createBBDD {
                     + "('Nuria','Muñoz Carrera','25',false,'Avenida Gran Via nº33 - Vigo - Spain','411203040','nuriamuñoz@gmail.com' ),"
                     + "('Bonifacio','Rodríguez Álvarez','55',true,'Camino del rio nº19 - Mos - Spain','232124578','bonifaciorodriguez@gmail.com' ),"
                     + "('Leonardo','Costas Zapatero','42',true,'Calle Miramar nº23 - Cangas - Spain','787878788','leonardocostas@gmail.com' );");
-            
+
             //Ventas
             sentencia.execute("INSERT INTO ventas (IDCliente, IDCarta, Cantidad) values"
                     + "('00001','001','1'),"
@@ -156,8 +160,7 @@ public class createBBDD {
                     + "('00004','013','1'),"
                     + "('00005','009','3'),"
                     + "('00006','006','1');");
-            
-            
+
             //Reservas
             sentencia.execute("INSERT INTO reservas (IDCarta, IDCliente, Cantidad) values"
                     + "('002','00001','2'),"
@@ -168,6 +171,14 @@ public class createBBDD {
             System.out.println(e);
         }
 
+    }
+
+    public static void insertarNeodatis() {
+        ODB odb = ODBFactory.openClient("localhost", 8000, "neoWonka");
+       /** Cliente cli = new Cliente(27, "Alfonso", "Fernández Alvarez", "Baixada ao Reiro Nº19 - Ponteareas - Spain", "555555520", "fonsi20@gmail.com", true);
+        odb.delete(cli);
+        odb.commit();**/
+        odb.close();
     }
 
 }

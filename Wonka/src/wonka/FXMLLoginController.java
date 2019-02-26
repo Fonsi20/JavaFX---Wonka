@@ -37,7 +37,7 @@ import org.neodatis.odb.ODBServer;
  */
 public class FXMLLoginController implements Initializable {
 
-    private double x, y;    
+    private double x, y;
 
     @FXML
     private Label label;
@@ -61,7 +61,7 @@ public class FXMLLoginController implements Initializable {
     private TextField edUser;
 
     @FXML
-    private void handleButtonAction(ActionEvent event) throws IOException, InterruptedException{
+    private void handleButtonAction(ActionEvent event) throws IOException, InterruptedException {
 
         Task<Void> sleeper = new Task<Void>() {
             @Override
@@ -98,7 +98,8 @@ public class FXMLLoginController implements Initializable {
                                     } else {
                                         sentencia.execute("use TIENDACARTAS");
                                         System.out.println("--- Base de datos CREADA ---\n");
-                                    }Wonka.basedatos = true;
+                                    }
+                                    Wonka.basedatos = true;
 
                                 } catch (SQLException e) {
                                     System.out.println("Error: " + e);
@@ -111,6 +112,7 @@ public class FXMLLoginController implements Initializable {
                                 server.addBase("neoWonka", "neoWonka.neo");
                                 server.startServer(true);
                                 Thread.sleep(100);
+                                createBBDD.insertarNeodatis();
                                 Wonka.basedatos = false;
 
                             }
@@ -119,7 +121,7 @@ public class FXMLLoginController implements Initializable {
                             HomeStage.setScene(new Scene(segunda));
                             HomeStage.toFront();
                             HomeStage.show();
-                            
+
                         } else {
                             edPass.setText("");
                             edUser.setText("");

@@ -174,11 +174,11 @@ public class createBBDD {
     }
 
     public static void insertarNeodatis() {
-        ODB odb = ODBFactory.openClient("localhost", 8000, "neoWonka");
-       /** Cliente cli = new Cliente(27, "Alfonso", "Fernández Alvarez", "Baixada ao Reiro Nº19 - Ponteareas - Spain", "555555520", "fonsi20@gmail.com", true);
-        odb.delete(cli);
-        odb.commit();**/
-        odb.close();
+        /*ODB odb = ODBFactory.openClient("localhost", 8000, "neoWonka");
+        Cliente cli = new Cliente(27, "Alfonso", "Fernández Alvarez", "Baixada ao Reiro Nº19 - Ponteareas - Spain", "555555520", "fonsi20@gmail.com", true);
+        odb.store(cli);
+        odb.commit();
+        odb.close();*/
     }
 
 }

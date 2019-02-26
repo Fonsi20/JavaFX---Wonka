@@ -1622,13 +1622,15 @@ public class Controller implements Initializable, MapComponentInitializedListene
             try {
                 for (int i = 0; i < nodesClientes.length; i++) {
                     valCliente.next();
+
                     final int j = i;
                     nodesClientes[i] = FXMLLoader.load(getClass().getResource("ItemCliente.fxml"));
-
+                    System.out.println((String)valCliente.getFirst().getByAlias("Nombre"));
                     //Establecimiento de labels
                     Label itemClienteNombre = (Label) nodesClientes[i].lookup("#itemClienteNombre");
-                    itemClienteNombre.setText((String) ov.getByAlias("Nombre"));
-
+                    itemClienteNombre.setText((String)valCliente.getFirst().getByAlias("Nombre"));
+                    System.out.println("PIPO 22245645642");
+                    
                     Label itemClienteApellido = (Label) nodesClientes[i].lookup("#itemClienteApellido");
                     itemClienteApellido.setText((String) ov.getByAlias("Apellidos"));
 

@@ -134,13 +134,12 @@
             </Button>
             <HBox alignment="CENTER" prefWidth="200.0" style="-fx-background-color: #000;">
                <children>
-                  <Label text="PIPO" />
-                  <Label text="EN" textFill="#0b4b5b">
+                  <Label fx:id="btnEN" onMouseClicked="#setLocaleEN" text="EN" textFill="#0b4b5b">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label text="ES" textFill="#4cd9ff">
+                  <Label fx:id="btnES" onMouseClicked="#setLocaleES" text="ES" textFill="#4cd9ff">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

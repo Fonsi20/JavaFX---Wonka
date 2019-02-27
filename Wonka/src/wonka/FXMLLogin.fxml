@@ -34,7 +34,7 @@
             </JFXButton>
             <JFXTextField fx:id="edUser" focusColor="WHITE" layoutX="35.0" layoutY="121.0" prefHeight="25.0" prefWidth="287.0" promptText="username / email" unFocusColor="#4cd9ff" />
             <JFXPasswordField fx:id="edPass" focusColor="WHITE" layoutX="35.0" layoutY="183.0" prefHeight="25.0" prefWidth="287.0" promptText="password" unFocusColor="#4cd9ff" />
-            <Text fill="WHITE" layoutX="146.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sing In">
+            <Text fill="WHITE" layoutX="146.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%SIGN_IN">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -64,6 +64,6 @@
             </LinearGradient>
          </fill>
       </Text>
-      <Text fill="WHITE" layoutX="56.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Proyecto para Acceso a Datos( ADD) &#10;Programa gestor de  clientes, pedidos y cartas de los juegos:&#10;Magic, Force of Will y Yu Gi Oh.&#10;Desarrolllado en 2018 y propiedad de:&#10;Alfonso Fernández, Daniel Bastos y Diego Vilariño" />
+      <Text fill="WHITE" layoutX="60.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%PROJECT_DESCRIPTION" AnchorPane.topAnchor="267.6302089691162" />
    </children>
 </AnchorPane>

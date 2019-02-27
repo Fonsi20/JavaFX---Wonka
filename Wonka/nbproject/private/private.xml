@@ -3,15 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/a16alfonsofa/Documents/NetBeansProjects/JavaFX---Wonka/Wonka/src/backend/comprovacionesBBDD.java</file>
-            <file>file:/C:/Users/a16alfonsofa/Documents/NetBeansProjects/JavaFX---Wonka/Wonka/src/wonka/Wonka.java</file>
-            <file>file:/C:/Users/a16alfonsofa/Documents/NetBeansProjects/JavaFX---Wonka/Wonka/src/wonka/FXMLLoginController.java</file>
-            <file>file:/C:/Users/a16alfonsofa/Documents/NetBeansProjects/JavaFX---Wonka/Wonka/src/wonka/Controller.java</file>
-            <file>file:/C:/Users/a16alfonsofa/Documents/NetBeansProjects/JavaFX---Wonka/Wonka/src/backend/createBBDD.java</file>
-            <file>file:/C:/Users/a16alfonsofa/Documents/NetBeansProjects/JavaFX---Wonka/Wonka/src/backend/comprobacionesDatos.java</file>
-            <file>file:/C:/Users/a16alfonsofa/Documents/NetBeansProjects/JavaFX---Wonka/Wonka/src/backend/Bajas.java</file>
-            <file>file:/C:/Users/a16alfonsofa/Documents/NetBeansProjects/JavaFX---Wonka/Wonka/src/backend/Inserciones.java</file>
-            <file>file:/C:/Users/a16alfonsofa/Documents/NetBeansProjects/JavaFX---Wonka/Wonka/src/wonka/NewHibernateUtil.java</file>
+            <file>file:/home/sf/NetBeansProjects/JavaFX---Wonka/Wonka/src/wonka/FXMLLoginController.java</file>
+            <file>file:/home/sf/NetBeansProjects/JavaFX---Wonka/Wonka/src/wonka/I18N.java</file>
+            <file>file:/home/sf/NetBeansProjects/JavaFX---Wonka/Wonka/src/wonka/Controller.java</file>
+            <file>file:/home/sf/NetBeansProjects/JavaFX---Wonka/Wonka/src/wonka/resources/strings_es_ES.properties</file>
+            <file>file:/home/sf/NetBeansProjects/JavaFX---Wonka/Wonka/src/wonka/Home.fxml</file>
         </group>
     </open-files>
 </project-private>

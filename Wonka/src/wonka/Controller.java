@@ -62,6 +62,14 @@ public class Controller implements Initializable, MapComponentInitializedListene
 
 // <editor-fold defaultstate="collapsed" desc="Declaraciones de elementos de la interfaz">
     //INICIALIZAMOS LAS PANTALLAS Y TODOS LOS DEMÁS COMPONENETES DE NUESTROS FXML
+    
+    
+    @FXML
+    private Label btnEN;
+
+    @FXML
+    private Label btnES;
+    
     @FXML
     private AnchorPane home;
 
@@ -372,12 +380,19 @@ public class Controller implements Initializable, MapComponentInitializedListene
     private String idCartaCompra;
 
     private File selectedFile;
-
+    
+    private ResourceBundle bundle;
+    private URL location;
+    
     // ---------------------------------------- Métodos de control de la aplicación ---------------------------------------------------//
     // <editor-fold defaultstate="collapsed" desc="Método de inicialización">
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        
         gmaps.addMapInializedListener(this);
+        
+        this.location = location;
+        this.bundle = resources;
 
         try {
             //Arrancamos todas las listas de todas las pantallas
@@ -3254,5 +3269,20 @@ public class Controller implements Initializable, MapComponentInitializedListene
         }
     }
     // </editor-fold>
+    
+    
+    // <editor-fold defaultstate="collapsed" desc="Métodos de cambio de idioma">
+    @FXML
+    void setLocaleEN(MouseEvent event) {
+       this.bundle = ResourceBundle.getBundle("wonka/resources/strings_en_EN");
+       this.initialize(location, bundle);
+    }
 
+    @FXML
+    void setLocaleES(MouseEvent event) {
+        this.bundle = ResourceBundle.getBundle("wonka/resources/strings_es_ES");
+        this.initialize(location, bundle);
+    }
+    
+    // </editor-fold>
 }

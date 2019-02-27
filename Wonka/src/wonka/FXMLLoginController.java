@@ -28,6 +28,8 @@ import wonka.I18N;
  */
 public class FXMLLoginController implements Initializable {
 
+    private static ResourceBundle strings = ResourceBundle.getBundle("wonka/resources/strings_en_EN");
+
     private double x, y;
 
     @FXML
@@ -76,7 +78,7 @@ public class FXMLLoginController implements Initializable {
                         } else {
                             edPass.setText("");
                             edUser.setText("");
-                            edUser.setPromptText("Usuario o Contraseña incorrecta");
+                            edUser.setPromptText(strings.getString("WRONG_USER_PSW"));
                         }
                     }
                     if (event.getSource() == btnSingUp) {
@@ -93,6 +95,7 @@ public class FXMLLoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        
         this.MoverVentanas(this.login);
     }
 

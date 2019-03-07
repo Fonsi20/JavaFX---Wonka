@@ -29,26 +29,34 @@ public class Inserciones {
     public static SessionFactory sessionFactory;
     public static ODB odb;
 
-    public void BDReady() {
+    public static void BDReady() {
         if (Wonka.basedatos == true) {
             sessionFactory = NewHibernateUtil.getSessionFactory();
         } else {
-            odb = ODBFactory.openClient("localhost", 8000, "noeWonka");
+            odb = ODBFactory.openClient("localhost", 8000, "neoWonka");
         }
     }
 
     public static void insertarCartasMagic(ArrayList<String> Carta, byte[] IMG) {
         System.out.println("en MAGIC " + Carta);
+        
         int stock = Integer.parseInt(Carta.get(0));
         float price = Float.parseFloat(Carta.get(6));
         String[] parts = (Carta.get(5)).split("-");
         String year = parts[0];
-        CartaMAGIC aux;
-        aux = new CartaMAGIC(Carta.get(9), Carta.get(7), Carta.get(8), Carta.get(10), stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), year, price, IMG);
+        Carta aux = null;
+        if (IMG == null) {
+            aux = new CartaMAGIC(Carta.get(9), Carta.get(7), Carta.get(8), Carta.get(10), stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), year, price);
+        } else {
+            aux = new CartaMAGIC(Carta.get(9), Carta.get(7), Carta.get(8), Carta.get(10), stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), year, price, IMG);
+        }
         if (Wonka.basedatos == true) {
             guardarModificar(aux);
         } else {
+            odb = ODBFactory.openClient("localhost", 8000, "neoWonka");
+            System.out.println(aux);
             odb.store(aux);
+            odb.commit();
             odb.close();
         }
 
@@ -62,7 +70,12 @@ public class Inserciones {
         String[] parts = (Carta.get(5)).split("-");
         String year = parts[0];
         CartaYUGI aux;
-        aux = new CartaYUGI(Carta.get(7), Carta.get(11), Carta.get(8), Carta.get(10), nivel, stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), year, price, IMG);
+
+        if (IMG == null) {
+            aux = new CartaYUGI(Carta.get(7), Carta.get(11), Carta.get(8), Carta.get(10), nivel, stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), year, price);
+        } else {
+            aux = new CartaYUGI(Carta.get(7), Carta.get(11), Carta.get(8), Carta.get(10), nivel, stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), year, price, IMG);
+        }
         if (Wonka.basedatos == true) {
             guardarModificar(aux);
         } else {
@@ -78,7 +91,11 @@ public class Inserciones {
         String[] parts = (Carta.get(5)).split("-");
         String year = parts[0];
         CartaFOW aux;
-        aux = new CartaFOW(Carta.get(7), Carta.get(9), Carta.get(8), Carta.get(11), Carta.get(10), stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), year, price, IMG);
+        if (IMG == null) {
+            aux = new CartaFOW(Carta.get(7), Carta.get(9), Carta.get(8), Carta.get(11), Carta.get(10), stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), year, price);
+        } else {
+            aux = new CartaFOW(Carta.get(7), Carta.get(9), Carta.get(8), Carta.get(11), Carta.get(10), stock, Carta.get(1), Carta.get(2), Carta.get(3), Carta.get(4), year, price, IMG);
+        }
         if (Wonka.basedatos == true) {
             guardarModificar(aux);
         } else {
@@ -205,6 +222,7 @@ public class Inserciones {
                 guardarModificar(fow);
             } else {
                 odb.store(fow);
+                odb.commit();
                 odb.close();
             }
 
@@ -222,10 +240,12 @@ public class Inserciones {
             sexo = true;
         }
         Cliente aux = new Cliente(Integer.parseInt(Cliente.get(2)), Cliente.get(0), Cliente.get(1), Cliente.get(4), Cliente.get(5), Cliente.get(6), sexo);
+        System.out.println("en aux es " + aux.getNombre());
         if (Wonka.basedatos == true) {
             guardarModificar(aux);
         } else {
             odb.store(aux);
+            odb.commit();
             odb.close();
         }
     }

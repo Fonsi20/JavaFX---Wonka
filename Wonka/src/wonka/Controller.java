@@ -381,6 +381,13 @@ public class Controller implements Initializable, MapComponentInitializedListene
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         gmaps.addMapInializedListener(this);
+
+        if (Wonka.basedatos == true) {
+            btnSubirImagen.setVisible(true);
+        } else {
+            btnSubirImagen.setVisible(false);
+        }
+
         System.out.println("uno");
         try {
             try {
@@ -855,8 +862,8 @@ public class Controller implements Initializable, MapComponentInitializedListene
             int value = Integer.parseInt(String.valueOf(ov.getByAlias("IDCarta")));
             limpiarListas(pnItems);
             nodes = new Node[value];
-            Values valCarta = odb.getValues(new ValuesCriteriaQuery(Carta.class)
-                    .field("NombreJuego")
+            ValuesCriteriaQuery vc = new ValuesCriteriaQuery(Carta.class);
+            Values valCarta = odb.getValues(vc.field("NombreJuego")
                     .field("NombreCarta")
                     .field("Coleccion")
                     .field("Precio")
@@ -894,15 +901,6 @@ public class Controller implements Initializable, MapComponentInitializedListene
 
                     nodes[i].setOnMouseClicked(event -> {
 
-                        /**
-                         * Session s; s = NewHibernateUtil.getSession();
-                         * List<Object> CartaMAGIC =
-                         * s.createCriteria(CartaMAGIC.class).list();
-                         * List<Object> CartaFOW =
-                         * s.createCriteria(CartaFOW.class).list(); List<Object>
-                         * CartaYUGI = s.createCriteria(CartaYUGI.class).list();
-                         * s.close();*
-                         */
                         Objects<CartaYUGI> valCartaYugi = odb.getObjects(new CriteriaQuery(CartaYUGI.class));
                         Objects<CartaMAGIC> valCartaMagic = odb.getObjects(new CriteriaQuery(CartaMAGIC.class));
                         Objects<CartaFOW> valCartaFow = odb.getObjects(new CriteriaQuery(CartaFOW.class));
@@ -1633,13 +1631,12 @@ public class Controller implements Initializable, MapComponentInitializedListene
 
                     Label itemClienteEdad = (Label) nodesClientes[i].lookup("#itemClienteEdad");
                     itemClienteEdad.setText(String.valueOf(ovv.getByAlias("Edad")));
-                    
+
                     Label itemClienteEmail = (Label) nodesClientes[i].lookup("#itemClienteEmail");
                     itemClienteEmail.setText((String) ovv.getByAlias("Mail"));
 
                     Label itemClienteTlf = (Label) nodesClientes[i].lookup("#itemClienteTlf");
                     itemClienteTlf.setText((String) ovv.getByAlias("Telefono"));
-
 
                     nodesClientes[i].setOnMouseEntered(event -> {
                         nodesClientes[j].setStyle("-fx-background-color : #266D7F; -fx-background-radius:5");
@@ -1697,7 +1694,7 @@ public class Controller implements Initializable, MapComponentInitializedListene
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            odb.close();
+            //odb.close();
         }
 
     }
@@ -2464,8 +2461,12 @@ public class Controller implements Initializable, MapComponentInitializedListene
         Carta.add(colecCard.getText());
         Carta.add(yearCard.getText());
         Carta.add(priceCard.getText());
-        System.out.println(selectedFile.getAbsolutePath());
-        byte[] IMG = Files.readAllBytes(selectedFile.toPath());
+
+        byte[] IMG = null;
+        if (Wonka.basedatos == true) {
+            System.out.println(selectedFile.getAbsolutePath());
+            IMG = Files.readAllBytes(selectedFile.toPath());
+        }
 
         if (((String) nameGame.getSelectionModel().getSelectedItem()) == null) {
             nameGame.setStyle("  -fx-border-color:#f45454;"

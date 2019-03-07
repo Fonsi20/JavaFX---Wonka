@@ -111,10 +111,10 @@ public class FXMLLoginController implements Initializable {
                                 ODBServer server = ODBFactory.openServer(8000);
                                 server.addBase("neoWonka", "neoWonka.neo");
                                 server.startServer(true);
-                                Thread.sleep(100);
+                                //  Thread.sleep(100);
                                 createBBDD.insertarNeodatis();
                                 Wonka.basedatos = false;
-
+                                arreglosDependencias();
                             }
                             Parent segunda = FXMLLoader.load(getClass().getResource("Home.fxml"));
                             Stage HomeStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -134,8 +134,32 @@ public class FXMLLoginController implements Initializable {
 
                 } catch (IOException e) {
                     System.out.println(e);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(FXMLLoginController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            private void arreglosDependencias() {
+                String url = "jdbc:mysql://localhost:3307/?user=root&password=usbw";
+                try {
+                    conect = DriverManager.getConnection(url);
+                    sentencia = conect.createStatement();
+
+                } catch (SQLException e) {
+                    System.out.println("Error: " + e);
+                    System.exit(1);
+                }
+                try {
+                    if (!sentencia.executeQuery("show databases like 'TIENDACARTAS'").first()) {
+                        createBBDD.crearTablas(sentencia);
+                        System.out.println("--- Base de datos NEODATIS CREADA ---\n");
+                    } else {
+                        sentencia.execute("use TIENDACARTAS");
+                        System.out.println("--- Base de datos NEODATIS CREADA ---\n");
+                    }
+                    Wonka.basedatos = true;
+
+                } catch (SQLException e) {
+                    System.out.println("Error: " + e);
+                    System.exit(2);
                 }
             }
         });

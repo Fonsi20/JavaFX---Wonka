@@ -36,6 +36,8 @@ import org.neodatis.odb.ODBServer;
  * @author a16alfonsofa
  */
 public class FXMLLoginController implements Initializable {
+    
+    private static ResourceBundle strings = ResourceBundle.getBundle("wonka/resources/strings_en_US");
 
     private double x, y;
 
@@ -125,7 +127,7 @@ public class FXMLLoginController implements Initializable {
                         } else {
                             edPass.setText("");
                             edUser.setText("");
-                            edUser.setPromptText("Usuario o Contraseña incorrecta");
+                            edUser.setPromptText(strings.getString("WRONG_USER_PSW"));
                         }
                     }
                     if (event.getSource() == btnSingUp) {

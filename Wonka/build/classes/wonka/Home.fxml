@@ -37,12 +37,12 @@
                   <Insets bottom="10.0" top="50.0" />
                </VBox.margin>
             </ImageView>
-            <Label text="Administrador" textFill="#e7e5e5">
+            <Label fx:id="adminLabel" text="%ADMIN" textFill="#e7e5e5">
                <VBox.margin>
                   <Insets bottom="20.0" />
                </VBox.margin>
             </Label>
-            <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="Inicio" textFill="#e7e5e5">
+            <Button fx:id="btnOverview" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="%HOME" textFill="#e7e5e5">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -60,7 +60,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="Cartas">
+            <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="%CARDS">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -72,7 +72,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="Clientes">
+            <Button fx:id="btnCustomers" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="%CLIENTS">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -84,7 +84,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnCompras" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="Compras">
+            <Button fx:id="btnCompras" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="%PURCHASES">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -96,7 +96,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnHistorial" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="300.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="Historial">
+            <Button fx:id="btnHistorial" alignment="BASELINE_LEFT" graphicTextGap="22.0" layoutX="10.0" layoutY="300.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="%HISTORY">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -108,7 +108,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="Desarrolladores">
+            <Button fx:id="btnSettings" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="%DEVELOPERS">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -120,7 +120,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnSignout" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="Salir">
+            <Button fx:id="btnSignout" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0" style="-fx-background-color: #00000B;" stylesheets="@style.css" text="%EXIT">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -134,12 +134,12 @@
             </Button>
             <HBox alignment="CENTER" prefWidth="200.0" style="-fx-background-color: #000;">
                <children>
-                  <Label text="EN" textFill="#0b4b5b">
+                  <Label fx:id="btnEN" onMouseClicked="#setLocaleEN" text="EN" textFill="#0b4b5b">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label text="ES" textFill="#4cd9ff">
+                  <Label fx:id="btnES" onMouseClicked="#setLocaleES" text="ES" textFill="#4cd9ff">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -159,38 +159,38 @@
             <Pane fx:id="pnlSignOut" prefHeight="200.0" prefWidth="849.0" visible="false" />
             <Pane fx:id="pnlHistorial" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Label layoutX="48.0" layoutY="27.0" text="Historial" textFill="#e7e5e5">
+                  <Label layoutX="48.0" layoutY="27.0" text="%HISTORY" textFill="#e7e5e5">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
                   <HBox alignment="CENTER_LEFT" layoutY="88.0" prefHeight="42.0" prefWidth="935.0" style="-fx-background-color: #4CD9FF;">
                      <children>
-                        <Label text="Nombre">
+                        <Label text="%NAME">
                            <HBox.margin>
                               <Insets left="110.0" />
                            </HBox.margin>
                         </Label>
-                        <Label layoutX="154.0" layoutY="23.0" text="Nombre Carta">
+                        <Label layoutX="154.0" layoutY="23.0" text="%CARD_NAME">
                            <HBox.margin>
                               <Insets left="105.0" right="200.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Cantidad">
+                        <Label text="%AMOUNT">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
                         </Label>
-                        <Label layoutX="348.0" layoutY="23.0" text="Teléfono">
+                        <Label layoutX="348.0" layoutY="23.0" text="%PHONE">
                            <HBox.margin>
                               <Insets left="30.0" right="30.0" />
                            </HBox.margin></Label>
-                        <Label layoutX="350.0" layoutY="23.0" text="Precio">
+                        <Label layoutX="350.0" layoutY="23.0" text="%PRICE">
                            <HBox.margin>
                               <Insets right="48.0" />
                            </HBox.margin>
                         </Label>
-                        <Label layoutX="380.0" layoutY="23.0" text="Estado" />
+                        <Label layoutX="380.0" layoutY="23.0" text="%STATE" />
                      </children>
                   </HBox>
                   <ScrollPane fx:id="ListHistorial" hbarPolicy="NEVER" layoutX="15.0" layoutY="135.0" prefHeight="284.0" prefWidth="905.0" stylesheets="@style.css">
@@ -202,7 +202,7 @@
                         </VBox>
                      </content>
                   </ScrollPane>
-                  <JFXButton fx:id="btnCancelarReserva" layoutX="751.0" layoutY="32.0" onAction="#CancelarReservaHistorial" prefWidth="150.0" style="-fx-background-color: #fa5f7e;" text="Cancelar Reserva" textFill="WHITE">
+                  <JFXButton fx:id="btnCancelarReserva" layoutX="751.0" layoutY="32.0" onAction="#CancelarReservaHistorial" prefWidth="150.0" style="-fx-background-color: #fa5f7e;" text="%CANCEL_RESERVATION" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -247,19 +247,19 @@
             </Pane>
             <Pane fx:id="pnlCompras" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
-                  <Label layoutX="48.0" layoutY="27.0" text="Compras" textFill="#e7e5e5">
+                  <Label layoutX="48.0" layoutY="27.0" text="%PURCHASES" textFill="#e7e5e5">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
                   <HBox alignment="CENTER_LEFT" layoutX="1.0" layoutY="145.0" prefHeight="42.0" prefWidth="461.0" style="-fx-background-color: #4CD478;">
                      <children>
-                        <Label text="Nombre">
+                        <Label text="%NAME">
                            <HBox.margin>
                               <Insets left="90.0" right="20.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Apellidos">
+                        <Label text="%LAST_NAME">
                            <HBox.margin>
                               <Insets left="60.0" />
                            </HBox.margin>
@@ -277,17 +277,17 @@
                   </ScrollPane>
                   <HBox alignment="CENTER_LEFT" layoutX="447.0" layoutY="145.0" prefHeight="42.0" prefWidth="488.0" style="-fx-background-color: #4CD478;">
                      <children>
-                        <Label text="Juego">
+                        <Label text="%GAME">
                            <HBox.margin>
                               <Insets left="90.0" right="20.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Nombre Carta">
+                        <Label text="%CARD_NAME">
                            <HBox.margin>
                               <Insets left="60.0" right="20.0" />
                            </HBox.margin>
                         </Label>
-                        <Label layoutX="154.0" layoutY="23.0" text="Precio">
+                        <Label layoutX="154.0" layoutY="23.0" text="%PRICE">
                            <HBox.margin>
                               <Insets left="60.0" />
                            </HBox.margin>
@@ -303,25 +303,25 @@
                         </VBox>
                      </content>
                   </ScrollPane>
-                  <JFXButton fx:id="btnComprarCarta" layoutX="751.0" layoutY="32.0" onAction="#accionComprarCarta" prefWidth="150.0" style="-fx-background-color: #4CD478;" text="Comprar" textFill="WHITE">
+                  <JFXButton fx:id="btnComprarCarta" layoutX="751.0" layoutY="32.0" onAction="#accionComprarCarta" prefWidth="150.0" style="-fx-background-color: #4CD478;" text="%BUY" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="btnLimpiarListas" layoutX="583.0" layoutY="32.0" onAction="#accionBorrarCompras" prefWidth="150.0" style="-fx-background-color: #00C9FF;" text="Limpiar" textFill="WHITE">
+                  <JFXButton fx:id="btnLimpiarListas" layoutX="583.0" layoutY="32.0" onAction="#accionBorrarCompras" prefWidth="150.0" style="-fx-background-color: #00C9FF;" text="%CLEAR" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </JFXButton>
-                  <JFXTextField fx:id="busComCliente" layoutX="23.0" layoutY="107.0" onKeyPressed="#accionBuscarComprasCliente" prefHeight="25.0" prefWidth="420.0" promptText="Nombre del cliente a buscar...." style="-fx-background-color: #00222B; -fx-text-fill: #fff;" unFocusColor="WHITE" />
-                  <JFXTextField fx:id="busComCarta" layoutX="479.0" layoutY="107.0" onKeyPressed="#accionBuscarComprasCarta" prefHeight="25.0" prefWidth="420.0" promptText="Nombre de la carta a buscar...." style="-fx-background-color: #00222B; -fx-text-fill: #fff;" unFocusColor="WHITE" />
-                  <TextField fx:id="textAreaCantidadCompra" layoutX="411.0" layoutY="32.0" prefHeight="30.0" prefWidth="149.0" promptText="Cantidad" style="-fx-background-color: #00000B; -fx-prompt-text-fill: #fff; -fx-text-fill: #fff;" />
-                  <JFXCheckBox checkedColor="#00c9ff" layoutX="185.0" layoutY="38.0" text="Domicilio" textFill="WHITE" unCheckedColor="#0c0c0c">
+                  <JFXTextField fx:id="busComCliente" layoutX="23.0" layoutY="107.0" onKeyPressed="#accionBuscarComprasCliente" prefHeight="25.0" prefWidth="420.0" promptText="%CLIENT_NAME_SEARCH_PROMPT" style="-fx-background-color: #00222B; -fx-text-fill: #fff;" unFocusColor="WHITE" />
+                  <JFXTextField fx:id="busComCarta" layoutX="479.0" layoutY="107.0" onKeyPressed="#accionBuscarComprasCarta" prefHeight="25.0" prefWidth="420.0" promptText="%CARD_SEARCH_PROMPT" style="-fx-background-color: #00222B; -fx-text-fill: #fff;" unFocusColor="WHITE" />
+                  <TextField fx:id="textAreaCantidadCompra" layoutX="411.0" layoutY="32.0" prefHeight="30.0" prefWidth="149.0" promptText="%AMOUNT" style="-fx-background-color: #00000B; -fx-prompt-text-fill: #fff; -fx-text-fill: #fff;" />
+                  <JFXCheckBox checkedColor="#00c9ff" layoutX="185.0" layoutY="38.0" text="%ADDRESS" textFill="WHITE" unCheckedColor="#0c0c0c">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </JFXCheckBox>
-                  <JFXCheckBox checkedColor="#00c9ff" layoutX="292.0" layoutY="38.0" selected="true" text="En tienda" textFill="WHITE" unCheckedColor="#0c0c0c">
+                  <JFXCheckBox checkedColor="#00c9ff" layoutX="292.0" layoutY="38.0" selected="true" text="%PICKUP_STORE" textFill="WHITE" unCheckedColor="#0c0c0c">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -334,7 +334,7 @@
                      <children>
                         <VBox prefHeight="112.0" prefWidth="150.0" spacing="10.0">
                            <children>
-                              <Label text="Nombre Juego" textFill="WHITE">
+                              <Label text="%GAME_NAME" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -342,7 +342,7 @@
                                     <Insets top="62.0" />
                                  </VBox.margin>
                               </Label>
-                              <ComboBox fx:id="nameGame" onAction="#activarAtributo" prefWidth="150.0" promptText="Escoge" stylesheets="@style.css" />
+                              <ComboBox fx:id="nameGame" onAction="#activarAtributo" prefWidth="150.0" promptText="%CHOOSE" stylesheets="@style.css" />
                               <Label text="Stock" textFill="#fa5f7e">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
@@ -353,7 +353,7 @@
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="150.0" spacing="10.0">
                            <children>
-                              <Label text="Precio" textFill="WHITE">
+                              <Label text="%PRICE" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -362,7 +362,7 @@
                                  </VBox.margin>
                               </Label>
                               <TextField fx:id="priceCard" promptText="20,4€" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B; -fx-prompt-text-fill: #fff;" />
-                              <Label text="Año" textFill="#fa5f7e">
+                              <Label text="%YEAR" textFill="#fa5f7e">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -372,18 +372,18 @@
                         </VBox>
                         <VBox prefHeight="114.0" prefWidth="369.0" spacing="10.0">
                            <children>
-                              <Label text="Colección" textFill="WHITE">
+                              <Label text="%COLLECTION" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="colecCard" promptText="Nombre de la Colección de la Carta" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B; -fx-prompt-text-fill: #fff;" />
-                              <Label text="Descripcion" textFill="WHITE">
+                              <TextField fx:id="colecCard" promptText="%PROMPT_NAME_COLLECTION" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B; -fx-prompt-text-fill: #fff;" />
+                              <Label text="%DESCRIPTION" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <JFXTextArea fx:id="sumCard" promptText="Descripcion de la carta...." style="-fx-background-color: #00000B; -fx-text-fill: #ffffff; -fx-prompt-text-fill: #fff;" unFocusColor="WHITE" wrapText="true">
+                              <JFXTextArea fx:id="sumCard" promptText="%PROMPT_CARD_DESCRIPTION" style="-fx-background-color: #00000B; -fx-text-fill: #ffffff; -fx-prompt-text-fill: #fff;" unFocusColor="WHITE" wrapText="true">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
@@ -395,27 +395,27 @@
                         </VBox>
                         <VBox alignment="TOP_CENTER" prefHeight="180.0" prefWidth="136.0" spacing="15.0">
                            <children>
-                              <Button fx:id="btnSubirImagen" layoutX="10.0" maxHeight="25.0" maxWidth="120.0" minHeight="25.0" minWidth="120.0" mnemonicParsing="false" onAction="#selectImg" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #26407F;" text="Subir Imagen" textFill="WHITE">
+                              <Button fx:id="btnSubirImagen" layoutX="10.0" maxHeight="25.0" maxWidth="120.0" minHeight="25.0" minWidth="120.0" mnemonicParsing="false" onAction="#selectImg" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #26407F;" text="%IMG_UPLOAD" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btnLimpiarCarta" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="115.0" maxHeight="25.0" maxWidth="120.0" minHeight="25.0" minWidth="120.0" mnemonicParsing="false" onAction="#accionLimpiarCarta" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Limpiar" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="btnLimpiarCarta" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="115.0" maxHeight="25.0" maxWidth="120.0" minHeight="25.0" minWidth="120.0" mnemonicParsing="false" onAction="#accionLimpiarCarta" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="%CLEAR" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btnModificarCarta" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="140.0" maxHeight="25.0" maxWidth="120.0" minHeight="25.0" minWidth="120.0" mnemonicParsing="false" onAction="#accionModificarCarta" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Modificar Carta" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="btnModificarCarta" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="140.0" maxHeight="25.0" maxWidth="120.0" minHeight="25.0" minWidth="120.0" mnemonicParsing="false" onAction="#accionModificarCarta" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="%EDIT_CARD" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btnBorrarCarta" alignment="CENTER" contentDisplay="CENTER" maxHeight="25.0" maxWidth="120.0" minHeight="25.0" minWidth="120.0" mnemonicParsing="false" onAction="#accionbtnBorrarCarta" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Borrar Carta" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="btnBorrarCarta" alignment="CENTER" contentDisplay="CENTER" maxHeight="25.0" maxWidth="120.0" minHeight="25.0" minWidth="120.0" mnemonicParsing="false" onAction="#accionbtnBorrarCarta" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="%DELETE_CARD" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btnGuardarCarta" alignment="CENTER" contentDisplay="CENTER" maxHeight="25.0" maxWidth="120.0" minHeight="25.0" minWidth="120.0" mnemonicParsing="false" onAction="#accionGuardarCarta" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #4CD478;" text="Guardar Carta" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="btnGuardarCarta" alignment="CENTER" contentDisplay="CENTER" maxHeight="25.0" maxWidth="120.0" minHeight="25.0" minWidth="120.0" mnemonicParsing="false" onAction="#accionGuardarCarta" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #4CD478;" text="%SAVE_CARD" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -426,27 +426,27 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutY="488.0" prefHeight="42.0" prefWidth="935.0" style="-fx-background-color: #26407F;">
                      <children>
-                        <Label text="Juego" textFill="#e7e5e5">
+                        <Label text="%GAME" textFill="#e7e5e5">
                            <HBox.margin>
                               <Insets left="90.0" right="90.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Nombre Carta" textFill="#e7e5e5">
+                        <Label text="%CARD_NAME" textFill="#e7e5e5">
                            <HBox.margin>
                               <Insets left="20.0" right="260.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Colección" textFill="#e7e5e5">
+                        <Label text="%COLLECTION" textFill="#e7e5e5">
                            <HBox.margin>
                               <Insets left="10.0" right="70.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Precio" textFill="#e7e5e5">
+                        <Label text="%PRICE" textFill="#e7e5e5">
                            <HBox.margin>
                               <Insets left="20.0" right="50.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Cantidad" textFill="#e7e5e5">
+                        <Label text="%AMOUNT" textFill="#e7e5e5">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
@@ -468,13 +468,13 @@
                                     <Insets bottom="26.0" />
                                  </VBox.margin>
                               </Text>
-                              <Label text="ID de la carta" textFill="WHITE">
+                              <Label text="%CARD_ID" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="yugiID" promptText="45AF1" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B; -fx-prompt-text-fill: #fff;" />
-                              <Label text="Atributo" textFill="WHITE">
+                              <Label text="%ATTRIBUTE" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -484,12 +484,12 @@
                         </VBox>
                         <VBox fx:id="atributosYugi2" disable="true" prefHeight="200.0" prefWidth="100.0" spacing="5.0" style="-fx-background-color: #266D7F;" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label text="Tipo Carta" textFill="WHITE">
+                              <Label text="%CARD_TYPE" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <JFXComboBox fx:id="yugiTipo" prefHeight="25.0" prefWidth="137.0" promptText="  Trampa" style="-fx-prompt-text-fill: #fff;" stylesheets="@style.css">
+                              <JFXComboBox fx:id="yugiTipo" prefHeight="25.0" prefWidth="137.0" promptText="%TRAP" style="-fx-prompt-text-fill: #fff;" stylesheets="@style.css">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
@@ -497,13 +497,13 @@
                                     <Insets left="7.0" />
                                  </padding>
                               </JFXComboBox>
-                              <Label text="Nivel" textFill="WHITE">
+                              <Label text="%LEVEL" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="yugiNivel" promptText="4" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B; -fx-prompt-text-fill: #fff;" />
-                              <Label text="Sub Tipo" textFill="WHITE">
+                              <Label text="%SUB_TYPE" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -524,13 +524,13 @@
                                     <Insets bottom="26.0" />
                                  </VBox.margin>
                               </Text>
-                              <Label text="ID de la carta" textFill="WHITE">
+                              <Label text="%CARD_ID" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="magiID" promptText="45AF1" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B; -fx-prompt-text-fill: #fff;" />
-                              <Label text="Coste" textFill="WHITE">
+                              <Label text="%COST" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -546,7 +546,7 @@
                               <Insets bottom="20.0" left="15.0" right="15.0" top="30.0" />
                            </padding>
                            <children>
-                              <Label text="Tipo" textFill="WHITE">
+                              <Label text="%TYPE" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -560,7 +560,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <JFXComboBox fx:id="magiColor" prefHeight="25.0" prefWidth="133.0" promptText="  Azul" style="-fx-prompt-text-fill: #fff;" stylesheets="@style.css">
+                              <JFXComboBox fx:id="magiColor" prefHeight="25.0" prefWidth="133.0" promptText="%BLUE" style="-fx-prompt-text-fill: #fff;" stylesheets="@style.css">
                                  <padding>
                                     <Insets left="7.0" />
                                  </padding>
@@ -580,13 +580,13 @@
                                     <Insets bottom="26.0" />
                                  </VBox.margin>
                               </Text>
-                              <Label text="ID de la carta" textFill="WHITE">
+                              <Label text="%CARD_ID" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="fogID" promptText="45AF1" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B; -fx-prompt-text-fill: #fff;" />
-                              <Label text="Coste" textFill="WHITE">
+                              <Label text="%COST" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -599,28 +599,28 @@
                               <Insets bottom="20.0" left="15.0" right="15.0" top="30.0" />
                            </padding>
                            <children>
-                              <Label text="Tipo" textFill="WHITE">
+                              <Label text="%TYPE" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="fogTipo" promptText="Instant" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B; -fx-prompt-text-fill: #fff;" />
-                              <Label text="Elemento" textFill="WHITE">
+                              <Label text="%ELEMENT" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <JFXComboBox fx:id="fogColor" prefHeight="25.0" prefWidth="131.0" promptText="  Oscuridad" style="-fx-prompt-text-fill: #fff;" stylesheets="@style.css">
+                              <JFXComboBox fx:id="fogColor" prefHeight="25.0" prefWidth="131.0" promptText="%DARKNESS" style="-fx-prompt-text-fill: #fff;" stylesheets="@style.css">
                                  <padding>
                                     <Insets left="7.0" />
                                  </padding>
                               </JFXComboBox>
-                              <Label text="Raza" textFill="WHITE">
+                              <Label text="%RACE" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="fogRaza" promptText="Humano" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B; -fx-prompt-text-fill: #fff;" />
+                              <TextField fx:id="fogRaza" promptText="%HUMAN" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B; -fx-prompt-text-fill: #fff;" />
                            </children>
                         </VBox>
                      </children>
@@ -634,12 +634,12 @@
                         </VBox>
                      </content>
                   </ScrollPane>
-                  <TextField fx:id="nameCard" layoutX="47.0" layoutY="115.0" prefHeight="25.0" prefWidth="320.0" promptText="Nombre de carta" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B; -fx-prompt-text-fill: #fff;" />
-                  <TextField fx:id="entradaBusquedaCartas" layoutX="709.0" layoutY="35.0" onKeyPressed="#accionBuscarAñadirCarta" prefHeight="27.0" prefWidth="183.0" promptText="Buscar nombre de carta.." style="-fx-text-fill: #ffffff; -fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;">
+                  <TextField fx:id="nameCard" layoutX="47.0" layoutY="115.0" prefHeight="25.0" prefWidth="320.0" promptText="%CARD_NAME" style="-fx-text-fill: #ffffff; -fx-background-color: #00000B; -fx-prompt-text-fill: #fff;" />
+                  <TextField fx:id="entradaBusquedaCartas" layoutX="709.0" layoutY="35.0" onKeyPressed="#accionBuscarAñadirCarta" prefHeight="27.0" prefWidth="183.0" promptText="%CARD_SEARCH_PROMPT" style="-fx-text-fill: #ffffff; -fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;">
                      <padding>
                         <Insets left="10.0" right="40.0" />
                      </padding></TextField>
-                  <Label layoutX="48.0" layoutY="27.0" text="Lista de Cartas" textFill="#e7e5e5">
+                  <Label layoutX="48.0" layoutY="27.0" text="%CARDS_LIST" textFill="#e7e5e5">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -649,7 +649,7 @@
                         <Image url="@../images/icons8_Search_52px.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="47.0" layoutY="88.0" text="Nombre de Carta" textFill="WHITE">
+                  <Label layoutX="47.0" layoutY="88.0" text="%CARD_NAME" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -657,11 +657,11 @@
                </children></Pane>
             <Pane fx:id="pnlCustomer" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
-                  <TextField fx:id="lblBuscarCliente" layoutX="709.0" layoutY="35.0" onKeyPressed="#accionBuscarCliente" prefHeight="27.0" prefWidth="183.0" promptText="Buscar nombre cliente..." style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-text-fill: #ffffff;">
+                  <TextField fx:id="lblBuscarCliente" layoutX="709.0" layoutY="35.0" onKeyPressed="#accionBuscarCliente" prefHeight="27.0" prefWidth="183.0" promptText="%CLIENT_NAME_SEARCH_PROMPT" style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-text-fill: #ffffff;">
                      <padding>
                         <Insets left="10.0" right="40.0" />
                      </padding></TextField>
-                  <Label layoutX="46.0" layoutY="27.0" text="Clientes" textFill="#e7e5e5">
+                  <Label layoutX="46.0" layoutY="27.0" text="%CLIENTS" textFill="#e7e5e5">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -675,13 +675,13 @@
                      <children>
                         <VBox prefHeight="128.0" prefWidth="171.0" spacing="10.0">
                            <children>
-                              <Label text="Nombre Cliente" textFill="WHITE">
+                              <Label text="%CLIENT_NAME" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="nombreCliente" promptText="Emma" style="-fx-background-color: #00000B; -fx-text-fill: #ffffff; -fx-prompt-text-fill: #fff;" />
-                              <Label text="Edad" textFill="#fa5f7e">
+                              <Label text="%AGE" textFill="#fa5f7e">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -691,18 +691,18 @@
                         </VBox>
                         <VBox prefHeight="182.0" prefWidth="186.0" spacing="10.0">
                            <children>
-                              <Label text="Apellidos" textFill="WHITE">
+                              <Label text="%LAST_NAME" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="apellidosCliente" promptText="McFlurry James" style="-fx-background-color: #00000B; -fx-text-fill: #ffffff; -fx-prompt-text-fill: #fff;" />
-                              <Label text="Sexo" textFill="WHITE">
+                              <Label text="%SEX" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="sexoCliente" prefHeight="25.0" prefWidth="234.0" promptText="Escoge" style="-fx-prompt-text-fill: #fff;" stylesheets="@style.css" VBox.vgrow="ALWAYS" />
+                              <ComboBox fx:id="sexoCliente" prefHeight="25.0" prefWidth="234.0" promptText="%PICK" style="-fx-prompt-text-fill: #fff;" stylesheets="@style.css" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
                         <VBox prefHeight="143.0" prefWidth="215.0" spacing="10.0">
@@ -713,7 +713,7 @@
                                  </font>
                               </Label>
                               <TextField fx:id="emailCliente" promptText="google@gmail.com" style="-fx-background-color: #00000B; -fx-text-fill: #ffffff; -fx-prompt-text-fill: #fff;" />
-                              <Label text="Teléfono" textFill="WHITE">
+                              <Label text="%PHONE" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -723,22 +723,22 @@
                         </VBox>
                         <VBox alignment="TOP_CENTER" prefHeight="180.0" prefWidth="136.0" spacing="15.0">
                            <children>
-                              <Button fx:id="btnLimpiarCamposClientes" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="115.0" mnemonicParsing="false" onAction="#accionLimpiarCamposClientes" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Limpiar Campos" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="btnLimpiarCamposClientes" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="115.0" mnemonicParsing="false" onAction="#accionLimpiarCamposClientes" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="%CLEAR" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btnModificarCamposClientes" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="140.0" mnemonicParsing="false" onAction="#accionModificarCamposClientes" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Modificar Cliente" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="btnModificarCamposClientes" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="140.0" mnemonicParsing="false" onAction="#accionModificarCamposClientes" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="%EDIT_CLIENT" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btnBorrarCamposClientes" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#accionBorrarCamposClientes" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="Borrar Cliente" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="btnBorrarCamposClientes" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#accionBorrarCamposClientes" prefWidth="120.0" style="-fx-background-color: #00C9FF;" text="%DELETE_CLIENT" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="btnGuardarCamposClientes" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#accionGuardarCamposClientes" prefWidth="120.0" style="-fx-background-color: #4CD478;" text="Guardar Cliente" textAlignment="CENTER" textFill="WHITE">
+                              <Button fx:id="btnGuardarCamposClientes" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#accionGuardarCamposClientes" prefWidth="120.0" style="-fx-background-color: #4CD478;" text="%SAVE_CLIENT" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -761,17 +761,17 @@
                   </ScrollPane>
                   <HBox alignment="CENTER_LEFT" layoutX="-1.0" layoutY="303.0" prefHeight="42.0" prefWidth="935.0" style="-fx-background-color: #FFC600;">
                      <children>
-                        <Label text="Nombre">
+                        <Label text="%NAME">
                            <HBox.margin>
                               <Insets left="110.0" right="90.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Apellidos">
+                        <Label text="%LAST_NAME">
                            <HBox.margin>
                               <Insets left="20.0" right="155.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Edad">
+                        <Label text="%AGE">
                            <HBox.margin>
                               <Insets left="10.0" right="70.0" />
                            </HBox.margin>
@@ -781,14 +781,14 @@
                               <Insets left="20.0" right="154.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Teléfono">
+                        <Label text="%PHONE">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
                         </Label>
                      </children>
                   </HBox>
-                  <Label layoutX="43.0" layoutY="239.0" text="Direccio" textFill="WHITE">
+                  <Label layoutX="43.0" layoutY="239.0" text="%ADDRESS" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -797,11 +797,11 @@
                </children></Pane>
             <Pane fx:id="pnlOverview" prefHeight="576.0" prefWidth="793.0" visible="false">
                <children>
-                  <TextField fx:id="entradaBusquedaInicio" layoutX="709.0" layoutY="35.0" onKeyPressed="#accionBuscarCarta" prefHeight="27.0" prefWidth="183.0" promptText="Buscar nombre de carta..." style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-text-fill: #fff;">
+                  <TextField fx:id="entradaBusquedaInicio" layoutX="709.0" layoutY="35.0" onKeyPressed="#accionBuscarCarta" prefHeight="27.0" prefWidth="183.0" promptText="%CARD_SEARCH_PROMPT" style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-text-fill: #fff;">
                      <padding>
                         <Insets left="10.0" right="40.0" />
                      </padding></TextField>
-                  <Label layoutX="48.0" layoutY="27.0" text="Inicio" textFill="#e7e5e5">
+                  <Label layoutX="48.0" layoutY="27.0" text="%HOME" textFill="#e7e5e5">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -815,7 +815,7 @@
                                     <Font name="System Bold" size="26.0" />
                                  </font>
                               </Label>
-                              <Label text="Total Cartas" textFill="#e7e5e5" />
+                              <Label text="%CARDS_TOTAL" textFill="#e7e5e5" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="150.0">
@@ -825,7 +825,7 @@
                                     <Font name="System Bold" size="26.0" />
                                  </font>
                               </Label>
-                              <Label text="Total Clientes" textFill="#e7e5e5" />
+                              <Label text="%CLIENTS_TOTAL" textFill="#e7e5e5" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="150.0">
@@ -835,7 +835,7 @@
                                     <Font name="System Bold" size="26.0" />
                                  </font>
                               </Label>
-                              <Label text="Ventas Realizadas" textFill="#e7e5e5" />
+                              <Label text="%SALES_MADE" textFill="#e7e5e5" />
                            </children>
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="150.0">
@@ -845,34 +845,34 @@
                                     <Font name="System Bold" size="26.0" />
                                  </font>
                               </Label>
-                              <Label text="Pedidos Pendientes" textFill="#e7e5e5" />
+                              <Label text="%PENDING_RESERVATIONS" textFill="#e7e5e5" />
                            </children>
                         </VBox>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="-1.0" layoutY="178.0" prefHeight="42.0" prefWidth="935.0" style="-fx-background-color: #fa5f7e;">
                      <children>
-                        <Label text="Juego" textFill="#e7e5e5">
+                        <Label text="%GAME" textFill="#e7e5e5">
                            <HBox.margin>
                               <Insets left="90.0" right="80.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Nombre Carta" textFill="#e7e5e5">
+                        <Label text="%CARD_NAME" textFill="#e7e5e5">
                            <HBox.margin>
                               <Insets left="20.0" right="240.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Colección" textFill="#e7e5e5">
+                        <Label text="%COLLECTION" textFill="#e7e5e5">
                            <HBox.margin>
                               <Insets left="50.0" right="65.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Precio" textFill="#e7e5e5">
+                        <Label text="%PRICE" textFill="#e7e5e5">
                            <HBox.margin>
                               <Insets left="20.0" right="50.0" />
                            </HBox.margin>
                         </Label>
-                        <Label text="Cantidad" textFill="#e7e5e5">
+                        <Label text="%AMOUNT" textFill="#e7e5e5">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
@@ -1012,12 +1012,12 @@
                                  <children>
                                     <VBox maxHeight="150.0" maxWidth="180.0" minHeight="150.0" minWidth="180.0" prefHeight="150.0" prefWidth="180.0">
                                        <children>
-                                          <Text fx:id="MCNombreC" fill="#07a8ff" strokeType="OUTSIDE" strokeWidth="0.0" text="Trampa Opresiva">
+                                          <Text fx:id="MCNombreC" fill="#07a8ff" strokeType="OUTSIDE" strokeWidth="0.0" text="%OPPRESSIVE_TRAP">
                                              <font>
                                                 <Font name="System Bold" size="20.0" />
                                              </font>
                                           </Text>
-                                          <Text fx:id="MCColeccion" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Coleccion: Kaladesh" />
+                                          <Text fx:id="MCColeccion" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%KALADESH_COLLECTION" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -1033,7 +1033,7 @@
                      <children>
                         <VBox minWidth="133.0" prefHeight="200.0" prefWidth="150.0">
                            <children>
-                              <Text fx:id="MCPrecio" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio: ">
+                              <Text fx:id="MCPrecio" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%PRICE">
                                  <VBox.margin>
                                     <Insets left="10.0" top="5.0" />
                                  </VBox.margin>
@@ -1043,7 +1043,7 @@
                                     <Insets left="10.0" top="5.0" />
                                  </VBox.margin>
                               </Separator>
-                              <Text fx:id="MCStock" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Stock: ">
+                              <Text fx:id="MCStock" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Stock">
                                  <VBox.margin>
                                     <Insets left="10.0" top="5.0" />
                                  </VBox.margin>
@@ -1053,7 +1053,7 @@
                                     <Insets left="10.0" top="5.0" />
                                  </VBox.margin>
                               </Separator>
-                              <Text fx:id="MCAno" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Año: ">
+                              <Text fx:id="MCAno" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%YEAR">
                                  <VBox.margin>
                                     <Insets left="10.0" top="5.0" />
                                  </VBox.margin>
@@ -1070,31 +1070,31 @@
                                     <Insets top="5.0" />
                                  </VBox.margin>
                               </Text>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Id Carta">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%CARD_ID">
                                  <VBox.margin>
                                     <Insets bottom="2.0" top="10.0" />
                                  </VBox.margin>
                               </Text>
                               <TextField fx:id="MCyuID" editable="false" focusTraversable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" style="-fx-background-color: #0c0c0c; -fx-text-fill: #fff;" />
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo Carta">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%CARD_TYPE">
                                  <VBox.margin>
                                     <Insets bottom="2.0" top="10.0" />
                                  </VBox.margin>
                               </Text>
                               <TextField fx:id="MCyuTIPOC" editable="false" focusTraversable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" style="-fx-background-color: #0c0c0c; -fx-text-fill: #fff;" />
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Atributo">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%ATTRIBUTE">
                                  <VBox.margin>
                                     <Insets bottom="2.0" top="10.0" />
                                  </VBox.margin>
                               </Text>
                               <TextField fx:id="MCyuAtribu" editable="false" focusTraversable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" style="-fx-background-color: #0c0c0c; -fx-text-fill: #fff;" />
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nivel">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%LEVEL">
                                  <VBox.margin>
                                     <Insets bottom="2.0" top="10.0" />
                                  </VBox.margin>
                               </Text>
                               <TextField fx:id="MCyuLVL" editable="false" focusTraversable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" style="-fx-background-color: #0c0c0c; -fx-text-fill: #fff;" />
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Sub Tipo">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%SUB_TYPE">
                                  <VBox.margin>
                                     <Insets bottom="2.0" top="10.0" />
                                  </VBox.margin>
@@ -1118,19 +1118,19 @@
                                     <Insets top="5.0" />
                                  </VBox.margin>
                               </Text>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Id Carta">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%CARD_ID">
                                  <VBox.margin>
                                     <Insets bottom="2.0" top="10.0" />
                                  </VBox.margin>
                               </Text>
                               <TextField fx:id="MCmagicID" editable="false" focusTraversable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" style="-fx-background-color: #0c0c0c; -fx-text-fill: #fff;" />
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%TYPE">
                                  <VBox.margin>
                                     <Insets bottom="2.0" top="10.0" />
                                  </VBox.margin>
                               </Text>
                               <TextField fx:id="MCmagicTIPOC" editable="false" focusTraversable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" style="-fx-background-color: #0c0c0c; -fx-text-fill: #fff;" />
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Coste">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%COST">
                                  <VBox.margin>
                                     <Insets bottom="2.0" top="10.0" />
                                  </VBox.margin>
@@ -1157,31 +1157,31 @@
                                     <Insets top="5.0" />
                                  </VBox.margin>
                               </Text>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Id Carta">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%CARD_ID">
                                  <VBox.margin>
                                     <Insets bottom="2.0" top="10.0" />
                                  </VBox.margin>
                               </Text>
                               <TextField fx:id="MCfowID" editable="false" focusTraversable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" style="-fx-background-color: #0c0c0c; -fx-text-fill: #fff;" />
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%TYPE">
                                  <VBox.margin>
                                     <Insets bottom="2.0" top="10.0" />
                                  </VBox.margin>
                               </Text>
                               <TextField fx:id="MCfowTIPOC" editable="false" focusTraversable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" style="-fx-background-color: #0c0c0c; -fx-text-fill: #fff;" />
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Coste">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%COST">
                                  <VBox.margin>
                                     <Insets bottom="2.0" top="10.0" />
                                  </VBox.margin>
                               </Text>
                               <TextField fx:id="MCfowCoste" editable="false" focusTraversable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" style="-fx-background-color: #0c0c0c; -fx-text-fill: #fff;" />
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Elemento">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%ELEMENT">
                                  <VBox.margin>
                                     <Insets bottom="2.0" top="10.0" />
                                  </VBox.margin>
                               </Text>
                               <TextField fx:id="MCfowElemento" editable="false" focusTraversable="false" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" style="-fx-background-color: #0c0c0c; -fx-text-fill: #fff;" />
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Raza">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%RACE">
                                  <VBox.margin>
                                     <Insets bottom="2.0" top="10.0" />
                                  </VBox.margin>

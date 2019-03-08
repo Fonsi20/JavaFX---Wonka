@@ -34,6 +34,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Level;
@@ -60,6 +61,7 @@ import org.neodatis.odb.Objects;
 import org.neodatis.odb.Values;
 import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
 import org.neodatis.odb.impl.core.query.values.ValuesCriteriaQuery;
+import utilidadopenstreetmap.OpenStreetMapUtils;
 
 public class Controller implements Initializable, MapComponentInitializedListener {
 
@@ -2108,6 +2110,39 @@ public class Controller implements Initializable, MapComponentInitializedListene
                         nodesHistorial[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
                     });
                     nodesHistorial[i].setOnMouseClicked(event -> {
+                        String telf = ((Label) nodesHistorial[j].lookup("#itemHistorialTlf")).getText();
+                        try {
+                            ResultSet res1 = S.executeQuery("select Dirección from clientes where Telefono='" + telf + "'");
+                            res1.first();
+                            String direccion = res1.getString(1);
+                            direccion = direccion.replace("-","");
+                            direccion = direccion.replaceAll("\\s+"," ");
+                                                        System.out.println(direccion);
+
+                            Map<String, Double> coords;
+                            
+                            coords = OpenStreetMapUtils.getInstance().getCoordinates(direccion);
+                            LatLong compra = new LatLong(coords.get("lat"), coords.get("lon"));
+                            MapOptions moptions = new MapOptions();
+                            moptions.center(new LatLong(coords.get("lat"), coords.get("lon")))
+                                    .mapType(MapTypeIdEnum.ROADMAP)
+                                    .overviewMapControl(false)
+                                    .panControl(false)
+                                    .rotateControl(false)
+                                    .scaleControl(false)
+                                    .streetViewControl(false)
+                                    .zoomControl(false)
+                                    .zoom(13);
+                            map = gmaps.createMap(moptions);
+                            MarkerOptions markerOptions1 = new MarkerOptions();
+                            markerOptions1.position(compra);
+
+                            Marker marcadorCompra = new Marker(markerOptions1);
+                            map.addMarker(marcadorCompra);
+                        } catch (SQLException e) {
+                            System.out.println(e);
+                        }
+                        System.out.println(telf);
                         nodesHistorial[j].setStyle("-fx-background-color : #17414C; -fx-background-radius:5");
                         nodesHistorial[j].setOnMouseExited(null);
                         nodesHistorial[j].setOnMouseEntered(null);
@@ -2222,11 +2257,15 @@ public class Controller implements Initializable, MapComponentInitializedListene
                     nodesHistorial[j].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
                 });
                 nodesHistorial[cont].setOnMouseClicked(event -> {
+                    System.out.println("a");
+                    ///  String telefono = ((Label)nodesHistorial[j].lookup("#itemHistorialTlf")).getText();
+                    ///  System.out.println(telefono);
                     nodesHistorial[j].setStyle("-fx-background-color : #17414C; -fx-background-radius:5");
                     nodesHistorial[j].setOnMouseExited(null);
                     nodesHistorial[j].setOnMouseEntered(null);
                     for (int x = 0; x < nodesHistorial.length; x++) {
                         if (x != j) {
+
                             nodesHistorial[x].setStyle("-fx-background-color :  #02030A; -fx-background-radius:5");
                             final int x2 = x;
                             nodesHistorial[x].setOnMouseExited(event2 -> {

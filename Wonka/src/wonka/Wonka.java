@@ -7,6 +7,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -39,7 +41,9 @@ public class Wonka extends Application {
 
     public void mostrarVentanaPrincipal() throws IOException {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));
+            Locale locale = new Locale("en", "US");
+            ResourceBundle bundle = ResourceBundle.getBundle("strings", locale);
+            Parent root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"), bundle);
             primaryStage.initStyle(StageStyle.TRANSPARENT);
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);

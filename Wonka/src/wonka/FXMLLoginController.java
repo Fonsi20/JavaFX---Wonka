@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Level;
@@ -36,8 +37,6 @@ import org.neodatis.odb.ODBServer;
  * @author a16alfonsofa
  */
 public class FXMLLoginController implements Initializable {
-    
-    private static ResourceBundle strings = ResourceBundle.getBundle("wonka/resources/strings_en_US");
 
     private double x, y;
 
@@ -84,7 +83,7 @@ public class FXMLLoginController implements Initializable {
                         if (edUser.getText().toLowerCase().equals("root") && edPass.getText().toLowerCase().equals("root")) {
 
                             if (rbHibernate.isSelected()) {
-                                String url = "jdbc:mysql://localhost:3307/?user=root&password=usbw";
+                                String url = "jdbc:mysql://localhost:3307/?user=root&password=root";
                                 try {
                                     conect = DriverManager.getConnection(url);
                                     sentencia = conect.createStatement();
@@ -118,7 +117,9 @@ public class FXMLLoginController implements Initializable {
                                 Wonka.basedatos = false;
                                 arreglosDependencias();
                             }
-                            Parent segunda = FXMLLoader.load(getClass().getResource("Home.fxml"));
+                            Locale locale = new Locale("en", "US");
+                            ResourceBundle bundle = ResourceBundle.getBundle("strings", locale);
+                            Parent segunda = FXMLLoader.load(getClass().getResource("Home.fxml"), bundle);
                             Stage HomeStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                             HomeStage.setScene(new Scene(segunda));
                             HomeStage.toFront();
@@ -127,7 +128,7 @@ public class FXMLLoginController implements Initializable {
                         } else {
                             edPass.setText("");
                             edUser.setText("");
-                            edUser.setPromptText(strings.getString("WRONG_USER_PSW"));
+                            edUser.setPromptText("Wrong user/password");
                         }
                     }
                     if (event.getSource() == btnSingUp) {
@@ -140,7 +141,7 @@ public class FXMLLoginController implements Initializable {
             }
 
             private void arreglosDependencias() {
-                String url = "jdbc:mysql://localhost:3307/?user=root&password=usbw";
+                String url = "jdbc:mysql://localhost:3307/?user=root&password=root";
                 try {
                     conect = DriverManager.getConnection(url);
                     sentencia = conect.createStatement();

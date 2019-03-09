@@ -702,7 +702,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="sexoCliente" prefHeight="25.0" prefWidth="234.0" promptText="%PICK" style="-fx-prompt-text-fill: #fff;" stylesheets="@style.css" VBox.vgrow="ALWAYS" />
+                              <ComboBox fx:id="sexoCliente" prefHeight="25.0" prefWidth="234.0" promptText="%CHOOSE" style="-fx-prompt-text-fill: #fff;" stylesheets="@style.css" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
                         <VBox prefHeight="143.0" prefWidth="215.0" spacing="10.0">

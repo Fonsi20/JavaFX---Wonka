@@ -34,11 +34,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -386,17 +388,13 @@ public class Controller implements Initializable, MapComponentInitializedListene
 
     private File selectedFile;
     
-    private ResourceBundle bundle;
-    private URL location;
+    private Locale locale;
 
     // ---------------------------------------- Métodos de control de la aplicación ---------------------------------------------------//
     // <editor-fold defaultstate="collapsed" desc="Método de inicialización">
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         gmaps.addMapInializedListener(this);
-        
-        this.location = location;
-        this.bundle = resources;
 
         if (Wonka.basedatos == true) {
             btnSubirImagen.setVisible(true);
@@ -4153,15 +4151,17 @@ public class Controller implements Initializable, MapComponentInitializedListene
         
     // <editor-fold defaultstate="collapsed" desc="Métodos de cambio de idioma">
     @FXML
-    void setLocaleEN(MouseEvent event) {
-       this.bundle = ResourceBundle.getBundle("wonka/resources/strings_en_EN");
-       this.initialize(location, bundle);
+    void setLocaleEN(MouseEvent event) throws IOException {
+        Scene scene = home.getScene();
+        this.locale = new Locale("en", "US");
+        scene.setRoot(FXMLLoader.load(getClass().getResource("Home.fxml"), ResourceBundle.getBundle("strings", locale)));
     }
 
     @FXML
-    void setLocaleES(MouseEvent event) {
-        this.bundle = ResourceBundle.getBundle("wonka/resources/strings_es_ES");
-        this.initialize(location, bundle);
+    void setLocaleES(MouseEvent event) throws IOException {
+        Scene scene = home.getScene();
+        this.locale = new Locale("es", "ES");
+        scene.setRoot(FXMLLoader.load(getClass().getResource("Home.fxml"), ResourceBundle.getBundle("strings", locale)));
     }
     
     // </editor-fold>

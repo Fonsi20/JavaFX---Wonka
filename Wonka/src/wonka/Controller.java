@@ -389,12 +389,15 @@ public class Controller implements Initializable, MapComponentInitializedListene
     private File selectedFile;
     
     private Locale locale;
+    private ResourceBundle resources;
 
     // ---------------------------------------- Métodos de control de la aplicación ---------------------------------------------------//
     // <editor-fold defaultstate="collapsed" desc="Método de inicialización">
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         gmaps.addMapInializedListener(this);
+        
+        this.resources = resources;
 
         if (Wonka.basedatos == true) {
             btnSubirImagen.setVisible(true);
@@ -443,8 +446,8 @@ public class Controller implements Initializable, MapComponentInitializedListene
 
         //Cargamos items en la comboBox de sexo de cliente
         sexoCliente.getItems().addAll(
-                "Femenino",
-                "Masculino"
+                resources.getString("FEMALE"),
+                resources.getString("MALE")
         );
 
         magiColor.getItems().addAll(
@@ -708,8 +711,8 @@ public class Controller implements Initializable, MapComponentInitializedListene
                             s.close();
 
                             MCNombreC.setText(itemCartaNombre.getText());
-                            MCColeccion.setText("Coleccion: " + itemCartaColeccion.getText());
-                            MCPrecio.setText("Precio: " + itemCartaPrecio.getText());
+                            MCColeccion.setText(resources.getString("COLLECTION")+": "+ itemCartaColeccion.getText());
+                            MCPrecio.setText(resources.getString("PRICE")+": "+ itemCartaPrecio.getText());
                             MCStock.setText("Stock: " + itemCartaStock.getText());
 
                             if (itemCartaJuego.getText().equals("Yu-Gi-Oh")) {
@@ -1170,9 +1173,9 @@ public class Controller implements Initializable, MapComponentInitializedListene
                                     if (itemCartaNombre.getText().equals(((CartaYUGI) o).getNombreCarta())) {
 
                                         if (((CartaYUGI) o).getIMG() == null) {
-                                            btnSubirImagen.setText("Subir imagen");
+                                            btnSubirImagen.setText(resources.getString("IMG_UPLOAD"));
                                         } else {
-                                            btnSubirImagen.setText("Modificar imagen");
+                                            btnSubirImagen.setText(resources.getString("IMG_EDIT"));
                                         }
 
                                         sumCard.setText(((CartaYUGI) o).getDescripcion());
@@ -1202,9 +1205,9 @@ public class Controller implements Initializable, MapComponentInitializedListene
                                     if (itemCartaNombre.getText().equals(((CartaMAGIC) o).getNombreCarta())) {
 
                                         if (((CartaMAGIC) o).getIMG() == null) {
-                                            btnSubirImagen.setText("Subir imagen");
+                                            btnSubirImagen.setText(resources.getString("IMG_UPLOAD"));
                                         } else {
-                                            btnSubirImagen.setText("Modificar imagen");
+                                            btnSubirImagen.setText(resources.getString("IMG_EDIT"));
                                         }
 
                                         sumCard.setText(((CartaMAGIC) o).getDescripcion());
@@ -1246,9 +1249,9 @@ public class Controller implements Initializable, MapComponentInitializedListene
                                     if (itemCartaNombre.getText().equals(((CartaFOW) o).getNombreCarta())) {
 
                                         if (((CartaFOW) o).getIMG() == null) {
-                                            btnSubirImagen.setText("Subir imagen");
+                                            btnSubirImagen.setText(resources.getString("IMG_UPLOAD"));
                                         } else {
-                                            btnSubirImagen.setText("Modificar imagen");
+                                            btnSubirImagen.setText(resources.getString("IMG_EDIT"));
                                         }
 
                                         sumCard.setText(((CartaFOW) o).getDescripcion());
@@ -1387,9 +1390,9 @@ public class Controller implements Initializable, MapComponentInitializedListene
                                 if (itemCartaNombre.getText().equals(((CartaYUGI) o).getNombreCarta())) {
 
                                     if (((CartaYUGI) o).getIMG() == null) {
-                                        btnSubirImagen.setText("Subir imagen");
+                                        btnSubirImagen.setText(resources.getString("IMG_UPLOAD"));
                                     } else {
-                                        btnSubirImagen.setText("Modificar imagen");
+                                        btnSubirImagen.setText(resources.getString("IMG_EDIT"));
                                     }
 
                                     sumCard.setText(((CartaYUGI) o).getDescripcion());
@@ -1420,9 +1423,9 @@ public class Controller implements Initializable, MapComponentInitializedListene
                                 if (itemCartaNombre.getText().equals(((CartaMAGIC) o).getNombreCarta())) {
 
                                     if (((CartaMAGIC) o).getIMG() == null) {
-                                        btnSubirImagen.setText("Subir imagen");
+                                        btnSubirImagen.setText(resources.getString("IMG_UPLOAD"));
                                     } else {
-                                        btnSubirImagen.setText("Modificar imagen");
+                                        btnSubirImagen.setText(resources.getString("IMG_EDIT"));
                                     }
 
                                     sumCard.setText(((CartaMAGIC) o).getDescripcion());
@@ -1465,9 +1468,9 @@ public class Controller implements Initializable, MapComponentInitializedListene
                                 if (itemCartaNombre.getText().equals(((CartaFOW) o).getNombreCarta())) {
 
                                     if (((CartaFOW) o).getIMG() == null) {
-                                        btnSubirImagen.setText("Subir imagen");
+                                        btnSubirImagen.setText(resources.getString("IMG_UPLOAD"));
                                     } else {
-                                        btnSubirImagen.setText("Modificar imagen");
+                                        btnSubirImagen.setText(resources.getString("IMG_EDIT"));
                                     }
 
                                     sumCard.setText(((CartaFOW) o).getDescripcion());
@@ -2068,7 +2071,7 @@ public class Controller implements Initializable, MapComponentInitializedListene
                     itemHistoriaPrecio.setText(ResVentas.getString("P"));
 
                     Button itemHistoriaEstado = (Button) nodesHistorial[i].lookup("#itemHistorialEstado");
-                    itemHistoriaEstado.setText("Vendida");
+                    itemHistoriaEstado.setText(resources.getString("SOLD"));
                     pnItemsHistorial.getChildren().add(nodesHistorial[i]);
 
                     final int j = i;
@@ -2110,7 +2113,7 @@ public class Controller implements Initializable, MapComponentInitializedListene
                     itemHistoriaPrecio.setText(ResReservas.getString("P"));
 
                     Button itemHistoriaEstado = (Button) nodesHistorial[i].lookup("#itemHistorialEstado");
-                    itemHistoriaEstado.setText("Reservada");
+                    itemHistoriaEstado.setText(resources.getString("RESERVED"));
 
                     pnItemsHistorial.getChildren().add(nodesHistorial[i]);
 
@@ -2212,7 +2215,7 @@ public class Controller implements Initializable, MapComponentInitializedListene
                 itemHistoriaPrecio.setText(String.valueOf(venta.getCarta().getPrecio()));
 
                 Button itemHistoriaEstado = (Button) nodesHistorial[cont].lookup("#itemHistorialEstado");
-                itemHistoriaEstado.setText("Vendida");
+                itemHistoriaEstado.setText(resources.getString("SOLD"));
                 pnItemsHistorial.getChildren().add(nodesHistorial[cont]);
 
                 final int j = cont;
@@ -2257,7 +2260,7 @@ public class Controller implements Initializable, MapComponentInitializedListene
                 itemHistoriaPrecio.setText(String.valueOf(reserva.getIDCarta().getPrecio()));
 
                 Button itemHistoriaEstado = (Button) nodesHistorial[cont].lookup("#itemHistorialEstado");
-                itemHistoriaEstado.setText("Reservada");
+                itemHistoriaEstado.setText(resources.getString("RESERVED"));
 
                 pnItemsHistorial.getChildren().add(nodesHistorial[cont]);
 
@@ -2374,7 +2377,7 @@ public class Controller implements Initializable, MapComponentInitializedListene
         }
         if (correcto == 1) {
             edadCliente.setText("");
-            edadCliente.setPromptText("Introduce un número");
+            edadCliente.setPromptText(resources.getString("ENTER_NUMBER"));
             edadCliente.setStyle("  -fx-border-color:#f45454;"
                     + "    -fx-border-radius:0.15em;"
                     + "    -fx-background-color:#00000b;"
@@ -2385,7 +2388,7 @@ public class Controller implements Initializable, MapComponentInitializedListene
 
         if (correcto == 2) {
             telefonoCliente.setText("");
-            telefonoCliente.setPromptText("Introduce un número de 9 digitos");
+            telefonoCliente.setPromptText(resources.getString("ENTER_9_DIGIT"));
             telefonoCliente.setStyle("  -fx-border-color:#f45454;"
                     + "    -fx-border-radius:0.15em;"
                     + "    -fx-background-color:#00000b;"
@@ -2593,7 +2596,7 @@ public class Controller implements Initializable, MapComponentInitializedListene
 
             if (correcto == 2) {
                 yearCard.setText("");
-                yearCard.setPromptText("Introduce un número de 4 digitos");
+                yearCard.setPromptText(resources.getString("ENTER_4_DIGIT"));
                 yearCard.setStyle("  -fx-border-color:#f45454;"
                         + "    -fx-border-radius:0.15em;"
                         + "    -fx-background-color:#00000b;"
@@ -2604,7 +2607,7 @@ public class Controller implements Initializable, MapComponentInitializedListene
 
             if (correcto == 4) {
                 priceCard.setText("");
-                priceCard.setPromptText("Introduce un número");
+                priceCard.setPromptText(resources.getString("ENTER_NUMBER"));
                 priceCard.setStyle("  -fx-border-color:#f45454;"
                         + "    -fx-border-radius:0.15em;"
                         + "    -fx-background-color:#00000b;"
@@ -2687,7 +2690,7 @@ public class Controller implements Initializable, MapComponentInitializedListene
 
                     if (correcto == 8) {
                         yugiNivel.setText("");
-                        yugiNivel.setPromptText("Un Número");
+                        yugiNivel.setPromptText(resources.getString("ENTER_NUMBER"));
                         yugiNivel.setStyle("  -fx-border-color:#f45454;"
                                 + "    -fx-border-radius:0.15em;"
                                 + "    -fx-background-color:#00000b;"
@@ -2894,7 +2897,7 @@ public class Controller implements Initializable, MapComponentInitializedListene
         }
         if (correcto == 1) {
             edadCliente.setText("");
-            edadCliente.setPromptText("Introduce un número");
+            edadCliente.setPromptText(resources.getString("ENTER_NUMBER"));
             edadCliente.setStyle("  -fx-border-color:#f45454;"
                     + "    -fx-border-radius:0.15em;"
                     + "    -fx-background-color:#00000b;"
@@ -2905,7 +2908,7 @@ public class Controller implements Initializable, MapComponentInitializedListene
 
         if (correcto == 2) {
             telefonoCliente.setText("");
-            telefonoCliente.setPromptText("Introduce un número de 9 digitos");
+            telefonoCliente.setPromptText(resources.getString("ENTER_9_DIGIT"));
             telefonoCliente.setStyle("  -fx-border-color:#f45454;"
                     + "    -fx-border-radius:0.15em;"
                     + "    -fx-background-color:#00000b;"
@@ -3109,7 +3112,7 @@ public class Controller implements Initializable, MapComponentInitializedListene
 
             if (correcto == 2) {
                 yearCard.setText("");
-                yearCard.setPromptText("Introduce un número de 4 digitos");
+                yearCard.setPromptText(resources.getString("ENTER_4_DIGIT"));
                 yearCard.setStyle("  -fx-border-color:#f45454;"
                         + "    -fx-border-radius:0.15em;"
                         + "    -fx-background-color:#00000b;"
@@ -3120,7 +3123,7 @@ public class Controller implements Initializable, MapComponentInitializedListene
 
             if (correcto == 4) {
                 priceCard.setText("");
-                priceCard.setPromptText("Introduce un número");
+                priceCard.setPromptText(resources.getString("ENTER_NUMBER"));
                 priceCard.setStyle("  -fx-border-color:#f45454;"
                         + "    -fx-border-radius:0.15em;"
                         + "    -fx-background-color:#00000b;"
@@ -3203,7 +3206,7 @@ public class Controller implements Initializable, MapComponentInitializedListene
 
                     if (correcto == 8) {
                         yugiNivel.setText("");
-                        yugiNivel.setPromptText("Un Número");
+                        yugiNivel.setPromptText(resources.getString("ENTER_NUMBER"));
                         yugiNivel.setStyle("  -fx-border-color:#f45454;"
                                 + "    -fx-border-radius:0.15em;"
                                 + "    -fx-background-color:#00000b;"
@@ -3628,7 +3631,7 @@ public class Controller implements Initializable, MapComponentInitializedListene
         stockCard.setText("");
         priceCard.setText("");
         sumCard.setText("");
-        btnSubirImagen.setText("Subir imagen");
+        btnSubirImagen.setText(resources.getString("IMG_UPLOAD"));
         stockCard.setStyle(" -fx-background-color:#00000b;"
                 + "    -fx-text-fill:#fff;");
 
@@ -4141,7 +4144,7 @@ public class Controller implements Initializable, MapComponentInitializedListene
         );
         try {
             selectedFile = fileChooser.showOpenDialog(stage);
-            btnSubirImagen.setText("Imagen Lista");
+            btnSubirImagen.setText("IMAGE_SET");
         } catch (Exception e) {
 
         }

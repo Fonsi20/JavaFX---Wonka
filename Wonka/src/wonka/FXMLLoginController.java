@@ -83,7 +83,7 @@ public class FXMLLoginController implements Initializable {
                         if (edUser.getText().toLowerCase().equals("root") && edPass.getText().toLowerCase().equals("root")) {
 
                             if (rbHibernate.isSelected()) {
-                                String url = "jdbc:mysql://localhost:3307/?user=root&password=root";
+                                String url = "jdbc:mysql://localhost:3307/?user=root&password=usbw";
                                 try {
                                     conect = DriverManager.getConnection(url);
                                     sentencia = conect.createStatement();
@@ -141,7 +141,7 @@ public class FXMLLoginController implements Initializable {
             }
 
             private void arreglosDependencias() {
-                String url = "jdbc:mysql://localhost:3307/?user=root&password=root";
+                String url = "jdbc:mysql://localhost:3307/?user=root&password=usbw";
                 try {
                     conect = DriverManager.getConnection(url);
                     sentencia = conect.createStatement();

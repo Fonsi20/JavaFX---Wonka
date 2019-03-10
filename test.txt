@@ -1,0 +1,110 @@
+Alguien habla del proyecto, es una aplicación de escritorio que usaría el empleado del establecimiento para gestionar
+su stock las fichas de los clientes así como los precios y del cual se podria sacar estadisticas de ventas de sus productos.
+
+El proyecto a sido desarrollado en Java para el backend, con JavaFX en el Frontend e Hibernate y Neodatis en la parte de BBDD.
+El trabajo se realizo de forma modular por parte de los integrantes mediante la plataforma GitHub.
+
+
+Pantalla Login
+--------------------------------------------------------------------------------------------
+
+1 - Pantalla Login, prograr que si ponemos algo que no sea ROOT- ROOT da error.
+	Explicar por que le ponemos seguridad a la aplicacion.
+
+--------------------------------------------------------------------------------------------
+
+Pantalla Home
+--------------------------------------------------------------------------------------------
+
+2 - Buscar en la pantalla inicio "es" y ver que aparecen la esfera curibor y eviscerar,
+cartas de juegos distintos. Dejar en blanco lo de buscar, darle a enter y que vuelva a poner toda la lista.
+
+3 - Pinchar sobre alguna carta para que se muestre eldesplegable de carta.
+
+4 - Explicar que tenemos un dashboad justo encima con información general de nuestra tienda.(Aún no hablar del
+metodo de automatización de pedidos) 
+
+--------------------------------------------------------------------------------------------
+
+Pantalla Cartas
+--------------------------------------------------------------------------------------------
+5 - Explicar el funcionamiento de las inserciones, que hay botones que se activan o se desactivan dependiendo de lo que hagamos
+
+6 - Introducimos datos de carta nueva que vamos a ingresar.
+
+	Nombre: Awesome Magic CARD
+	Coleccion: Amazing Card
+	Juego: Magic
+	Stock: 2
+	Precio: 20
+	Año: 1999
+	Descripcion: The most magic card ever.	
+	CardID: 20
+	cost: 2B
+	Type: Instant
+	Color: Blanco
+	IMAGEN: cartaEjemplo, está en la carpeta de imagenes
+
+7 - Mostrar que se cargó bien
+
+8 - Mostrar que no podemos meter dos cartas iguales, ni cuando modificamos una carta podemos volver a guardarla para que no haya duplicados.
+
+--------------------------------------------------------------------------------------------
+
+Pantalla Clientes
+--------------------------------------------------------------------------------------------
+ 
+9 - Explicar que funciona de la misma forma que la anterior.
+
+10 - Meter un usuario.
+
+	nombre: Peter
+	apellidos: Parker
+	email: yourfriend@shield.com
+	edad: 22
+	sexo: masculino
+	telefono:555555555
+	domicilio: New York
+
+--------------------------------------------------------------------------------------------
+
+Pantalla Compras / Historial
+--------------------------------------------------------------------------------------------
+
+11 - Aquí se explica que para comprar solo seleccionamos una carta, un cliente yla cantidad de cartas que queremos comprar
+ 	Se puede mostrar antes de la compra como en la pantalla inicio en nuestro dashboar tenemos 6 ventas realizadas,
+	al realizar esta pasará a 7 y como baja el stock de la carta de 2 a 1.
+		
+	1 - Trampa Opresiva - Leonardo
+	
+12 - Explicar que si no tenemos suficientes cartas en stock estas pasarán a reservas, que serán enviadas al domicilio del cliente.
+	Pero que esto sucede mediante un método de automatización de Stock, al llegar a 5 pedidos pendientes, nosotros llamamos a un probeedor
+	y enviamos las cartas a los clientes, pero como el método de envio depende de muchos factores y empresas, nosotros lo representamos
+ 	de forma automática. Tambia cambiamos el stock de todos los productos a 0 de stock que han sido pedidos consiguiendo nuevas existencias.
+
+13 - Pinchar en la pantalla historial sobre una de las reservas y ver como cambia el mapa.
+	Explicar que el mapa es de google, una api de pago y esas weas....
+
+14 - Explicar que en ese momento tenemos 3 reservas
+	
+	Ana 1 caza de almas
+	Alfonso 2 Arbol de la perdición
+	Nuria 3 Esfera kuriboh
+
+15 - Realizar una compra más de Trampa Opresiva, que aun tiene 1 en stock, pero de dos cartas. Una aparece como vendida y otra en reserva.
+
+	2 - Trampa Opresiva - David da Silva
+
+16 - Si vamos a inicio hay una venta más, de 7 a 8, y una reserva más, de 3 a 4, y el stock de trampa opresiva es 0.
+	En la pantalla historial aparecerán ambas.
+
+17 - Realizamos otra compra de un producto con 0 stock, otra distinta para que le método de automatización funcione.
+	
+	4 - Caza de almas - Bonifacio
+
+18 - En el Home los datos del dashboard han cambiado, ya no hay reservas, todo han sido ventas, y los stocks se han actualizados.
+	Ahora tenemso stock de todas las cartas que no teníamos. En historial todas las cartas han pasado a Vendidas.
+
+Y para acabar dar las gracias a todos los presentes y a los profesores por su ayuda(así ganamos puntos).
+
+ 

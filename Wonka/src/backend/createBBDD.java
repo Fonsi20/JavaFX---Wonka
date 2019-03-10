@@ -145,12 +145,12 @@ public class createBBDD {
 
             //Clientes
             sentencia.execute("INSERT INTO clientes (Nombre,Apellidos,Edad,Sexo,Dirección,Telefono,Mail) values"
-                    + "('Alfonso','Fernández Alvarez','27',true,'Baixada ao Reiro Nº19 - Ponteareas - Spain','555555520','fonsi20@gmail.com' ),"
-                    + "('David','da Silva Simón','23',true,'Camiño Arieiro nº1 - Vigo - Spain','568975345','daviddasilva@gmail.com' ),"
-                    + "('Ana','Pérez Sánchez','31',false,'Calle Coruña nº13 - Vigo - Spain','484574656','anaperez@gmail.com' ),"
-                    + "('Nuria','Muñoz Carrera','25',false,'Avenida Gran Via nº33 - Vigo - Spain','411203040','nuriamuñoz@gmail.com' ),"
-                    + "('Bonifacio','Rodríguez Álvarez','55',true,'Camino del rio nº19 - Mos - Spain','232124578','bonifaciorodriguez@gmail.com' ),"
-                    + "('Leonardo','Costas Zapatero','42',true,'Calle Miramar nº23 - Cangas - Spain','787878788','leonardocostas@gmail.com' );");
+                    + "('Alfonso','Fernández Alvarez','27',true,'Baixada ao Reiro 19','555555520','fonsi20@gmail.com' ),"
+                    + "('David','da Silva Simón','23',true,'Arieiro 1','568975345','daviddasilva@gmail.com' ),"
+                    + "('Ana','Pérez Sánchez','31',false,'Coruña 13','484574656','anaperez@gmail.com' ),"
+                    + "('Nuria','Muñoz Carrera','25',false,'Gran Via 33','411203040','nuriamuñoz@gmail.com' ),"
+                    + "('Bonifacio','Rodríguez Álvarez','55',true,'Camino del rio 19','232124578','bonifaciorodriguez@gmail.com' ),"
+                    + "('Leonardo','Costas Zapatero','42',true,'Miramar 23','787878788','leonardocostas@gmail.com' );");
 
             //Ventas
             sentencia.execute("INSERT INTO ventas (IDCliente, IDCarta, Cantidad) values"

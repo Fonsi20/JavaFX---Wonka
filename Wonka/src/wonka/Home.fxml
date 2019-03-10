@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -132,9 +131,9 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <HBox alignment="CENTER" prefWidth="200.0" style="-fx-background-color: #000;">
+            <HBox alignment="CENTER" prefWidth="200.0">
                <children>
-                  <Label fx:id="btnEN" onMouseClicked="#setLocaleEN" text="EN" textFill="#0b4b5b">
+                  <Label fx:id="btnEN" onMouseClicked="#setLocaleEN" text="EN" textFill="#fa5f7e">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -157,7 +156,7 @@
       <StackPane fx:id="PantallasHome" layoutX="258.0" prefHeight="781.0" prefWidth="935.0" style="-fx-background-color: #00222B;">
          <children>
             <Pane fx:id="pnlSignOut" prefHeight="200.0" prefWidth="849.0" visible="false" />
-            <Pane fx:id="pnlHistorial" prefHeight="200.0" prefWidth="200.0">
+            <Pane fx:id="pnlHistorial" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
                   <Label layoutX="48.0" layoutY="27.0" text="%HISTORY" textFill="#e7e5e5">
                      <font>
@@ -193,9 +192,9 @@
                         <Label layoutX="380.0" layoutY="23.0" text="%STATE" />
                      </children>
                   </HBox>
-                  <ScrollPane fx:id="ListHistorial" hbarPolicy="NEVER" layoutX="15.0" layoutY="135.0" prefHeight="284.0" prefWidth="905.0" stylesheets="@style.css">
+                  <ScrollPane fx:id="ListHistorial" hbarPolicy="NEVER" layoutX="15.0" layoutY="135.0" prefHeight="337.0" prefWidth="905.0" stylesheets="@style.css">
                      <content>
-                        <VBox fx:id="pnItemsHistorial" prefHeight="282.0" prefWidth="903.0" spacing="5.0" style="-fx-background-color: #00222B;">
+                        <VBox fx:id="pnItemsHistorial" prefHeight="335.0" prefWidth="903.0" spacing="5.0" style="-fx-background-color: #00222B;">
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
@@ -208,41 +207,6 @@
                      </font>
                   </JFXButton>
                   <GoogleMapView fx:id="gmaps" layoutY="486.0" prefHeight="295.0" prefWidth="935.0" />
-                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="240.0" layoutY="435.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/preparando.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="358.0" layoutY="437.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/almacen.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="489.0" layoutY="435.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/envio.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="629.0" layoutY="435.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/cliente.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="562.0" layoutY="437.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/arrow.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="425.0" layoutY="437.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/arrow.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="304.0" layoutY="437.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/arrow.png" />
-                     </image>
-                  </ImageView>
                </children>
             </Pane>
             <Pane fx:id="pnlCompras" prefHeight="200.0" prefWidth="200.0" visible="false">
@@ -316,16 +280,6 @@
                   <JFXTextField fx:id="busComCliente" layoutX="23.0" layoutY="107.0" onKeyPressed="#accionBuscarComprasCliente" prefHeight="25.0" prefWidth="420.0" promptText="%CLIENT_NAME_SEARCH_PROMPT" style="-fx-background-color: #00222B; -fx-text-fill: #fff;" unFocusColor="WHITE" />
                   <JFXTextField fx:id="busComCarta" layoutX="479.0" layoutY="107.0" onKeyPressed="#accionBuscarComprasCarta" prefHeight="25.0" prefWidth="420.0" promptText="%CARD_SEARCH_PROMPT" style="-fx-background-color: #00222B; -fx-text-fill: #fff;" unFocusColor="WHITE" />
                   <TextField fx:id="textAreaCantidadCompra" layoutX="411.0" layoutY="32.0" prefHeight="30.0" prefWidth="149.0" promptText="%AMOUNT" style="-fx-background-color: #00000B; -fx-prompt-text-fill: #fff; -fx-text-fill: #fff;" />
-                  <JFXCheckBox checkedColor="#00c9ff" layoutX="185.0" layoutY="38.0" text="%ADDRESS" textFill="WHITE" unCheckedColor="#0c0c0c">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </JFXCheckBox>
-                  <JFXCheckBox checkedColor="#00c9ff" layoutX="292.0" layoutY="38.0" selected="true" text="%PICKUP_STORE" textFill="WHITE" unCheckedColor="#0c0c0c">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </JFXCheckBox>
                </children>
             </Pane>
             <Pane fx:id="pnlOrders" prefHeight="200.0" prefWidth="200.0" visible="false">
@@ -718,7 +672,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="telefonoCliente" promptText="20,4€" style="-fx-background-color: #00000B; -fx-text-fill: #ffffff; -fx-prompt-text-fill: #fff;" />
+                              <TextField fx:id="telefonoCliente" promptText="555005500" style="-fx-background-color: #00000B; -fx-text-fill: #ffffff; -fx-prompt-text-fill: #fff;" />
                            </children>
                         </VBox>
                         <VBox alignment="TOP_CENTER" prefHeight="180.0" prefWidth="136.0" spacing="15.0">
@@ -793,9 +747,9 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="direccionCliente" alignment="TOP_LEFT" layoutX="39.0" layoutY="263.0" prefHeight="25.0" prefWidth="675.0" promptText="Ponteareas, nº22 CP 45124 Pontevedra España" style="-fx-background-color: #00000B; -fx-text-fill: #ffffff; -fx-prompt-text-fill: #fff;" />
+                  <TextField fx:id="direccionCliente" alignment="TOP_LEFT" layoutX="39.0" layoutY="263.0" prefHeight="25.0" prefWidth="675.0" promptText="Madrid Calle Coruña 20" style="-fx-background-color: #00000B; -fx-text-fill: #ffffff; -fx-prompt-text-fill: #fff;" />
                </children></Pane>
-            <Pane fx:id="pnlOverview" prefHeight="576.0" prefWidth="793.0" visible="false">
+            <Pane fx:id="pnlOverview" prefHeight="576.0" prefWidth="793.0">
                <children>
                   <TextField fx:id="entradaBusquedaInicio" layoutX="709.0" layoutY="35.0" onKeyPressed="#accionBuscarCarta" prefHeight="27.0" prefWidth="183.0" promptText="%CARD_SEARCH_PROMPT" style="-fx-background-color: #00222B; -fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-text-fill: #fff;">
                      <padding>
@@ -943,10 +897,10 @@
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../images/dani.png" />
+                                    <Image url="@../images/david.png" />
                                  </image>
                               </ImageView>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Daniel Bastos">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="David da Silva">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
                                  </font>
@@ -954,7 +908,7 @@
                                     <Insets top="20.0" />
                                  </VBox.margin>
                               </Text>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="“Mi vida no tiene dirección,&#10;tampoco objetivos y aun así&#10;soy feliz. ¡No sé por qué! &#10;¿Qué estoy haciendo bien?”&#10;– Snoopy&#10;">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="“Amo la humanidad, &#10;¡es la gente a quienes &#10;no soporto!”&#10;– Linus&#10;&#10;">
                                  <font>
                                     <Font name="System Italic" size="16.0" />
                                  </font>
@@ -968,10 +922,10 @@
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../images/diego.png" />
+                                    <Image url="@../images/xiana.png" />
                                  </image>
                               </ImageView>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Diego Vilariño">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Xiana Domínguez">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
                                  </font>
@@ -979,7 +933,7 @@
                                     <Insets top="20.0" />
                                  </VBox.margin>
                               </Text>
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="“¿Profesora? ¿Qué tipo&#10;de prueba tendremos hoy?&#10;¿Selección múltiple? ¡Bien!&#10;¡Escojo no tomarlo!”&#10;– Patty&#10;">
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="“El ejercicio es una mala&#10;palabra, cada vez que la&#10;escucho me lavo la boca &#10;con chocolate.”&#10;– Charles M. Schulz&#10;">
                                  <font>
                                     <Font name="System Italic" size="16.0" />
                                  </font>
